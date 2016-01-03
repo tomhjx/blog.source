@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="MySQL,乐观锁,悲观锁," />
 
 
 
@@ -51,25 +51,52 @@
 
 
 
-<meta name="description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="description" content="1        事务隔离
+事务隔离是数据库提供的功能。
+SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：
+SET TRANSACTION ISOLATION LEVEL
+{ READ UNCOMMITTED
+
+| READ COMMITTED
+
+| REPEATABLE READ
+
+| SNAPSHOT
+
+| SERIALIZABLE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/index.html">
+<meta property="og:title" content="悲观锁和乐观锁">
+<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/悲观锁和乐观锁/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
-<meta property="og:updated_time" content="2016-01-03T06:05:43.000Z">
+<meta property="og:description" content="1        事务隔离
+事务隔离是数据库提供的功能。
+SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：
+SET TRANSACTION ISOLATION LEVEL
+{ READ UNCOMMITTED
+
+| READ COMMITTED
+
+| REPEATABLE READ
+
+| SNAPSHOT
+
+| SERIALIZABLE">
+<meta property="og:updated_time" content="2016-01-03T09:36:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta name="twitter:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="twitter:title" content="悲观锁和乐观锁">
+<meta name="twitter:description" content="1        事务隔离
+事务隔离是数据库提供的功能。
+SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：
+SET TRANSACTION ISOLATION LEVEL
+{ READ UNCOMMITTED
+
+| READ COMMITTED
+
+| REPEATABLE READ
+
+| SNAPSHOT
+
+| SERIALIZABLE">
 
 
 
@@ -81,7 +108,7 @@ git p">
   };
 </script>
 
-  <title> 使用GitHub和Hexo搭建免费静态Blog | 疯狂的茶几 </title>
+  <title> 悲观锁和乐观锁 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +259,7 @@ git p">
             
             
               
-                使用GitHub和Hexo搭建免费静态Blog
+                悲观锁和乐观锁
               
             
           </h1>
@@ -241,7 +268,7 @@ git p">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T13:22:25+08:00" content="2016-01-03">
+            <time itemprop="dateCreated" datetime="2016-01-03T17:33:09+08:00" content="2016-01-03">
               2016-01-03
             </time>
           </span>
@@ -251,8 +278,20 @@ git p">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -267,8 +306,8 @@ git p">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/" itemprop="commentsCount"></span>
+                <a href="/2016/01/03/悲观锁和乐观锁/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/悲观锁和乐观锁/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -287,13 +326,101 @@ git p">
       
 
       
-        <span itemprop="articleBody"><h3 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h3><p><a href="http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
-<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><p><a href="https://hexo.io/zh-cn/api/index.html" target="_blank" rel="external">https://hexo.io/zh-cn/api/index.html</a></p>
-<p><a href="http://segmentfault.com/a/1190000002632530" target="_blank" rel="external">http://segmentfault.com/a/1190000002632530</a></p>
-<h3 id="git_pages"><a href="#git_pages" class="headerlink" title="git pages"></a>git pages</h3><p><a href="http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html" target="_blank" rel="external">http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html</a></p>
-<h3 id="u63A8_u8350_u4E3B_u9898"><a href="#u63A8_u8350_u4E3B_u9898" class="headerlink" title="推荐主题"></a>推荐主题</h3><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><a href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE" class="headerlink" title="第三方搜索引擎"></a>第三方搜索引擎</h3><p><a href="https://swiftype.com/" target="_blank" rel="external">https://swiftype.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><a href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF" class="headerlink" title="第三方评论系统"></a>第三方评论系统</h3><p><a href="http://duoshuo.com/" target="_blank" rel="external">http://duoshuo.com/</a></p>
+        <span itemprop="articleBody"><p>1        事务隔离</p>
+<p>事务隔离是数据库提供的功能。</p>
+<p>SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：</p>
+<p>SET TRANSACTION ISOLATION LEVEL</p>
+<pre><code>{ READ UNCOMMITTED
+
+| READ COMMITTED
+
+| REPEATABLE READ
+
+| SNAPSHOT
+
+| SERIALIZABLE
+
+}
+</code></pre><p>[ ; ]</p>
+<p>Read Committed是SQL Server的预设隔离等级。</p>
+<p>1.1         READ UNCOMMITTED<br>Read UnCommitted事务可以读取事务已修改，但未提交的的记录。</p>
+<p>Read UnCommitted事务会产生脏读（Dirty Read）。</p>
+<p>Read UnCommitted事务与select语句加nolock的效果一样，它是所有隔离级别中限制最少的。</p>
+<p>1.2         READ COMMITTED<br>Read Committed事务不能读取事务已修改，但未提交的记录。</p>
+<p>Read Committed是SQL Server的预设隔离等级。</p>
+<p>1.3         REPEATABLE READ<br>Repeatable Read事务不能读取交易已修改，但未提交的记录，并且在事务完成之前，任何其它事务都不能修改目前事务已读取的记录。</p>
+<p>其它事务仍可以插入新记录，但必须符合当前事务的搜索条件——这意味着当前事务重新查询记录时，会产生幻读（Phantom Read）。</p>
+<p>1.4         SNAPSHOT<br>Snapshot事务中任何语句所读取的记录，都是事务启动时的数据。</p>
+<p>这相当于事务启动时，数据库为事务生成了一份专用“快照”。</p>
+<p>在当前事务中看到不其它事务在当前事务启动之后所进行的数据修改。</p>
+<p>Snapshot事务不会读取记录时要求锁定，读取记录的Snapshot事务不会锁住其它事务写入记录，写入记录的事务也不会锁住Snapshot事务读取数据。</p>
+<p>1.5         SERIALIZABLE<br>Serializable事务会产生以下效果：</p>
+<p>1.语句无法读取其它事务已修改但未提交的记录。</p>
+<p>2.在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</p>
+<p>3.在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</p>
+<p>Serializable事务与select语句加holdlock的效果一样。</p>
+<p>2        READ COMMITTED 和 REPEATABLE READ<br>Read Committed 和 Repeatable Read 是最常用的两种事务。</p>
+<p>Read Committed 是 SQL Server的默认级别；而 Repeatable Read 比Read Committed 更能保证数据一致性。</p>
+<p>2.1         特点<br>Read Committed会阻塞其它事务中的update，但不会阻塞select。</p>
+<p>Repeatable Read不但会阻塞其它事务中的update，还会阻塞select。</p>
+<p>Read Committed 和 Repeatable Read 的相同点是：都会阻塞其它事务的update语句。</p>
+<p>Read Committed 和 Repeatable Read 的不同点是：Read Committed 不会阻塞其它事务的select语句，但Repeatable Read阻塞。</p>
+<p>注意，Read Committed 和 Repeatable Read 都是行级锁，它们只会锁住与自己相关的记录。当事务提交之后，阻塞的语句就会继续执行。</p>
+<p>2.2         理解<br>2.2.1     READ COMMITTED<br>Read Committed 事务的含义是我select出来的记录，别人只能看，不能改（只阻塞别的事务的update）。</p>
+<p>Read Committed 的缺点是：无法防止读取不一致和修改丢失。</p>
+<p>读取不一致是因为Read Committed 不锁住读取的记录；修改丢失是因为别的事务也能读取当前事务的记录，虽然会阻塞别的事务的update，但在当前事务提交之后，别的事务的update语句会继续执行，进而覆盖上一次事务的结果，导致上一次的修改丢失。</p>
+<p>2.2.2     REPEATABLE READ<br>Repeatable Read 事务的含义是我select出来的记录，不允许别人看，也不允许别人改（阻塞别的事务select、update），这就意味着我可以在事务中多次select数据，而不用担心出现“脏读”——这就是“可重复读取”的意思。</p>
+<p>Repeatable Read 虽然解决了Read Committed 事务的读取不一致和修改丢失的缺点，但它也有缺点（尽管这个缺点Read Committed 也有）：</p>
+<p>Repeatable Read 不会阻塞insert和delete，所以会出现“幻读”——两次select的结果不一样。还有，Repeatable Read 占用的资源比Read Committed 大。</p>
+<p>3        在应用程序中设置事务隔离级别<br>READ COMMITTED 是 Microsoft SQL Server Database Engine 的预设隔离等级。</p>
+<p>已指定隔离等级时，在 SQL Server 工作阶段中，所有查询和数据操作语言 (DML) 陈述式的锁定行为都会在此隔离等级运作。此隔离等级会维持有效，直到工作阶段结束或隔离等级设为另一个等级为止。</p>
+<p>如果应用程序必须在不同隔离等级操作，可以使用下列方法来设定隔离等级：</p>
+<p>l           执行 SET TRANSACTION ISOLATION LEVEL Transact-SQL 陈述式。</p>
+<p>l           如果 ADO.NET 应用程序使用 System.Data.SqlClient 管理的命名空间，可以使用 SqlConnection.BeginTransaction 方法来指定 IsolationLevel 选项。</p>
+<p>l           使用 ADO 的应用程序可以设定 Autocommit Isolation Levels 属性。</p>
+<p>l           当启动交易时，使用 OLE DB 的应用程序可以将 isoLevel 设为所要的交易隔离等级，以呼叫 ITransactionLocal::StartTransaction。当在自动认可模式中指定隔离等级时，使用 OLE DB 的应用程序可以将 DBPROPSET_SESSION 属性 DBPROP_SESS_AUTOCOMMITISOLEVELS 设为所要的交易隔离等级。</p>
+<p>l           使用 ODBC 的应用程序可以使用 SQLSetConnectAttr 来设定 SQL_COPT_SS_TXN_ISOLATION 属性。</p>
+<p>4        悲观锁<br>悲观锁是指假设并发更新冲突会发生，所以不管冲突是否真的发生，都会使用锁机制。</p>
+<p>悲观锁会完成以下功能：锁住读取的记录，防止其它事务读取和更新这些记录。其它事务会一直阻塞，直到这个事务结束。</p>
+<p>悲观锁是在使用了数据库的事务隔离功能的基础上，独享占用的资源，以此保证读取数据一致性，避免修改丢失。</p>
+<p>悲观锁可以使用Repeatable Read事务，它完全满足悲观锁的要求。</p>
+<p>5        乐观锁<br>乐观锁不会锁住任何东西，也就是说，它不依赖数据库的事务机制，乐观锁完全是应用系统层面的东西。</p>
+<p>如果使用乐观锁，那么数据库就必须加版本字段，否则就只能比较所有字段，但因为浮点类型不能比较，所以实际上没有版本字段是不可行的。</p>
+<p>6        死锁<br>当二或多个工作各自具有某个资源的锁定，但其它工作尝试要锁定此资源，而造成工作永久封锁彼此时，会发生死锁。例如：</p>
+<ol>
+<li><p>事务 A 取得数据列 1 的共享锁定。</p>
+</li>
+<li><p>事务B 取得数据列 2 的共享锁定。</p>
+</li>
+<li><p>事务A 现在要求数据列 2 的独占锁定，但会被封锁直到事务B 完成并释出对数据列 2 的共享锁定为止。</p>
+</li>
+<li><p>事务B 现在要求数据列 1 的独占锁定，但会被封锁直到事务A 完成并释出对数据列 1 的共享锁定为止。</p>
+</li>
+</ol>
+<p>等到事务B 完成后，事务A 才能完成，但事务B 被事务A 封锁了。这个状况也称为「循环相依性」(Cyclic Dependency)。事务A 相依于事务B，并且事务B 也因为相依于事务A 而封闭了这个循环。</p>
+<p>例如以下操作就会产生死锁，两个连接互相阻塞对方的update。</p>
+<p>连接1：</p>
+<p>begin tran</p>
+<p>select * from customers</p>
+<p>update customers set CompanyName = CompanyName</p>
+<p>waitfor delay ‘00:00:05’</p>
+<p>select * from Employees</p>
+<p>–因为Employees被连接2锁住了，所以这里会阻塞。</p>
+<p>update Employees set LastName = LastName</p>
+<p>commit tran</p>
+<p>连接2：</p>
+<p>begin tran</p>
+<p>select * from Employees</p>
+<p>update Employees set LastName = LastName</p>
+<p>waitfor delay ‘00:00:05’</p>
+<p>select * from customers</p>
+<p>–因为customers被连接1锁住了，所以这里会阻塞。</p>
+<p>update customers set CompanyName = CompanyName</p>
+<p>commit tran</p>
+<p>SQL Server遇到死锁时会自动杀死其中一个事务，而另一个事务会正常结束（提交或回滚）。</p>
+<p>SQL Server对杀死的连接返回错误代码是1205，异常提示是：</p>
+<p>Your transaction (process ID #52) was deadlocked on {lock | communication buffer | thRead} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.</p>
+<p>除了Read UnCommitted和Snapshot，其它类型的事务都可能产生死锁。</p>
 </span>
       
     </div>
@@ -302,7 +429,11 @@ git p">
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+            <a href="/tags/乐观锁/" rel="tag">#乐观锁</a>
+          
+            <a href="/tags/悲观锁/" rel="tag">#悲观锁</a>
           
         </div>
       
@@ -311,12 +442,16 @@ git p">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/03/select考察/" rel="next" title="select考察">
+                <i class="fa fa-chevron-left"></i> select考察
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/" rel="prev" title="PHP如何释放内存之UNSET销毁变量并释放内存详解">
-                PHP如何释放内存之UNSET销毁变量并释放内存详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/03/mySQL查询优化/" rel="prev" title="mySQL查询优化">
+                mySQL查询优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -344,8 +479,8 @@ git p">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/"
-           data-title="使用GitHub和Hexo搭建免费静态Blog" data-url="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/">
+      <div class="ds-thread" data-thread-key="2016/01/03/悲观锁和乐观锁/"
+           data-title="悲观锁和乐观锁" data-url="http://tomhjx.github.io/2016/01/03/悲观锁和乐观锁/">
       </div>
     
   </div>
@@ -435,7 +570,7 @@ git p">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6559_u7A0B"><span class="nav-number">1.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo"><span class="nav-number">2.</span> <span class="nav-text">hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_pages"><span class="nav-number">3.</span> <span class="nav-text">git pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u8350_u4E3B_u9898"><span class="nav-number">4.</span> <span class="nav-text">推荐主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><span class="nav-number">5.</span> <span class="nav-text">第三方搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><span class="nav-number">6.</span> <span class="nav-text">第三方评论系统</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

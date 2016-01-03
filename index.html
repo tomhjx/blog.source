@@ -240,8 +240,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/" itemprop="url">
-                  PHP任意文件上传漏洞（CVE-2015-2348）
+                <a class="post-title-link" href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="url">
+                  MySQL server has gone away报错原因分析
                 </a>
               
             
@@ -251,7 +251,7 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T14:06:37+08:00" content="2016-01-03">
+            <time itemprop="dateCreated" datetime="2016-01-03T17:44:52+08:00" content="2016-01-03">
               2016-01-03
             </time>
           </span>
@@ -261,8 +261,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -273,8 +273,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -289,8 +289,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/" itemprop="commentsCount"></span>
+                <a href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,12 +312,31 @@
         
           <span itemprop="articleBody">
             
-              <p>安全研究人员今天发布了一个中危漏洞——PHP任意文件上传漏洞（CVE-2015-2348）。<br>在上传文件的时候只判断文件名是合法的文件名就断定这个文件不是恶意文件，这确实会导致其他安全问题。并且在这种情况下，在你自己的文件中检查漏洞很不现实，因为这个漏洞可以绕过你对文件名后缀、文件类型(Content-Type)、Mime type、文件大小等的检查，所以仅仅依靠这些检查是救不了你的。<br>漏洞细节<br>这个漏洞存在于php中一个非常常用的函数中：move_uploaded_files，开发者总是用这个函数来移动上传的文件,这个函数会检查被上传的文件是否是一个合法的文件(是否是通过 HTTP 的 post 机制上传的)，如果是合法的文件，则将它一定到指定目录中。<br>例子：<br>move_uploaded_file ( string $filename , string $destination )<br>这里的问题是，可以在文件名中插入空字符(之前多次修复过这个漏洞，比如CVE-2006-7243)，利用插入空字符的方式，攻击者可以上传任意文件，引起远程代码执行漏洞等。<br>我这里用DVWA来演示这个例子，DVWA级别最高的一题中因为种种原因不是很容易通过，意在告诉开发者如何去开发更安全的文件上传组件。让我们来看看这个例子：<br>代码地址：<a href="https://github.com/RandomStorm/DVWA/blob/master/vulnerabilities/upload/source/high.php" target="_blank" rel="external">https://github.com/RandomStorm/DVWA/blob/master/vulnerabilities/upload/source/high.php</a><br>代码片段：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uploaded_name</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'name'</span>]; </span><br><span class="line"><span class="variable">$uploaded_ext</span> = substr(<span class="variable">$uploaded_name</span>, strrpos(<span class="variable">$uploaded_name</span>, <span class="string">'.'</span>) + <span class="number">1</span>); <span class="variable">$uploaded_size</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'size'</span>]; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((<span class="variable">$uploaded_ext</span> == <span class="string">"jpg"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"JPG"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"jpeg"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"JPEG"</span>) &amp;&amp; (<span class="variable">$uploaded_size</span> &lt; <span class="number">100000</span>))&#123; <span class="keyword">if</span>(!move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'tmp_name'</span>], <span class="variable">$target_path</span>)) &#123; </span><br><span class="line"></span><br><span class="line"><span class="variable">$html</span> .= <span class="string">''</span>;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">'Your image was not uploaded.'</span>; </span><br><span class="line"><span class="variable">$html</span> .= <span class="string">''</span>; &#125; </span><br><span class="line"><span class="keyword">else</span> &#123; </span><br><span class="line"><span class="variable">$html</span> .= <span class="variable">$target_path</span> . <span class="string">' succesfully uploaded!'</span>;</span><br></pre></td></tr></table></figure>
-<p>.<br>.<br>这段代码有好多个漏洞，比如XSCH, XSS等，但是没有RCE这种严重的漏洞，因为从PHP 5.3.1开始，空字符的问题已经被修复了。这里的问题是，DVWA将用户上传的name参数传递给了move_upload_file()函数，那么 php 执行的操作可能就是这样子的：<br>move_uploaded_file($_FILES[‘name’][‘tmp_name’],”/file.php\x00.jpg”);<br>这本应该创建一个名为file.php\x00.jpg的文件，但实际上创建的文件是file.php。</p>
-<p>这样，就绕过了代码中对后缀名的校验，并且事实证明GD库中又很多其他函数也存在这个问题(比如getimagesize(), imagecreatefromjpeg()…等)，可以看这个例子。<br>如果你机器的php版本在 5.4.39, 5.5.x – 5.5.23, 或者 5.6.x – 5.6.7，可以通过检查文件名中是否有\x00字符来解决本文中所述的问题。<br>安全建议<br>如果你的机器上存在这个漏洞，建议使用随机字符串重命名文件名，而不是使用用户上传上来的name参数的值。</p>
-<p><a href="http://www.freebuf.com/vuls/62811.html" target="_blank" rel="external">http://www.freebuf.com/vuls/62811.html</a></p>
-
+              <h3 id="MySQL__u670D_u52A1_u5B95_u4E86"><a href="#MySQL__u670D_u52A1_u5B95_u4E86" class="headerlink" title="MySQL 服务宕了"></a>MySQL 服务宕了</h3><p>判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'uptime';"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Uptime        | 68928 |&#10;+---------------+-------+&#10;1 row in set (0.04 sec)</span><br></pre></td></tr></table></figure>
+<p>或者查看MySQL的报错日志，看看有没有重启的信息</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ tail /var/<span class="built_in">log</span>/mysql/error.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;130101 22:22:30 InnoDB: Initializing buffer pool, size = 256.0M&#10;130101 22:22:30 InnoDB: Completed initialization of buffer pool&#10;130101 22:22:30 InnoDB: highest supported file format is Barracuda.&#10;130101 22:22:30 InnoDB: 1.1.8 started; log sequence number 63444325509&#10;130101 22:22:30 [Note] Server hostname (bind-address): &#39;127.0.0.1&#39;; port: 3306&#10;130101 22:22:30 [Note]   - &#39;127.0.0.1&#39; resolves to &#39;127.0.0.1&#39;;&#10;130101 22:22:30 [Note] Server socket created on IP: &#39;127.0.0.1&#39;.&#10;130101 22:22:30 [Note] Event Scheduler: Loaded 0 events&#10;130101 22:22:30 [Note] /usr/sbin/mysqld: ready for connections.&#10;Version: &#39;5.5.28-cll&#39;  socket: &#39;/var/lib/mysql/mysql.sock&#39;  port: 3306  MySQL Community Server (GPL)</span><br></pre></td></tr></table></figure>
+<p>如果uptime数值很大，表明mysql服务运行了很久了。说明最近服务没有重启过。</p>
+<p>如果日志没有相关信息，也表名mysql服务最近没有重启过，可以继续检查下面几项内容。</p>
+<h3 id="u8FDE_u63A5_u8D85_u65F6"><a href="#u8FDE_u63A5_u8D85_u65F6" class="headerlink" title="连接超时"></a>连接超时</h3><p>如果程序使用的是长连接，则这种情况的可能性会比较大。</p>
+<p>即，某个长连接很久没有新的请求发起，达到了server端的timeout，被server强行关闭。</p>
+<p>此后再通过这个connection发起查询的时候，就会报错server has gone away</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global variables like '%timeout';"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----------------------------+----------+&#10;| Variable_name              | Value    |&#10;+----------------------------+----------+&#10;| connect_timeout            | 30       |&#10;| delayed_insert_timeout     | 300      |&#10;| innodb_lock_wait_timeout   | 50       |&#10;| innodb_rollback_on_timeout | OFF      |&#10;| interactive_timeout        | 28800    |&#10;| lock_wait_timeout          | 31536000 |&#10;| net_read_timeout           | 30       |&#10;| net_write_timeout          | 60       |&#10;| slave_net_timeout          | 3600     |&#10;| wait_timeout               | 28800    |&#10;+----------------------------+----------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; SET SESSION wait_timeout=5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Wait 10 seconds</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT NOW();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;ERROR 2006 (HY000): MySQL server has gone away&#10;No connection. Trying to reconnect...&#10;Connection id:    132361&#10;Current database: *** NONE ***&#10;&#10;+---------------------+&#10;| NOW()               |&#10;+---------------------+&#10;| 2013-01-02 11:31:15 |&#10;+---------------------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill"><a href="#u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill" class="headerlink" title="进程在server端被主动kill"></a>进程在server端被主动kill</h3><p>这种情况和情况2相似，只是发起者是DBA或者其他job。发现有长时间的慢查询执行kill xxx导致。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'com_kill'"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Com_kill      | 0     |&#10;+---------------+-------+</span><br></pre></td></tr></table></figure>
+<h3 id="Your_SQL_statement_was_too_large"><a href="#Your_SQL_statement_was_too_large" class="headerlink" title="Your SQL statement was too large."></a>Your SQL statement was too large.</h3><p>当查询的结果集超过 max_allowed_packet 也会出现这样的报错。定位方法是打出相关报错的语句。</p>
+<p>用select * into outfile 的方式导出到文件，查看文件大小是否超过 max_allowed_packet ，如果超过则需要调整参数，或者优化语句。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+---------+&#10;| Variable_name      | Value   |&#10;+--------------------+---------+&#10;| max_allowed_packet | 1048576 |&#10;+--------------------+---------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>修改参数：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; set global max_allowed_packet=1024*1024*16;</span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+----------+&#10;| Variable_name      | Value    |&#10;+--------------------+----------+&#10;| max_allowed_packet | 16777216 |&#10;+--------------------+----------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
             
           </span>
         
@@ -342,6 +361,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
         </div>
@@ -380,21 +403,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

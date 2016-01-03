@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -51,25 +51,19 @@
 
 
 
-<meta name="description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="description" content="SELECT语句定义一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：
+&amp;#60;SELECT clause&amp;#62; [&amp;#60;FROM clause&amp;#62;] [&amp;#60;WHERE clause&amp;#62;] [&amp;#60;GROUP BY clause&amp;#62;] [&amp;#60;HAVING clause&amp;#62;] [&amp;#60;ORDER BY clause&amp;#62">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/index.html">
+<meta property="og:title" content="select语句执行顺序">
+<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/select语句执行顺序/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
-<meta property="og:updated_time" content="2016-01-03T06:05:43.000Z">
+<meta property="og:description" content="SELECT语句定义一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：
+&amp;#60;SELECT clause&amp;#62; [&amp;#60;FROM clause&amp;#62;] [&amp;#60;WHERE clause&amp;#62;] [&amp;#60;GROUP BY clause&amp;#62;] [&amp;#60;HAVING clause&amp;#62;] [&amp;#60;ORDER BY clause&amp;#62">
+<meta property="og:updated_time" content="2016-01-03T09:40:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta name="twitter:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="twitter:title" content="select语句执行顺序">
+<meta name="twitter:description" content="SELECT语句定义一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：
+&amp;#60;SELECT clause&amp;#62; [&amp;#60;FROM clause&amp;#62;] [&amp;#60;WHERE clause&amp;#62;] [&amp;#60;GROUP BY clause&amp;#62;] [&amp;#60;HAVING clause&amp;#62;] [&amp;#60;ORDER BY clause&amp;#62">
 
 
 
@@ -81,7 +75,7 @@ git p">
   };
 </script>
 
-  <title> 使用GitHub和Hexo搭建免费静态Blog | 疯狂的茶几 </title>
+  <title> select语句执行顺序 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +226,7 @@ git p">
             
             
               
-                使用GitHub和Hexo搭建免费静态Blog
+                select语句执行顺序
               
             
           </h1>
@@ -241,7 +235,7 @@ git p">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T13:22:25+08:00" content="2016-01-03">
+            <time itemprop="dateCreated" datetime="2016-01-03T17:39:04+08:00" content="2016-01-03">
               2016-01-03
             </time>
           </span>
@@ -251,8 +245,20 @@ git p">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -267,8 +273,8 @@ git p">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/" itemprop="commentsCount"></span>
+                <a href="/2016/01/03/select语句执行顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select语句执行顺序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -287,13 +293,13 @@ git p">
       
 
       
-        <span itemprop="articleBody"><h3 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h3><p><a href="http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
-<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><p><a href="https://hexo.io/zh-cn/api/index.html" target="_blank" rel="external">https://hexo.io/zh-cn/api/index.html</a></p>
-<p><a href="http://segmentfault.com/a/1190000002632530" target="_blank" rel="external">http://segmentfault.com/a/1190000002632530</a></p>
-<h3 id="git_pages"><a href="#git_pages" class="headerlink" title="git pages"></a>git pages</h3><p><a href="http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html" target="_blank" rel="external">http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html</a></p>
-<h3 id="u63A8_u8350_u4E3B_u9898"><a href="#u63A8_u8350_u4E3B_u9898" class="headerlink" title="推荐主题"></a>推荐主题</h3><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><a href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE" class="headerlink" title="第三方搜索引擎"></a>第三方搜索引擎</h3><p><a href="https://swiftype.com/" target="_blank" rel="external">https://swiftype.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><a href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF" class="headerlink" title="第三方评论系统"></a>第三方评论系统</h3><p><a href="http://duoshuo.com/" target="_blank" rel="external">http://duoshuo.com/</a></p>
+        <span itemprop="articleBody"><h3 id="SELECT_u8BED_u53E5_u5B9A_u4E49"><a href="#SELECT_u8BED_u53E5_u5B9A_u4E49" class="headerlink" title="SELECT语句定义"></a>SELECT语句定义</h3><p>一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#60;SELECT clause&#62; [&#60;FROM clause&#62;] [&#60;WHERE clause&#62;] [&#60;GROUP BY clause&#62;] [&#60;HAVING clause&#62;] [&#60;ORDER BY clause&#62;] [&#60;LIMIT clause&#62;]</span><br></pre></td></tr></table></figure>
+<p>SELECT子句是必选的，其它子句如WHERE子句、GROUP BY子句等是可选的。</p>
+<p>一个SELECT语句中，子句的顺序是固定的。例如GROUP BY子句不会位于WHERE子句的前面。</p>
+<h3 id="SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F"><a href="#SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F" class="headerlink" title="SELECT语句执行顺序"></a>SELECT语句执行顺序</h3><p>SELECT语句中子句的执行顺序与SELECT语句中子句的输入顺序是不一样的，所以并不是从SELECT子句开始执行的，而是按照下面的顺序执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;&#24320;&#22987;-&#62;FROM&#23376;&#21477;-&#62;WHERE&#23376;&#21477;-&#62;GROUP BY&#23376;&#21477;-&#62;HAVING&#23376;&#21477;-&#62;ORDER BY&#23376;&#21477;-&#62;SELECT&#23376;&#21477;-&#62;LIMIT&#23376;&#21477;-&#62;&#26368;&#32456;&#32467;&#26524;</span><br></pre></td></tr></table></figure>
+<p>每个子句执行后都会产生一个中间结果，供接下来的子句使用，如果不存在某个子句，就跳过</p>
 </span>
       
     </div>
@@ -302,7 +308,7 @@ git p">
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
           
         </div>
       
@@ -311,12 +317,16 @@ git p">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/03/mySQL查询优化/" rel="next" title="mySQL查询优化">
+                <i class="fa fa-chevron-left"></i> mySQL查询优化
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/" rel="prev" title="PHP如何释放内存之UNSET销毁变量并释放内存详解">
-                PHP如何释放内存之UNSET销毁变量并释放内存详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" rel="prev" title="MySQL server has gone away报错原因分析">
+                MySQL server has gone away报错原因分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -344,8 +354,8 @@ git p">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/"
-           data-title="使用GitHub和Hexo搭建免费静态Blog" data-url="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/">
+      <div class="ds-thread" data-thread-key="2016/01/03/select语句执行顺序/"
+           data-title="select语句执行顺序" data-url="http://tomhjx.github.io/2016/01/03/select语句执行顺序/">
       </div>
     
   </div>
@@ -435,7 +445,7 @@ git p">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6559_u7A0B"><span class="nav-number">1.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo"><span class="nav-number">2.</span> <span class="nav-text">hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_pages"><span class="nav-number">3.</span> <span class="nav-text">git pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u8350_u4E3B_u9898"><span class="nav-number">4.</span> <span class="nav-text">推荐主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><span class="nav-number">5.</span> <span class="nav-text">第三方搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><span class="nav-number">6.</span> <span class="nav-text">第三方评论系统</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT_u8BED_u53E5_u5B9A_u4E49"><span class="nav-number">1.</span> <span class="nav-text">SELECT语句定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F"><span class="nav-number">2.</span> <span class="nav-text">SELECT语句执行顺序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="MySQL,故障问题," />
 
 
 
@@ -51,25 +51,22 @@
 
 
 
-<meta name="description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="description" content="MySQL 服务宕了判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长
+$ mysql -uroot -p -e &quot;show global status like &apos;uptime&apos;;&quot;
++---------------+-------+&amp;#10;| Variable_name | Value |&amp;#10;+---------------+-------+&amp;#10;| Upti">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/index.html">
+<meta property="og:title" content="MySQL server has gone away报错原因分析">
+<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/MySQL-server-has-gone-away报错原因分析/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
-<meta property="og:updated_time" content="2016-01-03T06:05:43.000Z">
+<meta property="og:description" content="MySQL 服务宕了判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长
+$ mysql -uroot -p -e &quot;show global status like &apos;uptime&apos;;&quot;
++---------------+-------+&amp;#10;| Variable_name | Value |&amp;#10;+---------------+-------+&amp;#10;| Upti">
+<meta property="og:updated_time" content="2016-01-03T09:49:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta name="twitter:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="twitter:title" content="MySQL server has gone away报错原因分析">
+<meta name="twitter:description" content="MySQL 服务宕了判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长
+$ mysql -uroot -p -e &quot;show global status like &apos;uptime&apos;;&quot;
++---------------+-------+&amp;#10;| Variable_name | Value |&amp;#10;+---------------+-------+&amp;#10;| Upti">
 
 
 
@@ -81,7 +78,7 @@ git p">
   };
 </script>
 
-  <title> 使用GitHub和Hexo搭建免费静态Blog | 疯狂的茶几 </title>
+  <title> MySQL server has gone away报错原因分析 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +229,7 @@ git p">
             
             
               
-                使用GitHub和Hexo搭建免费静态Blog
+                MySQL server has gone away报错原因分析
               
             
           </h1>
@@ -241,7 +238,7 @@ git p">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T13:22:25+08:00" content="2016-01-03">
+            <time itemprop="dateCreated" datetime="2016-01-03T17:44:52+08:00" content="2016-01-03">
               2016-01-03
             </time>
           </span>
@@ -251,8 +248,20 @@ git p">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -267,8 +276,8 @@ git p">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/" itemprop="commentsCount"></span>
+                <a href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -287,14 +296,31 @@ git p">
       
 
       
-        <span itemprop="articleBody"><h3 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h3><p><a href="http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
-<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><p><a href="https://hexo.io/zh-cn/api/index.html" target="_blank" rel="external">https://hexo.io/zh-cn/api/index.html</a></p>
-<p><a href="http://segmentfault.com/a/1190000002632530" target="_blank" rel="external">http://segmentfault.com/a/1190000002632530</a></p>
-<h3 id="git_pages"><a href="#git_pages" class="headerlink" title="git pages"></a>git pages</h3><p><a href="http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html" target="_blank" rel="external">http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html</a></p>
-<h3 id="u63A8_u8350_u4E3B_u9898"><a href="#u63A8_u8350_u4E3B_u9898" class="headerlink" title="推荐主题"></a>推荐主题</h3><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><a href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE" class="headerlink" title="第三方搜索引擎"></a>第三方搜索引擎</h3><p><a href="https://swiftype.com/" target="_blank" rel="external">https://swiftype.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><a href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF" class="headerlink" title="第三方评论系统"></a>第三方评论系统</h3><p><a href="http://duoshuo.com/" target="_blank" rel="external">http://duoshuo.com/</a></p>
-</span>
+        <span itemprop="articleBody"><h3 id="MySQL__u670D_u52A1_u5B95_u4E86"><a href="#MySQL__u670D_u52A1_u5B95_u4E86" class="headerlink" title="MySQL 服务宕了"></a>MySQL 服务宕了</h3><p>判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'uptime';"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Uptime        | 68928 |&#10;+---------------+-------+&#10;1 row in set (0.04 sec)</span><br></pre></td></tr></table></figure>
+<p>或者查看MySQL的报错日志，看看有没有重启的信息</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ tail /var/<span class="built_in">log</span>/mysql/error.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;130101 22:22:30 InnoDB: Initializing buffer pool, size = 256.0M&#10;130101 22:22:30 InnoDB: Completed initialization of buffer pool&#10;130101 22:22:30 InnoDB: highest supported file format is Barracuda.&#10;130101 22:22:30 InnoDB: 1.1.8 started; log sequence number 63444325509&#10;130101 22:22:30 [Note] Server hostname (bind-address): &#39;127.0.0.1&#39;; port: 3306&#10;130101 22:22:30 [Note]   - &#39;127.0.0.1&#39; resolves to &#39;127.0.0.1&#39;;&#10;130101 22:22:30 [Note] Server socket created on IP: &#39;127.0.0.1&#39;.&#10;130101 22:22:30 [Note] Event Scheduler: Loaded 0 events&#10;130101 22:22:30 [Note] /usr/sbin/mysqld: ready for connections.&#10;Version: &#39;5.5.28-cll&#39;  socket: &#39;/var/lib/mysql/mysql.sock&#39;  port: 3306  MySQL Community Server (GPL)</span><br></pre></td></tr></table></figure>
+<p>如果uptime数值很大，表明mysql服务运行了很久了。说明最近服务没有重启过。</p>
+<p>如果日志没有相关信息，也表名mysql服务最近没有重启过，可以继续检查下面几项内容。</p>
+<h3 id="u8FDE_u63A5_u8D85_u65F6"><a href="#u8FDE_u63A5_u8D85_u65F6" class="headerlink" title="连接超时"></a>连接超时</h3><p>如果程序使用的是长连接，则这种情况的可能性会比较大。</p>
+<p>即，某个长连接很久没有新的请求发起，达到了server端的timeout，被server强行关闭。</p>
+<p>此后再通过这个connection发起查询的时候，就会报错server has gone away</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global variables like '%timeout';"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----------------------------+----------+&#10;| Variable_name              | Value    |&#10;+----------------------------+----------+&#10;| connect_timeout            | 30       |&#10;| delayed_insert_timeout     | 300      |&#10;| innodb_lock_wait_timeout   | 50       |&#10;| innodb_rollback_on_timeout | OFF      |&#10;| interactive_timeout        | 28800    |&#10;| lock_wait_timeout          | 31536000 |&#10;| net_read_timeout           | 30       |&#10;| net_write_timeout          | 60       |&#10;| slave_net_timeout          | 3600     |&#10;| wait_timeout               | 28800    |&#10;+----------------------------+----------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; SET SESSION wait_timeout=5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Wait 10 seconds</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT NOW();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;ERROR 2006 (HY000): MySQL server has gone away&#10;No connection. Trying to reconnect...&#10;Connection id:    132361&#10;Current database: *** NONE ***&#10;&#10;+---------------------+&#10;| NOW()               |&#10;+---------------------+&#10;| 2013-01-02 11:31:15 |&#10;+---------------------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill"><a href="#u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill" class="headerlink" title="进程在server端被主动kill"></a>进程在server端被主动kill</h3><p>这种情况和情况2相似，只是发起者是DBA或者其他job。发现有长时间的慢查询执行kill xxx导致。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'com_kill'"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Com_kill      | 0     |&#10;+---------------+-------+</span><br></pre></td></tr></table></figure>
+<h3 id="Your_SQL_statement_was_too_large"><a href="#Your_SQL_statement_was_too_large" class="headerlink" title="Your SQL statement was too large."></a>Your SQL statement was too large.</h3><p>当查询的结果集超过 max_allowed_packet 也会出现这样的报错。定位方法是打出相关报错的语句。</p>
+<p>用select * into outfile 的方式导出到文件，查看文件大小是否超过 max_allowed_packet ，如果超过则需要调整参数，或者优化语句。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+---------+&#10;| Variable_name      | Value   |&#10;+--------------------+---------+&#10;| max_allowed_packet | 1048576 |&#10;+--------------------+---------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>修改参数：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; set global max_allowed_packet=1024*1024*16;</span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+----------+&#10;| Variable_name      | Value    |&#10;+--------------------+----------+&#10;| max_allowed_packet | 16777216 |&#10;+--------------------+----------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></span>
       
     </div>
 
@@ -302,7 +328,9 @@ git p">
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+            <a href="/tags/故障问题/" rel="tag">#故障问题</a>
           
         </div>
       
@@ -311,13 +339,13 @@ git p">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/03/select语句执行顺序/" rel="next" title="select语句执行顺序">
+                <i class="fa fa-chevron-left"></i> select语句执行顺序
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/" rel="prev" title="PHP如何释放内存之UNSET销毁变量并释放内存详解">
-                PHP如何释放内存之UNSET销毁变量并释放内存详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -344,8 +372,8 @@ git p">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/"
-           data-title="使用GitHub和Hexo搭建免费静态Blog" data-url="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/">
+      <div class="ds-thread" data-thread-key="2016/01/03/MySQL-server-has-gone-away报错原因分析/"
+           data-title="MySQL server has gone away报错原因分析" data-url="http://tomhjx.github.io/2016/01/03/MySQL-server-has-gone-away报错原因分析/">
       </div>
     
   </div>
@@ -435,7 +463,7 @@ git p">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6559_u7A0B"><span class="nav-number">1.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo"><span class="nav-number">2.</span> <span class="nav-text">hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_pages"><span class="nav-number">3.</span> <span class="nav-text">git pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u8350_u4E3B_u9898"><span class="nav-number">4.</span> <span class="nav-text">推荐主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><span class="nav-number">5.</span> <span class="nav-text">第三方搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><span class="nav-number">6.</span> <span class="nav-text">第三方评论系统</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL__u670D_u52A1_u5B95_u4E86"><span class="nav-number">1.</span> <span class="nav-text">MySQL 服务宕了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FDE_u63A5_u8D85_u65F6"><span class="nav-number">2.</span> <span class="nav-text">连接超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill"><span class="nav-number">3.</span> <span class="nav-text">进程在server端被主动kill</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Your_SQL_statement_was_too_large"><span class="nav-number">4.</span> <span class="nav-text">Your SQL statement was too large.</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
