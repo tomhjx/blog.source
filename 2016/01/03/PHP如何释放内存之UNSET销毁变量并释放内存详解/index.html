@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="PHP内存释放," />
 
 
 
@@ -51,25 +51,19 @@
 
 
 
-<meta name="description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="description" content="PHP的unset()函数用来清除、销毁变量，不用的变量，我们可以用unset()将它销毁。但是某些时候，用unset()却无法达到销毁变量占用的内存！我们先看一个例子：
+12345$s = str_repeat(&apos;1&apos;,255);       //产生由255个1组成的字符串$m = memory_get_usage();        //获取当前占用内存unset($s);$mm = mem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/index.html">
+<meta property="og:title" content="PHP如何释放内存之UNSET销毁变量并释放内存详解">
+<meta property="og:url" content="http://tomhjx.github.io/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
-<meta property="og:updated_time" content="2016-01-03T06:05:43.000Z">
+<meta property="og:description" content="PHP的unset()函数用来清除、销毁变量，不用的变量，我们可以用unset()将它销毁。但是某些时候，用unset()却无法达到销毁变量占用的内存！我们先看一个例子：
+12345$s = str_repeat(&apos;1&apos;,255);       //产生由255个1组成的字符串$m = memory_get_usage();        //获取当前占用内存unset($s);$mm = mem">
+<meta property="og:updated_time" content="2016-01-03T05:48:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用GitHub和Hexo搭建免费静态Blog">
-<meta name="twitter:description" content="教程http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io
-hexohttps://hexo.io/zh-cn/api/index.html
-http://segmentfault.com/a/1190000002632530
-git p">
+<meta name="twitter:title" content="PHP如何释放内存之UNSET销毁变量并释放内存详解">
+<meta name="twitter:description" content="PHP的unset()函数用来清除、销毁变量，不用的变量，我们可以用unset()将它销毁。但是某些时候，用unset()却无法达到销毁变量占用的内存！我们先看一个例子：
+12345$s = str_repeat(&apos;1&apos;,255);       //产生由255个1组成的字符串$m = memory_get_usage();        //获取当前占用内存unset($s);$mm = mem">
 
 
 
@@ -81,7 +75,7 @@ git p">
   };
 </script>
 
-  <title> 使用GitHub和Hexo搭建免费静态Blog | 疯狂的茶几 </title>
+  <title> PHP如何释放内存之UNSET销毁变量并释放内存详解 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +226,7 @@ git p">
             
             
               
-                使用GitHub和Hexo搭建免费静态Blog
+                PHP如何释放内存之UNSET销毁变量并释放内存详解
               
             
           </h1>
@@ -241,7 +235,7 @@ git p">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T13:22:25+08:00" content="2016-01-03">
+            <time itemprop="dateCreated" datetime="2016-01-03T13:43:57+08:00" content="2016-01-03">
               2016-01-03
             </time>
           </span>
@@ -251,8 +245,20 @@ git p">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -267,8 +273,8 @@ git p">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/" itemprop="commentsCount"></span>
+                <a href="/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -287,13 +293,17 @@ git p">
       
 
       
-        <span itemprop="articleBody"><h3 id="u6559_u7A0B"><a href="#u6559_u7A0B" class="headerlink" title="教程"></a>教程</h3><p><a href="http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
-<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><p><a href="https://hexo.io/zh-cn/api/index.html" target="_blank" rel="external">https://hexo.io/zh-cn/api/index.html</a></p>
-<p><a href="http://segmentfault.com/a/1190000002632530" target="_blank" rel="external">http://segmentfault.com/a/1190000002632530</a></p>
-<h3 id="git_pages"><a href="#git_pages" class="headerlink" title="git pages"></a>git pages</h3><p><a href="http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html" target="_blank" rel="external">http://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html</a></p>
-<h3 id="u63A8_u8350_u4E3B_u9898"><a href="#u63A8_u8350_u4E3B_u9898" class="headerlink" title="推荐主题"></a>推荐主题</h3><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><a href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE" class="headerlink" title="第三方搜索引擎"></a>第三方搜索引擎</h3><p><a href="https://swiftype.com/" target="_blank" rel="external">https://swiftype.com/</a></p>
-<h3 id="u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><a href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF" class="headerlink" title="第三方评论系统"></a>第三方评论系统</h3><p><a href="http://duoshuo.com/" target="_blank" rel="external">http://duoshuo.com/</a></p>
+        <span itemprop="articleBody"><p>PHP的unset()函数用来清除、销毁变量，不用的变量，我们可以用unset()将它销毁。但是某些时候，用unset()却无法达到销毁变量占用的内存！我们先看一个例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$s</span> = str_repeat(<span class="string">'1'</span>,<span class="number">255</span>);       <span class="comment">//产生由255个1组成的字符串</span></span><br><span class="line"><span class="variable">$m</span> = memory_get_usage();        <span class="comment">//获取当前占用内存</span></span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$s</span>);</span><br><span class="line"><span class="variable">$mm</span> = memory_get_usage();       <span class="comment">//unset()后再查看当前占用内存</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$m</span>-<span class="variable">$mm</span>;</span><br></pre></td></tr></table></figure>
+<p>最后输出unset()之前占用内存减去unset()之后占用内存，如果是正数，那么说明unset($s)已经将$s从内存中销毁(或者 说，unset()之后内存占用减少了)，可是我在PHP5和windows平台下，得到的结果是：-48。这是否可以说明，unset($s)并没有起 到销毁变量$s所占用内存的作用呢？我们再作下面的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$s</span> = str_repeat(<span class="string">'1'</span>,<span class="number">256</span>);       <span class="comment">//产生由256个1组成的字符串</span></span><br><span class="line"><span class="variable">$m</span> = memory_get_usage();        <span class="comment">//获取当前占用内存</span></span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$s</span>);</span><br><span class="line"><span class="variable">$mm</span> = memory_get_usage();       <span class="comment">//unset()后再查看当前占用内存</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$m</span>-<span class="variable">$mm</span>;</span><br></pre></td></tr></table></figure>
+<p>这个例子，和上面的例子几乎相同，唯一的不同是，$s由256个1组成，即比第一个例子多了一个1，得到结果是：224。这是否可以说明，unset($s)已经将$s所占用的内存销毁了？<br>通过上面两个例子，我们可以得出以下结论：<br>结论一、unset()函数只能在变量值占用内存空间超过256字节时才会释放内存空间。<br>那么是不是只要变量值超过256，使用unset就可以释放内存空间呢？我们再通过一个例子来测试一下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$s</span> = str_repeat(<span class="string">'1'</span>,<span class="number">256</span>);               <span class="comment">//这和第二个例子完全相同</span></span><br><span class="line"><span class="variable">$p</span> = &amp;<span class="variable">$s</span>;</span><br><span class="line"><span class="variable">$m</span> = memory_get_usage();</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$s</span>);                                              <span class="comment">//销毁$s</span></span><br><span class="line"><span class="variable">$mm</span> = memory_get_usage();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$p</span> . <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$m</span>-<span class="variable">$mm</span>;</span><br></pre></td></tr></table></figure>
+<p>刷新页面，我们看到第一行有256个1，第二行是-48，按理说我们已经销毁了$s，而$p只是引用$s的变量，应该是没有内容了，另外，unset($s)后内存占用却比unset()前增加了！现在我们再做以下的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$s</span> = str_repeat(<span class="string">'1'</span>, <span class="number">256</span>);              <span class="comment">//这和第二个例子完全相同</span></span><br><span class="line"><span class="variable">$p</span> = &amp;<span class="variable">$s</span>;</span><br><span class="line"><span class="variable">$m</span> = memory_get_usage();</span><br><span class="line"><span class="variable">$s</span> = <span class="keyword">null</span>;                                              <span class="comment">//设置$s为null</span></span><br><span class="line"><span class="variable">$mm</span> = memory_get_usage();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$p</span> . <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$m</span>-<span class="variable">$mm</span>;</span><br></pre></td></tr></table></figure>
+<p>现在刷新页面，我们看到，输出$p已经是没有内容了，unset()前后内存占用量之差是224，即已经清除了变量占用的内存。本例中的$s=null也可以换成unset()，如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$s</span> = str_repeat(<span class="string">'1'</span>, <span class="number">256</span>);              <span class="comment">//这和第二个例子完全相同</span></span><br><span class="line"><span class="variable">$p</span> = &amp;<span class="variable">$s</span>;</span><br><span class="line"><span class="variable">$m</span> = memory_get_usage();</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$s</span>);                                              <span class="comment">//销毁$s</span></span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$p</span>);</span><br><span class="line"><span class="variable">$mm</span> = memory_get_usage();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$p</span> . <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$m</span>-<span class="variable">$mm</span>;</span><br></pre></td></tr></table></figure>
+<p>我们将$s和$p都使用unset()销毁，这时再看内存占用量之差也是224，说明这样也可以释放内存。那么，我们可以得到另外一条结论：<br>结论二、只有当指向该变量的所有变量（如引用变量）都被销毁后，才会释放内存。<br>相信经过本文的例子后，大家应该对unset()有所了解了，最起码，本人用unset()也是为了在变量不起作用时，释放内存。</p>
 </span>
       
     </div>
@@ -302,7 +312,7 @@ git p">
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/PHP内存释放/" rel="tag">#PHP内存释放</a>
           
         </div>
       
@@ -311,12 +321,16 @@ git p">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/" rel="next" title="使用GitHub和Hexo搭建免费静态Blog">
+                <i class="fa fa-chevron-left"></i> 使用GitHub和Hexo搭建免费静态Blog
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/" rel="prev" title="PHP如何释放内存之UNSET销毁变量并释放内存详解">
-                PHP如何释放内存之UNSET销毁变量并释放内存详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/03/PHP扩展安装/" rel="prev" title="PHP扩展安装">
+                PHP扩展安装 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -344,8 +358,8 @@ git p">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/03/使用GitHub和Hexo搭建免费静态Blog/"
-           data-title="使用GitHub和Hexo搭建免费静态Blog" data-url="http://tomhjx.github.io/2016/01/03/使用GitHub和Hexo搭建免费静态Blog/">
+      <div class="ds-thread" data-thread-key="2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/"
+           data-title="PHP如何释放内存之UNSET销毁变量并释放内存详解" data-url="http://tomhjx.github.io/2016/01/03/PHP如何释放内存之UNSET销毁变量并释放内存详解/">
       </div>
     
   </div>
@@ -435,7 +449,7 @@ git p">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6559_u7A0B"><span class="nav-number">1.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo"><span class="nav-number">2.</span> <span class="nav-text">hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_pages"><span class="nav-number">3.</span> <span class="nav-text">git pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u8350_u4E3B_u9898"><span class="nav-number">4.</span> <span class="nav-text">推荐主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u641C_u7D22_u5F15_u64CE"><span class="nav-number">5.</span> <span class="nav-text">第三方搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u65B9_u8BC4_u8BBA_u7CFB_u7EDF"><span class="nav-number">6.</span> <span class="nav-text">第三方评论系统</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
