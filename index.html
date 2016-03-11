@@ -240,6 +240,467 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/12/定时器重启爱奇艺客户端/" itemprop="url">
+                  定时器重启爱奇艺客户端
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-12T01:34:42+08:00" content="2016-03-12">
+              2016-03-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/windows批处理/" itemprop="url" rel="index">
+                    <span itemprop="name">windows批处理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/12/定时器重启爱奇艺客户端/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/12/定时器重启爱奇艺客户端/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>想下载几个电视节目，找了很多地方，没有资源打包下载的，只有爱奇艺上可以下载。</p>
+<p>但是有个问题，爱奇艺客户端上的下载功能不好用，断了不重试，每次断了之后，只能手动暂停再重开才能继续。</p>
+<p>于是需要写个批处理来代替人工，才能挂着不用管。</p>
+<h2 id="u7CFB_u7EDF"><a href="#u7CFB_u7EDF" class="headerlink" title="系统"></a>系统</h2><p>windows xp sp3</p>
+<h2 id="u65B9_u6848"><a href="#u65B9_u6848" class="headerlink" title="方案"></a>方案</h2><ul>
+<li><p>由于无法长时间挂着下载，需要定期暂停并重新下载</p>
+</li>
+<li><p>设置客户端启动即刻继续下载</p>
+</li>
+<li><p>定时重启客户端，达到周期性重试下载的目的</p>
+</li>
+</ul>
+<h2 id="u8BBE_u8BA1"><a href="#u8BBE_u8BA1" class="headerlink" title="设计"></a>设计</h2><h5 id="u5BA2_u6237_u7AEF_u7684_u5B88_u62A4_u8FDB_u7A0B"><a href="#u5BA2_u6237_u7AEF_u7684_u5B88_u62A4_u8FDB_u7A0B" class="headerlink" title="客户端的守护进程"></a>客户端的守护进程</h5><ul>
+<li><p>设置客户端自动启动</p>
+</li>
+<li><p><code>运行</code> -&gt; 输入<code>msconfig</code> -&gt; 切换到<code>启动</code>选项卡 </p>
+</li>
+<li><p>找到最小启动客户端的命令</p>
+</li>
+</ul>
+<ul>
+<li>编写客户端的守护进程</li>
+</ul>
+<p><code>QyClient-daemon.bat</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;:main&#10;ping -n 3 127.0.0.1&#62;nul&#10;tasklist | find /i &#34;QyClient.exe&#34;&#38;&#38;goto main&#10;cd D:\Program Files\IQIYI Video\LStyle\&#10;start QyClient.exe&#10;goto main</span><br></pre></td></tr></table></figure>
+<h5 id="u5173_u95ED_u5BA2_u6237_u7AEF"><a href="#u5173_u95ED_u5BA2_u6237_u7AEF" class="headerlink" title="关闭客户端"></a>关闭客户端</h5><p><code>QyClient-Close.bat</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">taskkill /im QyClient.exe</span><br></pre></td></tr></table></figure>
+<h5 id="u4E3B_u8FDB_u7A0B"><a href="#u4E3B_u8FDB_u7A0B" class="headerlink" title="主进程"></a>主进程</h5><p><code>QyClient.bat</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd D:\workplace\tmp\&#10;start /min QyClient-daemon.bat&#10;:main&#10;ping -n 71 127.0.0.1&#62;nul&#10;taskkill /im QyClient.exe&#10;goto main</span><br></pre></td></tr></table></figure>
+<h2 id="u4F7F_u7528"><a href="#u4F7F_u7528" class="headerlink" title="使用"></a>使用</h2><p>执行<code>QyClient.bat</code></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/MySQL行级锁-表级锁-页级锁详解/" itemprop="url">
+                  MySQL行级锁,表级锁,页级锁详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T18:02:00+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/MySQL行级锁-表级锁-页级锁详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL行级锁-表级锁-页级锁详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501"><a href="#u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501" class="headerlink" title="行级锁,表级锁,页级锁"></a>行级锁,表级锁,页级锁</h2><p>页级:引擎 BDB。<br>表级:引擎 MyISAM ， 理解为锁住整个表，可以同时读，写不行<br>行级:引擎 INNODB ， 单独的一行记录加锁</p>
+<p>表级，直接锁定整张表，在你锁定期间，其它进程无法对该表进行写操作。如果你是写锁，则其它进程则读也不允许<br>行级,，仅对指定的记录进行加锁，这样其它进程还是可以对同一个表中的其它记录进行操作。<br>页级，表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。 </p>
+<p>MySQL 5.1支持对MyISAM和MEMORY表进行表级锁定，对BDB表进行页级锁定，对InnoDB表进行行级锁定。<br>对WRITE，MySQL使用的表锁定方法原理如下：<br>如果在表上没有锁，在它上面放一个写锁。<br>否则，把锁定请求放在写锁定队列中。 </p>
+<p>对READ，MySQL使用的锁定方法原理如下：<br>如果在表上没有写锁定，把一个读锁定放在它上面<br>否则，把锁请求放在读锁定队列中。 </p>
+<p>InnoDB使用行锁定，BDB使用页锁定。对于这两种存储引擎，都可能存在死锁。这是因为，在SQL语句处理期间，InnoDB自动获得行锁定和BDB获得页锁定，而不是在事务启动时获得。  </p>
+<p>行级锁定的优点：</p>
+<ul>
+<li>当在许多线程中访问不同的行时只存在少量锁定冲突。</li>
+<li>回滚时只有少量的更改。</li>
+<li>可以长时间锁定单一的行。</li>
+</ul>
+<p>行级锁定的缺点：</p>
+<ul>
+<li>比页级或表级锁定占用更多的内存。</li>
+<li>当在表的大部分中使用时，比页级或表级锁定速度慢，因为你必须获取更多的锁。</li>
+<li>如果你在大部分数据上经常进行GROUP BY操作或者必须经常扫描整个表，比其它锁定明显慢很多。</li>
+<li>用高级别锁定，通过支持不同的类型锁定，你也可以很容易地调节应用程序，因为其锁成本小于行级锁定。</li>
+</ul>
+<p>在以下情况下，表锁定优先于页级或行级锁定：</p>
+<ul>
+<li>表的大部分语句用于读取。</li>
+<li>对严格的关键字进行读取和更新，你可以更新或删除可以用单一的读取的关键字来提取的一行：</li>
+<li>UPDATE tbl_name SET column=value WHERE unique_key_col=key_value;</li>
+<li>DELETE FROM tbl_name WHERE unique_key_col=key_value;</li>
+<li>SELECT 结合并行的INSERT语句，并且只有很少的UPDATE或DELETE语句。</li>
+<li>在整个表上有许多扫描或GROUP BY操作，没有任何写操作。</li>
+</ul>
+<h2 id="mysql__u9501_u8868_u7C7B_u578B_u548C_u89E3_u9501_u8BED_u53E5"><a href="#mysql__u9501_u8868_u7C7B_u578B_u548C_u89E3_u9501_u8BED_u53E5" class="headerlink" title="mysql 锁表类型和解锁语句"></a>mysql 锁表类型和解锁语句</h2><p>如果想要在一个表上做大量的 INSERT 和 SELECT 操作，但是并行的插入却不可能时，可以将记录插入到临时表中，然后定期将临时表中的数据更新到实际的表里。可以用以下命令实现：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; LOCK TABLES real_table WRITE, insert_table WRITE;</span><br><span class="line">mysql&gt; INSERT INTO real_table SELECT * FROM insert_table;</span><br><span class="line">mysql&gt; TRUNCATE TABLE insert_table;</span><br><span class="line">mysql&gt; UNLOCK TABLES;</span><br></pre></td></tr></table></figure>
+<p>行级锁的优点有：<br>    在很多线程请求不同记录时减少冲突锁。<br>    事务回滚时减少改变数据。<br>    使长时间对单独的一行记录加锁成为可能。</p>
+<p>行级锁的缺点有：<br>    比页级锁和表级锁消耗更多的内存。<br>    锁是计算机协调多个进程或线程并发访问某一资源的机制，不同的数据库的锁机制大同小异。由于数据库资源是一种供许多用户共享的资源，所以如何保证数据并发访问的一致性、有效性是所有数据库必须解决的一个问题，锁冲突也是影响数据库并发访问性能的一个重要因素。了解锁机制不仅可以使我们更有效的开发利用数据库资源，也使我们能够更好地维护数据库，从而提高数据库的性能。</p>
+<p>MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。</p>
+<p>例如，MyISAM和MEMORY存储引擎采用的是表级锁（table-level-locking）；BDB存储引擎采用的是页面锁（page-level-locking），同时也支持表级锁；InnoDB存储引擎既支持行级锁，也支持表级锁，默认情况下是采用行级锁。</p>
+<p>上述三种锁的特性可大致归纳如下：<br>1） 表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。<br>2） 行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。<br>3） 页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</p>
+<pre><code>三种锁各有各的特点，若仅从锁的角度来说，表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如WEB应用；行级锁更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理（OLTP）系统。
+
+MySQL表级锁有两种模式：表共享读锁（Table Read Lock）和表独占写锁（Table Write Lock）。什么意思呢，就是说对MyISAM表进行读操作时，它不会阻塞其他用户对同一表的读请求，但会阻塞 对同一表的写操作；而对MyISAM表的写操作，则会阻塞其他用户对同一表的读和写操作。
+
+MyISAM表的读和写是串行的，即在进行读操作时不能进行写操作，反之也是一样。但在一定条件下MyISAM表也支持查询和插入的操作的并发进行，其机制是通过控制一个系统变量（concurrent_insert）来进行的，当其值设置为0时，不允许并发插入；当其值设置为1 时，如果MyISAM表中没有空洞（即表中没有被删除的行），MyISAM允许在一个进程读表的同时，另一个进程从表尾插入记录；当其值设置为2时，无论MyISAM表中有没有空洞，都允许在表尾并发插入记录。
+
+MyISAM锁调度是如何实现的呢，这也是一个很关键的问题。例如，当一个进程请求某个MyISAM表的读锁，同时另一个进程也请求同一表的写锁，此时MySQL将会如优先处理进程呢？通过研究表明，写进程将先获得锁（即使读请求先到锁等待队列）。但这也造成一个很大的缺陷，即大量的写操作会造成查询操作很难获得读锁，从而可能造成永远阻塞。所幸我们可以通过一些设置来调节MyISAM的调度行为。我们可通过指定参数low-priority-updates，使MyISAM默认引擎给予读请求以优先的权利，设置其值为1（set low_priority_updates=1),使优先级降低。
+
+InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION），二是采用了行级锁。我们知道事务是由一组SQL语句组成的逻辑处理单元，其有四个属性（简称ACID属性），分别为：
+</code></pre><p>原子性（Atomicity）：事务是一个原子操作单元，其对数据的修改，要么全部执行，要么全都不执行；<br>一致性（Consistent）：在事务开始和完成时，数据都必须保持一致状态；<br>隔离性（Isolation）：数据库系统提供一定的隔离机制，保证事务在不受外部并发操作影响的“独立”环境执行；<br>持久性（Durable）：事务完成之后，它对于数据的修改是永久性的，即使出现系统故障也能够保持。</p>
+<p>InnoDB有两种模式的行锁：</p>
+<p>1）共享锁：允许一个事务去读一行，阻止其他事务获得相同数据集的排他锁。<br>    ( Select * from table_name where ……lock in share mode)</p>
+<p>2）排他锁：允许获得排他锁的事务更新数据，阻止其他事务取得相同数据集的共享读锁和  排他写锁。(select * from table_name where…..for update)<br>    为了允许行锁和表锁共存，实现多粒度锁机制；同时还有两种内部使用的意向锁（都是表锁），分别为意向共享锁和意向排他锁。<br>    InnoDB行锁是通过给索引项加锁来实现的，即只有通过索引条件检索数据，InnoDB才使用行级锁，否则将使用表锁！</p>
+<p>另外：插入，更新性能优化的几个重要参数</p>
+<p>bulk_insert_buffer_size<br>批量插入缓存大小, 这个参数是针对MyISAM存储引擎来说的.适用于在一次性插入100-1000+条记录时, 提高效率.默认值是8M.可以针对数据量的大小,翻倍增加.</p>
+<p>concurrent_insert<br>并发插入, 当表没有空洞(删除过记录), 在某进程获取读锁的情况下,其他进程可以在表尾部进行插入.</p>
+<p>值可以设0不允许并发插入, 1当表没有空洞时, 执行并发插入, 2不管是否有空洞都执行并发插入.<br>默认是1 针对表的删除频率来设置.</p>
+<p>delay_key_write<br>针对MyISAM存储引擎,延迟更新索引.意思是说,update记录时,先将数据up到磁盘,但不up索引,将索引存在内存里,当表关闭时,将内存索引,写到磁盘. 值为 0不开启, 1开启. 默认开启.</p>
+<p>delayed_insert_limit, delayed_insert_timeout, delayed_queue_size<br>延迟插入, 将数据先交给内存队列, 然后慢慢地插入.但是这些配置,不是所有的存储引擎都支持, 目前来看, 常用的InnoDB不支持, MyISAM支持. 根据实际情况调大, 一般默认够用了</p>
+<h2 id="MySQL_InnoDB__u9501_u8868_u4E0E_u9501_u884C"><a href="#MySQL_InnoDB__u9501_u8868_u4E0E_u9501_u884C" class="headerlink" title="MySQL InnoDB 锁表与锁行"></a>MySQL InnoDB 锁表与锁行</h2><p>由于InnoDB预设是Row-Level Lock，所以只有「明确」的指定主键，MySQL才会执行Row lock (只锁住被选取的资料例) ，否则MySQL将会执行Table Lock (将整个资料表单给锁住)。</p>
+<p>举个例子: 假设有个表单products ，里面有id跟name二个栏位，id是主键。</p>
+<p>例1: (明确指定主键，并且有此笔资料，row lock)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'3'</span> <span class="keyword">and</span> <span class="keyword">type</span>=<span class="number">1</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>例2: (明确指定主键，若查无此笔资料，无lock)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'-1'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>例3: (无主键，table lock)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">name</span>=<span class="string">'Mouse'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>例4: (主键不明确，table lock)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>&lt;&gt;<span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>例5: (主键不明确，table lock)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">LIKE</span> <span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>注1: FOR UPDATE仅适用于InnoDB，且必须在交易区块(BEGIN/COMMIT)中才能生效。<br>注2: 要测试锁定的状况，可以利用MySQL的Command Mode ，开二个视窗来做测试。</p>
+<p>在MySql 5.0中测试确实是这样的<br>另外：MyAsim 只支持表级锁，InnerDB支持行级锁<br>添加了(行级锁/表级锁)锁的数据不能被其它事务再锁定，也不被其它事务修改（修改、删除）<br>是表级锁时，不管是否查询到记录，都会锁定表<br>此外，如果A与B都对表id进行查询但查询不到记录，则A与B在查询上不会进行row锁，但A与B都会获取排它锁，此时A再插入一条记录的话则会因为B已经有锁而处于等待中，此时B再插入一条同样的数据则会抛出Deadlock found when trying to get lock; try restarting transaction然后释放锁，此时A就获得了锁而插入成功</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/MYSQL索引失效的各种情形总结/" itemprop="url">
+                  MYSQL索引失效的各种情形总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T17:58:30+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/MYSQL索引失效的各种情形总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MYSQL索引失效的各种情形总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ul>
+<li>没有查询条件，或者查询条件没有建立索引 </li>
+<li>在查询条件上没有使用引导列 </li>
+<li>查询的数量是大表的大部分，应该是30％以上。 </li>
+<li>索引本身失效</li>
+<li>查询条件使用函数在索引列上，或者对索引列进行运算，运算包括(+，-，<em>，/，! 等) 错误的例子：select </em> from test where id-1=9; 正确的例子：select * from test where id=10; </li>
+<li>对小表查询 </li>
+<li>提示不使用索引</li>
+<li>统计数据不真实 </li>
+<li>CBO计算走索引花费过大的情况。其实也包含了上面的情况，这里指的是表占有的block要比索引小。 </li>
+<li>隐式转换导致索引失效.这一点应当引起重视.也是开发中经常会犯的错误. 由于表的字段tu_mdn定义为varchar2(20),但在查询时把该字段作为number类型以where条件传给Oracle,这样会导致索引失效. 错误的例子：select <em> from test where tu_mdn=13333333333; 正确的例子：select </em> from test where tu_mdn=’13333333333’; </li>
+<li>&lt;&gt;  </li>
+<li>like “%_” 百分号在前. </li>
+<li>表没分析. </li>
+<li>单独引用复合索引里非第一位置的索引列. </li>
+<li>字符型字段为数字时在where条件里不添加引号. </li>
+<li>对索引列进行运算.需要建立函数索引. </li>
+<li>not in ,not exist. </li>
+<li>当变量采用的是times变量，而表的字段采用的是date变量时.或相反情况。 </li>
+<li>B-tree索引 is null不会走,is not null会走,位图索引 is null,is not null 都会走 </li>
+<li>联合索引 is not null 只要在建立的索引列（不分先后）都会走, in null时 必须要和建立索引第一列一起使用,当建立索引第一位置条件是is null 时,其他建立索引的列可以是is null（但必须在所有列 都满足is null的时候）,或者=一个值； 当建立索引的第一位置是=一个值时,其他索引列可以是任何情况（包括is null =一个值）,以上两种情况索引都会走。其他情况不会走。</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="url">
                   MySQL server has gone away报错原因分析
                 </a>
@@ -357,6 +818,1075 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/select语句执行顺序/" itemprop="url">
+                  select语句执行顺序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T17:39:04+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/select语句执行顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select语句执行顺序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="SELECT_u8BED_u53E5_u5B9A_u4E49"><a href="#SELECT_u8BED_u53E5_u5B9A_u4E49" class="headerlink" title="SELECT语句定义"></a>SELECT语句定义</h3><p>一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#60;SELECT clause&#62; [&#60;FROM clause&#62;] [&#60;WHERE clause&#62;] [&#60;GROUP BY clause&#62;] [&#60;HAVING clause&#62;] [&#60;ORDER BY clause&#62;] [&#60;LIMIT clause&#62;]</span><br></pre></td></tr></table></figure>
+<p>SELECT子句是必选的，其它子句如WHERE子句、GROUP BY子句等是可选的。</p>
+<p>一个SELECT语句中，子句的顺序是固定的。例如GROUP BY子句不会位于WHERE子句的前面。</p>
+<h3 id="SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F"><a href="#SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F" class="headerlink" title="SELECT语句执行顺序"></a>SELECT语句执行顺序</h3><p>SELECT语句中子句的执行顺序与SELECT语句中子句的输入顺序是不一样的，所以并不是从SELECT子句开始执行的，而是按照下面的顺序执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;&#24320;&#22987;-&#62;FROM&#23376;&#21477;-&#62;WHERE&#23376;&#21477;-&#62;GROUP BY&#23376;&#21477;-&#62;HAVING&#23376;&#21477;-&#62;ORDER BY&#23376;&#21477;-&#62;SELECT&#23376;&#21477;-&#62;LIMIT&#23376;&#21477;-&#62;&#26368;&#32456;&#32467;&#26524;</span><br></pre></td></tr></table></figure>
+<p>每个子句执行后都会产生一个中间结果，供接下来的子句使用，如果不存在某个子句，就跳过</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/mySQL查询优化/" itemprop="url">
+                  mySQL查询优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T17:35:28+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/mySQL查询优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/mySQL查询优化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>糟糕的SQL查询语句可对整个应用程序的运行产生严重的影响，其不仅消耗掉更多的数据库时间，且它将对其他应用组件产生影响。</p>
+<p>　　如同其它学科，优化查询性能很大程度上决定于开发者的直觉。幸运的是，像MySQL这样的数据库自带有一些协助工具。本文简要讨论诸多工具之三种：使用索引，使用EXPLAIN分析查询以及调整MySQL的内部配置。</p>
+<p>　　一、使用索引<br>　<br>　　MySQL允许对数据库表进行索引，以此能迅速查找记录，而无需一开始就扫描整个表，由此显著地加快查询速度。每个表最多可以做到16个索引，此外MySQL还支持多列索引及全文检索。</p>
+<p>　　给表添加一个索引非常简单，只需调用一个CREATE INDEX命令并为索引指定它的域即可。列表A给出了一个例子：</p>
+<p>mysql&gt; CREATE INDEX idx_username ON users(username);<br>Query OK， 1 row affected (0.15 sec)<br>Records: 1  Duplicates: 0  Warnings: 0</p>
+<p>　　列表 A</p>
+<p>　　这里，对users表的username域做索引，以确保在WHERE或者HAVING子句中引用这一域的SELECT查询语句运行速度比没有添加索引时要快。通过SHOW INDEX命令可以查看索引已被创建（列表B）。</p>
+<p>　　 </p>
+<p>　　列表 B</p>
+<p>　　值得注意的是：索引就像一把双刃剑。对表的每一域做索引通常没有必要，且很可能导致运行速度减慢，因为向表中插入或修改数据时，MySQL不得不每次都为这些额外的工作重新建立索引。另一方面，避免对表的每一域做索引同样不是一个非常好的主意，因为在提高插入记录的速度时，导致查询操作的速度减慢。这就需要找到一个平衡点，比如在设计索引系统时，考虑表的主要功能（数据修复及编辑）不失为一种明智的选择。</p>
+<p>　　二、优化查询性能</p>
+<p>　　在分析查询性能时，考虑EXPLAIN关键字同样很管用。EXPLAIN关键字一般放在SELECT查询语句的前面，用于描述MySQL如何执行查询操作、以及MySQL成功返回结果集需要执行的行数。下面的一个简单例子可以说明（列表C）这一过程：</p>
+<p>　　 </p>
+<p>　　列表 C</p>
+<p>　　这里查询是基于两个表连接。EXPLAIN关键字描述了MySQL是如何处理连接这两个表。必须清楚的是，当前设计要求MySQL处理的是 country表中的一条记录以及city表中的整个4019条记录。这就意味着，还可使用其他的优化技巧改进其查询方法。例如，给city表添加如下索引（列表D）：</p>
+<p>mysql&gt; CREATE INDEX idx_ccode ON city(countrycode);<br>Query OK， 4079 rows affected (0.15 sec)<br>Records: 4079  Duplicates: 0  Warnings: 0</p>
+<p>　　列表 D</p>
+<p>　　现在，当我们重新使用EXPLAIN关键字进行查询时，我们可以看到一个显著的改进（列表E）：</p>
+<p>　　</p>
+<p>　　列表 E</p>
+<p>　　在这个例子中，MySQL现在只需要扫描city表中的333条记录就可产生一个结果集，其扫描记录数几乎减少了90％！自然，数据库资源的查询速度更快，效率更高。</p>
+<p>三、调整内部变量</p>
+<p>　　MySQL是如此的开放，所以可轻松地进一步调整其缺省设置以获得更优的性能及稳定性。需要优化的一些关键变量如下：</p>
+<p>　　改变索引缓冲区长度(key_buffer)</p>
+<p>　　一般，该变量控制缓冲区的长度在处理索引表（读/写操作）时使用。MySQL使用手册指出该变量可以不断增加以确保索引表的最佳性能，并推荐使用与系统内存25％的大小作为该变量的值。这是MySQL十分重要的配置变量之一，如果你对优化和提高系统性能有兴趣，可以从改变 key_buffer_size变量的值开始。</p>
+<p>　　改变表长(read_buffer_size)</p>
+<p>　　当一个查询不断地扫描某一个表，MySQL会为它分配一段内存缓冲区。read_buffer_size变量控制这一缓冲区的大小。如果你认为连续扫描进行得太慢，可以通过增加该变量值以及内存缓冲区大小提高其性能。</p>
+<p>　　设定打开表的数目的最大值(table_cache)</p>
+<p>　　该变量控制MySQL在任何时候打开表的最大数目，由此能控制服务器响应输入请求的能力。它跟max_connections变量密切相关，增加 table_cache值可使MySQL打开更多的表，就如增加max_connections值可增加连接数一样。当收到大量不同数据库及表的请求时，可以考虑改变这一值的大小。</p>
+<p>　　对缓长查询设定一个时间限制(long_query_time)</p>
+<p>　　MySQL带有“慢查询日志”，它会自动地记录所有的在一个特定的时间范围内尚未结束的查询。这个日志对于跟踪那些低效率或者行为不端的查询以及寻找优化对象都非常有用。long_query_time变量控制这一最大时间限定，以秒为单位。</p>
+<p>　　以上讨论并给出用于分析和优化SQL查询的三种工具的使用方法，以此提高你的应用程序性能。使用它们快乐地优化吧！</p>
+<p>使用EXPLAIN语句检查SQL语句</p>
+<p>　　当你在一条SELECT语句前放上关键词EXPLAIN，MySQL解释它将如何处理SELECT，提供有关表如何联结和以什么次序联结的信息。</p>
+<p>　　借助于EXPLAIN，你可以知道你什么时候必须为表加入索引以得到一个使用索引找到记录的更快的SELECT。</p>
+<p>EXPLAIN tbl_name</p>
+<p>or  EXPLAIN SELECT select_options<br>EXPLAIN tbl_name是DESCRIBE tbl_name或SHOW COLUMNS FROM tbl_name的一个同义词。</p>
+<p>　　从EXPLAIN的输出包括下面列：</p>
+<p>　　·table<br>　　输出的行所引用的表。</p>
+<p>　　· type<br>　　联结类型。各种类型的信息在下面给出。<br>　　不同的联结类型列在下面，以最好到最差类型的次序：<br>system const eq_ref ref range index ALL possible_keys</p>
+<p>　　· key<br>　　key列显示MySQL实际决定使用的键。如果没有索引被选择，键是NULL。</p>
+<p>　　· key_len<br>　　key_len列显示MySQL决定使用的键长度。如果键是NULL，长度是NULL。注意这告诉我们MySQL将实际使用一个多部键值的几个部分。</p>
+<p>　　· ref<br>　　ref列显示哪个列或常数与key一起用于从表中选择行。</p>
+<p>　　· rows<br>　　rows列显示MySQL相信它必须检验以执行查询的行数。</p>
+<p>　　·Extra<br>　　如果Extra列包括文字Only index，这意味着信息只用索引树中的信息检索出的。通常，这比扫描整个表要快。如果Extra列包括文字where used，它意味着一个WHERE子句将被用来限制哪些行与下一个表匹配或发向客户。</p>
+<p>　　通过相乘EXPLAIN输出的rows行的所有值，你能得到一个关于一个联结要多好的提示。这应该粗略地告诉你MySQL必须检验多少行以执行查询。</p>
+<p>　　例如，下面一个全连接：</p>
+<p>mysql&gt; EXPLAIN SELECT student.name From student，pet<br>-&gt; WHERE student.name=pet.owner;</p>
+<p>　　其结论为：</p>
+<p>+———+——+—————+——+———+——+——+————+<br>| table   | type | possible_keys | key  | key_len | ref  | rows | Extra      |<br>+———+——+—————+——+———+——+——+————+<br>| student | ALL  | NULL          | NULL |    NULL | NULL |   13 |            |<br>| pet     | ALL  | NULL          | NULL |    NULL | NULL |    9 | where used |<br>+———+——+—————+——+———+——+——+————+</p>
+<p>　　SELECT 查询的速度</p>
+<p>　　总的来说，当你想要使一个较慢的SELECT … WHERE更快，检查的第一件事情是你是否能增加一个索引。在不同表之间的所有引用通常应该用索引完成。你可以使用EXPLAIN来确定哪个索引用于一条SELECT语句。</p>
+<p>　　一些一般的建议：</p>
+<p>　　·为了帮助MySQL更好地优化查询，在它已经装载了相关数据后，在一个表上运行myisamchk –analyze。这为每一个更新一个值，指出有相同值地平均行数（当然，对唯一索引，这总是1。）</p>
+<p>　　·为了根据一个索引排序一个索引和数据，使用myisamchk –sort-index –sort-records=1（如果你想要在索引1上排序）。如果你有一个唯一索引，你想要根据该索引地次序读取所有的记录，这是使它更快的一个好方法。然而注意，这个排序没有被最佳地编写，并且对一个大表将花很长时间！</p>
+<p>　　MySQL怎样优化WHERE子句</p>
+<p>　　where优化被放在SELECT中，因为他们最主要在那里使用里，但是同样的优化被用于DELETE和UPDATE语句。</p>
+<p>　　也要注意，本节是不完全的。MySQL确实作了许多优化而我们没有时间全部记录他们。</p>
+<p>　　由MySQL实施的一些优化列在下面：</p>
+<p>　　1、删除不必要的括号：<br>((a AND b) AND c OR (((a AND b) AND (c AND d))))<br>-&gt; (a AND b AND c) OR (a AND b AND c AND d)</p>
+<p>　　2、常数调入：<br>(a-&gt; b&gt;5 AND b=c AND a=5</p>
+<p>　　3、删除常数条件(因常数调入所需)：<br>(B&gt;=5 AND B=5) OR (B=6 AND 5=5) OR (B=7 AND 5=6)<br>-&gt; B=5 OR B=6</p>
+<p>　　4、索引使用的常数表达式仅计算一次。</p>
+<p>　　5、在一个单个表上的没有一个WHERE的COUNT(*)直接从表中检索信息。当仅使用一个表时，对任何NOT NULL表达式也这样做。</p>
+<p>　　6、无效常数表达式的早期检测。MySQL快速检测某些SELECT语句是不可能的并且不返回行。</p>
+<p>　　7、如果你不使用GROUP BY或分组函数(COUNT()、MIN()……)，HAVING与WHERE合并。</p>
+<p>　　8、为每个子联结(sub join)，构造一个更简单的WHERE以得到一个更快的WHERE计算并且也尽快跳过记录。</p>
+<p>　　9、所有常数的表在查询中的任何其他表前被首先读出。一个常数的表是：</p>
+<p>　　·一个空表或一个有1行的表。</p>
+<p>　　·与在一个UNIQUE索引、或一个PRIMARY KEY的WHERE子句一起使用的表，这里所有的索引部分使用一个常数表达式并且索引部分被定义为NOT NULL。</p>
+<p>　　所有下列的表用作常数表</p>
+<p> mysql&gt; SELECT <em> FROM t WHERE primary_key=1;<br>mysql&gt; SELECT </em> FROM t1，t2<br>WHERE t1.primary_key=1 AND t2.primary_key=t1.id;</p>
+<p>　　10、对联结表的最好联结组合是通过尝试所有可能性来找到:(。如果所有在ORDER BY和GROUP BY的列来自同一个表，那么当廉洁时，该表首先被选中。</p>
+<p>　　11、如果有一个ORDER BY子句和一个不同的GROUP BY子句，或如果ORDER BY或GROUP BY包含不是来自联结队列中的第一个表的其他表的列，创建一个临时表。</p>
+<p>　　12、如果你使用SQL_SMALL_RESULT，MySQL将使用一个在内存中的表。</p>
+<p>　　13、因为DISTINCT被变换到在所有的列上的一个GROUP BY，DISTINCT与ORDER BY结合也将在许多情况下需要一张临时表。</p>
+<p>　　14、每个表的索引被查询并且使用跨越少于30% 的行的索引。如果这样的索引没能找到，使用一个快速的表扫描。</p>
+<p>　　15、在一些情况下，MySQL能从索引中读出行，甚至不咨询数据文件。如果索引使用的所有列是数字的，那么只有索引树被用来解答查询。</p>
+<p>　　16、在每个记录被输出前，那些不匹配HAVING子句的行被跳过。</p>
+<p>　　下面是一些很快的查询例子</p>
+<p> mysql&gt; SELECT COUNT(*) FROM tbl_name;<br>mysql&gt; SELECT MIN(key_part1)，MAX(key_part1) FROM tbl_name;<br>mysql&gt; SELECT MAX(key_part2) FROM tbl_name<br>           WHERE key_part_1=constant;<br>mysql&gt; SELECT … FROM tbl_name<br>           ORDER BY key_part1，key_part2，… LIMIT 10;<br>mysql&gt; SELECT … FROM tbl_name<br>           ORDER BY key_part1 DESC，key_part2 DESC，… LIMIT 10;</p>
+<p>　　下列查询仅使用索引树就可解决(假设索引列是数字的)：</p>
+<p> mysql&gt; SELECT key_part1，key_part2 FROM tbl_name WHERE key_part1=val;<br>mysql&gt; SELECT COUNT(*) FROM tbl_name<br>           WHERE key_part1=val1 AND key_part2=val2;<br>mysql&gt; SELECT key_part2 FROM tbl_name GROUP BY key_part1;</p>
+<p>　　下列查询使用索引以排序顺序检索，不用一次另外的排序：</p>
+<p> mysql&gt; SELECT … FROM tbl_name ORDER BY key_part1，key_part2，…<br>mysql&gt; SELECT … FROM tbl_name ORDER BY key_part1 DESC，key_part2 DESC，…</p>
+<p>MySQL怎样优化LEFT JOIN</p>
+<p>在MySQL中，A LEFT JOIN B实现如下：</p>
+<p>1、表B被设置为依赖于表A。</p>
+<p>2、表A被设置为依赖于所有用在LEFT JOIN条件的表(除B外)。</p>
+<p>3、所有LEFT JOIN条件被移到WHERE子句中。</p>
+<p>4、进行所有标准的联结优化，除了一个表总是在所有它依赖的表之后被读取。如果有一个循环依赖，MySQL将发出一个错误。</p>
+<p>5、进行所有标准的WHERE优化。</p>
+<p>6、如果在A中有一行匹配WHERE子句，但是在B中没有任何行匹配LEFT JOIN条件，那么在B中生成所有列设置为NULL的一行。</p>
+<p>7、如果你使用LEFT JOIN来找出在某些表中不存在的行并且在WHERE部分你有下列测试：column_name IS NULL，这里column_name 被声明为NOT NULL的列，那么MySQL在它已经找到了匹配LEFT JOIN条件的一行后，将停止在更多的行后寻找(对一特定的键组合)。</p>
+<p>MySQL怎样优化LIMIT</p>
+<p>在一些情况中，当你使用LIMIT #而不使用HAVING时，MySQL将以不同方式处理查询。</p>
+<p>1、如果你用LIMIT只选择一些行，当MySQL一般比较喜欢做完整的表扫描时，它将在一些情况下使用索引。</p>
+<p>2、如果你使用LIMIT #与ORDER BY，MySQL一旦找到了第一个 # 行，将结束排序而不是排序整个表。</p>
+<p>3、当结合LIMIT #和DISTINCT时，MySQL一旦找到#个唯一的行，它将停止。</p>
+<p>4、在一些情况下，一个GROUP BY能通过顺序读取键(或在键上做排序)来解决，并然后计算摘要直到键值改变。在这种情况下，LIMIT #将不计算任何不必要的GROUP。</p>
+<p>5、只要MySQL已经发送了第一个#行到客户，它将放弃查询。</p>
+<p>6、LIMIT 0将总是快速返回一个空集合。这对检查查询并且得到结果列的列类型是有用的。</p>
+<p>7、临时表的大小使用LIMIT #计算需要多少空间来解决查询。</p>
+<p>记录转载和修改的速度</p>
+<p>很多时候关心的是优化 SELECT 查询，因为它们是最常用的查询，而且确定怎样优化它们并不总是直截了当。相对来说，将数据装入数据库是直截了当的。然而，也存在可用来改善数据装载操作效率的策略，其基本原理如下：</p>
+<p>·成批装载较单行装载更快，因为在装载每个记录后，不需要刷新索引高速缓存；可在成批记录装入后才刷新。</p>
+<p>·在表无索引时装载比索引后装载更快。如果有索引，不仅必须增加记录到数据文件，而且还要修改每个索引以反映增加了的新记录。</p>
+<p>·较短的 SQL 语句比较长的 SQL 语句要快，因为它们涉及服务器方的分析较少，而且还因为将它们通过网络从客户机发送到服务器更快。</p>
+<p>这些因素中有一些似乎微不足道（特别是最后一个因素），但如果要装载大量的数据，即使是很小的因素也会产生很大的不同结果。</p>
+<p>INSERT查询的速度</p>
+<p>插入一个记录的时间由下列组成：</p>
+<p>·连接：(3)</p>
+<p>·发送查询给服务器：(2)</p>
+<p>·分析查询：(2)</p>
+<p>·插入记录：（1 x 记录大小）</p>
+<p>·插入索引：（1 x 索引）</p>
+<p>·关闭：(1)</p>
+<p>这里的数字有点与总体时间成正比。这不考虑打开表的初始开销(它为每个并发运行的查询做一次)。</p>
+<p>表的大小以N log N (B 树)的速度减慢索引的插入。</p>
+<p>加快插入的一些方法：</p>
+<p>·如果你同时从同一客户插入很多行，使用多个值表的INSERT语句。这比使用分开INSERT语句快(在一些情况中几倍)。</p>
+<p>·如果你从不同客户插入很多行，你能通过使用INSERT DELAYED语句得到更高的速度。</p>
+<p>·注意，用MyISAM，如果在表中没有删除的行，能在SELECT:s正在运行的同时插入行。</p>
+<p>·当从一个文本文件装载一个表时，使用LOAD DATA INFILE。这通常比使用很多INSERT语句快20倍。</p>
+<p>·当表有很多索引时，有可能多做些工作使得LOAD DATA INFILE更快些。使用下列过程：</p>
+<p>1、有选择地用CREATE TABLE创建表。例如使用mysql或Perl-DBI。</p>
+<p>2、执行FLUSH TABLES，或外壳命令mysqladmin flush-tables。</p>
+<p>3、使用myisamchk –keys-used=0 -rq /path/to/db/tbl_name。这将从表中删除所有索引的使用。</p>
+<p>4、用LOAD DATA INFILE把数据插入到表中，这将不更新任何索引，因此很快。</p>
+<p>5、如果你有myisampack并且想要压缩表，在它上面运行myisampack。</p>
+<p>6、用myisamchk -r -q /path/to/db/tbl_name再创建索引。这将在将它写入磁盘前在内存中创建索引树，并且它更快，因为避免大量磁盘寻道。结果索引树也被完美地平衡。</p>
+<p>7、执行FLUSH TABLES，或外壳命令mysqladmin flush-tables。</p>
+<p>这个过程将被构造进在MySQL的某个未来版本的LOAD DATA INFILE。</p>
+<p>·你可以锁定你的表以加速插入</p>
+<p>mysql&gt; LOCK TABLES a WRITE;<br>mysql&gt; INSERT INTO a VALUES (1，23)，(2，34)，(4，33);<br>mysql&gt; INSERT INTO a VALUES (8，26)，(6，29);<br>mysql&gt; UNLOCK TABLES;</p>
+<p>　　主要的速度差别是索引缓冲区仅被清洗到磁盘上一次，在所有INSERT语句完成后。一般有与有不同的INSERT语句那样夺的索引缓冲区清洗。如果你能用一个单个语句插入所有的行，锁定就不需要。锁定也将降低多连接测试的整体时间，但是对某些线程最大等待时间将上升(因为他们等待锁)。例如：</p>
+<p>thread 1 does 1000 inserts<br>thread 2， 3， and 4 does 1 insert<br>thread 5 does 1000 inserts </p>
+<p>如果你不使用锁定，2、3和4将在1和5前完成。如果你使用锁定，2、3和4将可能不在1或5前完成，但是整体时间应该快大约40%。因为INSERT， UPDATE和DELETE操作在MySQL中是很快的，通过为多于大约5次连续不断地插入或更新一行的东西加锁，你将获得更好的整体性能。如果你做很多一行的插入，你可以做一个LOCK TABLES，偶尔随后做一个UNLOCK TABLES(大约每1000行)以允许另外的线程存取表。这仍然将导致获得好的性能。当然，LOAD DATA INFILE对装载数据仍然是更快的。</p>
+<p>为了对LOAD DATA INFILE和INSERT得到一些更快的速度，扩大关键字缓冲区。</p>
+<p>UPDATE查询的速度</p>
+<p>更改查询被优化为有一个写开销的一个SELECT查询。写速度依赖于被更新数据大小和被更新索引的数量。</p>
+<p>使更改更快的另一个方法是推迟更改并且然后一行一行地做很多更改。如果你锁定表，做一行一行地很多更改比一次做一个快。</p>
+<p>注意，动态记录格式的更改一个较长总长的记录，可能切开记录。因此如果你经常这样做，时不时地OPTIMIZE TABLE是非常重要的。</p>
+<p>DELETE查询的速度</p>
+<p>删除一个记录的时间精确地与索引数量成正比。为了更快速地删除记录，你可以增加索引缓存的大小。</p>
+<p>从一个表删除所有行比删除行的一大部分也要得多。</p>
+<p>索引对有效装载数据的影响</p>
+<p>如果表是索引的，则可利用批量插入（LOAD DATA 或多行的 INSERT 语句）来减少索引的开销。这样会最小化索引更新的影响，因为索引只需要在所有行处理过时才进行刷新，而不是在每行处理后就刷新。</p>
+<p>·如果需要将大量数据装入一个新表，应该创建该表且在未索引时装载，装载数据后才创建索引，这样做较快。一次创建索引（而不是每行修改一次索引）较快。</p>
+<p>·如果在装载之前删除或禁用索引，装入数据后再重新创建或启用索引可能使装载更快。<br>·如果想对数据装载使用删除或禁用策略，一定要做一些实验，看这样做是否值得（如果将少量数据装入一个大表中，重建和索引所花费的时间可能比装载数据的时间还要长）。</p>
+<p>可用DROP INDEX和CREATE INDEX 来删除和重建索引。</p>
+<p>另一种可供选择的方法是利用 myisamchk 或 isamchk 禁用和启用索引。这需要在 MySQL 服务器主机上有一个帐户，并对表文件有写入权。为了禁用表索引，可进入相应的数据库目录，执行下列命令之一：</p>
+<p>shell&gt;myisamchk –keys-used=0 tbl_name<br>shell&gt;isamchk –keys-used=0 tbl_name </p>
+<p>　　对具有 .MYI 扩展名的索引文件的 MyISAM 表使用 myisamchk，对具有 .ISM 扩展名的索引文件的 ISAM 表使用 isamchk。在向表中装入数据后，按如下激活索引：</p>
+<p>shell&gt;myisamchk –recover –quick –keys-used=0 tbl_name<br>shell&gt;isamchk –recover –quick –keys-used=0 tbl_name</p>
+<p>　　n 为表具有的索引数目。可用 –description 选项调用相应的实用程序得出这个值：</p>
+<p>shell&gt;myisamchk –discription tbl_name<br>$isamchk –discription tbl_name</p>
+<p>　　如果决定使用索引禁用和激活，应该使用第13章中介绍的表修复锁定协议以阻止服务器同时更改锁（虽然此时不对表进行修复，但要对它像表修复过程一样进行修改，因此需要使用相同的锁定协议）。</p>
+<p>上述数据装载原理也适用于与需要执行不同操作的客户机有关的固定查询。例如，一般希望避免在频繁更新的表上长时间运行 SELECT 查询。长时间运行 SELECT 查询会产生大量争用，并降低写入程序的性能。一种可能的解决方法为，如果执行写入的主要是 INSERT 操作，那么先将记录存入一个临时表，然后定期地将这些记录加入主表中。如果需要立即访问新记录，这不是一个可行的方法。但只要能在一个较短的时间内不访问它们，就可以使用这个方法。使用临时表有两个方面的好处。首先，它减少了与主表上 SELECT 查询语句的争用，因此，执行更快。其次，从临时表将记录装入主表的总时间较分别装载记录的总时间少；相应的索引高速缓存只需在每个批量装载结束时进行刷新，而不是在每行装载后刷新。</p>
+<p>这个策略的一个应用是进入 Web 服务器的Web 页访问 MySQL 数据库。在此情形下，可能没有保证记录立即进入主表的较高权限。</p>
+<p>如果数据并不完全是那种在系统非正常关闭事件中插入的单个记录，那么减少索引刷新的另一策略是使用 MyISAM 表的 DELAYED_KEY_WRITE 表创建选项（如果将 MySQL 用于某些数据录入工作时可能会出现这种情况）。此选项使索引高速缓存只偶尔刷新，而不是在每次插入后都要刷新。</p>
+<p>如果希望在服务器范围内利用延迟索引刷新，只要利用 –delayed-key-write 选项启动 mysqld 即可。在此情形下，索引块写操作延迟到必须刷新块以便为其他索引值腾出空间为止，或延迟到执行了一个 flush-tables 命令后，或延迟到该索引表关闭。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/悲观锁和乐观锁/" itemprop="url">
+                  悲观锁和乐观锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T17:33:09+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/悲观锁和乐观锁/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/悲观锁和乐观锁/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>1        事务隔离</p>
+<p>事务隔离是数据库提供的功能。</p>
+<p>SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：</p>
+<p>SET TRANSACTION ISOLATION LEVEL</p>
+<pre><code>{ READ UNCOMMITTED
+
+| READ COMMITTED
+
+| REPEATABLE READ
+
+| SNAPSHOT
+
+| SERIALIZABLE
+
+}
+</code></pre><p>[ ; ]</p>
+<p>Read Committed是SQL Server的预设隔离等级。</p>
+<p>1.1         READ UNCOMMITTED<br>Read UnCommitted事务可以读取事务已修改，但未提交的的记录。</p>
+<p>Read UnCommitted事务会产生脏读（Dirty Read）。</p>
+<p>Read UnCommitted事务与select语句加nolock的效果一样，它是所有隔离级别中限制最少的。</p>
+<p>1.2         READ COMMITTED<br>Read Committed事务不能读取事务已修改，但未提交的记录。</p>
+<p>Read Committed是SQL Server的预设隔离等级。</p>
+<p>1.3         REPEATABLE READ<br>Repeatable Read事务不能读取交易已修改，但未提交的记录，并且在事务完成之前，任何其它事务都不能修改目前事务已读取的记录。</p>
+<p>其它事务仍可以插入新记录，但必须符合当前事务的搜索条件——这意味着当前事务重新查询记录时，会产生幻读（Phantom Read）。</p>
+<p>1.4         SNAPSHOT<br>Snapshot事务中任何语句所读取的记录，都是事务启动时的数据。</p>
+<p>这相当于事务启动时，数据库为事务生成了一份专用“快照”。</p>
+<p>在当前事务中看到不其它事务在当前事务启动之后所进行的数据修改。</p>
+<p>Snapshot事务不会读取记录时要求锁定，读取记录的Snapshot事务不会锁住其它事务写入记录，写入记录的事务也不会锁住Snapshot事务读取数据。</p>
+<p>1.5         SERIALIZABLE<br>Serializable事务会产生以下效果：</p>
+<p>1.语句无法读取其它事务已修改但未提交的记录。</p>
+<p>2.在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</p>
+<p>3.在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</p>
+<p>Serializable事务与select语句加holdlock的效果一样。</p>
+<p>2        READ COMMITTED 和 REPEATABLE READ<br>Read Committed 和 Repeatable Read 是最常用的两种事务。</p>
+<p>Read Committed 是 SQL Server的默认级别；而 Repeatable Read 比Read Committed 更能保证数据一致性。</p>
+<p>2.1         特点<br>Read Committed会阻塞其它事务中的update，但不会阻塞select。</p>
+<p>Repeatable Read不但会阻塞其它事务中的update，还会阻塞select。</p>
+<p>Read Committed 和 Repeatable Read 的相同点是：都会阻塞其它事务的update语句。</p>
+<p>Read Committed 和 Repeatable Read 的不同点是：Read Committed 不会阻塞其它事务的select语句，但Repeatable Read阻塞。</p>
+<p>注意，Read Committed 和 Repeatable Read 都是行级锁，它们只会锁住与自己相关的记录。当事务提交之后，阻塞的语句就会继续执行。</p>
+<p>2.2         理解<br>2.2.1     READ COMMITTED<br>Read Committed 事务的含义是我select出来的记录，别人只能看，不能改（只阻塞别的事务的update）。</p>
+<p>Read Committed 的缺点是：无法防止读取不一致和修改丢失。</p>
+<p>读取不一致是因为Read Committed 不锁住读取的记录；修改丢失是因为别的事务也能读取当前事务的记录，虽然会阻塞别的事务的update，但在当前事务提交之后，别的事务的update语句会继续执行，进而覆盖上一次事务的结果，导致上一次的修改丢失。</p>
+<p>2.2.2     REPEATABLE READ<br>Repeatable Read 事务的含义是我select出来的记录，不允许别人看，也不允许别人改（阻塞别的事务select、update），这就意味着我可以在事务中多次select数据，而不用担心出现“脏读”——这就是“可重复读取”的意思。</p>
+<p>Repeatable Read 虽然解决了Read Committed 事务的读取不一致和修改丢失的缺点，但它也有缺点（尽管这个缺点Read Committed 也有）：</p>
+<p>Repeatable Read 不会阻塞insert和delete，所以会出现“幻读”——两次select的结果不一样。还有，Repeatable Read 占用的资源比Read Committed 大。</p>
+<p>3        在应用程序中设置事务隔离级别<br>READ COMMITTED 是 Microsoft SQL Server Database Engine 的预设隔离等级。</p>
+<p>已指定隔离等级时，在 SQL Server 工作阶段中，所有查询和数据操作语言 (DML) 陈述式的锁定行为都会在此隔离等级运作。此隔离等级会维持有效，直到工作阶段结束或隔离等级设为另一个等级为止。</p>
+<p>如果应用程序必须在不同隔离等级操作，可以使用下列方法来设定隔离等级：</p>
+<p>l           执行 SET TRANSACTION ISOLATION LEVEL Transact-SQL 陈述式。</p>
+<p>l           如果 ADO.NET 应用程序使用 System.Data.SqlClient 管理的命名空间，可以使用 SqlConnection.BeginTransaction 方法来指定 IsolationLevel 选项。</p>
+<p>l           使用 ADO 的应用程序可以设定 Autocommit Isolation Levels 属性。</p>
+<p>l           当启动交易时，使用 OLE DB 的应用程序可以将 isoLevel 设为所要的交易隔离等级，以呼叫 ITransactionLocal::StartTransaction。当在自动认可模式中指定隔离等级时，使用 OLE DB 的应用程序可以将 DBPROPSET_SESSION 属性 DBPROP_SESS_AUTOCOMMITISOLEVELS 设为所要的交易隔离等级。</p>
+<p>l           使用 ODBC 的应用程序可以使用 SQLSetConnectAttr 来设定 SQL_COPT_SS_TXN_ISOLATION 属性。</p>
+<p>4        悲观锁<br>悲观锁是指假设并发更新冲突会发生，所以不管冲突是否真的发生，都会使用锁机制。</p>
+<p>悲观锁会完成以下功能：锁住读取的记录，防止其它事务读取和更新这些记录。其它事务会一直阻塞，直到这个事务结束。</p>
+<p>悲观锁是在使用了数据库的事务隔离功能的基础上，独享占用的资源，以此保证读取数据一致性，避免修改丢失。</p>
+<p>悲观锁可以使用Repeatable Read事务，它完全满足悲观锁的要求。</p>
+<p>5        乐观锁<br>乐观锁不会锁住任何东西，也就是说，它不依赖数据库的事务机制，乐观锁完全是应用系统层面的东西。</p>
+<p>如果使用乐观锁，那么数据库就必须加版本字段，否则就只能比较所有字段，但因为浮点类型不能比较，所以实际上没有版本字段是不可行的。</p>
+<p>6        死锁<br>当二或多个工作各自具有某个资源的锁定，但其它工作尝试要锁定此资源，而造成工作永久封锁彼此时，会发生死锁。例如：</p>
+<ol>
+<li><p>事务 A 取得数据列 1 的共享锁定。</p>
+</li>
+<li><p>事务B 取得数据列 2 的共享锁定。</p>
+</li>
+<li><p>事务A 现在要求数据列 2 的独占锁定，但会被封锁直到事务B 完成并释出对数据列 2 的共享锁定为止。</p>
+</li>
+<li><p>事务B 现在要求数据列 1 的独占锁定，但会被封锁直到事务A 完成并释出对数据列 1 的共享锁定为止。</p>
+</li>
+</ol>
+<p>等到事务B 完成后，事务A 才能完成，但事务B 被事务A 封锁了。这个状况也称为「循环相依性」(Cyclic Dependency)。事务A 相依于事务B，并且事务B 也因为相依于事务A 而封闭了这个循环。</p>
+<p>例如以下操作就会产生死锁，两个连接互相阻塞对方的update。</p>
+<p>连接1：</p>
+<p>begin tran</p>
+<p>select * from customers</p>
+<p>update customers set CompanyName = CompanyName</p>
+<p>waitfor delay ‘00:00:05’</p>
+<p>select * from Employees</p>
+<p>–因为Employees被连接2锁住了，所以这里会阻塞。</p>
+<p>update Employees set LastName = LastName</p>
+<p>commit tran</p>
+<p>连接2：</p>
+<p>begin tran</p>
+<p>select * from Employees</p>
+<p>update Employees set LastName = LastName</p>
+<p>waitfor delay ‘00:00:05’</p>
+<p>select * from customers</p>
+<p>–因为customers被连接1锁住了，所以这里会阻塞。</p>
+<p>update customers set CompanyName = CompanyName</p>
+<p>commit tran</p>
+<p>SQL Server遇到死锁时会自动杀死其中一个事务，而另一个事务会正常结束（提交或回滚）。</p>
+<p>SQL Server对杀死的连接返回错误代码是1205，异常提示是：</p>
+<p>Your transaction (process ID #52) was deadlocked on {lock | communication buffer | thRead} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.</p>
+<p>除了Read UnCommitted和Snapshot，其它类型的事务都可能产生死锁。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/select考察/" itemprop="url">
+                  select考察
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T16:32:23+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/select考察/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select考察/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`n_click`</span> (<span class="string">`n_click`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`publishtime`</span> (<span class="string">`publishtime`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`createtime`</span> (<span class="string">`createtime`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> profiling=<span class="number">1</span>;</span> #开启运行记录日志</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">profiles</span>;</span>#查询运行记录</span><br><span class="line">#<span class="operator"><span class="keyword">reset</span> <span class="keyword">query</span> <span class="keyword">cache</span>;</span>#清空查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">flush</span> <span class="keyword">tables</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> <span class="keyword">session</span> query_cache_type = <span class="number">0</span>;</span>临时禁用查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%query_cache%'</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'%Qcache%'</span>;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u8054_u8868_u67E5_u8BE2"><a href="#u8054_u8868_u67E5_u8BE2" class="headerlink" title="联表查询"></a>联表查询</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">inner</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;&#10;5000000 rows in set (31.00355250 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;&#10;5000000 rows in set (24.35417500 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u9650_u5236_u5C0F_u8BB0_u5F55_u6570_u8054_u8868_u67E5_u8BE2"><a href="#u9650_u5236_u5C0F_u8BB0_u5F55_u6570_u8054_u8868_u67E5_u8BE2" class="headerlink" title="限制小记录数联表查询"></a>限制小记录数联表查询</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">100000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra                       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where; Using filesort |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where                 |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;&#10;100000 rows in set (3.17512150 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">inner</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">100000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra                       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where; Using filesort |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where                 |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-----------------------------+&#10;&#10;&#10;100000 rows in set (3.46428075 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u603B_u8BB0_u5F55_u65705000000_uFF0C_u67E5_u8BE2_u8D85_u8FC747853_2Ca_u4E0D_u7528_u7D22_u5F15"><a href="#u603B_u8BB0_u5F55_u65705000000_uFF0C_u67E5_u8BE2_u8D85_u8FC747853_2Ca_u4E0D_u7528_u7D22_u5F15" class="headerlink" title="总记录数5000000，查询超过47853,a不用索引"></a>总记录数5000000，查询超过47853,a不用索引</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">47853</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+-------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows  | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+-------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       | 47853 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |     1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+-------+-------------+&#10;&#10;47853 rows in set (0.30755625 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">limit</span> <span class="number">47853</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;&#10;47853 rows in set (0.23440550 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt; <span class="number">1000000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;| id | select_type | table        | type | possible_keys | key  | key_len | ref  | rows    | Extra       |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;|  1 | SIMPLE      | case_article | ALL  | mid           | NULL | NULL    | NULL | 5000000 | Using where |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;&#10;2500814 rows in set (1.75442150 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt; <span class="number">1000000</span> <span class="keyword">limit</span> <span class="number">2500814</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+---------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows    | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+---------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 2625654 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+---------+-------------+&#10;&#10;2500814 rows in set (4.93114550 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt; <span class="number">1900000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows   | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 487187 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;&#10;249909 rows in set (0.53250450 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt; <span class="number">1900000</span> <span class="keyword">limit</span> <span class="number">249909</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows   | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 487187 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;&#10;249909 rows in set (0.52184200 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt;<span class="number">1900000</span> <span class="keyword">or</span> <span class="keyword">mid</span> &lt;<span class="number">1000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows   | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 256711 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;&#10;252507 rows in set (0.58568825 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="operator"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt;<span class="number">1900000</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &lt;<span class="number">1000</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+--------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;| id | select_type  | table        | type  | possible_keys | key  | key_len | ref  | rows   | Extra       |&#10;+----+--------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;|  1 | PRIMARY      | case_article | range | mid           | mid  | 4       | NULL | 253595 | Using where |&#10;|  2 | UNION        | case_article | range | mid           | mid  | 4       | NULL |   3116 | Using where |&#10;| NULL | UNION RESULT | &#60;union1,2&#62;   | ALL   | NULL          | NULL | NULL    | NULL |   NULL |             |&#10;+----+--------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;&#10;252507 rows in set (0.63561700 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &gt;<span class="number">1900000</span> <span class="keyword">or</span> <span class="keyword">mid</span> &lt;<span class="number">1000</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows   | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 256711 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+--------+-------------+&#10;&#10;92702 rows in set (0.52456750 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="title_u65E0_u505A_u7D22_u5F15"><a href="#title_u65E0_u505A_u7D22_u5F15" class="headerlink" title="title无做索引"></a>title无做索引</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title = <span class="string">'(10).title'</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;| id | select_type | table        | type | possible_keys | key  | key_len | ref  | rows    | Extra       |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;|  1 | SIMPLE      | case_article | ALL  | NULL          | NULL | NULL    | NULL | 5000000 | Using where |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+-------------+&#10;&#10;1 row in set (1.23551125 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="title_u505A_u7D22_u5F15"><a href="#title_u505A_u7D22_u5F15" class="headerlink" title="title做索引"></a>title做索引</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title = <span class="string">'(10).title'</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+-------+---------+-------+------+-------------+&#10;| id | select_type | table        | type | possible_keys | key   | key_len | ref   | rows | Extra       |&#10;+----+-------------+--------------+------+---------------+-------+---------+-------+------+-------------+&#10;|  1 | SIMPLE      | case_article | ref  | title         | title | 767     | const |    1 | Using where |&#10;+----+-------------+--------------+------+---------------+-------+---------+-------+------+-------------+&#10;&#10;1 row in set (0.00026075 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title = <span class="string">'(10).title'</span> <span class="keyword">or</span> title = <span class="string">'(40).title'</span> <span class="keyword">or</span> title = <span class="string">'(50).title'</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key   | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | title         | title | 767     | NULL |    3 | Using where |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;&#10;3 rows in set (0.00074250 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title <span class="keyword">in</span> (<span class="string">'(10).title'</span>,<span class="string">'(40).title'</span>,<span class="string">'(50).title'</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key   | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | title         | title | 767     | NULL |    3 | Using where |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;&#10;3 rows in set (0.00074150 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title <span class="keyword">like</span> <span class="string">'(10).title'</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key   | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | title         | title | 767     | NULL |    1 | Using where |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;&#10;1 row in set (0.00042425 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> title <span class="keyword">like</span> <span class="string">'%(10).title'</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key   | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | title         | title | 767     | NULL |    1 | Using where |&#10;+----+-------------+--------------+-------+---------------+-------+---------+------+------+-------------+&#10;&#10;1 row in set (1.96752275 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="group_by_u4E0Eunion_u65B9_u5F0F_u67E5_u8BE2_u6BD4_u8F83"><a href="#group_by_u4E0Eunion_u65B9_u5F0F_u67E5_u8BE2_u6BD4_u8F83" class="headerlink" title="group by与union方式查询比较"></a>group by与union方式查询比较</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">12</span>,<span class="number">13</span>) <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL |    5 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;&#10;3 rows in set (0.00056525 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">2</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">12</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+--------------+------+---------------+------+---------+-------+------+-------+&#10;| id | select_type  | table        | type | possible_keys | key  | key_len | ref   | rows | Extra |&#10;+----+--------------+--------------+------+---------------+------+---------+-------+------+-------+&#10;|  1 | PRIMARY      | case_article | ref  | mid           | mid  | 4       | const |    3 |       |&#10;|  2 | UNION        | case_article | ref  | mid           | mid  | 4       | const |    1 |       |&#10;|  3 | UNION        | case_article | ref  | mid           | mid  | 4       | const |    1 |       |&#10;| NULL | UNION RESULT | &#60;union1,2,3&#62; | ALL  | NULL          | NULL | NULL    | NULL  | NULL |       |&#10;+----+--------------+--------------+------+---------------+------+---------+-------+------+-------+&#10;&#10;3 rows in set (0.00045425 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span> case_article <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">where</span> a.createtime = <span class="number">1406038366</span> <span class="keyword">or</span> a.createtime = <span class="number">1406038367</span> <span class="keyword">group</span> <span class="keyword">by</span> a.createtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;| id | select_type | table | type  | possible_keys | key        | key_len | ref       | rows | Extra       |&#10;+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;|  1 | SIMPLE      | a     | range | createtime    | createtime | 4       | NULL      |   15 | Using where |&#10;|  1 | SIMPLE      | b     | ref   | mid           | mid        | 4       | test.a.id |   19 |             |&#10;+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;&#10;2 rows in set (0.00045750 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(a.<span class="keyword">id</span>),b.createtime <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span> case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> b.createtime = <span class="number">1406038366</span> <span class="keyword">or</span> b.createtime = <span class="number">1406038367</span> <span class="keyword">group</span> <span class="keyword">by</span> b.createtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;| id | select_type | table | type  | possible_keys | key        | key_len | ref       | rows | Extra       |&#10;+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;|  1 | SIMPLE      | a     | range | createtime    | createtime | 4       | NULL      |   15 | Using where |&#10;|  1 | SIMPLE      | b     | ref   | mid           | mid        | 4       | test.a.id |   19 |             |&#10;+----+-------------+-------+-------+---------------+------------+---------+-----------+------+-------------+&#10;&#10;2 rows in set (0.00068375 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span> case_article <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">where</span> a.createtime = <span class="number">1406038366</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span> case_article <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">where</span> a.createtime = <span class="number">1406038367</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+------------+------+---------------+------------+---------+-----------+------+-------+&#10;| id | select_type  | table      | type | possible_keys | key        | key_len | ref       | rows | Extra |&#10;+----+--------------+------------+------+---------------+------------+---------+-----------+------+-------+&#10;|  1 | PRIMARY      | a          | ref  | createtime    | createtime | 4       | const     |    8 |       |&#10;|  1 | PRIMARY      | b          | ref  | mid           | mid        | 4       | test.a.id |   19 |       |&#10;|  2 | UNION        | a          | ref  | createtime    | createtime | 4       | const     |    7 |       |&#10;|  2 | UNION        | b          | ref  | mid           | mid        | 4       | test.a.id |   19 |       |&#10;| NULL | UNION RESULT | &#60;union1,2&#62; | ALL  | NULL          | NULL       | NULL    | NULL      | NULL |       |&#10;+----+--------------+------------+------+---------------+------------+---------+-----------+------+-------+&#10;&#10;2 rows in set (0.00085850 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a,case_article <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">and</span> (a.createtime = <span class="number">1406038366</span> <span class="keyword">or</span> a.createtime = <span class="number">1406038367</span>) <span class="keyword">group</span> <span class="keyword">by</span> a.createtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;| id | select_type | table | type  | possible_keys      | key        | key_len | ref       | rows | Extra       |&#10;+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;|  1 | SIMPLE      | a     | range | PRIMARY,createtime | createtime | 4       | NULL      |   15 | Using where |&#10;|  1 | SIMPLE      | b     | ref   | mid                | mid        | 4       | test.a.id |   19 |             |&#10;+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;&#10;2 rows in set (0.00057425 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a,case_article <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">and</span> (a.createtime = <span class="number">1406038366</span>)) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a,case_article <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">and</span> (a.createtime = <span class="number">1406038367</span>));</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+------------+------+--------------------+------------+---------+-----------+------+-------+&#10;| id | select_type  | table      | type | possible_keys      | key        | key_len | ref       | rows | Extra |&#10;+----+--------------+------------+------+--------------------+------------+---------+-----------+------+-------+&#10;|  1 | PRIMARY      | a          | ref  | PRIMARY,createtime | createtime | 4       | const     |    8 |       |&#10;|  1 | PRIMARY      | b          | ref  | mid                | mid        | 4       | test.a.id |   19 |       |&#10;|  2 | UNION        | a          | ref  | PRIMARY,createtime | createtime | 4       | const     |    7 |       |&#10;|  2 | UNION        | b          | ref  | mid                | mid        | 4       | test.a.id |   19 |       |&#10;| NULL | UNION RESULT | &#60;union1,2&#62; | ALL  | NULL               | NULL       | NULL    | NULL      | NULL |       |&#10;+----+--------------+------------+------+--------------------+------------+---------+-----------+------+-------+&#10;&#10;2 rows in set (0.00053550 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(b.<span class="keyword">id</span>),a.createtime <span class="keyword">from</span> case_member <span class="keyword">as</span> a <span class="keyword">inner</span> <span class="keyword">join</span> case_article <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">id</span> = b.<span class="keyword">mid</span> <span class="keyword">where</span> a.createtime = <span class="number">1406038366</span> <span class="keyword">or</span> a.createtime = <span class="number">1406038367</span> <span class="keyword">group</span> <span class="keyword">by</span> a.createtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;| id | select_type | table | type  | possible_keys      | key        | key_len | ref       | rows | Extra       |&#10;+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;|  1 | SIMPLE      | a     | range | PRIMARY,createtime | createtime | 4       | NULL      |   15 | Using where |&#10;|  1 | SIMPLE      | b     | ref   | mid                | mid        | 4       | test.a.id |   19 |             |&#10;+----+-------------+-------+-------+--------------------+------------+---------+-----------+------+-------------+&#10;&#10;2 rows in set (0.00046050 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u67E5_u8BE2_u5355_u6761_u8BB0_u5F55"><a href="#u67E5_u8BE2_u5355_u6761_u8BB0_u5F55" class="headerlink" title="查询单条记录"></a>查询单条记录</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">limit</span> <span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+---------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key     | key_len | ref  | rows    | Extra       |&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+---------+-------------+&#10;|  1 | SIMPLE      | case_article | index | NULL          | PRIMARY | 4       | NULL | 5000000 | Using index |&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+---------+-------------+&#10;&#10;1 rows in set (0.00040625 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">asc</span> <span class="keyword">limit</span> <span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key     | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | index | NULL          | PRIMARY | 4       | NULL |    1 | Using index |&#10;+----+-------------+--------------+-------+---------------+---------+---------+------+------+-------------+&#10;&#10;1 rows in set (0.00034825 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case_article <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">mid</span> <span class="keyword">asc</span> <span class="keyword">limit</span> <span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------+&#10;|  1 | SIMPLE      | case_article | index | NULL          | mid  | 4       | NULL |    1 |       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------+&#10;&#10;1 rows in set (0.00036500 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">between</span>  <span class="number">1000</span> <span class="keyword">and</span> <span class="number">1500</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">mid</span> <span class="keyword">asc</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra       |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL | 1521 | Using where |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+-------------+&#10;&#10;1304 rows in set (0.04822150 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u67E5_u8BE2_u6700_u8FD1_u53D1_u5E03_u6587_u7AE0_u7684_u7528_u6237_u5217_u8868"><a href="#u67E5_u8BE2_u6700_u8FD1_u53D1_u5E03_u6587_u7AE0_u7684_u7528_u6237_u5217_u8868" class="headerlink" title="查询最近发布文章的用户列表"></a>查询最近发布文章的用户列表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">mid</span>,<span class="keyword">max</span>(publishtime) <span class="keyword">as</span> max_publishtime <span class="keyword">from</span> case_article <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span> <span class="keyword">order</span> <span class="keyword">by</span> max_publishtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;| id | select_type | table        | type | possible_keys | key  | key_len | ref  | rows    | Extra                           |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;|  1 | SIMPLE      | case_article | ALL  | NULL          | NULL | NULL    | NULL | 5000000 | Using temporary; Using filesort |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;&#10;1835947 rows in set (52.97973200 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">mid</span>,<span class="keyword">max</span>(publishtime) <span class="keyword">as</span> max_publishtime <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">1000</span>,<span class="number">10000</span>,<span class="number">100000</span>) <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span> <span class="keyword">order</span> <span class="keyword">by</span> max_publishtime;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+----------------------------------------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra                                        |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+----------------------------------------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL |    5 | Using where; Using temporary; Using filesort |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+----------------------------------------------+&#10;&#10;2 rows in set (0.00034525 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">mid</span>,<span class="keyword">max</span>(publishtime) <span class="keyword">as</span> max_publishtime <span class="keyword">from</span> case_article <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;| id | select_type | table        | type | possible_keys | key  | key_len | ref  | rows    | Extra                           |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;|  1 | SIMPLE      | case_article | ALL  | NULL          | NULL | NULL    | NULL | 5000000 | Using temporary; Using filesort |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;&#10;&#10;1835947 rows in set (47.17097075 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u67E5_u8BE2_u6700_u8FD1_u53D1_u5E03_u6587_u7AE0_u7684_u524D10_u7528_u6237_u5217_u8868"><a href="#u67E5_u8BE2_u6700_u8FD1_u53D1_u5E03_u6587_u7AE0_u7684_u524D10_u7528_u6237_u5217_u8868" class="headerlink" title="查询最近发布文章的前10用户列表"></a>查询最近发布文章的前10用户列表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">mid</span>,<span class="keyword">max</span>(publishtime) <span class="keyword">as</span> max_publishtime <span class="keyword">from</span> case_article <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span> <span class="keyword">order</span> <span class="keyword">by</span> max_publishtime <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">10</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;| id | select_type | table        | type | possible_keys | key  | key_len | ref  | rows    | Extra                           |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;|  1 | SIMPLE      | case_article | ALL  | NULL          | NULL | NULL    | NULL | 5000000 | Using temporary; Using filesort |&#10;+----+-------------+--------------+------+---------------+------+---------+------+---------+---------------------------------+&#10;&#10;10 rows in set (47.24095550 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="u7EDF_u8BA1mid_u6570"><a href="#u7EDF_u8BA1mid_u6570" class="headerlink" title="统计mid数"></a>统计mid数</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">mid</span>) <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &lt; <span class="number">290000</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra                                 |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL |    1 | Using where; Using index for group-by |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;&#10;1 row in set (0.40 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &lt; <span class="number">290000</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>) <span class="keyword">as</span> a;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra                                 |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;|  1 | PRIMARY     | NULL         | NULL  | NULL          | NULL | NULL    | NULL | NULL | Select tables optimized away          |&#10;|  2 | DERIVED     | case_article | range | mid           | mid  | 4       | NULL |    2 | Using where; Using index for group-by |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;&#10;&#10;1 row in set (0.46 sec)</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/explain/" itemprop="url">
+                  explain
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T16:26:06+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/explain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/explain/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`content`</span> <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">100001</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">10001</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">asc</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> = <span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+&#10;| id | select_type | table         | type | possible_keys | key  | key_len | ref   | rows | Extra |&#10;+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+&#10;|  1 | SIMPLE      | case1_article | ref  | mid           | mid  | 4       | const |   10 |       |&#10;+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> = <span class="number">2</span> <span class="keyword">or</span> <span class="keyword">mid</span> =<span class="number">12</span> <span class="keyword">or</span> <span class="keyword">mid</span>=<span class="number">13</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">12</span>,<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">between</span> <span class="number">2</span> <span class="keyword">and</span> <span class="number">13</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |  122 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">12</span>,<span class="number">13</span>) <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">2</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">12</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;| id | select_type  | table         | type | possible_keys | key  | key_len | ref   | rows | Extra       |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;|  1 | PRIMARY      | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  2 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  3 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |    7 | Using index |&#10;| NULL | UNION RESULT | &#60;union1,2,3&#62;  | ALL  | NULL          | NULL | NULL    | NULL  | NULL |             |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/03/apc测试/" itemprop="url">
+                  apc测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T16:04:11+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/apc测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/apc测试/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>thinkphp 3.2.1 demo</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;This is ApacheBench, Version 2.3 &#60;$Revision: 655654 $&#62;&#10;Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/&#10;Licensed to The Apache Software Foundation, http://www.apache.org/&#10;&#10;Benchmarking dev.demo.com (be patient)&#10;Completed 500 requests&#10;Completed 1000 requests&#10;Completed 1500 requests&#10;Completed 2000 requests&#10;Completed 2500 requests&#10;Completed 3000 requests&#10;Completed 3500 requests&#10;Completed 4000 requests&#10;Completed 4500 requests&#10;Completed 5000 requests&#10;Finished 5000 requests&#10;&#10;&#10;Server Software:        Apache/2.2.22&#10;Server Hostname:        dev.demo.com&#10;Server Port:            80&#10;&#10;Document Path:          /iframe.thinkphp/3.2.1/&#10;Document Length:        445 bytes&#10;&#10;Concurrency Level:      100&#10;Time taken for tests:   102.252 seconds&#10;Complete requests:      5000&#10;Failed requests:        0&#10;Write errors:           0&#10;Total transferred:      4000000 bytes&#10;HTML transferred:       2225000 bytes&#10;Requests per second:    48.90 [#/sec] (mean)&#10;Time per request:       2045.045 [ms] (mean)&#10;Time per request:       20.450 [ms] (mean, across all concurrent requests)&#10;Transfer rate:          38.20 [Kbytes/sec] received&#10;&#10;Connection Times (ms)&#10;              min  mean[+/-sd] median   max&#10;Connect:        0    1   2.0      1      20&#10;Processing:   836 2036 477.5   1993    7018&#10;Waiting:      835 1923 474.8   1876    7018&#10;Total:        836 2037 477.4   1994    7019&#10;&#10;Percentage of the requests served within a certain time (ms)&#10;  50%   1994&#10;  66%   2114&#10;  75%   2191&#10;  80%   2239&#10;  90%   2401&#10;  95%   2581&#10;  98%   2817&#10;  99%   3206&#10; 100%   7019 (longest request)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>开启apc后</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;This is ApacheBench, Version 2.3 &#60;$Revision: 655654 $&#62;&#10;Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/&#10;Licensed to The Apache Software Foundation, http://www.apache.org/&#10;&#10;Benchmarking dev.demo.com (be patient)&#10;Completed 500 requests&#10;Completed 1000 requests&#10;Completed 1500 requests&#10;Completed 2000 requests&#10;Completed 2500 requests&#10;Completed 3000 requests&#10;Completed 3500 requests&#10;Completed 4000 requests&#10;Completed 4500 requests&#10;Completed 5000 requests&#10;Finished 5000 requests&#10;&#10;&#10;Server Software:        Apache/2.2.22&#10;Server Hostname:        dev.demo.com&#10;Server Port:            80&#10;&#10;Document Path:          /iframe.thinkphp/3.2.1/&#10;Document Length:        445 bytes&#10;&#10;Concurrency Level:      100&#10;Time taken for tests:   34.969 seconds&#10;Complete requests:      5000&#10;Failed requests:        0&#10;Write errors:           0&#10;Total transferred:      4000000 bytes&#10;HTML transferred:       2225000 bytes&#10;Requests per second:    142.98 [#/sec] (mean)&#10;Time per request:       699.382 [ms] (mean)&#10;Time per request:       6.994 [ms] (mean, across all concurrent requests)&#10;Transfer rate:          111.71 [Kbytes/sec] received&#10;&#10;Connection Times (ms)&#10;              min  mean[+/-sd] median   max&#10;Connect:        0    1   2.0      1      18&#10;Processing:    61  695 353.2    658    4606&#10;Waiting:       14  658 347.7    615    4606&#10;Total:         61  696 353.0    658    4607&#10;&#10;Percentage of the requests served within a certain time (ms)&#10;  50%    658&#10;  66%    743&#10;  75%    800&#10;  80%    836&#10;  90%    946&#10;  95%   1072&#10;  98%   1340&#10;  99%   2618&#10; 100%   4607 (longest request)</span><br></pre></td></tr></table></figure>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
@@ -403,21 +1933,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
