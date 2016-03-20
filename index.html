@@ -240,6 +240,123 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/20/git-ssh-keys/" itemprop="url">
+                  git ssh keys
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-20T12:45:04+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/版本管理/" itemprop="url" rel="index">
+                    <span itemprop="name">版本管理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/版本管理/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/20/git-ssh-keys/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/git-ssh-keys/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>生成key</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#34;tomhjx&#34;</span><br></pre></td></tr></table></figure>
+<p>查key内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/12/定时器重启爱奇艺客户端/" itemprop="url">
                   定时器重启爱奇艺客户端
                 </a>
@@ -1765,129 +1882,6 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/apc测试/" itemprop="url">
-                  apc测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T16:04:11+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/apc测试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/apc测试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>thinkphp 3.2.1 demo</p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;This is ApacheBench, Version 2.3 &#60;$Revision: 655654 $&#62;&#10;Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/&#10;Licensed to The Apache Software Foundation, http://www.apache.org/&#10;&#10;Benchmarking dev.demo.com (be patient)&#10;Completed 500 requests&#10;Completed 1000 requests&#10;Completed 1500 requests&#10;Completed 2000 requests&#10;Completed 2500 requests&#10;Completed 3000 requests&#10;Completed 3500 requests&#10;Completed 4000 requests&#10;Completed 4500 requests&#10;Completed 5000 requests&#10;Finished 5000 requests&#10;&#10;&#10;Server Software:        Apache/2.2.22&#10;Server Hostname:        dev.demo.com&#10;Server Port:            80&#10;&#10;Document Path:          /iframe.thinkphp/3.2.1/&#10;Document Length:        445 bytes&#10;&#10;Concurrency Level:      100&#10;Time taken for tests:   102.252 seconds&#10;Complete requests:      5000&#10;Failed requests:        0&#10;Write errors:           0&#10;Total transferred:      4000000 bytes&#10;HTML transferred:       2225000 bytes&#10;Requests per second:    48.90 [#/sec] (mean)&#10;Time per request:       2045.045 [ms] (mean)&#10;Time per request:       20.450 [ms] (mean, across all concurrent requests)&#10;Transfer rate:          38.20 [Kbytes/sec] received&#10;&#10;Connection Times (ms)&#10;              min  mean[+/-sd] median   max&#10;Connect:        0    1   2.0      1      20&#10;Processing:   836 2036 477.5   1993    7018&#10;Waiting:      835 1923 474.8   1876    7018&#10;Total:        836 2037 477.4   1994    7019&#10;&#10;Percentage of the requests served within a certain time (ms)&#10;  50%   1994&#10;  66%   2114&#10;  75%   2191&#10;  80%   2239&#10;  90%   2401&#10;  95%   2581&#10;  98%   2817&#10;  99%   3206&#10; 100%   7019 (longest request)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>开启apc后</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;This is ApacheBench, Version 2.3 &#60;$Revision: 655654 $&#62;&#10;Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/&#10;Licensed to The Apache Software Foundation, http://www.apache.org/&#10;&#10;Benchmarking dev.demo.com (be patient)&#10;Completed 500 requests&#10;Completed 1000 requests&#10;Completed 1500 requests&#10;Completed 2000 requests&#10;Completed 2500 requests&#10;Completed 3000 requests&#10;Completed 3500 requests&#10;Completed 4000 requests&#10;Completed 4500 requests&#10;Completed 5000 requests&#10;Finished 5000 requests&#10;&#10;&#10;Server Software:        Apache/2.2.22&#10;Server Hostname:        dev.demo.com&#10;Server Port:            80&#10;&#10;Document Path:          /iframe.thinkphp/3.2.1/&#10;Document Length:        445 bytes&#10;&#10;Concurrency Level:      100&#10;Time taken for tests:   34.969 seconds&#10;Complete requests:      5000&#10;Failed requests:        0&#10;Write errors:           0&#10;Total transferred:      4000000 bytes&#10;HTML transferred:       2225000 bytes&#10;Requests per second:    142.98 [#/sec] (mean)&#10;Time per request:       699.382 [ms] (mean)&#10;Time per request:       6.994 [ms] (mean, across all concurrent requests)&#10;Transfer rate:          111.71 [Kbytes/sec] received&#10;&#10;Connection Times (ms)&#10;              min  mean[+/-sd] median   max&#10;Connect:        0    1   2.0      1      18&#10;Processing:    61  695 353.2    658    4606&#10;Waiting:       14  658 347.7    615    4606&#10;Total:         61  696 353.0    658    4607&#10;&#10;Percentage of the requests served within a certain time (ms)&#10;  50%    658&#10;  66%    743&#10;  75%    800&#10;  80%    836&#10;  90%    946&#10;  95%   1072&#10;  98%   1340&#10;  99%   2618&#10; 100%   4607 (longest request)</span><br></pre></td></tr></table></figure>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1934,21 +1928,21 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
