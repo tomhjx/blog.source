@@ -208,6 +208,140 @@
 
     
     
+      
+      
+        
+        
+        
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/20/GIT命令/" itemprop="url">
+                  GIT命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-20T12:53:09+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/版本管理/" itemprop="url" rel="index">
+                    <span itemprop="name">版本管理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/版本管理/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/20/GIT命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/GIT命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u7B80_u5355_u7406_u89E3_u547D_u4EE4"><a href="#u7B80_u5355_u7406_u89E3_u547D_u4EE4" class="headerlink" title="简单理解命令"></a>简单理解命令</h2><p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/19845650" target="_blank" rel="external">http://zhuanlan.zhihu.com/FrontendMagazine/19845650</a></p>
+<p><a href="http://www.open-open.com/lib/view/open1335879873983.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1335879873983.html</a></p>
+<h2 id="u901F_u67E5"><a href="#u901F_u67E5" class="headerlink" title="速查"></a>速查</h2><p><a href="http://www.jb51.net/article/55442.htm" target="_blank" rel="external">http://www.jb51.net/article/55442.htm</a></p>
+<p><a href="http://www.codeceo.com/article/git-command-guide.html" target="_blank" rel="external">http://www.codeceo.com/article/git-command-guide.html</a></p>
+<p><a href="http://www.codeceo.com/article/git-command-list.html" target="_blank" rel="external">http://www.codeceo.com/article/git-command-list.html</a></p>
+<h3 id="u521B_u5EFA_u7248_u672C_u5E93"><a href="#u521B_u5EFA_u7248_u672C_u5E93" class="headerlink" title="创建版本库"></a>创建版本库</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;git clone &#60;url&#62;                                           #&#20811;&#38534;&#36828;&#31243;&#30340;&#29256;&#26412;&#24211; &#10;git init                                                        #&#21021;&#22987;&#21270;&#26412;&#22320;&#29256;&#26412;&#24211; &#10;git checkout -b &#26412;&#22320;&#20998;&#25903;&#21517; &#36828;&#31243;&#20998;&#25903;&#21517;        #&#33719;&#21462;&#36828;&#31243;&#20998;&#25903;&#30340;&#20195;&#30721;</span><br></pre></td></tr></table></figure>
+<h3 id="u4FEE_u6539_u548C_u63D0_u4EA4"><a href="#u4FEE_u6539_u548C_u63D0_u4EA4" class="headerlink" title="修改和提交"></a>修改和提交</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git status                                                   #&#26597;&#30475;&#29366;&#24577; &#10;git diff                                                      #&#26597;&#30475;&#21464;&#26356;&#20869;&#23481; &#10;git add                                                      #&#36319;&#36394;&#25152;&#26377;&#25913;&#21160;&#36807;&#30340;&#25991;&#20214; &#10;git add &#60;file&#62;                                           #&#36319;&#36394;&#25351;&#23450;&#30340;&#25991;&#20214; &#10;git mv &#60;old&#62; &#60;new&#62;                                #&#25991;&#20214;&#25913;&#21517; &#10;git rm &#60;file&#62;                                             #&#21024;&#38500;&#25991;&#20214; &#10;git rm --cached &#60;file&#62;                              #&#20572;&#27490;&#36319;&#36394;&#25991;&#20214;&#20294;&#19981;&#21024;&#38500; &#10;git commit -m &#34;commit message&#34;            #&#25552;&#20132;&#25152;&#26377;&#26356;&#26032;&#36807;&#30340;&#25991;&#20214; &#10;git commit --amend                                #&#20462;&#25913;&#26368;&#21518;&#19968;&#27425;&#25552;&#20132;</span><br></pre></td></tr></table></figure>
+<h3 id="u67E5_u770B_u63D0_u4EA4_u5386_u53F2"><a href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2" class="headerlink" title="查看提交历史"></a>查看提交历史</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log                                                    #&#26597;&#30475;&#25552;&#20132;&#30340;&#21382;&#21490; &#10;git log -p &#60;file&#62;                                     #&#26597;&#30475;&#25351;&#23450;&#25991;&#20214;&#30340;&#25552;&#20132;&#21382;&#21490; &#10;git blame &#60;file&#62;                                     #&#20197;&#21015;&#34920;&#26041;&#24335;&#26597;&#30475;&#25351;&#23450;&#25991;&#20214;&#30340;&#25552;&#20132;&#21382;&#21490;</span><br></pre></td></tr></table></figure>
+<h3 id="u64A4_u6D88"><a href="#u64A4_u6D88" class="headerlink" title="撤消"></a>撤消</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;git reset --hard HEAD                          #&#25764;&#28040;&#24037;&#20316;&#30446;&#24405;&#20013;&#25152;&#26377;&#26410;&#25552;&#20132;&#25991;&#20214;&#30340;&#20462;&#25913;&#20869;&#23481; &#10;git checkout HEAD &#60;file&#62;                   #&#25764;&#28040;&#25351;&#23450;&#30340;&#26410;&#25552;&#20132;&#25991;&#20214;&#30340;&#20462;&#25913;&#20869;&#23481; &#10;git revert &#60;commit&#62;                           #&#25764;&#28040;&#25351;&#23450;&#30340;&#25552;&#20132;&#10;git reset --hard HEAD                         #&#25918;&#24323;&#26242;&#23384;&#21306;B&#21644;&#24037;&#20316;&#30446;&#24405;C&#30340;&#25152;&#26377;&#20462;&#25913;&#65292;&#24674;&#22797;&#26368;&#36817;&#19968;&#27425;&#25552;&#20132;&#29366;&#24577; &#65288;A -&#62;C &#25152;&#26377;&#25991;&#20214;) &#10;git checkout -- &#60;file_name&#62;              #&#24674;&#22797;&#26576;&#25991;&#20214;&#21040;&#26368;&#36817;&#19968;&#27425;&#25552;&#20132;&#29366;&#24577;&#65292;&#25918;&#24323;checkout&#21518;&#30340;&#20462;&#25913; (A -&#62; C &#25351;&#23450;&#25991;&#20214;) &#10;git revert HEAD                                 #&#25764;&#28040;&#26368;&#36817;&#30340;&#19968;&#20010;&#25552;&#20132; &#65288;&#38024;&#23545;&#24050;&#32463;&#30340;commit&#65292;&#36319;B&#21644;C&#26080;&#20851;&#65289; &#10;git revert HEAD^                              # &#25764;&#28040;&#19978;&#27425;&#8221;(next-to-last)&#30340;&#25552;&#20132; &#65288;^ &#20010;&#25968;&#21487;&#20197;&#36882;&#22686;&#65289;</span><br></pre></td></tr></table></figure>
+<h3 id="u5206_u652F_u4E0E_u6807_u7B7E"><a href="#u5206_u652F_u4E0E_u6807_u7B7E" class="headerlink" title="分支与标签"></a>分支与标签</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch                                                     #&#26174;&#31034;&#25152;&#26377;&#26412;&#22320;&#20998;&#25903; &#10;git branch &#60;branchName&#62;                           #&#21019;&#24314;&#26032;&#20998;&#25903; &#10;git checkout &#60;branchName/tagName&#62;        #&#20999;&#25442;&#21040;&#25351;&#23450;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git checkout -b &#60;branchName&#62;                   #&#21019;&#24314;&#26032;&#20998;&#25903;&#24182;&#20999;&#25442;&#21040;&#35813;&#20998;&#25903;&#10;git branch -d &#60;branchName&#62;                      #&#21024;&#38500;&#26412;&#22320;&#20998;&#25903;&#10;git branch -D &#60;branchName&#62;                     #&#24378;&#21046;&#21024;&#38500;&#26412;&#22320;&#20998;&#25903; &#10;git tag                                                         #&#21015;&#20986;&#25152;&#26377;&#26412;&#22320;&#26631;&#31614; &#10;git tag &#60;tagname&#62;                                     #&#22522;&#20110;&#26368;&#26032;&#25552;&#20132;&#21019;&#24314;&#26631;&#31614; &#10;git tag -d &#60;tagname&#62;                                #&#21024;&#38500;&#26631;&#31614; &#10;&#10;git checkout [options] [&#60;branchName&#62;] -- &#60;file&#62;... #&#22797;&#21046;&#25991;&#20214;&#21040;&#25351;&#23450;&#20998;&#25903;&#10;git diff &#60;branch&#62; --stat                                           #&#27604;&#36739;branch&#20998;&#25903;&#19982;&#24403;&#21069;&#20998;&#25903;&#24046;&#24322;</span><br></pre></td></tr></table></figure>
+<h3 id="u5408_u5E76_u4E0E_u884D_u5408"><a href="#u5408_u5E76_u4E0E_u884D_u5408" class="headerlink" title="合并与衍合"></a>合并与衍合</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git merge &#60;branch&#62;                       #&#21512;&#24182;&#25351;&#23450;&#20998;&#25903;&#21040;&#24403;&#21069;&#20998;&#25903; &#10;git rebase &#60;branch&#62;                      #&#34893;&#21512;&#25351;&#23450;&#20998;&#25903;&#21040;&#24403;&#21069;&#20998;&#25903;</span><br></pre></td></tr></table></figure>
+<h3 id="u8FDC_u7A0B_u64CD_u4F5C"><a href="#u8FDC_u7A0B_u64CD_u4F5C" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v                                          #&#26597;&#30475;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote show &#60;remote&#62;                    #&#26597;&#30475;&#25351;&#23450;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote add &#60;remote&#62; &#60;url&#62;            #&#28155;&#21152;&#36828;&#31243;&#29256;&#26412;&#24211; &#10;git fetch &#60;remote&#62;                                #&#20174;&#36828;&#31243;&#24211;&#33719;&#21462;&#20195;&#30721; &#10;git pull &#60;remote&#62; &#60;branchName&#62;         #&#19979;&#36733;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; &#60;branchName&#62;       #&#19978;&#20256;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; : &#60;branchName/tag-name&#62;    #&#21024;&#38500;&#36828;&#31243;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git push --tag                           #&#19978;&#20256;&#25152;&#26377;&#26631;&#31614;&#10;git branch -r                            #&#26597;&#30475;&#36828;&#31243;&#20998;&#25903;&#10;&#10;&#10;git rm --cached readme.txt # &#25991;&#20214;&#25918;&#24323;&#36319;&#36394;&#65292;&#20294;&#26159;&#36824;&#26159;&#20445;&#30041;&#22312;&#24037;&#20316;&#30446;&#24405;&#20013;&#12290; &#27809;&#26377;--cached &#36873;&#39033;&#65292;&#23601;&#23436;&#20840;&#21024;&#38500;&#25991;&#20214; &#10;git rm filename            #&#30452;&#25509;&#21024;&#38500;&#25991;&#20214;&#10;&#36890;&#36807;&#8220;git rm --cached README.txt&#8221;&#21629;&#20196;&#65292;&#21487;&#20197;&#23558;&#25991;&#20214;&#29366;&#24577;&#36824;&#21407;&#20026;&#26410;&#26242;&#23384;&#29366;&#24577;&#65292;&#21363;&#22238;&#21040;&#8220;Untracked files&#8221;&#25991;&#20214;&#29366;&#24577;&#12290; &#10;&#36890;&#36807;&#8220;git add README.txt&#8221;&#21629;&#20196;&#23558;&#24050;&#20462;&#25913;&#25991;&#20214;&#26356;&#26032;&#21040;&#26242;&#23384;&#21306;&#22495;&#20013;&#65292;&#22914;&#26524;&#24819;&#25764;&#38144;&#20462;&#25913;&#65292;&#21487;&#20197;&#20351;&#29992;&#8220;git checkout -- README.txt&#8221;&#21629;&#20196;&#12290; &#10;&#36890;&#36807;git reset HEAD &#60;file&#62;&#21462;&#28040;&#26242;&#23384;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1721,158 +1855,6 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/explain/" itemprop="url">
-                  explain
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T16:26:06+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/explain/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/explain/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`content`</span> <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">100001</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">10001</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">asc</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a,case1_member <span class="keyword">as</span> b <span class="keyword">where</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">and</span>  a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> a.<span class="keyword">id</span> <span class="keyword">limit</span> <span class="number">100</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+&#10;|  1 | SIMPLE      | a     | index  | mid           | PRIMARY | 4       | NULL       |  100 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |    1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+------+-------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> = <span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+&#10;| id | select_type | table         | type | possible_keys | key  | key_len | ref   | rows | Extra |&#10;+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+&#10;|  1 | SIMPLE      | case1_article | ref  | mid           | mid  | 4       | const |   10 |       |&#10;+----+-------------+---------------+------+---------------+------+---------+-------+------+-------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> = <span class="number">2</span> <span class="keyword">or</span> <span class="keyword">mid</span> =<span class="number">12</span> <span class="keyword">or</span> <span class="keyword">mid</span>=<span class="number">13</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">12</span>,<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">between</span> <span class="number">2</span> <span class="keyword">and</span> <span class="number">13</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |  122 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">12</span>,<span class="number">13</span>) <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;| id | select_type | table         | type  | possible_keys | key  | key_len | ref  | rows | Extra                    |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+&#10;|  1 | SIMPLE      | case1_article | range | mid           | mid  | 4       | NULL |   27 | Using where; Using index |&#10;+----+-------------+---------------+-------+---------------+------+---------+------+------+--------------------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">2</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">12</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;| id | select_type  | table         | type | possible_keys | key  | key_len | ref   | rows | Extra       |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;|  1 | PRIMARY      | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  2 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  3 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |    7 | Using index |&#10;| NULL | UNION RESULT | &#60;union1,2,3&#62;  | ALL  | NULL          | NULL | NULL    | NULL  | NULL |             |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1919,7 +1901,7 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
