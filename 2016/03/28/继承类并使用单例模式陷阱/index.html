@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="GIT," />
+  <meta name="keywords" content="PHP," />
 
 
 
@@ -51,25 +51,16 @@
 
 
 
-<meta name="description" content="生成key
-ssh-keygen -t rsa -C &amp;#34;tomhjx&amp;#34;
-查key内容
-cat ~/.ssh/id_rsa.pub">
+<meta name="description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GIT SSH keys">
-<meta property="og:url" content="http://tomhjx.github.io/2016/03/20/GIT-SSH-keys/index.html">
+<meta property="og:title" content="继承类并使用单例模式陷阱">
+<meta property="og:url" content="http://tomhjx.github.io/2016/03/28/继承类并使用单例模式陷阱/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="生成key
-ssh-keygen -t rsa -C &amp;#34;tomhjx&amp;#34;
-查key内容
-cat ~/.ssh/id_rsa.pub">
-<meta property="og:updated_time" content="2016-03-20T04:50:16.000Z">
+<meta property="og:description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
+<meta property="og:updated_time" content="2016-03-27T17:01:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GIT SSH keys">
-<meta name="twitter:description" content="生成key
-ssh-keygen -t rsa -C &amp;#34;tomhjx&amp;#34;
-查key内容
-cat ~/.ssh/id_rsa.pub">
+<meta name="twitter:title" content="继承类并使用单例模式陷阱">
+<meta name="twitter:description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
 
 
 
@@ -81,7 +72,7 @@ cat ~/.ssh/id_rsa.pub">
   };
 </script>
 
-  <title> GIT SSH keys | 疯狂的茶几 </title>
+  <title> 继承类并使用单例模式陷阱 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +223,7 @@ cat ~/.ssh/id_rsa.pub">
             
             
               
-                GIT SSH keys
+                继承类并使用单例模式陷阱
               
             
           </h1>
@@ -241,8 +232,8 @@ cat ~/.ssh/id_rsa.pub">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-20T12:45:04+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-03-28T00:46:51+08:00" content="2016-03-28">
+              2016-03-28
             </time>
           </span>
 
@@ -251,8 +242,8 @@ cat ~/.ssh/id_rsa.pub">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/版本管理/" itemprop="url" rel="index">
-                    <span itemprop="name">版本管理</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
                   </a>
                 </span>
 
@@ -263,8 +254,8 @@ cat ~/.ssh/id_rsa.pub">
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/版本管理/GIT/" itemprop="url" rel="index">
-                    <span itemprop="name">GIT</span>
+                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -279,8 +270,8 @@ cat ~/.ssh/id_rsa.pub">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/GIT-SSH-keys/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/GIT-SSH-keys/" itemprop="commentsCount"></span>
+                <a href="/2016/03/28/继承类并使用单例模式陷阱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/继承类并使用单例模式陷阱/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -299,10 +290,11 @@ cat ~/.ssh/id_rsa.pub">
       
 
       
-        <span itemprop="articleBody"><p>生成key</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#34;tomhjx&#34;</span><br></pre></td></tr></table></figure>
-<p>查key内容</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure></span>
+        <span itemprop="articleBody"><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_instance</span> = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> !== <span class="keyword">static</span>::<span class="variable">$_instance</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_instance</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'init '</span>.get_called_class().<span class="string">";\r\n"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_instance</span> = <span class="keyword">new</span> <span class="keyword">static</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls1st</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"1st;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls2nd</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"2nd;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$cls1st</span> = Cls1st::getInstance();</span><br><span class="line"><span class="variable">$cls1st</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls2nd</span> = Cls2nd::getInstance();</span><br><span class="line"><span class="variable">$cls2nd</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls1st</span> = Cls1st::getInstance();</span><br><span class="line"><span class="variable">$cls1st</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls2nd</span> = Cls2nd::getInstance();</span><br><span class="line"><span class="variable">$cls2nd</span>-&gt;say();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;init Cls1st;&#10;1st;&#10;1st;&#10;1st;&#10;1st;</span><br></pre></td></tr></table></figure>
+<p>修改实现类，重新声明单例变量</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls1st</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_instance</span> = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"1st;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls2nd</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_instance</span> = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"2nd;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;init Cls1st;&#10;1st;&#10;init Cls2nd;&#10;2nd;&#10;1st;&#10;2nd;</span><br></pre></td></tr></table></figure></span>
       
     </div>
 
@@ -310,7 +302,7 @@ cat ~/.ssh/id_rsa.pub">
       
         <div class="post-tags">
           
-            <a href="/tags/GIT/" rel="tag">#GIT</a>
+            <a href="/tags/PHP/" rel="tag">#PHP</a>
           
         </div>
       
@@ -319,17 +311,13 @@ cat ~/.ssh/id_rsa.pub">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/12/定时器重启爱奇艺客户端/" rel="next" title="定时器重启爱奇艺客户端">
-                <i class="fa fa-chevron-left"></i> 定时器重启爱奇艺客户端
+              <a href="/2016/03/20/GIT命令/" rel="next" title="GIT命令">
+                <i class="fa fa-chevron-left"></i> GIT命令
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/20/GIT命令/" rel="prev" title="GIT命令">
-                GIT命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -356,8 +344,8 @@ cat ~/.ssh/id_rsa.pub">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/GIT-SSH-keys/"
-           data-title="GIT SSH keys" data-url="http://tomhjx.github.io/2016/03/20/GIT-SSH-keys/">
+      <div class="ds-thread" data-thread-key="2016/03/28/继承类并使用单例模式陷阱/"
+           data-title="继承类并使用单例模式陷阱" data-url="http://tomhjx.github.io/2016/03/28/继承类并使用单例模式陷阱/">
       </div>
     
   </div>
