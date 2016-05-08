@@ -220,15 +220,148 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/09/php编译中遇到种种error解决办法/" itemprop="url">
+                  php编译中遇到种种error解决办法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-05-09T00:31:41+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/09/php编译中遇到种种error解决办法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/php编译中遇到种种error解决办法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <p>1) Configure: error: xml2-config not found. Please check your libxml2 installation.<br>Solutions :<br>Quote:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#yum install libxml2 libxml2-devel (For Redhat &#38; Fedora)&#10;# aptitude install libxml2-dev      (For ubuntu)</span><br></pre></td></tr></table></figure></p>
+<p>2) Checking for pkg-config… /usr/bin/pkg-config<br>configure: error: Cannot find OpenSSL’s <evp.h><br>Solutions :<br>Quote:</evp.h></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#yum install openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<p>3) Configure: error: Please reinstall the BZip2 distribution<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install bzip2 bzip2-devel</span><br></pre></td></tr></table></figure>
+<p>4) Configure: error: Please reinstall the libcurl distribution -<br>easy.h should be in <curl-dir>/include/curl/<br>Solutions :<br>Quote:</curl-dir></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install curl curl-devel   (For Redhat &#38; Fedora)&#10;# install libcurl4-gnutls-dev    (For Ubuntu)</span><br></pre></td></tr></table></figure>
+<p>5) Configure: error: libjpeg.(also) not found.<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install libjpeg libjpeg-devel</span><br></pre></td></tr></table></figure>
+<p>6) Configure: error: libpng.(also) not found.<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install libpng libpng-devel</span><br></pre></td></tr></table></figure>
+<p>7) Configure: error: freetype.h not found.<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#yum install freetype-devel</span><br></pre></td></tr></table></figure>
+<p>8) Configure: error: Unable to locate gmp.h<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install gmp-devel</span><br></pre></td></tr></table></figure>
+<p>9) Configure: error: Cannot find MySQL header files under /usr.<br>Note that the MySQL client library is not bundled anymore!<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install mysql-devel            (For Redhat &#38; Fedora)&#10;# apt-get install libmysql++-dev      (For Ubuntu)</span><br></pre></td></tr></table></figure>
+<p>10) Configure: error: Please reinstall the ncurses distribution<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install ncurses ncurses-devel</span><br></pre></td></tr></table></figure>
+<p>11) Checking for unixODBC support… configure: error: ODBC header file ‘/usr/include/sqlext.h’ not found!<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install unixODBC-devel</span><br></pre></td></tr></table></figure>
+<p>12) Configure: error: Cannot find pspell<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install pspell-devel</span><br></pre></td></tr></table></figure>
+<p>13) configure: error: mcrypt.h not found. Please reinstall libmcrypt.<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz/download&#10;mv download libmcrypt-2.5.8.tar.gz&#10;tar zxvf libmcrypt-2.5.8.tar.gz&#10;cd libmcrypt-2.5.8&#10;./configure --prefix=/usr/local/mcrypt&#10;make&#10;make install</span><br></pre></td></tr></table></figure>
+<p>14) Configure: error: snmp.h not found. Check your SNMP installation.<br>Solutions :<br>Quote:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># yum install net-snmp net-snmp-devel</span><br></pre></td></tr></table></figure>
+<p>15)configure: error: Please reinstall libmhash – I cannot find mhash.h</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#yum install mhash-devel</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1588,215 +1721,6 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/悲观锁和乐观锁/" itemprop="url">
-                  悲观锁和乐观锁
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:33:09+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/悲观锁和乐观锁/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/悲观锁和乐观锁/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>1        事务隔离</p>
-<p>事务隔离是数据库提供的功能。</p>
-<p>SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：</p>
-<p>SET TRANSACTION ISOLATION LEVEL</p>
-<pre><code>{ READ UNCOMMITTED
-
-| READ COMMITTED
-
-| REPEATABLE READ
-
-| SNAPSHOT
-
-| SERIALIZABLE
-
-}
-</code></pre><p>[ ; ]</p>
-<p>Read Committed是SQL Server的预设隔离等级。</p>
-<p>1.1         READ UNCOMMITTED<br>Read UnCommitted事务可以读取事务已修改，但未提交的的记录。</p>
-<p>Read UnCommitted事务会产生脏读（Dirty Read）。</p>
-<p>Read UnCommitted事务与select语句加nolock的效果一样，它是所有隔离级别中限制最少的。</p>
-<p>1.2         READ COMMITTED<br>Read Committed事务不能读取事务已修改，但未提交的记录。</p>
-<p>Read Committed是SQL Server的预设隔离等级。</p>
-<p>1.3         REPEATABLE READ<br>Repeatable Read事务不能读取交易已修改，但未提交的记录，并且在事务完成之前，任何其它事务都不能修改目前事务已读取的记录。</p>
-<p>其它事务仍可以插入新记录，但必须符合当前事务的搜索条件——这意味着当前事务重新查询记录时，会产生幻读（Phantom Read）。</p>
-<p>1.4         SNAPSHOT<br>Snapshot事务中任何语句所读取的记录，都是事务启动时的数据。</p>
-<p>这相当于事务启动时，数据库为事务生成了一份专用“快照”。</p>
-<p>在当前事务中看到不其它事务在当前事务启动之后所进行的数据修改。</p>
-<p>Snapshot事务不会读取记录时要求锁定，读取记录的Snapshot事务不会锁住其它事务写入记录，写入记录的事务也不会锁住Snapshot事务读取数据。</p>
-<p>1.5         SERIALIZABLE<br>Serializable事务会产生以下效果：</p>
-<p>1.语句无法读取其它事务已修改但未提交的记录。</p>
-<p>2.在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</p>
-<p>3.在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</p>
-<p>Serializable事务与select语句加holdlock的效果一样。</p>
-<p>2        READ COMMITTED 和 REPEATABLE READ<br>Read Committed 和 Repeatable Read 是最常用的两种事务。</p>
-<p>Read Committed 是 SQL Server的默认级别；而 Repeatable Read 比Read Committed 更能保证数据一致性。</p>
-<p>2.1         特点<br>Read Committed会阻塞其它事务中的update，但不会阻塞select。</p>
-<p>Repeatable Read不但会阻塞其它事务中的update，还会阻塞select。</p>
-<p>Read Committed 和 Repeatable Read 的相同点是：都会阻塞其它事务的update语句。</p>
-<p>Read Committed 和 Repeatable Read 的不同点是：Read Committed 不会阻塞其它事务的select语句，但Repeatable Read阻塞。</p>
-<p>注意，Read Committed 和 Repeatable Read 都是行级锁，它们只会锁住与自己相关的记录。当事务提交之后，阻塞的语句就会继续执行。</p>
-<p>2.2         理解<br>2.2.1     READ COMMITTED<br>Read Committed 事务的含义是我select出来的记录，别人只能看，不能改（只阻塞别的事务的update）。</p>
-<p>Read Committed 的缺点是：无法防止读取不一致和修改丢失。</p>
-<p>读取不一致是因为Read Committed 不锁住读取的记录；修改丢失是因为别的事务也能读取当前事务的记录，虽然会阻塞别的事务的update，但在当前事务提交之后，别的事务的update语句会继续执行，进而覆盖上一次事务的结果，导致上一次的修改丢失。</p>
-<p>2.2.2     REPEATABLE READ<br>Repeatable Read 事务的含义是我select出来的记录，不允许别人看，也不允许别人改（阻塞别的事务select、update），这就意味着我可以在事务中多次select数据，而不用担心出现“脏读”——这就是“可重复读取”的意思。</p>
-<p>Repeatable Read 虽然解决了Read Committed 事务的读取不一致和修改丢失的缺点，但它也有缺点（尽管这个缺点Read Committed 也有）：</p>
-<p>Repeatable Read 不会阻塞insert和delete，所以会出现“幻读”——两次select的结果不一样。还有，Repeatable Read 占用的资源比Read Committed 大。</p>
-<p>3        在应用程序中设置事务隔离级别<br>READ COMMITTED 是 Microsoft SQL Server Database Engine 的预设隔离等级。</p>
-<p>已指定隔离等级时，在 SQL Server 工作阶段中，所有查询和数据操作语言 (DML) 陈述式的锁定行为都会在此隔离等级运作。此隔离等级会维持有效，直到工作阶段结束或隔离等级设为另一个等级为止。</p>
-<p>如果应用程序必须在不同隔离等级操作，可以使用下列方法来设定隔离等级：</p>
-<p>l           执行 SET TRANSACTION ISOLATION LEVEL Transact-SQL 陈述式。</p>
-<p>l           如果 ADO.NET 应用程序使用 System.Data.SqlClient 管理的命名空间，可以使用 SqlConnection.BeginTransaction 方法来指定 IsolationLevel 选项。</p>
-<p>l           使用 ADO 的应用程序可以设定 Autocommit Isolation Levels 属性。</p>
-<p>l           当启动交易时，使用 OLE DB 的应用程序可以将 isoLevel 设为所要的交易隔离等级，以呼叫 ITransactionLocal::StartTransaction。当在自动认可模式中指定隔离等级时，使用 OLE DB 的应用程序可以将 DBPROPSET_SESSION 属性 DBPROP_SESS_AUTOCOMMITISOLEVELS 设为所要的交易隔离等级。</p>
-<p>l           使用 ODBC 的应用程序可以使用 SQLSetConnectAttr 来设定 SQL_COPT_SS_TXN_ISOLATION 属性。</p>
-<p>4        悲观锁<br>悲观锁是指假设并发更新冲突会发生，所以不管冲突是否真的发生，都会使用锁机制。</p>
-<p>悲观锁会完成以下功能：锁住读取的记录，防止其它事务读取和更新这些记录。其它事务会一直阻塞，直到这个事务结束。</p>
-<p>悲观锁是在使用了数据库的事务隔离功能的基础上，独享占用的资源，以此保证读取数据一致性，避免修改丢失。</p>
-<p>悲观锁可以使用Repeatable Read事务，它完全满足悲观锁的要求。</p>
-<p>5        乐观锁<br>乐观锁不会锁住任何东西，也就是说，它不依赖数据库的事务机制，乐观锁完全是应用系统层面的东西。</p>
-<p>如果使用乐观锁，那么数据库就必须加版本字段，否则就只能比较所有字段，但因为浮点类型不能比较，所以实际上没有版本字段是不可行的。</p>
-<p>6        死锁<br>当二或多个工作各自具有某个资源的锁定，但其它工作尝试要锁定此资源，而造成工作永久封锁彼此时，会发生死锁。例如：</p>
-<ol>
-<li><p>事务 A 取得数据列 1 的共享锁定。</p>
-</li>
-<li><p>事务B 取得数据列 2 的共享锁定。</p>
-</li>
-<li><p>事务A 现在要求数据列 2 的独占锁定，但会被封锁直到事务B 完成并释出对数据列 2 的共享锁定为止。</p>
-</li>
-<li><p>事务B 现在要求数据列 1 的独占锁定，但会被封锁直到事务A 完成并释出对数据列 1 的共享锁定为止。</p>
-</li>
-</ol>
-<p>等到事务B 完成后，事务A 才能完成，但事务B 被事务A 封锁了。这个状况也称为「循环相依性」(Cyclic Dependency)。事务A 相依于事务B，并且事务B 也因为相依于事务A 而封闭了这个循环。</p>
-<p>例如以下操作就会产生死锁，两个连接互相阻塞对方的update。</p>
-<p>连接1：</p>
-<p>begin tran</p>
-<p>select * from customers</p>
-<p>update customers set CompanyName = CompanyName</p>
-<p>waitfor delay ‘00:00:05’</p>
-<p>select * from Employees</p>
-<p>–因为Employees被连接2锁住了，所以这里会阻塞。</p>
-<p>update Employees set LastName = LastName</p>
-<p>commit tran</p>
-<p>连接2：</p>
-<p>begin tran</p>
-<p>select * from Employees</p>
-<p>update Employees set LastName = LastName</p>
-<p>waitfor delay ‘00:00:05’</p>
-<p>select * from customers</p>
-<p>–因为customers被连接1锁住了，所以这里会阻塞。</p>
-<p>update customers set CompanyName = CompanyName</p>
-<p>commit tran</p>
-<p>SQL Server遇到死锁时会自动杀死其中一个事务，而另一个事务会正常结束（提交或回滚）。</p>
-<p>SQL Server对杀死的连接返回错误代码是1205，异常提示是：</p>
-<p>Your transaction (process ID #52) was deadlocked on {lock | communication buffer | thRead} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.</p>
-<p>除了Read UnCommitted和Snapshot，其它类型的事务都可能产生死锁。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1843,14 +1767,14 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
