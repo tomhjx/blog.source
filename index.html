@@ -243,6 +243,382 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/25/nignx缓存proxy-cache/" itemprop="url">
+                  nignx缓存proxy_cache
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-25T00:01:02+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/web服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">web服务器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/web服务器/nignx/" itemprop="url" rel="index">
+                    <span itemprop="name">nignx</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/25/nignx缓存proxy-cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/25/nignx缓存proxy-cache/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;ssh root@192.168.1.123 -p 32200&#10;&#10;vi /usr/local/nginx/conf/nginx.conf&#10;&#10;&#10;======&#10;&#10;user  www www;&#10;worker_processes  1;&#10;pid        logs/nginx.pid;&#10;&#10;events &#123;&#10;    worker_connections  1024;&#10;&#125;&#10;&#10;&#10;http &#123;&#10;    include       mime.types;&#10;    default_type  application/octet-stream;&#10;&#10;    log_format  main  &#39;$remote_addr\t$msec\t[$time_local]\t$request\t&#39;&#10;                     &#39;&#34;$status&#34;\t$body_bytes_sent\t&#34;$http_referer&#34;\t&#39;&#10;                     &#39;&#34;$http_user_agent&#34;\t&#34;$http_q_ua&#34;\t&#34;$http_x_forwarded_for&#34;\t&#39;&#10;                     &#39;&#34;$upstream_addr&#34;\t$request_time&#39;;&#10;&#10;    sendfile        on;&#10;    keepalive_timeout  65;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name dev123.demo.com dev123.demo.proxy.com;&#10;        access_log  logs/dev123.demo.com-access.log;&#10;        location / &#123;&#10;            root   /var/www/demo;&#10;            index  index.html index.htm;&#10;        &#125;&#10;&#10;        location ~ \.php$ &#123;&#10;            root   /var/www/demo;&#10;            fastcgi_pass   127.0.0.1:9000;&#10;            fastcgi_index  index.php;&#10;            fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;&#10;            include        fastcgi_params;&#10;        &#125;&#10;    &#125;&#10;&#10;&#125;&#10;&#10;======&#10;&#10;/etc/init.d/nginx reload&#10;&#10;&#10;ssh root@192.168.1.121 -p 32200&#10;&#10;vi /usr/local/nginx/conf/nginx.conf&#10;&#10;======&#10;&#10;user  www www;&#10;worker_processes  1;&#10;pid        logs/nginx.pid;&#10;&#10;events &#123;&#10;    worker_connections  1024;&#10;&#125;&#10;&#10;&#10;http &#123;&#10;    include       mime.types;&#10;    default_type  application/octet-stream;&#10;&#10;    log_format  main  &#39;$remote_addr\t$msec\t[$time_local]\t$request\t&#39;&#10;                     &#39;&#34;$status&#34;\t$body_bytes_sent\t&#34;$http_referer&#34;\t&#39;&#10;                     &#39;&#34;$http_user_agent&#34;\t&#34;$http_q_ua&#34;\t&#34;$http_x_forwarded_for&#34;\t&#39;&#10;                     &#39;&#34;$upstream_addr&#34;\t$request_time&#39;;&#10;&#10;    sendfile        on;&#10;    keepalive_timeout  65;&#10;    proxy_cache_path /usr/local/nginx/proxy_cache levels=1:2 keys_zone=my-cache:8m max_size=1000m inactive=600m;&#10;    proxy_temp_path /usr/local/nginx/proxy_temp;&#10;&#10;&#10;    upstream dev123 &#123;&#10;        server 192.168.1.123:80;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name dev123.demo.proxy.com;&#10;        error_log  logs/dev123.demo.proxy.com-error.log;&#10;        access_log  logs/dev123.demo.proxy.com-access.log;&#10;&#10;        location / &#123;&#10;            proxy_pass http://dev123;&#10;            proxy_cache my-cache;&#10;            proxy_cache_valid 200 10m;&#10;            proxy_redirect off;&#10;            proxy_set_header Host $host;&#10;        &#125;&#10;    &#125;&#10;&#10;&#125;&#10;&#10;======&#10;&#10;/etc/init.d/nginx reload&#10;&#10;curl &#39;http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl &#39;http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl &#39;http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl &#39;http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl &#39;http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl -d &#39;&#39; http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl -d &#39;&#39; http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl -d &#39;&#39; http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl -d &#39;&#39; http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;curl -d &#39;&#39; http://dev123.demo.proxy.com/tmp/get-serv.php&#39;&#10;&#10;&#10;&#10;ssh root@192.168.1.123 -p 32200&#10;&#10;tail -n 10 /usr/local/nginx/logs/dev123.demo.com-access.log&#10;&#10;192.168.1.120 - - [24/Jul/2016:12:32:28 -0400] &#34;GET /tmp/get-serv.php HTTP/1.0&#34; 200 988 &#34;-&#34; &#34;curl/7.29.0&#34;&#10;192.168.1.120 - - [24/Jul/2016:12:33:03 -0400] &#34;POST /tmp/get-serv.php HTTP/1.0&#34; 200 1115 &#34;-&#34; &#34;curl/7.29.0&#34;&#10;192.168.1.120 - - [24/Jul/2016:12:33:03 -0400] &#34;POST /tmp/get-serv.php HTTP/1.0&#34; 200 1115 &#34;-&#34; &#34;curl/7.29.0&#34;&#10;192.168.1.120 - - [24/Jul/2016:12:33:04 -0400] &#34;POST /tmp/get-serv.php HTTP/1.0&#34; 200 1114 &#34;-&#34; &#34;curl/7.29.0&#34;&#10;192.168.1.120 - - [24/Jul/2016:12:33:06 -0400] &#34;POST /tmp/get-serv.php HTTP/1.0&#34; 200 1115 &#34;-&#34; &#34;curl/7.29.0&#34;&#10;192.168.1.120 - - [24/Jul/2016:12:33:07 -0400] &#34;POST /tmp/get-serv.php HTTP/1.0&#34; 200 1115 &#34;-&#34; &#34;curl/7.29.0&#34;</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.ttlsa.com/nginx/nginx-high-performance-caching/" target="_blank" rel="external">http://www.ttlsa.com/nginx/nginx-high-performance-caching/</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/04/Linux的inode是什么/" itemprop="url">
+                  Linux的inode是什么
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-04T12:26:19+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统/" itemprop="url" rel="index">
+                    <span itemprop="name">系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/04/Linux的inode是什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/04/Linux的inode是什么/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>转自：<br><a href="http://www.ruanyifeng.com/blog/2011/12/inode.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2011/12/inode.html</a><br><a href="http://blog.s135.com/post/295/" target="_blank" rel="external">http://blog.s135.com/post/295/</a><br><a href="http://hi.baidu.com/leejun_2005/blog/item/d9aa13a53b3af6e99152ee7e.html" target="_blank" rel="external">http://hi.baidu.com/leejun_2005/blog/item/d9aa13a53b3af6e99152ee7e.html</a> </p>
+<p>一、inode是什么？</p>
+<p>理解inode，要从文件储存说起。<br>文件储存在硬盘上，硬盘的最小存储单位叫做”扇区”（Sector）。每个扇区储存512字节（相当于0.5KB）。</p>
+<p>操作系统读取硬盘的时候，不会一个个扇区地读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个”块”（block）。这种由多个扇区组成的”块”，是文件存取的最小单位。”块”的大小，最常见的是4KB，即连续八个 sector组成一个 block。</p>
+<p>文件数据都储存在”块”中，那么很显然，我们还必须找到一个地方储存文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种储存文件元信息的区域就叫做inode，中文译名为”索引节点”。</p>
+<p>二、inode的内容<br>inode包含文件的元信息，具体来说有以下内容：<br>　　<em> 文件的字节数
+　　</em> 文件拥有者的User ID<br>　　<em> 文件的Group ID
+　　</em> 文件的读、写、执行权限<br>　　<em> 文件的时间戳，共有三个：ctime指inode上一次变动的时间，mtime指文件内容上一次变动的时间，atime指文件上一次打开的时间。
+　　</em> 链接数，即有多少文件名指向这个inode<br>　　* 文件数据block的位置</p>
+<p>可以用stat命令，查看某个文件的inode信息：<br>stat example.txt</p>
+<p>总之，除了文件名以外的所有文件信息，都存在inode之中。至于为什么没有文件名，下文会有详细解释。</p>
+<p>三、inode的大小<br>inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据；另一个是inode区（inode table），存放inode所包含的信息。<br>每个inode节点的大小，一般是128字节或256字节。inode节点的总数，在格式化时就给定，一般是每1KB或每2KB就设置一个inode。假定在一块1GB的硬盘中，每个inode节点的大小为128字节，每1KB就设置一个inode，那么inode table的大小就会达到128MB，占整块硬盘的12.8%。</p>
+<p>查看每个硬盘分区的inode总数和已经使用的数量，可以使用df命令。<br>df -i<br>查看每个inode节点的大小，可以用如下命令：<br>sudo dumpe2fs -h /dev/hda | grep “Inode size”<br>由于每个文件都必须有一个inode，因此有可能发生inode已经用光，但是硬盘还未存满的情况。这时，就无法在硬盘上创建新文件。</p>
+<p>四、inode号码<br>每个inode都有一个号码，操作系统用inode号码来识别不同的文件。</p>
+<p>这里值得重复一遍，Unix/Linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。表面上，用户通过文件名，打开文件。实际上，系统内部这个过程分成三步：首先，系统找到这个文件名对应的inode号码；其次，通过inode号码，获取inode信息；最后，根据inode信息，找到文件数据所在的block，读出数据。</p>
+<p>使用ls -i命令，可以看到文件名对应的inode号码：</p>
+<p>ls -i example.txt</p>
+<p>五、目录文件<br>Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。</p>
+<p>目录文件的结构非常简单，就是一系列目录项（dirent）的列表。每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的inode号码。</p>
+<p>ls命令只列出目录文件中的所有文件名：<br>ls /etc<br>ls -i命令列出整个目录文件，即文件名和inode号码：<br>ls -i /etc<br>如果要查看文件的详细信息，就必须根据inode号码，访问inode节点，读取信息。ls -l命令列出文件的详细信息。<br>ls -l /etc</p>
+<p>六、硬链接<br>一般情况下，文件名和inode号码是”一一对应”关系，每个inode号码对应一个文件名。但是，Unix/Linux系统允许，多个文件名指向同一个inode号码。这意味着，可以用不同的文件名访问同样的内容；对文件内容进行修改，会影响到所有文件名；但是，删除一个文件名，不影响另一个文件名的访问。这种情况就被称为”硬链接”（hard link）。</p>
+<p>ln命令可以创建硬链接：</p>
+<p>ln 源文件 目标文件<br>运行上面这条命令以后，源文件与目标文件的inode号码相同，都指向同一个inode。inode信息中有一项叫做”链接数”，记录指向该inode的文件名总数，这时就会增加1。反过来，删除一个文件名，就会使得inode节点中的”链接数”减1。当这个值减到0，表明没有文件名指向这个inode，系统就会回收这个inode号码，以及其所对应block区域。</p>
+<p>这里顺便说一下目录文件的”链接数”。创建目录时，默认会生成两个目录项：”.”和”..”。前者的inode号码就是当前目录的inode号码，等同于当前目录的”硬链接”；后者的inode号码就是当前目录的父目录的inode号码，等同于父目录的”硬链接”。所以，任何一个目录的”硬链接”总数，总是等于2加上它的子目录总数（含隐藏目录）,这里的2是父目录对其的“硬链接”和当前目录下的”.硬链接“。</p>
+<p>七、软链接<br>除了硬链接以外，还有一种特殊情况。文件A和文件B的inode号码虽然不一样，但是文件A的内容是文件B的路径。读取文件A时，系统会自动将访问者导向文件B。因此，无论打开哪一个文件，最终读取的都是文件B。这时，文件A就称为文件B的”软链接”（soft link）或者”符号链接（symbolic link）。</p>
+<p>这意味着，文件A依赖于文件B而存在，如果删除了文件B，打开文件A就会报错：”No such file or directory”。这是软链接与硬链接最大的不同：文件A指向文件B的文件名，而不是文件B的inode号码，文件B的inode”链接数”不会因此发生变化。</p>
+<p>ln -s命令可以创建软链接。<br>ln -s 源文文件或目录 目标文件或目录</p>
+<p>八、inode的特殊作用<br>由于inode号码与文件名分离，这种机制导致了一些Unix/Linux系统特有的现象。<br>　　1. 有时，文件名包含特殊字符，无法正常删除。这时，直接删除inode节点，就能起到删除文件的作用。<br>　　2. 移动文件或重命名文件，只是改变文件名，不影响inode号码。<br>　　3. 打开一个文件以后，系统就以inode号码来识别这个文件，不再考虑文件名。因此，通常来说，系统无法从inode号码得知文件名。<br>      第3点使得软件更新变得简单，可以在不关闭软件的情况下进行更新，不需要重启。因为系统通过inode号码，识别运行中的文件，不通过文件名。更新的时候，新版文件以同样的文件名，生成一个新的inode，不会影响到运行中的文件。等到下一次运行这个软件的时候，文件名就自动指向新版文件，旧版文件的inode则被回收。</p>
+<p>九 实际问题</p>
+<p>在一台配置较低的Linux服务器（内存、硬盘比较小）的/data分区内创建文件时，系统提示磁盘空间不足，用df -h命令查看了一下磁盘使用情况，发现/data分区只使用了66%，还有12G的剩余空间，按理说不会出现这种问题。 后来用df -i查看了一下/data分区的索引节点(inode)，发现已经用满(IUsed=100%)，导致系统无法创建新目录和文件。 </p>
+<p>查找原因：<br>　　/data/cache目录中存在数量非常多的小字节缓存文件，占用的Block不多，但是占用了大量的inode。 </p>
+<p>解决方案：<br>　　1、删除/data/cache目录中的部分文件，释放出/data分区的一部分inode。<br>　　2、用软连接将空闲分区/opt中的newcache目录连接到/data/cache，使用/opt分区的inode来缓解/data分区inode不足的问题：<br>　　ln -s /opt/newcache /data/cache </p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/01/在linux怎样查看挂载情况/" itemprop="url">
+                  在linux怎样查看挂载情况
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-01T00:38:27+08:00" content="2016-06-01">
+              2016-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统/" itemprop="url" rel="index">
+                    <span itemprop="name">系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/01/在linux怎样查看挂载情况/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/在linux怎样查看挂载情况/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;cat /etc/mtab</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/09/php编译中遇到种种error解决办法/" itemprop="url">
                   php编译中遇到种种error解决办法
                 </a>
@@ -1186,547 +1562,12 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="url">
-                  MySQL server has gone away报错原因分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:44:52+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="MySQL__u670D_u52A1_u5B95_u4E86"><a href="#MySQL__u670D_u52A1_u5B95_u4E86" class="headerlink" title="MySQL 服务宕了"></a>MySQL 服务宕了</h3><p>判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'uptime';"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Uptime        | 68928 |&#10;+---------------+-------+&#10;1 row in set (0.04 sec)</span><br></pre></td></tr></table></figure>
-<p>或者查看MySQL的报错日志，看看有没有重启的信息</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ tail /var/<span class="built_in">log</span>/mysql/error.log</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;130101 22:22:30 InnoDB: Initializing buffer pool, size = 256.0M&#10;130101 22:22:30 InnoDB: Completed initialization of buffer pool&#10;130101 22:22:30 InnoDB: highest supported file format is Barracuda.&#10;130101 22:22:30 InnoDB: 1.1.8 started; log sequence number 63444325509&#10;130101 22:22:30 [Note] Server hostname (bind-address): &#39;127.0.0.1&#39;; port: 3306&#10;130101 22:22:30 [Note]   - &#39;127.0.0.1&#39; resolves to &#39;127.0.0.1&#39;;&#10;130101 22:22:30 [Note] Server socket created on IP: &#39;127.0.0.1&#39;.&#10;130101 22:22:30 [Note] Event Scheduler: Loaded 0 events&#10;130101 22:22:30 [Note] /usr/sbin/mysqld: ready for connections.&#10;Version: &#39;5.5.28-cll&#39;  socket: &#39;/var/lib/mysql/mysql.sock&#39;  port: 3306  MySQL Community Server (GPL)</span><br></pre></td></tr></table></figure>
-<p>如果uptime数值很大，表明mysql服务运行了很久了。说明最近服务没有重启过。</p>
-<p>如果日志没有相关信息，也表名mysql服务最近没有重启过，可以继续检查下面几项内容。</p>
-<h3 id="u8FDE_u63A5_u8D85_u65F6"><a href="#u8FDE_u63A5_u8D85_u65F6" class="headerlink" title="连接超时"></a>连接超时</h3><p>如果程序使用的是长连接，则这种情况的可能性会比较大。</p>
-<p>即，某个长连接很久没有新的请求发起，达到了server端的timeout，被server强行关闭。</p>
-<p>此后再通过这个connection发起查询的时候，就会报错server has gone away</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global variables like '%timeout';"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----------------------------+----------+&#10;| Variable_name              | Value    |&#10;+----------------------------+----------+&#10;| connect_timeout            | 30       |&#10;| delayed_insert_timeout     | 300      |&#10;| innodb_lock_wait_timeout   | 50       |&#10;| innodb_rollback_on_timeout | OFF      |&#10;| interactive_timeout        | 28800    |&#10;| lock_wait_timeout          | 31536000 |&#10;| net_read_timeout           | 30       |&#10;| net_write_timeout          | 60       |&#10;| slave_net_timeout          | 3600     |&#10;| wait_timeout               | 28800    |&#10;+----------------------------+----------+</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; SET SESSION wait_timeout=5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Wait 10 seconds</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT NOW();</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;ERROR 2006 (HY000): MySQL server has gone away&#10;No connection. Trying to reconnect...&#10;Connection id:    132361&#10;Current database: *** NONE ***&#10;&#10;+---------------------+&#10;| NOW()               |&#10;+---------------------+&#10;| 2013-01-02 11:31:15 |&#10;+---------------------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill"><a href="#u8FDB_u7A0B_u5728server_u7AEF_u88AB_u4E3B_u52A8kill" class="headerlink" title="进程在server端被主动kill"></a>进程在server端被主动kill</h3><p>这种情况和情况2相似，只是发起者是DBA或者其他job。发现有长时间的慢查询执行kill xxx导致。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'com_kill'"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Com_kill      | 0     |&#10;+---------------+-------+</span><br></pre></td></tr></table></figure>
-<h3 id="Your_SQL_statement_was_too_large"><a href="#Your_SQL_statement_was_too_large" class="headerlink" title="Your SQL statement was too large."></a>Your SQL statement was too large.</h3><p>当查询的结果集超过 max_allowed_packet 也会出现这样的报错。定位方法是打出相关报错的语句。</p>
-<p>用select * into outfile 的方式导出到文件，查看文件大小是否超过 max_allowed_packet ，如果超过则需要调整参数，或者优化语句。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+---------+&#10;| Variable_name      | Value   |&#10;+--------------------+---------+&#10;| max_allowed_packet | 1048576 |&#10;+--------------------+---------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>修改参数：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; set global max_allowed_packet=1024*1024*16;</span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+----------+&#10;| Variable_name      | Value    |&#10;+--------------------+----------+&#10;| max_allowed_packet | 16777216 |&#10;+--------------------+----------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/select语句执行顺序/" itemprop="url">
-                  select语句执行顺序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:39:04+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/select语句执行顺序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select语句执行顺序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="SELECT_u8BED_u53E5_u5B9A_u4E49"><a href="#SELECT_u8BED_u53E5_u5B9A_u4E49" class="headerlink" title="SELECT语句定义"></a>SELECT语句定义</h3><p>一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#60;SELECT clause&#62; [&#60;FROM clause&#62;] [&#60;WHERE clause&#62;] [&#60;GROUP BY clause&#62;] [&#60;HAVING clause&#62;] [&#60;ORDER BY clause&#62;] [&#60;LIMIT clause&#62;]</span><br></pre></td></tr></table></figure>
-<p>SELECT子句是必选的，其它子句如WHERE子句、GROUP BY子句等是可选的。</p>
-<p>一个SELECT语句中，子句的顺序是固定的。例如GROUP BY子句不会位于WHERE子句的前面。</p>
-<h3 id="SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F"><a href="#SELECT_u8BED_u53E5_u6267_u884C_u987A_u5E8F" class="headerlink" title="SELECT语句执行顺序"></a>SELECT语句执行顺序</h3><p>SELECT语句中子句的执行顺序与SELECT语句中子句的输入顺序是不一样的，所以并不是从SELECT子句开始执行的，而是按照下面的顺序执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;&#24320;&#22987;-&#62;FROM&#23376;&#21477;-&#62;WHERE&#23376;&#21477;-&#62;GROUP BY&#23376;&#21477;-&#62;HAVING&#23376;&#21477;-&#62;ORDER BY&#23376;&#21477;-&#62;SELECT&#23376;&#21477;-&#62;LIMIT&#23376;&#21477;-&#62;&#26368;&#32456;&#32467;&#26524;</span><br></pre></td></tr></table></figure>
-<p>每个子句执行后都会产生一个中间结果，供接下来的子句使用，如果不存在某个子句，就跳过</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/03/mySQL查询优化/" itemprop="url">
-                  mySQL查询优化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:35:28+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/mySQL查询优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/mySQL查询优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>糟糕的SQL查询语句可对整个应用程序的运行产生严重的影响，其不仅消耗掉更多的数据库时间，且它将对其他应用组件产生影响。</p>
-<p>　　如同其它学科，优化查询性能很大程度上决定于开发者的直觉。幸运的是，像MySQL这样的数据库自带有一些协助工具。本文简要讨论诸多工具之三种：使用索引，使用EXPLAIN分析查询以及调整MySQL的内部配置。</p>
-<p>　　一、使用索引<br>　<br>　　MySQL允许对数据库表进行索引，以此能迅速查找记录，而无需一开始就扫描整个表，由此显著地加快查询速度。每个表最多可以做到16个索引，此外MySQL还支持多列索引及全文检索。</p>
-<p>　　给表添加一个索引非常简单，只需调用一个CREATE INDEX命令并为索引指定它的域即可。列表A给出了一个例子：</p>
-<p>mysql&gt; CREATE INDEX idx_username ON users(username);<br>Query OK， 1 row affected (0.15 sec)<br>Records: 1  Duplicates: 0  Warnings: 0</p>
-<p>　　列表 A</p>
-<p>　　这里，对users表的username域做索引，以确保在WHERE或者HAVING子句中引用这一域的SELECT查询语句运行速度比没有添加索引时要快。通过SHOW INDEX命令可以查看索引已被创建（列表B）。</p>
-<p>　　 </p>
-<p>　　列表 B</p>
-<p>　　值得注意的是：索引就像一把双刃剑。对表的每一域做索引通常没有必要，且很可能导致运行速度减慢，因为向表中插入或修改数据时，MySQL不得不每次都为这些额外的工作重新建立索引。另一方面，避免对表的每一域做索引同样不是一个非常好的主意，因为在提高插入记录的速度时，导致查询操作的速度减慢。这就需要找到一个平衡点，比如在设计索引系统时，考虑表的主要功能（数据修复及编辑）不失为一种明智的选择。</p>
-<p>　　二、优化查询性能</p>
-<p>　　在分析查询性能时，考虑EXPLAIN关键字同样很管用。EXPLAIN关键字一般放在SELECT查询语句的前面，用于描述MySQL如何执行查询操作、以及MySQL成功返回结果集需要执行的行数。下面的一个简单例子可以说明（列表C）这一过程：</p>
-<p>　　 </p>
-<p>　　列表 C</p>
-<p>　　这里查询是基于两个表连接。EXPLAIN关键字描述了MySQL是如何处理连接这两个表。必须清楚的是，当前设计要求MySQL处理的是 country表中的一条记录以及city表中的整个4019条记录。这就意味着，还可使用其他的优化技巧改进其查询方法。例如，给city表添加如下索引（列表D）：</p>
-<p>mysql&gt; CREATE INDEX idx_ccode ON city(countrycode);<br>Query OK， 4079 rows affected (0.15 sec)<br>Records: 4079  Duplicates: 0  Warnings: 0</p>
-<p>　　列表 D</p>
-<p>　　现在，当我们重新使用EXPLAIN关键字进行查询时，我们可以看到一个显著的改进（列表E）：</p>
-<p>　　</p>
-<p>　　列表 E</p>
-<p>　　在这个例子中，MySQL现在只需要扫描city表中的333条记录就可产生一个结果集，其扫描记录数几乎减少了90％！自然，数据库资源的查询速度更快，效率更高。</p>
-<p>三、调整内部变量</p>
-<p>　　MySQL是如此的开放，所以可轻松地进一步调整其缺省设置以获得更优的性能及稳定性。需要优化的一些关键变量如下：</p>
-<p>　　改变索引缓冲区长度(key_buffer)</p>
-<p>　　一般，该变量控制缓冲区的长度在处理索引表（读/写操作）时使用。MySQL使用手册指出该变量可以不断增加以确保索引表的最佳性能，并推荐使用与系统内存25％的大小作为该变量的值。这是MySQL十分重要的配置变量之一，如果你对优化和提高系统性能有兴趣，可以从改变 key_buffer_size变量的值开始。</p>
-<p>　　改变表长(read_buffer_size)</p>
-<p>　　当一个查询不断地扫描某一个表，MySQL会为它分配一段内存缓冲区。read_buffer_size变量控制这一缓冲区的大小。如果你认为连续扫描进行得太慢，可以通过增加该变量值以及内存缓冲区大小提高其性能。</p>
-<p>　　设定打开表的数目的最大值(table_cache)</p>
-<p>　　该变量控制MySQL在任何时候打开表的最大数目，由此能控制服务器响应输入请求的能力。它跟max_connections变量密切相关，增加 table_cache值可使MySQL打开更多的表，就如增加max_connections值可增加连接数一样。当收到大量不同数据库及表的请求时，可以考虑改变这一值的大小。</p>
-<p>　　对缓长查询设定一个时间限制(long_query_time)</p>
-<p>　　MySQL带有“慢查询日志”，它会自动地记录所有的在一个特定的时间范围内尚未结束的查询。这个日志对于跟踪那些低效率或者行为不端的查询以及寻找优化对象都非常有用。long_query_time变量控制这一最大时间限定，以秒为单位。</p>
-<p>　　以上讨论并给出用于分析和优化SQL查询的三种工具的使用方法，以此提高你的应用程序性能。使用它们快乐地优化吧！</p>
-<p>使用EXPLAIN语句检查SQL语句</p>
-<p>　　当你在一条SELECT语句前放上关键词EXPLAIN，MySQL解释它将如何处理SELECT，提供有关表如何联结和以什么次序联结的信息。</p>
-<p>　　借助于EXPLAIN，你可以知道你什么时候必须为表加入索引以得到一个使用索引找到记录的更快的SELECT。</p>
-<p>EXPLAIN tbl_name</p>
-<p>or  EXPLAIN SELECT select_options<br>EXPLAIN tbl_name是DESCRIBE tbl_name或SHOW COLUMNS FROM tbl_name的一个同义词。</p>
-<p>　　从EXPLAIN的输出包括下面列：</p>
-<p>　　·table<br>　　输出的行所引用的表。</p>
-<p>　　· type<br>　　联结类型。各种类型的信息在下面给出。<br>　　不同的联结类型列在下面，以最好到最差类型的次序：<br>system const eq_ref ref range index ALL possible_keys</p>
-<p>　　· key<br>　　key列显示MySQL实际决定使用的键。如果没有索引被选择，键是NULL。</p>
-<p>　　· key_len<br>　　key_len列显示MySQL决定使用的键长度。如果键是NULL，长度是NULL。注意这告诉我们MySQL将实际使用一个多部键值的几个部分。</p>
-<p>　　· ref<br>　　ref列显示哪个列或常数与key一起用于从表中选择行。</p>
-<p>　　· rows<br>　　rows列显示MySQL相信它必须检验以执行查询的行数。</p>
-<p>　　·Extra<br>　　如果Extra列包括文字Only index，这意味着信息只用索引树中的信息检索出的。通常，这比扫描整个表要快。如果Extra列包括文字where used，它意味着一个WHERE子句将被用来限制哪些行与下一个表匹配或发向客户。</p>
-<p>　　通过相乘EXPLAIN输出的rows行的所有值，你能得到一个关于一个联结要多好的提示。这应该粗略地告诉你MySQL必须检验多少行以执行查询。</p>
-<p>　　例如，下面一个全连接：</p>
-<p>mysql&gt; EXPLAIN SELECT student.name From student，pet<br>-&gt; WHERE student.name=pet.owner;</p>
-<p>　　其结论为：</p>
-<p>+———+——+—————+——+———+——+——+————+<br>| table   | type | possible_keys | key  | key_len | ref  | rows | Extra      |<br>+———+——+—————+——+———+——+——+————+<br>| student | ALL  | NULL          | NULL |    NULL | NULL |   13 |            |<br>| pet     | ALL  | NULL          | NULL |    NULL | NULL |    9 | where used |<br>+———+——+—————+——+———+——+——+————+</p>
-<p>　　SELECT 查询的速度</p>
-<p>　　总的来说，当你想要使一个较慢的SELECT … WHERE更快，检查的第一件事情是你是否能增加一个索引。在不同表之间的所有引用通常应该用索引完成。你可以使用EXPLAIN来确定哪个索引用于一条SELECT语句。</p>
-<p>　　一些一般的建议：</p>
-<p>　　·为了帮助MySQL更好地优化查询，在它已经装载了相关数据后，在一个表上运行myisamchk –analyze。这为每一个更新一个值，指出有相同值地平均行数（当然，对唯一索引，这总是1。）</p>
-<p>　　·为了根据一个索引排序一个索引和数据，使用myisamchk –sort-index –sort-records=1（如果你想要在索引1上排序）。如果你有一个唯一索引，你想要根据该索引地次序读取所有的记录，这是使它更快的一个好方法。然而注意，这个排序没有被最佳地编写，并且对一个大表将花很长时间！</p>
-<p>　　MySQL怎样优化WHERE子句</p>
-<p>　　where优化被放在SELECT中，因为他们最主要在那里使用里，但是同样的优化被用于DELETE和UPDATE语句。</p>
-<p>　　也要注意，本节是不完全的。MySQL确实作了许多优化而我们没有时间全部记录他们。</p>
-<p>　　由MySQL实施的一些优化列在下面：</p>
-<p>　　1、删除不必要的括号：<br>((a AND b) AND c OR (((a AND b) AND (c AND d))))<br>-&gt; (a AND b AND c) OR (a AND b AND c AND d)</p>
-<p>　　2、常数调入：<br>(a-&gt; b&gt;5 AND b=c AND a=5</p>
-<p>　　3、删除常数条件(因常数调入所需)：<br>(B&gt;=5 AND B=5) OR (B=6 AND 5=5) OR (B=7 AND 5=6)<br>-&gt; B=5 OR B=6</p>
-<p>　　4、索引使用的常数表达式仅计算一次。</p>
-<p>　　5、在一个单个表上的没有一个WHERE的COUNT(*)直接从表中检索信息。当仅使用一个表时，对任何NOT NULL表达式也这样做。</p>
-<p>　　6、无效常数表达式的早期检测。MySQL快速检测某些SELECT语句是不可能的并且不返回行。</p>
-<p>　　7、如果你不使用GROUP BY或分组函数(COUNT()、MIN()……)，HAVING与WHERE合并。</p>
-<p>　　8、为每个子联结(sub join)，构造一个更简单的WHERE以得到一个更快的WHERE计算并且也尽快跳过记录。</p>
-<p>　　9、所有常数的表在查询中的任何其他表前被首先读出。一个常数的表是：</p>
-<p>　　·一个空表或一个有1行的表。</p>
-<p>　　·与在一个UNIQUE索引、或一个PRIMARY KEY的WHERE子句一起使用的表，这里所有的索引部分使用一个常数表达式并且索引部分被定义为NOT NULL。</p>
-<p>　　所有下列的表用作常数表</p>
-<p> mysql&gt; SELECT <em> FROM t WHERE primary_key=1;<br>mysql&gt; SELECT </em> FROM t1，t2<br>WHERE t1.primary_key=1 AND t2.primary_key=t1.id;</p>
-<p>　　10、对联结表的最好联结组合是通过尝试所有可能性来找到:(。如果所有在ORDER BY和GROUP BY的列来自同一个表，那么当廉洁时，该表首先被选中。</p>
-<p>　　11、如果有一个ORDER BY子句和一个不同的GROUP BY子句，或如果ORDER BY或GROUP BY包含不是来自联结队列中的第一个表的其他表的列，创建一个临时表。</p>
-<p>　　12、如果你使用SQL_SMALL_RESULT，MySQL将使用一个在内存中的表。</p>
-<p>　　13、因为DISTINCT被变换到在所有的列上的一个GROUP BY，DISTINCT与ORDER BY结合也将在许多情况下需要一张临时表。</p>
-<p>　　14、每个表的索引被查询并且使用跨越少于30% 的行的索引。如果这样的索引没能找到，使用一个快速的表扫描。</p>
-<p>　　15、在一些情况下，MySQL能从索引中读出行，甚至不咨询数据文件。如果索引使用的所有列是数字的，那么只有索引树被用来解答查询。</p>
-<p>　　16、在每个记录被输出前，那些不匹配HAVING子句的行被跳过。</p>
-<p>　　下面是一些很快的查询例子</p>
-<p> mysql&gt; SELECT COUNT(*) FROM tbl_name;<br>mysql&gt; SELECT MIN(key_part1)，MAX(key_part1) FROM tbl_name;<br>mysql&gt; SELECT MAX(key_part2) FROM tbl_name<br>           WHERE key_part_1=constant;<br>mysql&gt; SELECT … FROM tbl_name<br>           ORDER BY key_part1，key_part2，… LIMIT 10;<br>mysql&gt; SELECT … FROM tbl_name<br>           ORDER BY key_part1 DESC，key_part2 DESC，… LIMIT 10;</p>
-<p>　　下列查询仅使用索引树就可解决(假设索引列是数字的)：</p>
-<p> mysql&gt; SELECT key_part1，key_part2 FROM tbl_name WHERE key_part1=val;<br>mysql&gt; SELECT COUNT(*) FROM tbl_name<br>           WHERE key_part1=val1 AND key_part2=val2;<br>mysql&gt; SELECT key_part2 FROM tbl_name GROUP BY key_part1;</p>
-<p>　　下列查询使用索引以排序顺序检索，不用一次另外的排序：</p>
-<p> mysql&gt; SELECT … FROM tbl_name ORDER BY key_part1，key_part2，…<br>mysql&gt; SELECT … FROM tbl_name ORDER BY key_part1 DESC，key_part2 DESC，…</p>
-<p>MySQL怎样优化LEFT JOIN</p>
-<p>在MySQL中，A LEFT JOIN B实现如下：</p>
-<p>1、表B被设置为依赖于表A。</p>
-<p>2、表A被设置为依赖于所有用在LEFT JOIN条件的表(除B外)。</p>
-<p>3、所有LEFT JOIN条件被移到WHERE子句中。</p>
-<p>4、进行所有标准的联结优化，除了一个表总是在所有它依赖的表之后被读取。如果有一个循环依赖，MySQL将发出一个错误。</p>
-<p>5、进行所有标准的WHERE优化。</p>
-<p>6、如果在A中有一行匹配WHERE子句，但是在B中没有任何行匹配LEFT JOIN条件，那么在B中生成所有列设置为NULL的一行。</p>
-<p>7、如果你使用LEFT JOIN来找出在某些表中不存在的行并且在WHERE部分你有下列测试：column_name IS NULL，这里column_name 被声明为NOT NULL的列，那么MySQL在它已经找到了匹配LEFT JOIN条件的一行后，将停止在更多的行后寻找(对一特定的键组合)。</p>
-<p>MySQL怎样优化LIMIT</p>
-<p>在一些情况中，当你使用LIMIT #而不使用HAVING时，MySQL将以不同方式处理查询。</p>
-<p>1、如果你用LIMIT只选择一些行，当MySQL一般比较喜欢做完整的表扫描时，它将在一些情况下使用索引。</p>
-<p>2、如果你使用LIMIT #与ORDER BY，MySQL一旦找到了第一个 # 行，将结束排序而不是排序整个表。</p>
-<p>3、当结合LIMIT #和DISTINCT时，MySQL一旦找到#个唯一的行，它将停止。</p>
-<p>4、在一些情况下，一个GROUP BY能通过顺序读取键(或在键上做排序)来解决，并然后计算摘要直到键值改变。在这种情况下，LIMIT #将不计算任何不必要的GROUP。</p>
-<p>5、只要MySQL已经发送了第一个#行到客户，它将放弃查询。</p>
-<p>6、LIMIT 0将总是快速返回一个空集合。这对检查查询并且得到结果列的列类型是有用的。</p>
-<p>7、临时表的大小使用LIMIT #计算需要多少空间来解决查询。</p>
-<p>记录转载和修改的速度</p>
-<p>很多时候关心的是优化 SELECT 查询，因为它们是最常用的查询，而且确定怎样优化它们并不总是直截了当。相对来说，将数据装入数据库是直截了当的。然而，也存在可用来改善数据装载操作效率的策略，其基本原理如下：</p>
-<p>·成批装载较单行装载更快，因为在装载每个记录后，不需要刷新索引高速缓存；可在成批记录装入后才刷新。</p>
-<p>·在表无索引时装载比索引后装载更快。如果有索引，不仅必须增加记录到数据文件，而且还要修改每个索引以反映增加了的新记录。</p>
-<p>·较短的 SQL 语句比较长的 SQL 语句要快，因为它们涉及服务器方的分析较少，而且还因为将它们通过网络从客户机发送到服务器更快。</p>
-<p>这些因素中有一些似乎微不足道（特别是最后一个因素），但如果要装载大量的数据，即使是很小的因素也会产生很大的不同结果。</p>
-<p>INSERT查询的速度</p>
-<p>插入一个记录的时间由下列组成：</p>
-<p>·连接：(3)</p>
-<p>·发送查询给服务器：(2)</p>
-<p>·分析查询：(2)</p>
-<p>·插入记录：（1 x 记录大小）</p>
-<p>·插入索引：（1 x 索引）</p>
-<p>·关闭：(1)</p>
-<p>这里的数字有点与总体时间成正比。这不考虑打开表的初始开销(它为每个并发运行的查询做一次)。</p>
-<p>表的大小以N log N (B 树)的速度减慢索引的插入。</p>
-<p>加快插入的一些方法：</p>
-<p>·如果你同时从同一客户插入很多行，使用多个值表的INSERT语句。这比使用分开INSERT语句快(在一些情况中几倍)。</p>
-<p>·如果你从不同客户插入很多行，你能通过使用INSERT DELAYED语句得到更高的速度。</p>
-<p>·注意，用MyISAM，如果在表中没有删除的行，能在SELECT:s正在运行的同时插入行。</p>
-<p>·当从一个文本文件装载一个表时，使用LOAD DATA INFILE。这通常比使用很多INSERT语句快20倍。</p>
-<p>·当表有很多索引时，有可能多做些工作使得LOAD DATA INFILE更快些。使用下列过程：</p>
-<p>1、有选择地用CREATE TABLE创建表。例如使用mysql或Perl-DBI。</p>
-<p>2、执行FLUSH TABLES，或外壳命令mysqladmin flush-tables。</p>
-<p>3、使用myisamchk –keys-used=0 -rq /path/to/db/tbl_name。这将从表中删除所有索引的使用。</p>
-<p>4、用LOAD DATA INFILE把数据插入到表中，这将不更新任何索引，因此很快。</p>
-<p>5、如果你有myisampack并且想要压缩表，在它上面运行myisampack。</p>
-<p>6、用myisamchk -r -q /path/to/db/tbl_name再创建索引。这将在将它写入磁盘前在内存中创建索引树，并且它更快，因为避免大量磁盘寻道。结果索引树也被完美地平衡。</p>
-<p>7、执行FLUSH TABLES，或外壳命令mysqladmin flush-tables。</p>
-<p>这个过程将被构造进在MySQL的某个未来版本的LOAD DATA INFILE。</p>
-<p>·你可以锁定你的表以加速插入</p>
-<p>mysql&gt; LOCK TABLES a WRITE;<br>mysql&gt; INSERT INTO a VALUES (1，23)，(2，34)，(4，33);<br>mysql&gt; INSERT INTO a VALUES (8，26)，(6，29);<br>mysql&gt; UNLOCK TABLES;</p>
-<p>　　主要的速度差别是索引缓冲区仅被清洗到磁盘上一次，在所有INSERT语句完成后。一般有与有不同的INSERT语句那样夺的索引缓冲区清洗。如果你能用一个单个语句插入所有的行，锁定就不需要。锁定也将降低多连接测试的整体时间，但是对某些线程最大等待时间将上升(因为他们等待锁)。例如：</p>
-<p>thread 1 does 1000 inserts<br>thread 2， 3， and 4 does 1 insert<br>thread 5 does 1000 inserts </p>
-<p>如果你不使用锁定，2、3和4将在1和5前完成。如果你使用锁定，2、3和4将可能不在1或5前完成，但是整体时间应该快大约40%。因为INSERT， UPDATE和DELETE操作在MySQL中是很快的，通过为多于大约5次连续不断地插入或更新一行的东西加锁，你将获得更好的整体性能。如果你做很多一行的插入，你可以做一个LOCK TABLES，偶尔随后做一个UNLOCK TABLES(大约每1000行)以允许另外的线程存取表。这仍然将导致获得好的性能。当然，LOAD DATA INFILE对装载数据仍然是更快的。</p>
-<p>为了对LOAD DATA INFILE和INSERT得到一些更快的速度，扩大关键字缓冲区。</p>
-<p>UPDATE查询的速度</p>
-<p>更改查询被优化为有一个写开销的一个SELECT查询。写速度依赖于被更新数据大小和被更新索引的数量。</p>
-<p>使更改更快的另一个方法是推迟更改并且然后一行一行地做很多更改。如果你锁定表，做一行一行地很多更改比一次做一个快。</p>
-<p>注意，动态记录格式的更改一个较长总长的记录，可能切开记录。因此如果你经常这样做，时不时地OPTIMIZE TABLE是非常重要的。</p>
-<p>DELETE查询的速度</p>
-<p>删除一个记录的时间精确地与索引数量成正比。为了更快速地删除记录，你可以增加索引缓存的大小。</p>
-<p>从一个表删除所有行比删除行的一大部分也要得多。</p>
-<p>索引对有效装载数据的影响</p>
-<p>如果表是索引的，则可利用批量插入（LOAD DATA 或多行的 INSERT 语句）来减少索引的开销。这样会最小化索引更新的影响，因为索引只需要在所有行处理过时才进行刷新，而不是在每行处理后就刷新。</p>
-<p>·如果需要将大量数据装入一个新表，应该创建该表且在未索引时装载，装载数据后才创建索引，这样做较快。一次创建索引（而不是每行修改一次索引）较快。</p>
-<p>·如果在装载之前删除或禁用索引，装入数据后再重新创建或启用索引可能使装载更快。<br>·如果想对数据装载使用删除或禁用策略，一定要做一些实验，看这样做是否值得（如果将少量数据装入一个大表中，重建和索引所花费的时间可能比装载数据的时间还要长）。</p>
-<p>可用DROP INDEX和CREATE INDEX 来删除和重建索引。</p>
-<p>另一种可供选择的方法是利用 myisamchk 或 isamchk 禁用和启用索引。这需要在 MySQL 服务器主机上有一个帐户，并对表文件有写入权。为了禁用表索引，可进入相应的数据库目录，执行下列命令之一：</p>
-<p>shell&gt;myisamchk –keys-used=0 tbl_name<br>shell&gt;isamchk –keys-used=0 tbl_name </p>
-<p>　　对具有 .MYI 扩展名的索引文件的 MyISAM 表使用 myisamchk，对具有 .ISM 扩展名的索引文件的 ISAM 表使用 isamchk。在向表中装入数据后，按如下激活索引：</p>
-<p>shell&gt;myisamchk –recover –quick –keys-used=0 tbl_name<br>shell&gt;isamchk –recover –quick –keys-used=0 tbl_name</p>
-<p>　　n 为表具有的索引数目。可用 –description 选项调用相应的实用程序得出这个值：</p>
-<p>shell&gt;myisamchk –discription tbl_name<br>$isamchk –discription tbl_name</p>
-<p>　　如果决定使用索引禁用和激活，应该使用第13章中介绍的表修复锁定协议以阻止服务器同时更改锁（虽然此时不对表进行修复，但要对它像表修复过程一样进行修改，因此需要使用相同的锁定协议）。</p>
-<p>上述数据装载原理也适用于与需要执行不同操作的客户机有关的固定查询。例如，一般希望避免在频繁更新的表上长时间运行 SELECT 查询。长时间运行 SELECT 查询会产生大量争用，并降低写入程序的性能。一种可能的解决方法为，如果执行写入的主要是 INSERT 操作，那么先将记录存入一个临时表，然后定期地将这些记录加入主表中。如果需要立即访问新记录，这不是一个可行的方法。但只要能在一个较短的时间内不访问它们，就可以使用这个方法。使用临时表有两个方面的好处。首先，它减少了与主表上 SELECT 查询语句的争用，因此，执行更快。其次，从临时表将记录装入主表的总时间较分别装载记录的总时间少；相应的索引高速缓存只需在每个批量装载结束时进行刷新，而不是在每行装载后刷新。</p>
-<p>这个策略的一个应用是进入 Web 服务器的Web 页访问 MySQL 数据库。在此情形下，可能没有保证记录立即进入主表的较高权限。</p>
-<p>如果数据并不完全是那种在系统非正常关闭事件中插入的单个记录，那么减少索引刷新的另一策略是使用 MyISAM 表的 DELAYED_KEY_WRITE 表创建选项（如果将 MySQL 用于某些数据录入工作时可能会出现这种情况）。此选项使索引高速缓存只偶尔刷新，而不是在每次插入后都要刷新。</p>
-<p>如果希望在服务器范围内利用延迟索引刷新，只要利用 –delayed-key-write 选项启动 mysqld 即可。在此情形下，索引块写操作延迟到必须刷新块以便为其他索引值腾出空间为止，或延迟到执行了一个 flush-tables 命令后，或延迟到该索引表关闭。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1767,21 +1608,21 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

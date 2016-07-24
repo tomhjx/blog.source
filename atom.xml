@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tomhjx.github.io/"/>
-  <updated>2016-05-08T16:58:59.000Z</updated>
+  <updated>2016-07-24T16:39:26.000Z</updated>
   <id>http://tomhjx.github.io/</id>
   
   <author>
@@ -14,6 +14,112 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nignx缓存proxy_cache</title>
+    <link href="http://tomhjx.github.io/2016/07/25/nignx%E7%BC%93%E5%AD%98proxy-cache/"/>
+    <id>http://tomhjx.github.io/2016/07/25/nignx缓存proxy-cache/</id>
+    <published>2016-07-24T16:01:02.000Z</published>
+    <updated>2016-07-24T16:39:26.000Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;ssh root@192.168.1.123 -p 32200&amp;#10;&amp;#10;vi /usr/local/nginx/conf/nginx.conf&amp;#10;&amp;#10;&amp;#10;======&amp;#10;&amp;#10;user  www www;&amp;#10;worker_processes  1;&amp;#10;pid        logs/nginx.pid;&amp;#10;&amp;#10;events &amp;#123;&amp;#10;    worker_connections  1024;&amp;#10;&amp;#125;&amp;#10;&amp;#10;&amp;#10;http &amp;#123;&amp;#10;    include       mime.types;&amp;#10;    default_type  application/octet-stream;&amp;#10;&amp;#10;    log_format  main  &amp;#39;$remote_addr\t$msec\t[$time_local]\t$request\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$status&amp;#34;\t$body_bytes_sent\t&amp;#34;$http_referer&amp;#34;\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$http_user_agent&amp;#34;\t&amp;#34;$http_q_ua&amp;#34;\t&amp;#34;$http_x_forwarded_for&amp;#34;\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$upstream_addr&amp;#34;\t$request_time&amp;#39;;&amp;#10;&amp;#10;    sendfile        on;&amp;#10;    keepalive_timeout  65;&amp;#10;&amp;#10;    server &amp;#123;&amp;#10;        listen 80;&amp;#10;        server_name dev123.demo.com dev123.demo.proxy.com;&amp;#10;        access_log  logs/dev123.demo.com-access.log;&amp;#10;        location / &amp;#123;&amp;#10;            root   /var/www/demo;&amp;#10;            index  index.html index.htm;&amp;#10;        &amp;#125;&amp;#10;&amp;#10;        location ~ \.php$ &amp;#123;&amp;#10;            root   /var/www/demo;&amp;#10;            fastcgi_pass   127.0.0.1:9000;&amp;#10;            fastcgi_index  index.php;&amp;#10;            fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;&amp;#10;            include        fastcgi_params;&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#10;&amp;#125;&amp;#10;&amp;#10;======&amp;#10;&amp;#10;/etc/init.d/nginx reload&amp;#10;&amp;#10;&amp;#10;ssh root@192.168.1.121 -p 32200&amp;#10;&amp;#10;vi /usr/local/nginx/conf/nginx.conf&amp;#10;&amp;#10;======&amp;#10;&amp;#10;user  www www;&amp;#10;worker_processes  1;&amp;#10;pid        logs/nginx.pid;&amp;#10;&amp;#10;events &amp;#123;&amp;#10;    worker_connections  1024;&amp;#10;&amp;#125;&amp;#10;&amp;#10;&amp;#10;http &amp;#123;&amp;#10;    include       mime.types;&amp;#10;    default_type  application/octet-stream;&amp;#10;&amp;#10;    log_format  main  &amp;#39;$remote_addr\t$msec\t[$time_local]\t$request\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$status&amp;#34;\t$body_bytes_sent\t&amp;#34;$http_referer&amp;#34;\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$http_user_agent&amp;#34;\t&amp;#34;$http_q_ua&amp;#34;\t&amp;#34;$http_x_forwarded_for&amp;#34;\t&amp;#39;&amp;#10;                     &amp;#39;&amp;#34;$upstream_addr&amp;#34;\t$request_time&amp;#39;;&amp;#10;&amp;#10;    sendfile        on;&amp;#10;    keepalive_timeout  65;&amp;#10;    proxy_cache_path /usr/local/nginx/proxy_cache levels=1:2 keys_zone=my-cache:8m max_size=1000m inactive=600m;&amp;#10;    proxy_temp_path /usr/local/nginx/proxy_temp;&amp;#10;&amp;#10;&amp;#10;    upstream dev123 &amp;#123;&amp;#10;        server 192.168.1.123:80;&amp;#10;    &amp;#125;&amp;#10;&amp;#10;    server &amp;#123;&amp;#10;        listen 80;&amp;#10;        server_name dev123.demo.proxy.com;&amp;#10;        error_log  logs/dev123.demo.proxy.com-error.log;&amp;#10;        access_log  logs/dev123.demo.proxy.com-access.log;&amp;#10;&amp;#10;        location / &amp;#123;&amp;#10;            proxy_pass http://dev123;&amp;#10;            proxy_cache my-cache;&amp;#10;            proxy_cache_valid 200 10m;&amp;#10;            proxy_redirect off;&amp;#10;            proxy_set_header Host $host;&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#10;&amp;#125;&amp;#10;&amp;#10;======&amp;#10;&amp;#10;/etc/init.d/nginx reload&amp;#10;&amp;#10;curl &amp;#39;http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl &amp;#39;http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl &amp;#39;http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl &amp;#39;http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl &amp;#39;http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl -d &amp;#39;&amp;#39; http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl -d &amp;#39;&amp;#39; http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl -d &amp;#39;&amp;#39; http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl -d &amp;#39;&amp;#39; http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;curl -d &amp;#39;&amp;#39; http://dev123.demo.proxy.com/tmp/get-serv.php&amp;#39;&amp;#10;&amp;#10;&amp;#10;&amp;#10;ssh root@192.168.1.123 -p 32200&amp;#10;&amp;#10;tail -n 10 /usr/local/nginx/logs/dev123.demo.com-access.log&amp;#10;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:32:28 -0400] &amp;#34;GET /tmp/get-serv.php HTTP/1.0&amp;#34; 200 988 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:33:03 -0400] &amp;#34;POST /tmp/get-serv.php HTTP/1.0&amp;#34; 200 1115 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:33:03 -0400] &amp;#34;POST /tmp/get-serv.php HTTP/1.0&amp;#34; 200 1115 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:33:04 -0400] &amp;#34;POST /tmp/get-serv.php HTTP/1.0&amp;#34; 200 1114 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:33:06 -0400] &amp;#34;POST /tmp/get-serv.php HTTP/1.0&amp;#34; 200 1115 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&amp;#10;192.168.1.120 - - [24/Jul/2016:12:33:07 -0400] &amp;#34;POST /tmp/get-serv.php HTTP/1.0&amp;#34; 200 1115 &amp;#34;-&amp;#34; &amp;#34;curl/7.29.0&amp;#34;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ttlsa.com/nginx/nginx-high-performance-caching/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ttlsa.com/nginx/nginx-high-performance-caching/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;ssh root@192.168.1.123 -p 32200&amp;#10;&amp;#10;vi /usr/lo
+    
+    </summary>
+    
+      <category term="web服务器" scheme="http://tomhjx.github.io/categories/web%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="nignx" scheme="http://tomhjx.github.io/categories/web%E6%9C%8D%E5%8A%A1%E5%99%A8/nignx/"/>
+    
+    
+      <category term="nignx" scheme="http://tomhjx.github.io/tags/nignx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux的inode是什么</title>
+    <link href="http://tomhjx.github.io/2016/06/04/Linux%E7%9A%84inode%E6%98%AF%E4%BB%80%E4%B9%88/"/>
+    <id>http://tomhjx.github.io/2016/06/04/Linux的inode是什么/</id>
+    <published>2016-06-04T04:26:19.000Z</published>
+    <updated>2016-06-04T04:27:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;转自：&lt;br&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2011/12/inode.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ruanyifeng.com/blog/2011/12/inode.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.s135.com/post/295/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.s135.com/post/295/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://hi.baidu.com/leejun_2005/blog/item/d9aa13a53b3af6e99152ee7e.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hi.baidu.com/leejun_2005/blog/item/d9aa13a53b3af6e99152ee7e.html&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;一、inode是什么？&lt;/p&gt;
+&lt;p&gt;理解inode，要从文件储存说起。&lt;br&gt;文件储存在硬盘上，硬盘的最小存储单位叫做”扇区”（Sector）。每个扇区储存512字节（相当于0.5KB）。&lt;/p&gt;
+&lt;p&gt;操作系统读取硬盘的时候，不会一个个扇区地读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个”块”（block）。这种由多个扇区组成的”块”，是文件存取的最小单位。”块”的大小，最常见的是4KB，即连续八个 sector组成一个 block。&lt;/p&gt;
+&lt;p&gt;文件数据都储存在”块”中，那么很显然，我们还必须找到一个地方储存文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种储存文件元信息的区域就叫做inode，中文译名为”索引节点”。&lt;/p&gt;
+&lt;p&gt;二、inode的内容&lt;br&gt;inode包含文件的元信息，具体来说有以下内容：&lt;br&gt;　　&lt;em&gt; 文件的字节数
+　　&lt;/em&gt; 文件拥有者的User ID&lt;br&gt;　　&lt;em&gt; 文件的Group ID
+　　&lt;/em&gt; 文件的读、写、执行权限&lt;br&gt;　　&lt;em&gt; 文件的时间戳，共有三个：ctime指inode上一次变动的时间，mtime指文件内容上一次变动的时间，atime指文件上一次打开的时间。
+　　&lt;/em&gt; 链接数，即有多少文件名指向这个inode&lt;br&gt;　　* 文件数据block的位置&lt;/p&gt;
+&lt;p&gt;可以用stat命令，查看某个文件的inode信息：&lt;br&gt;stat example.txt&lt;/p&gt;
+&lt;p&gt;总之，除了文件名以外的所有文件信息，都存在inode之中。至于为什么没有文件名，下文会有详细解释。&lt;/p&gt;
+&lt;p&gt;三、inode的大小&lt;br&gt;inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据；另一个是inode区（inode table），存放inode所包含的信息。&lt;br&gt;每个inode节点的大小，一般是128字节或256字节。inode节点的总数，在格式化时就给定，一般是每1KB或每2KB就设置一个inode。假定在一块1GB的硬盘中，每个inode节点的大小为128字节，每1KB就设置一个inode，那么inode table的大小就会达到128MB，占整块硬盘的12.8%。&lt;/p&gt;
+&lt;p&gt;查看每个硬盘分区的inode总数和已经使用的数量，可以使用df命令。&lt;br&gt;df -i&lt;br&gt;查看每个inode节点的大小，可以用如下命令：&lt;br&gt;sudo dumpe2fs -h /dev/hda | grep “Inode size”&lt;br&gt;由于每个文件都必须有一个inode，因此有可能发生inode已经用光，但是硬盘还未存满的情况。这时，就无法在硬盘上创建新文件。&lt;/p&gt;
+&lt;p&gt;四、inode号码&lt;br&gt;每个inode都有一个号码，操作系统用inode号码来识别不同的文件。&lt;/p&gt;
+&lt;p&gt;这里值得重复一遍，Unix/Linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。表面上，用户通过文件名，打开文件。实际上，系统内部这个过程分成三步：首先，系统找到这个文件名对应的inode号码；其次，通过inode号码，获取inode信息；最后，根据inode信息，找到文件数据所在的block，读出数据。&lt;/p&gt;
+&lt;p&gt;使用ls -i命令，可以看到文件名对应的inode号码：&lt;/p&gt;
+&lt;p&gt;ls -i example.txt&lt;/p&gt;
+&lt;p&gt;五、目录文件&lt;br&gt;Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。&lt;/p&gt;
+&lt;p&gt;目录文件的结构非常简单，就是一系列目录项（dirent）的列表。每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的inode号码。&lt;/p&gt;
+&lt;p&gt;ls命令只列出目录文件中的所有文件名：&lt;br&gt;ls /etc&lt;br&gt;ls -i命令列出整个目录文件，即文件名和inode号码：&lt;br&gt;ls -i /etc&lt;br&gt;如果要查看文件的详细信息，就必须根据inode号码，访问inode节点，读取信息。ls -l命令列出文件的详细信息。&lt;br&gt;ls -l /etc&lt;/p&gt;
+&lt;p&gt;六、硬链接&lt;br&gt;一般情况下，文件名和inode号码是”一一对应”关系，每个inode号码对应一个文件名。但是，Unix/Linux系统允许，多个文件名指向同一个inode号码。这意味着，可以用不同的文件名访问同样的内容；对文件内容进行修改，会影响到所有文件名；但是，删除一个文件名，不影响另一个文件名的访问。这种情况就被称为”硬链接”（hard link）。&lt;/p&gt;
+&lt;p&gt;ln命令可以创建硬链接：&lt;/p&gt;
+&lt;p&gt;ln 源文件 目标文件&lt;br&gt;运行上面这条命令以后，源文件与目标文件的inode号码相同，都指向同一个inode。inode信息中有一项叫做”链接数”，记录指向该inode的文件名总数，这时就会增加1。反过来，删除一个文件名，就会使得inode节点中的”链接数”减1。当这个值减到0，表明没有文件名指向这个inode，系统就会回收这个inode号码，以及其所对应block区域。&lt;/p&gt;
+&lt;p&gt;这里顺便说一下目录文件的”链接数”。创建目录时，默认会生成两个目录项：”.”和”..”。前者的inode号码就是当前目录的inode号码，等同于当前目录的”硬链接”；后者的inode号码就是当前目录的父目录的inode号码，等同于父目录的”硬链接”。所以，任何一个目录的”硬链接”总数，总是等于2加上它的子目录总数（含隐藏目录）,这里的2是父目录对其的“硬链接”和当前目录下的”.硬链接“。&lt;/p&gt;
+&lt;p&gt;七、软链接&lt;br&gt;除了硬链接以外，还有一种特殊情况。文件A和文件B的inode号码虽然不一样，但是文件A的内容是文件B的路径。读取文件A时，系统会自动将访问者导向文件B。因此，无论打开哪一个文件，最终读取的都是文件B。这时，文件A就称为文件B的”软链接”（soft link）或者”符号链接（symbolic link）。&lt;/p&gt;
+&lt;p&gt;这意味着，文件A依赖于文件B而存在，如果删除了文件B，打开文件A就会报错：”No such file or directory”。这是软链接与硬链接最大的不同：文件A指向文件B的文件名，而不是文件B的inode号码，文件B的inode”链接数”不会因此发生变化。&lt;/p&gt;
+&lt;p&gt;ln -s命令可以创建软链接。&lt;br&gt;ln -s 源文文件或目录 目标文件或目录&lt;/p&gt;
+&lt;p&gt;八、inode的特殊作用&lt;br&gt;由于inode号码与文件名分离，这种机制导致了一些Unix/Linux系统特有的现象。&lt;br&gt;　　1. 有时，文件名包含特殊字符，无法正常删除。这时，直接删除inode节点，就能起到删除文件的作用。&lt;br&gt;　　2. 移动文件或重命名文件，只是改变文件名，不影响inode号码。&lt;br&gt;　　3. 打开一个文件以后，系统就以inode号码来识别这个文件，不再考虑文件名。因此，通常来说，系统无法从inode号码得知文件名。&lt;br&gt;      第3点使得软件更新变得简单，可以在不关闭软件的情况下进行更新，不需要重启。因为系统通过inode号码，识别运行中的文件，不通过文件名。更新的时候，新版文件以同样的文件名，生成一个新的inode，不会影响到运行中的文件。等到下一次运行这个软件的时候，文件名就自动指向新版文件，旧版文件的inode则被回收。&lt;/p&gt;
+&lt;p&gt;九 实际问题&lt;/p&gt;
+&lt;p&gt;在一台配置较低的Linux服务器（内存、硬盘比较小）的/data分区内创建文件时，系统提示磁盘空间不足，用df -h命令查看了一下磁盘使用情况，发现/data分区只使用了66%，还有12G的剩余空间，按理说不会出现这种问题。 后来用df -i查看了一下/data分区的索引节点(inode)，发现已经用满(IUsed=100%)，导致系统无法创建新目录和文件。 &lt;/p&gt;
+&lt;p&gt;查找原因：&lt;br&gt;　　/data/cache目录中存在数量非常多的小字节缓存文件，占用的Block不多，但是占用了大量的inode。 &lt;/p&gt;
+&lt;p&gt;解决方案：&lt;br&gt;　　1、删除/data/cache目录中的部分文件，释放出/data分区的一部分inode。&lt;br&gt;　　2、用软连接将空闲分区/opt中的newcache目录连接到/data/cache，使用/opt分区的inode来缓解/data分区inode不足的问题：&lt;br&gt;　　ln -s /opt/newcache /data/cache &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;转自：&lt;br&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2011/12/inode.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ruanyifeng.com/blog/2011/12/
+    
+    </summary>
+    
+      <category term="系统" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在linux怎样查看挂载情况</title>
+    <link href="http://tomhjx.github.io/2016/06/01/%E5%9C%A8linux%E6%80%8E%E6%A0%B7%E6%9F%A5%E7%9C%8B%E6%8C%82%E8%BD%BD%E6%83%85%E5%86%B5/"/>
+    <id>http://tomhjx.github.io/2016/06/01/在linux怎样查看挂载情况/</id>
+    <published>2016-05-31T16:38:27.000Z</published>
+    <updated>2016-05-31T16:38:52.000Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;cat /etc/mtab&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;cat /etc/mtab&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/f
+    
+    </summary>
+    
+      <category term="系统" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>php编译中遇到种种error解决办法</title>
