@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="PHP," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
+<meta name="description" content="&amp;#10;find /home/user -cmin -60">
 <meta property="og:type" content="article">
-<meta property="og:title" content="继承类并使用单例模式陷阱">
-<meta property="og:url" content="http://tomhjx.github.io/2016/03/28/继承类并使用单例模式陷阱/index.html">
+<meta property="og:title" content="Linux下如何查找某文件夹下最近1小时内修改过的文件">
+<meta property="og:url" content="http://tomhjx.github.io/2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/index.html">
 <meta property="og:site_name" content="疯狂的茶几">
-<meta property="og:description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
-<meta property="og:updated_time" content="2016-04-01T17:37:59.000Z">
+<meta property="og:description" content="&amp;#10;find /home/user -cmin -60">
+<meta property="og:updated_time" content="2016-11-05T08:54:33.671Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="继承类并使用单例模式陷阱">
-<meta name="twitter:description" content="&amp;lt;?phpabstract class Base &amp;#123;    protected static $_instance = null;    public static function getInstance()    &amp;#123;        if(null !== static::$_instance)        &amp;#123;            return stati">
+<meta name="twitter:title" content="Linux下如何查找某文件夹下最近1小时内修改过的文件">
+<meta name="twitter:description" content="&amp;#10;find /home/user -cmin -60">
 
 
 
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title> 继承类并使用单例模式陷阱 | 疯狂的茶几 </title>
+  <title> Linux下如何查找某文件夹下最近1小时内修改过的文件 | 疯狂的茶几 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -235,7 +235,7 @@
             
             
               
-                继承类并使用单例模式陷阱
+                Linux下如何查找某文件夹下最近1小时内修改过的文件
               
             
           </h1>
@@ -244,8 +244,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-28T00:46:51+08:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-11-05T16:53:47+08:00" content="2016-11-05">
+              2016-11-05
             </time>
           </span>
 
@@ -254,8 +254,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/系统/" itemprop="url" rel="index">
+                    <span itemprop="name">系统</span>
                   </a>
                 </span>
 
@@ -266,8 +266,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/系统/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -282,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/28/继承类并使用单例模式陷阱/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/继承类并使用单例模式陷阱/" itemprop="commentsCount"></span>
+                <a href="/2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -302,11 +302,8 @@
       
 
       
-        <span itemprop="articleBody"><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_instance</span> = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> !== <span class="keyword">static</span>::<span class="variable">$_instance</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_instance</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'init '</span>.get_called_class().<span class="string">";\r\n"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_instance</span> = <span class="keyword">new</span> <span class="keyword">static</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls1st</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"1st;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls2nd</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"2nd;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$cls1st</span> = Cls1st::getInstance();</span><br><span class="line"><span class="variable">$cls1st</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls2nd</span> = Cls2nd::getInstance();</span><br><span class="line"><span class="variable">$cls2nd</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls1st</span> = Cls1st::getInstance();</span><br><span class="line"><span class="variable">$cls1st</span>-&gt;say();</span><br><span class="line"><span class="variable">$cls2nd</span> = Cls2nd::getInstance();</span><br><span class="line"><span class="variable">$cls2nd</span>-&gt;say();</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;init Cls1st;&#10;1st;&#10;1st;&#10;1st;&#10;1st;</span><br></pre></td></tr></table></figure>
-<p>修改父类</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_instances</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="variable">$calledClass</span> = get_called_class();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">static</span>::<span class="variable">$_instances</span>[<span class="variable">$calledClass</span>]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_instances</span>[<span class="variable">$calledClass</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'init '</span>.get_called_class().<span class="string">";\r\n"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$return</span> = <span class="keyword">static</span>::<span class="variable">$_instances</span>[<span class="variable">$calledClass</span>] = <span class="keyword">new</span> <span class="keyword">static</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;init Cls1st;&#10;1st;&#10;init Cls2nd;&#10;2nd;&#10;1st;&#10;2nd;</span><br></pre></td></tr></table></figure></span>
+        <span itemprop="articleBody"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;find /home/user -cmin -60</span><br></pre></td></tr></table></figure>
+</span>
       
     </div>
 
@@ -314,7 +311,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/PHP/" rel="tag">#PHP</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -323,17 +320,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/GIT命令/" rel="next" title="GIT命令">
-                <i class="fa fa-chevron-left"></i> GIT命令
+              <a href="/2016/10/22/syslog-ng安装部署/" rel="next" title="syslog-ng安装部署">
+                <i class="fa fa-chevron-left"></i> syslog-ng安装部署
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/09/php编译中遇到种种error解决办法/" rel="prev" title="php编译中遇到种种error解决办法">
-                php编译中遇到种种error解决办法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -360,8 +353,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/28/继承类并使用单例模式陷阱/"
-           data-title="继承类并使用单例模式陷阱" data-url="http://tomhjx.github.io/2016/03/28/继承类并使用单例模式陷阱/">
+      <div class="ds-thread" data-thread-key="2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/"
+           data-title="Linux下如何查找某文件夹下最近1小时内修改过的文件" data-url="http://tomhjx.github.io/2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/">
       </div>
     
   </div>

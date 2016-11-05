@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tomhjx.github.io/"/>
-  <updated>2016-10-23T05:59:58.000Z</updated>
+  <updated>2016-11-05T08:54:33.671Z</updated>
   <id>http://tomhjx.github.io/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux下如何查找某文件夹下最近1小时内修改过的文件</title>
+    <link href="http://tomhjx.github.io/2016/11/05/Linux%E4%B8%8B%E5%A6%82%E4%BD%95%E6%9F%A5%E6%89%BE%E6%9F%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%9C%80%E8%BF%911%E5%B0%8F%E6%97%B6%E5%86%85%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84%E6%96%87%E4%BB%B6/"/>
+    <id>http://tomhjx.github.io/2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/</id>
+    <published>2016-11-05T08:53:47.000Z</published>
+    <updated>2016-11-05T08:54:33.671Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;find /home/user -cmin -60&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;find /home/user -cmin -60&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr
+    
+    </summary>
+    
+      <category term="系统" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/categories/%E7%B3%BB%E7%BB%9F/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://tomhjx.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>syslog-ng安装部署</title>

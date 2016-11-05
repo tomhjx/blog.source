@@ -248,6 +248,125 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/" itemprop="url">
+                  PHP任意文件上传漏洞（CVE-2015-2348）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-03T14:06:37+08:00" content="2016-01-03">
+              2016-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/PHP任意文件上传漏洞（CVE-2015-2348）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>安全研究人员今天发布了一个中危漏洞——PHP任意文件上传漏洞（CVE-2015-2348）。<br>在上传文件的时候只判断文件名是合法的文件名就断定这个文件不是恶意文件，这确实会导致其他安全问题。并且在这种情况下，在你自己的文件中检查漏洞很不现实，因为这个漏洞可以绕过你对文件名后缀、文件类型(Content-Type)、Mime type、文件大小等的检查，所以仅仅依靠这些检查是救不了你的。<br>漏洞细节<br>这个漏洞存在于php中一个非常常用的函数中：move_uploaded_files，开发者总是用这个函数来移动上传的文件,这个函数会检查被上传的文件是否是一个合法的文件(是否是通过 HTTP 的 post 机制上传的)，如果是合法的文件，则将它一定到指定目录中。<br>例子：<br>move_uploaded_file ( string $filename , string $destination )<br>这里的问题是，可以在文件名中插入空字符(之前多次修复过这个漏洞，比如CVE-2006-7243)，利用插入空字符的方式，攻击者可以上传任意文件，引起远程代码执行漏洞等。<br>我这里用DVWA来演示这个例子，DVWA级别最高的一题中因为种种原因不是很容易通过，意在告诉开发者如何去开发更安全的文件上传组件。让我们来看看这个例子：<br>代码地址：<a href="https://github.com/RandomStorm/DVWA/blob/master/vulnerabilities/upload/source/high.php" target="_blank" rel="external">https://github.com/RandomStorm/DVWA/blob/master/vulnerabilities/upload/source/high.php</a><br>代码片段：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$uploaded_name</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'name'</span>]; </span><br><span class="line"><span class="variable">$uploaded_ext</span> = substr(<span class="variable">$uploaded_name</span>, strrpos(<span class="variable">$uploaded_name</span>, <span class="string">'.'</span>) + <span class="number">1</span>); <span class="variable">$uploaded_size</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'size'</span>]; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((<span class="variable">$uploaded_ext</span> == <span class="string">"jpg"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"JPG"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"jpeg"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"JPEG"</span>) &amp;&amp; (<span class="variable">$uploaded_size</span> &lt; <span class="number">100000</span>))&#123; <span class="keyword">if</span>(!move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'tmp_name'</span>], <span class="variable">$target_path</span>)) &#123; </span><br><span class="line"></span><br><span class="line"><span class="variable">$html</span> .= <span class="string">''</span>;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">'Your image was not uploaded.'</span>; </span><br><span class="line"><span class="variable">$html</span> .= <span class="string">''</span>; &#125; </span><br><span class="line"><span class="keyword">else</span> &#123; </span><br><span class="line"><span class="variable">$html</span> .= <span class="variable">$target_path</span> . <span class="string">' succesfully uploaded!'</span>;</span><br></pre></td></tr></table></figure>
+<p>.<br>.<br>这段代码有好多个漏洞，比如XSCH, XSS等，但是没有RCE这种严重的漏洞，因为从PHP 5.3.1开始，空字符的问题已经被修复了。这里的问题是，DVWA将用户上传的name参数传递给了move_upload_file()函数，那么 php 执行的操作可能就是这样子的：<br>move_uploaded_file($_FILES[‘name’][‘tmp_name’],”/file.php\x00.jpg”);<br>这本应该创建一个名为file.php\x00.jpg的文件，但实际上创建的文件是file.php。</p>
+<p>这样，就绕过了代码中对后缀名的校验，并且事实证明GD库中又很多其他函数也存在这个问题(比如getimagesize(), imagecreatefromjpeg()…等)，可以看这个例子。<br>如果你机器的php版本在 5.4.39, 5.5.x – 5.5.23, 或者 5.6.x – 5.6.7，可以通过检查文件名中是否有\x00字符来解决本文中所述的问题。<br>安全建议<br>如果你的机器上存在这个漏洞，建议使用随机字符串重命名文件名，而不是使用用户上传上来的name参数的值。</p>
+<p><a href="http://www.freebuf.com/vuls/62811.html" target="_blank" rel="external">http://www.freebuf.com/vuls/62811.html</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/03/PHP扩展安装/" itemprop="url">
                   PHP扩展安装
                 </a>
@@ -635,7 +754,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
