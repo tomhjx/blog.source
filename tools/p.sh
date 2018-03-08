@@ -5,4 +5,5 @@ hexo g
 #----git
 git add -A
 git commit -m "Site updated."
-git push
+git pull git@github.com:tomhjx/tomhjx.github.io.git master
+git push git@github.com:tomhjx/tomhjx.github.io.git master
