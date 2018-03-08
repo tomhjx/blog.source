@@ -482,7 +482,7 @@
 <p>找到该文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server/libjvm.so</span><br></pre></td></tr></table></figure>
 <p>做软链，目的要让libjvm.so可以访问到</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ln -s /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server/libjvm.so /usr/local/lib/libjvm.so</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
 <h1 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h1><blockquote>
 <p>在192.168.1.121上构建日志中心，192.168.1.120落地本地日志并上报到日志中心</p>
 </blockquote>
@@ -1624,7 +1624,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

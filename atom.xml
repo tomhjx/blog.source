@@ -45,7 +45,7 @@
     <link href="http://tomhjx.github.io/2016/10/22/syslog-ng%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/"/>
     <id>http://tomhjx.github.io/2016/10/22/syslog-ng安装部署/</id>
     <published>2016-10-22T03:35:08.000Z</published>
-    <updated>2016-10-23T05:59:58.000Z</updated>
+    <updated>2017-01-15T10:44:24.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;u73AF_u5883&quot;&gt;&lt;a href=&quot;#u73AF_u5883&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;日志客户端机&lt;/p&gt;
@@ -90,7 +90,7 @@
 &lt;p&gt;找到该文件&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server/libjvm.so&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;做软链，目的要让libjvm.so可以访问到&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ln -s /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server/libjvm.so /usr/local/lib/libjvm.so&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#10;export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server:$LD_LIBRARY_PATH&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;u914D_u7F6E&quot;&gt;&lt;a href=&quot;#u914D_u7F6E&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;在192.168.1.121上构建日志中心，192.168.1.120落地本地日志并上报到日志中心&lt;/p&gt;
 &lt;/blockquote&gt;
