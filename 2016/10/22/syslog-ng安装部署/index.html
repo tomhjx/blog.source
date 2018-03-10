@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'YFFH0CCP57',
+      apiKey: '8ae83e007f83e881bb1071fe58673c1b',
+      indexName: 'tomhjx_hexo_blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="syslog-ng," />
+
+
+<meta name="description" content="环境
+日志客户端机
+
+ip   : 192.168.1.120
+系统 : CentOS Linux release 7.1.1503 (Core)
+
+日志服务端机
+
+ip   : 192.168.1.121
+系统 : CentOS Linux release 7.1.1503 (Core)
+安装
+参考资料
+
+https://syslog-ng.gitbooks.io/getting-started">
+<meta property="og:type" content="article">
+<meta property="og:title" content="syslog-ng安装部署">
+<meta property="og:url" content="http://tomhjx.github.io/2016/10/22/syslog-ng安装部署/index.html">
+<meta property="og:site_name" content="疯狂的茶几">
+<meta property="og:description" content="环境
+日志客户端机
+
+ip   : 192.168.1.120
+系统 : CentOS Linux release 7.1.1503 (Core)
+
+日志服务端机
+
+ip   : 192.168.1.121
+系统 : CentOS Linux release 7.1.1503 (Core)
+安装
+参考资料
+
+https://syslog-ng.gitbooks.io/getting-started">
+<meta property="og:updated_time" content="2017-01-15T10:44:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="syslog-ng安装部署">
+<meta name="twitter:description" content="环境
+日志客户端机
+
+ip   : 192.168.1.120
+系统 : CentOS Linux release 7.1.1503 (Core)
+
+日志服务端机
+
+ip   : 192.168.1.121
+系统 : CentOS Linux release 7.1.1503 (Core)
+安装
+参考资料
+
+https://syslog-ng.gitbooks.io/getting-started">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="疯狂的茶几" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://tomhjx.github.io/2016/10/22/syslog-ng安装部署/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>syslog-ng安装部署 | 疯狂的茶几</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">疯狂的茶几</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首頁</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />關於</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />標籤</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分類</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />歸檔</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜尋</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/10/22/syslog-ng安装部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">syslog-ng安装部署</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-10-22T11:35:08+08:00">2016-10-22</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/日志工具/" itemprop="url" rel="index"><span itemprop="name">日志工具</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/日志工具/syslog-ng/" itemprop="url" rel="index"><span itemprop="name">syslog-ng</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="u73AF_u5883"><a href="#u73AF_u5883" class="headerlink" title="环境"></a>环境</h1><blockquote>
+<p>日志客户端机</p>
+</blockquote>
+<p>ip   : 192.168.1.120</p>
+<p>系统 : CentOS Linux release 7.1.1503 (Core)</p>
+<blockquote>
+<p>日志服务端机</p>
+</blockquote>
+<p>ip   : 192.168.1.121</p>
+<p>系统 : CentOS Linux release 7.1.1503 (Core)</p>
+<h1 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h1><blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://syslog-ng.gitbooks.io/getting-started/content/" target="_blank" rel="external">https://syslog-ng.gitbooks.io/getting-started/content/</a></p>
+<p><a href="http://www.sa-log.com/101.html" target="_blank" rel="external">http://www.sa-log.com/101.html</a></p>
+<blockquote>
+<p>执行安装</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;wget http://www.balabit.com/downloads/files/syslog-ng/sources/3.2.4/source/eventlog_0.2.12.tar.gz&#10;&#10;tar xvf eventlog_0.2.12.tar.gz&#10;&#10;cd eventlog-0.2.12&#10;&#10;./configure --prefix=/usr/local/eventlog &#38;&#38; make &#38;&#38; make install</span><br></pre></td></tr></table></figure>
+<p>syslog-ng的包可以在这找到</p>
+<p><a href="https://github.com/balabit/syslog-ng/releases/" target="_blank" rel="external">https://github.com/balabit/syslog-ng/releases/</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;yum -y install glib2-devel json-c-devel&#10;&#10;wget https://github.com/balabit/syslog-ng/releases/download/syslog-ng-3.8.1/syslog-ng-3.8.1.tar.gz&#10;&#10;tar xvf syslog-ng-3.8.1.tar.gz&#10;&#10;cd syslog-ng-3.8.1&#10;&#10;export PKG_CONFIG_PATH=/usr/local/eventlog/lib/pkgconfig&#10;&#10;./configure --prefix=/usr/local/syslog-ng --enable-json &#38;&#38; make&#38;&#38; make install&#10;&#10;&#10;cp ./contrib/rhel-packaging/syslog-ng.init /etc/init.d/syslog-ng&#10;&#10;chmod +x /etc/init.d/syslog-ng</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>启动</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/etc/init.d/syslog-ng start</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/usr/local/syslog-ng/sbin/syslog-ng</span><br></pre></td></tr></table></figure>
+<h1 id="u5B89_u88C5_u9047_u5230_u7684_u95EE_u9898"><a href="#u5B89_u88C5_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="安装遇到的问题"></a>安装遇到的问题</h1><blockquote>
+<p>安装syslog-ng时，编译报错：configure: error: Package requirements (glib-2.0 &gt;= 2.10.1 gmodule-2.0 gthread-2.0) were not met</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install glib2-devel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>启动syslog-ng失败，报错：template: $(format-json)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install json-c-devel&#10;&#10;&#10;cd syslog-ng-3.8.1&#10;&#10;export PKG_CONFIG_PATH=/usr/local/eventlog/lib/pkgconfig&#10;&#10;./configure --prefix=/usr/local/syslog-ng --enable-json &#38;&#38; make&#38;&#38; make install</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>启动syslog-ng报错：Error opening plugin module; module=’mod-java’, error=’libjvm.so: cannot open shared object file: No such file or directory’</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;find /usr -name libjvm.so</span><br></pre></td></tr></table></figure>
+<p>找到该文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server/libjvm.so</span><br></pre></td></tr></table></figure>
+<p>做软链，目的要让libjvm.so可以访问到</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-2.b17.el7_1.x86_64/jre/lib/amd64/server:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<h1 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h1><blockquote>
+<p>在192.168.1.121上构建日志中心，192.168.1.120落地本地日志并上报到日志中心</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -p22 root@192.168.1.120</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;vi /usr/local/syslog-ng/etc/syslog-ng.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@version: 3.8&#10;@include &#34;scl.conf&#34;&#10;&#10;options &#123;&#10;        log_msg_size(16384);&#10;        flush_lines(1);&#10;        log_fifo_size(1000000);&#10;        time_reopen(10);&#10;        use_dns(no);&#10;        dns_cache(yes);&#10;        use_fqdn(yes);&#10;        keep_hostname(yes);&#10;        chain_hostnames(no);&#10;        check_hostname(yes);&#10;        create_dirs(yes);&#10;        dir_perm(0755);&#10;        perm(0644);&#10;        stats_freq(1800);&#10;    threaded(yes);&#10;&#125;;&#10;&#10;source s_local &#123;&#10;    #standard Linux log source (this is the default place for the syslog()&#10;# function to send logs to)&#10;    unix-stream(&#34;/dev/log&#34; max-connections(10240) log_iw_size(1024000));&#10;# messages from the kernel&#10;    file(&#34;/proc/kmsg&#34; program_override(&#34;kernel&#34;));&#10;&#125;;&#10;&#10;## project logs&#10;&#10;destination d_remote_local6 &#123;tcp(&#39;192.168.1.121&#39; port(5124));&#125;;&#10;destination d_remote_back_all &#123;file(&#34;/var/log/projlogs/$PROGRAM/$YEAR$MONTH/$DAY/$HOUR&#34; perm(0644) dir_perm(0755) create_dirs(yes) );&#125;;&#10;filter f_remote_log_all &#123; facility(local6) and match(&#34;/&#34; value(&#34;PROGRAM&#34;));&#125;;&#10;&#10;log &#123;&#10;    source(s_local);&#10;    filter(f_remote_log_all);&#10;    destination(d_remote_back_all);&#10;    destination(d_remote_local6);&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -p22 root@192.168.1.121</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;vi /usr/local/syslog-ng/etc/syslog-ng.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;@version: 3.8&#10;@include &#34;scl.conf&#34;&#10;&#10;options &#123;&#10;        flush_lines (0);&#10;        time_reopen (10);&#10;        log_fifo_size (1000);&#10;        chain_hostnames (off);&#10;        use_dns (no);&#10;        use_fqdn (no);&#10;        create_dirs (yes);&#10;        keep_hostname (no);&#10;&#125;;&#10;&#10;&#10;source src_projlog &#123;&#10;    tcp(ip(&#34;192.168.1.121&#34;) port(5124));&#10;&#125;;&#10;                                                         &#10;                                                        &#10;filter f_remote_log_all &#123;facility(local6) and match(&#34;/&#34; value(&#34;PROGRAM&#34;));&#125;; &#10;                                                         &#10;destination dst_projlog &#123;&#10;    file(&#34;/var/log/center_projlogs/$PROGRAM/$YEAR$MONTH/$DAY/$HOUR&#34; perm(0644) dir_perm(0755) create_dirs(yes));&#10;&#125;;&#10;                                                         &#10;                                                         &#10;log &#123;&#10;    source(src_projlog);&#10;    filter(f_remote_log_all);&#10;    destination(dst_projlog);&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在192.168.1.121上构建日志中心，192.168.1.120不落地本地日志，只上报到日志中心</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -p22 root@192.168.1.120</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;vi /usr/local/syslog-ng/etc/syslog-ng.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@version: 3.8&#10;@include &#34;scl.conf&#34;&#10;&#10;options &#123;&#10;        log_msg_size(16384);&#10;        flush_lines(1);&#10;        log_fifo_size(1000000);&#10;        time_reopen(10);&#10;        use_dns(no);&#10;        dns_cache(yes);&#10;        use_fqdn(yes);&#10;        keep_hostname(yes);&#10;        chain_hostnames(no);&#10;        check_hostname(yes);&#10;        create_dirs(yes);&#10;        dir_perm(0755);&#10;        perm(0644);&#10;        stats_freq(1800);&#10;    threaded(yes);&#10;&#125;;&#10;&#10;source s_local &#123;&#10;    #standard Linux log source (this is the default place for the syslog()&#10;# function to send logs to)&#10;    unix-stream(&#34;/dev/log&#34; max-connections(10240) log_iw_size(1024000));&#10;# messages from the kernel&#10;    file(&#34;/proc/kmsg&#34; program_override(&#34;kernel&#34;));&#10;&#125;;&#10;&#10;## project logs&#10;&#10;destination d_remote_local6 &#123;tcp(&#39;192.168.1.121&#39; port(5124));&#125;;&#10;filter f_remote_log_all &#123; facility(local6) and match(&#34;/&#34; value(&#34;PROGRAM&#34;));&#125;;&#10;&#10;log &#123;&#10;    source(s_local);&#10;    filter(f_remote_log_all);&#10;    destination(d_remote_local6);&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -p22 root@192.168.1.121</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;vi /usr/local/syslog-ng/etc/syslog-ng.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;@version: 3.8&#10;@include &#34;scl.conf&#34;&#10;&#10;options &#123;&#10;        flush_lines (0);&#10;        time_reopen (10);&#10;        log_fifo_size (1000);&#10;        chain_hostnames (off);&#10;        use_dns (no);&#10;        use_fqdn (no);&#10;        create_dirs (yes);&#10;        keep_hostname (no);&#10;&#125;;&#10;&#10;&#10;source src_projlog &#123;&#10;    tcp(ip(&#34;192.168.1.121&#34;) port(5124));&#10;&#125;;&#10;                                                         &#10;                                                        &#10;filter f_remote_log_all &#123;facility(local6) and match(&#34;/&#34; value(&#34;PROGRAM&#34;));&#125;; &#10;                                                         &#10;destination dst_projlog &#123;&#10;    file(&#34;/var/log/center_projlogs/$PROGRAM/$YEAR$MONTH/$DAY/$HOUR&#34; perm(0644) dir_perm(0755) create_dirs(yes));&#10;&#125;;&#10;                                                         &#10;                                                         &#10;log &#123;&#10;    source(src_projlog);&#10;    filter(f_remote_log_all);&#10;    destination(dst_projlog);&#10;&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/syslog-ng/" rel="tag"># syslog-ng</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/16/在linux如何使用rsync做文件同步/" rel="next" title="在linux如何使用rsync做文件同步">
+                <i class="fa fa-chevron-left"></i> 在linux如何使用rsync做文件同步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/05/Linux下如何查找某文件夹下最近1小时内修改过的文件/" rel="prev" title="Linux下如何查找某文件夹下最近1小时内修改过的文件">
+                Linux下如何查找某文件夹下最近1小时内修改过的文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="疯狂的茶几" />
+            
+              <p class="site-author-name" itemprop="name">疯狂的茶几</p>
+              <p class="site-description motion-element" itemprop="description">懒人一个</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分類</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">標籤</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/tomhjx" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u73AF_u5883"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B89_u88C5"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B89_u88C5_u9047_u5230_u7684_u95EE_u9898"><span class="nav-number">3.</span> <span class="nav-text">安装遇到的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u914D_u7F6E"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">疯狂的茶几</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.0.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
