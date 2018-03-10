@@ -20,6 +20,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -50,35 +53,58 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
 
 
 
 
 
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
   <meta name="keywords" content="GIT," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="疯狂的茶几" type="application/atom+xml" />
-
-
-
-
 
 
 <meta name="description" content="简单理解命令http://zhuanlan.zhihu.com/FrontendMagazine/19845650
@@ -103,29 +129,8 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  <link rel="alternate" href="/atom.xml" title="疯狂的茶几" type="application/atom+xml" />
+
 
 
 
@@ -133,8 +138,11 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
-
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
   <title>GIT命令 | 疯狂的茶几</title>
   
 
@@ -144,6 +152,34 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -158,7 +194,7 @@ http://www.codeceo.com/article/git-command-gu">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"> <div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -192,51 +228,31 @@ http://www.codeceo.com/article/git-command-gu">
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Trang Chủ</a>
         </li>
       
         
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Giới Thiệu</a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Thẻ</a>
         </li>
       
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Đầu Mục</a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Lưu Trữ</a>
         </li>
       
 
@@ -246,10 +262,7 @@ http://www.codeceo.com/article/git-command-gu">
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />Tìm Kiếm</a>
         </li>
       
     </ul>
@@ -286,9 +299,26 @@ http://www.codeceo.com/article/git-command-gu">
 </nav>
 
 
+  
+
+
 
  </div>
     </header>
+
+    
+  
+  
+  
+    
+      
+    
+    <a href="https://github.com/tomhjx" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg>
+    
+      </a>
+    
+
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -303,6 +333,8 @@ http://www.codeceo.com/article/git-command-gu">
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -337,13 +369,12 @@ http://www.codeceo.com/article/git-command-gu">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-20T12:53:09+08:00">
-                2016-03-20
-              </time>
+              <time title="Được tạo" itemprop="dateCreated datePublished" datetime="2016-03-20T12:53:09+08:00">2016-03-20</time>
             
 
+            
             
 
             
@@ -358,25 +389,17 @@ http://www.codeceo.com/article/git-command-gu">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">Trong</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/版本管理/" itemprop="url" rel="index">
-                    <span itemprop="name">版本管理</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本管理/" itemprop="url" rel="index"><span itemprop="name">版本管理</span></a></span>
 
                 
                 
-                  ， 
+                  , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/版本管理/GIT/" itemprop="url" rel="index">
-                    <span itemprop="name">GIT</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本管理/GIT/" itemprop="url" rel="index"><span itemprop="name">GIT</span></a></span>
 
                 
                 
@@ -424,6 +447,9 @@ http://www.codeceo.com/article/git-command-gu">
 <h3 id="u8FDC_u7A0B_u64CD_u4F5C"><a href="#u8FDC_u7A0B_u64CD_u4F5C" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v                                          #&#26597;&#30475;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote show &#60;remote&#62;                    #&#26597;&#30475;&#25351;&#23450;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote add &#60;remote&#62; &#60;url&#62;            #&#28155;&#21152;&#36828;&#31243;&#29256;&#26412;&#24211; &#10;git fetch &#60;remote&#62;                                #&#20174;&#36828;&#31243;&#24211;&#33719;&#21462;&#20195;&#30721; &#10;git pull &#60;remote&#62; &#60;branchName&#62;         #&#19979;&#36733;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; &#60;branchName&#62;       #&#19978;&#20256;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; : &#60;branchName/tag-name&#62;    #&#21024;&#38500;&#36828;&#31243;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git push --tag                           #&#19978;&#20256;&#25152;&#26377;&#26631;&#31614;&#10;git branch -r                            #&#26597;&#30475;&#36828;&#31243;&#20998;&#25903;&#10;&#10;&#10;git rm --cached readme.txt # &#25991;&#20214;&#25918;&#24323;&#36319;&#36394;&#65292;&#20294;&#26159;&#36824;&#26159;&#20445;&#30041;&#22312;&#24037;&#20316;&#30446;&#24405;&#20013;&#12290; &#27809;&#26377;--cached &#36873;&#39033;&#65292;&#23601;&#23436;&#20840;&#21024;&#38500;&#25991;&#20214; &#10;git rm filename            #&#30452;&#25509;&#21024;&#38500;&#25991;&#20214;&#10;&#36890;&#36807;&#8220;git rm --cached README.txt&#8221;&#21629;&#20196;&#65292;&#21487;&#20197;&#23558;&#25991;&#20214;&#29366;&#24577;&#36824;&#21407;&#20026;&#26410;&#26242;&#23384;&#29366;&#24577;&#65292;&#21363;&#22238;&#21040;&#8220;Untracked files&#8221;&#25991;&#20214;&#29366;&#24577;&#12290; &#10;&#36890;&#36807;&#8220;git add README.txt&#8221;&#21629;&#20196;&#23558;&#24050;&#20462;&#25913;&#25991;&#20214;&#26356;&#26032;&#21040;&#26242;&#23384;&#21306;&#22495;&#20013;&#65292;&#22914;&#26524;&#24819;&#25764;&#38144;&#20462;&#25913;&#65292;&#21487;&#20197;&#20351;&#29992;&#8220;git checkout -- README.txt&#8221;&#21629;&#20196;&#12290; &#10;&#36890;&#36807;git reset HEAD &#60;file&#62;&#21462;&#28040;&#26242;&#23384;</span><br></pre></td></tr></table></figure>
       
     </div>
+
+    
+
     
     
     
@@ -489,9 +515,6 @@ http://www.codeceo.com/article/git-command-gu">
           </div>
           
 
-
-          
-
   
 
 
@@ -517,10 +540,10 @@ http://www.codeceo.com/article/git-command-gu">
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Mục Lục
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Tổng Quan
           </li>
         </ul>
       
@@ -537,42 +560,110 @@ http://www.codeceo.com/article/git-command-gu">
               <p class="site-description motion-element" itemprop="description">懒人一个</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">bài viết</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">mục</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">thẻ</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
             <div class="feed-link motion-element">
@@ -584,16 +675,6 @@ http://www.codeceo.com/article/git-command-gu">
           
 
           
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/tomhjx" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-            </div>
-          
 
           
           
@@ -601,6 +682,9 @@ http://www.codeceo.com/article/git-command-gu">
           
           
 
+          
+            
+          
           
 
         </div>
@@ -643,10 +727,14 @@ http://www.codeceo.com/article/git-command-gu">
   <span class="author" itemprop="copyrightHolder">疯狂的茶几</span>
 
   
+
+  
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+  <div class="powered-by">Cung cấp bởi <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -654,12 +742,13 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Giao Diện &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.4</div>
 
 
 
 
         
+
 
 
 
@@ -698,7 +787,13 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
+
+
+
   
+
+
+
 
 
 
@@ -714,16 +809,6 @@ http://www.codeceo.com/article/git-command-gu">
   
   
     <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
@@ -745,33 +830,29 @@ http://www.codeceo.com/article/git-command-gu">
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
 
+
+
+  
 
 
 
@@ -798,8 +879,6 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
-
-
   
 
 
@@ -815,7 +894,7 @@ http://www.codeceo.com/article/git-command-gu">
   <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
   
 
-  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+  <script src="/js/src/algolia-search.js?v=6.0.4"></script>
 
 
 
@@ -826,6 +905,10 @@ http://www.codeceo.com/article/git-command-gu">
   
 
   
+
+  
+  
+
   
 
   
