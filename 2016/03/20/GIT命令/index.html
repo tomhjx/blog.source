@@ -1,9 +1,22 @@
-<!doctype html>
-<html class="theme-next   use-motion ">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -21,18 +34,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="GIT," />
@@ -42,11 +75,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="疯狂的茶几" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
 
 
 
@@ -75,194 +103,197 @@ http://www.codeceo.com/article/git-command-gu">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
 
-  <title> GIT命令 | 疯狂的茶几 </title>
+
+
+  <link rel="canonical" href="http://tomhjx.github.io/2016/03/20/GIT命令/"/>
+
+
+
+
+
+  <title>GIT命令 | 疯狂的茶几</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
+  
+  
+    
   
 
-
-
-
-
-
-  <div class="container one-column page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">疯狂的茶几</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">疯狂的茶几</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  
-  <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'FswkeQpoefr-Zu6Swa1J','2.0.0');
-</script>
-
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/03/20/GIT命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                GIT命令
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">GIT命令</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-03-20T12:53:09+08:00" content="2016-03-20">
-              2016-03-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-20T12:53:09+08:00">
+                2016-03-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/版本管理/" itemprop="url" rel="index">
                     <span itemprop="name">版本管理</span>
                   </a>
@@ -272,9 +303,8 @@ http://www.codeceo.com/article/git-command-gu">
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/版本管理/GIT/" itemprop="url" rel="index">
                     <span itemprop="name">GIT</span>
                   </a>
@@ -282,20 +312,19 @@ http://www.codeceo.com/article/git-command-gu">
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/20/GIT命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/GIT命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -304,14 +333,16 @@ http://www.codeceo.com/article/git-command-gu">
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h2 id="u7B80_u5355_u7406_u89E3_u547D_u4EE4"><a href="#u7B80_u5355_u7406_u89E3_u547D_u4EE4" class="headerlink" title="简单理解命令"></a>简单理解命令</h2><p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/19845650" target="_blank" rel="external">http://zhuanlan.zhihu.com/FrontendMagazine/19845650</a></p>
+        <h2 id="u7B80_u5355_u7406_u89E3_u547D_u4EE4"><a href="#u7B80_u5355_u7406_u89E3_u547D_u4EE4" class="headerlink" title="简单理解命令"></a>简单理解命令</h2><p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/19845650" target="_blank" rel="external">http://zhuanlan.zhihu.com/FrontendMagazine/19845650</a></p>
 <p><a href="http://www.open-open.com/lib/view/open1335879873983.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1335879873983.html</a></p>
 <h2 id="u901F_u67E5"><a href="#u901F_u67E5" class="headerlink" title="速查"></a>速查</h2><p><a href="http://www.jb51.net/article/55442.htm" target="_blank" rel="external">http://www.jb51.net/article/55442.htm</a></p>
 <p><a href="http://www.codeceo.com/article/git-command-guide.html" target="_blank" rel="external">http://www.codeceo.com/article/git-command-guide.html</a></p>
@@ -322,17 +353,30 @@ http://www.codeceo.com/article/git-command-gu">
 <h3 id="u64A4_u6D88"><a href="#u64A4_u6D88" class="headerlink" title="撤消"></a>撤消</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;git reset --hard HEAD                          #&#25764;&#28040;&#24037;&#20316;&#30446;&#24405;&#20013;&#25152;&#26377;&#26410;&#25552;&#20132;&#25991;&#20214;&#30340;&#20462;&#25913;&#20869;&#23481; &#10;git checkout HEAD &#60;file&#62;                   #&#25764;&#28040;&#25351;&#23450;&#30340;&#26410;&#25552;&#20132;&#25991;&#20214;&#30340;&#20462;&#25913;&#20869;&#23481; &#10;git revert &#60;commit&#62;                           #&#25764;&#28040;&#25351;&#23450;&#30340;&#25552;&#20132;&#10;git reset --hard HEAD                         #&#25918;&#24323;&#26242;&#23384;&#21306;B&#21644;&#24037;&#20316;&#30446;&#24405;C&#30340;&#25152;&#26377;&#20462;&#25913;&#65292;&#24674;&#22797;&#26368;&#36817;&#19968;&#27425;&#25552;&#20132;&#29366;&#24577; &#65288;A -&#62;C &#25152;&#26377;&#25991;&#20214;) &#10;git checkout -- &#60;file_name&#62;              #&#24674;&#22797;&#26576;&#25991;&#20214;&#21040;&#26368;&#36817;&#19968;&#27425;&#25552;&#20132;&#29366;&#24577;&#65292;&#25918;&#24323;checkout&#21518;&#30340;&#20462;&#25913; (A -&#62; C &#25351;&#23450;&#25991;&#20214;) &#10;git revert HEAD                                 #&#25764;&#28040;&#26368;&#36817;&#30340;&#19968;&#20010;&#25552;&#20132; &#65288;&#38024;&#23545;&#24050;&#32463;&#30340;commit&#65292;&#36319;B&#21644;C&#26080;&#20851;&#65289; &#10;git revert HEAD^                              # &#25764;&#28040;&#19978;&#27425;&#8221;(next-to-last)&#30340;&#25552;&#20132; &#65288;^ &#20010;&#25968;&#21487;&#20197;&#36882;&#22686;&#65289;</span><br></pre></td></tr></table></figure>
 <h3 id="u5206_u652F_u4E0E_u6807_u7B7E"><a href="#u5206_u652F_u4E0E_u6807_u7B7E" class="headerlink" title="分支与标签"></a>分支与标签</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch                                                     #&#26174;&#31034;&#25152;&#26377;&#26412;&#22320;&#20998;&#25903; &#10;git branch &#60;branchName&#62;                           #&#21019;&#24314;&#26032;&#20998;&#25903; &#10;git checkout &#60;branchName/tagName&#62;        #&#20999;&#25442;&#21040;&#25351;&#23450;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git checkout -b &#60;branchName&#62;                   #&#21019;&#24314;&#26032;&#20998;&#25903;&#24182;&#20999;&#25442;&#21040;&#35813;&#20998;&#25903;&#10;git branch -d &#60;branchName&#62;                      #&#21024;&#38500;&#26412;&#22320;&#20998;&#25903;&#10;git branch -D &#60;branchName&#62;                     #&#24378;&#21046;&#21024;&#38500;&#26412;&#22320;&#20998;&#25903; &#10;git tag                                                         #&#21015;&#20986;&#25152;&#26377;&#26412;&#22320;&#26631;&#31614; &#10;git tag &#60;tagname&#62;                                     #&#22522;&#20110;&#26368;&#26032;&#25552;&#20132;&#21019;&#24314;&#26631;&#31614; &#10;git tag -d &#60;tagname&#62;                                #&#21024;&#38500;&#26631;&#31614; &#10;&#10;git checkout [options] [&#60;branchName&#62;] -- &#60;file&#62;... #&#22797;&#21046;&#25991;&#20214;&#21040;&#25351;&#23450;&#20998;&#25903;&#10;git diff &#60;branch&#62; --stat                                           #&#27604;&#36739;branch&#20998;&#25903;&#19982;&#24403;&#21069;&#20998;&#25903;&#24046;&#24322;</span><br></pre></td></tr></table></figure>
 <h3 id="u5408_u5E76_u4E0E_u884D_u5408"><a href="#u5408_u5E76_u4E0E_u884D_u5408" class="headerlink" title="合并与衍合"></a>合并与衍合</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git merge &#60;branch&#62;                       #&#21512;&#24182;&#25351;&#23450;&#20998;&#25903;&#21040;&#24403;&#21069;&#20998;&#25903; &#10;git rebase &#60;branch&#62;                      #&#34893;&#21512;&#25351;&#23450;&#20998;&#25903;&#21040;&#24403;&#21069;&#20998;&#25903;</span><br></pre></td></tr></table></figure>
-<h3 id="u8FDC_u7A0B_u64CD_u4F5C"><a href="#u8FDC_u7A0B_u64CD_u4F5C" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v                                          #&#26597;&#30475;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote show &#60;remote&#62;                    #&#26597;&#30475;&#25351;&#23450;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote add &#60;remote&#62; &#60;url&#62;            #&#28155;&#21152;&#36828;&#31243;&#29256;&#26412;&#24211; &#10;git fetch &#60;remote&#62;                                #&#20174;&#36828;&#31243;&#24211;&#33719;&#21462;&#20195;&#30721; &#10;git pull &#60;remote&#62; &#60;branchName&#62;         #&#19979;&#36733;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; &#60;branchName&#62;       #&#19978;&#20256;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; : &#60;branchName/tag-name&#62;    #&#21024;&#38500;&#36828;&#31243;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git push --tag                           #&#19978;&#20256;&#25152;&#26377;&#26631;&#31614;&#10;git branch -r                            #&#26597;&#30475;&#36828;&#31243;&#20998;&#25903;&#10;&#10;&#10;git rm --cached readme.txt # &#25991;&#20214;&#25918;&#24323;&#36319;&#36394;&#65292;&#20294;&#26159;&#36824;&#26159;&#20445;&#30041;&#22312;&#24037;&#20316;&#30446;&#24405;&#20013;&#12290; &#27809;&#26377;--cached &#36873;&#39033;&#65292;&#23601;&#23436;&#20840;&#21024;&#38500;&#25991;&#20214; &#10;git rm filename            #&#30452;&#25509;&#21024;&#38500;&#25991;&#20214;&#10;&#36890;&#36807;&#8220;git rm --cached README.txt&#8221;&#21629;&#20196;&#65292;&#21487;&#20197;&#23558;&#25991;&#20214;&#29366;&#24577;&#36824;&#21407;&#20026;&#26410;&#26242;&#23384;&#29366;&#24577;&#65292;&#21363;&#22238;&#21040;&#8220;Untracked files&#8221;&#25991;&#20214;&#29366;&#24577;&#12290; &#10;&#36890;&#36807;&#8220;git add README.txt&#8221;&#21629;&#20196;&#23558;&#24050;&#20462;&#25913;&#25991;&#20214;&#26356;&#26032;&#21040;&#26242;&#23384;&#21306;&#22495;&#20013;&#65292;&#22914;&#26524;&#24819;&#25764;&#38144;&#20462;&#25913;&#65292;&#21487;&#20197;&#20351;&#29992;&#8220;git checkout -- README.txt&#8221;&#21629;&#20196;&#12290; &#10;&#36890;&#36807;git reset HEAD &#60;file&#62;&#21462;&#28040;&#26242;&#23384;</span><br></pre></td></tr></table></figure></span>
+<h3 id="u8FDC_u7A0B_u64CD_u4F5C"><a href="#u8FDC_u7A0B_u64CD_u4F5C" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v                                          #&#26597;&#30475;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote show &#60;remote&#62;                    #&#26597;&#30475;&#25351;&#23450;&#36828;&#31243;&#29256;&#26412;&#24211;&#20449;&#24687; &#10;git remote add &#60;remote&#62; &#60;url&#62;            #&#28155;&#21152;&#36828;&#31243;&#29256;&#26412;&#24211; &#10;git fetch &#60;remote&#62;                                #&#20174;&#36828;&#31243;&#24211;&#33719;&#21462;&#20195;&#30721; &#10;git pull &#60;remote&#62; &#60;branchName&#62;         #&#19979;&#36733;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; &#60;branchName&#62;       #&#19978;&#20256;&#20195;&#30721;&#21450;&#24555;&#36895;&#21512;&#24182; &#10;git push &#60;remote&#62; : &#60;branchName/tag-name&#62;    #&#21024;&#38500;&#36828;&#31243;&#20998;&#25903;&#25110;&#26631;&#31614; &#10;git push --tag                           #&#19978;&#20256;&#25152;&#26377;&#26631;&#31614;&#10;git branch -r                            #&#26597;&#30475;&#36828;&#31243;&#20998;&#25903;&#10;&#10;&#10;git rm --cached readme.txt # &#25991;&#20214;&#25918;&#24323;&#36319;&#36394;&#65292;&#20294;&#26159;&#36824;&#26159;&#20445;&#30041;&#22312;&#24037;&#20316;&#30446;&#24405;&#20013;&#12290; &#27809;&#26377;--cached &#36873;&#39033;&#65292;&#23601;&#23436;&#20840;&#21024;&#38500;&#25991;&#20214; &#10;git rm filename            #&#30452;&#25509;&#21024;&#38500;&#25991;&#20214;&#10;&#36890;&#36807;&#8220;git rm --cached README.txt&#8221;&#21629;&#20196;&#65292;&#21487;&#20197;&#23558;&#25991;&#20214;&#29366;&#24577;&#36824;&#21407;&#20026;&#26410;&#26242;&#23384;&#29366;&#24577;&#65292;&#21363;&#22238;&#21040;&#8220;Untracked files&#8221;&#25991;&#20214;&#29366;&#24577;&#12290; &#10;&#36890;&#36807;&#8220;git add README.txt&#8221;&#21629;&#20196;&#23558;&#24050;&#20462;&#25913;&#25991;&#20214;&#26356;&#26032;&#21040;&#26242;&#23384;&#21306;&#22495;&#20013;&#65292;&#22914;&#26524;&#24819;&#25764;&#38144;&#20462;&#25913;&#65292;&#21487;&#20197;&#20351;&#29992;&#8220;git checkout -- README.txt&#8221;&#21629;&#20196;&#12290; &#10;&#36890;&#36807;git reset HEAD &#60;file&#62;&#21462;&#28040;&#26242;&#23384;</span><br></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/GIT/" rel="tag">#GIT</a>
+            <a href="/tags/GIT/" rel="tag"># GIT</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -344,6 +388,8 @@ http://www.codeceo.com/article/git-command-gu">
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -358,6 +404,10 @@ http://www.codeceo.com/article/git-command-gu">
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -368,25 +418,19 @@ http://www.codeceo.com/article/git-command-gu">
   </div>
 
 
+          </div>
+          
+
+
+          
+
+  
+
+
+
         </div>
-
         
-
-
-        
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/03/20/GIT命令/"
-           data-title="GIT命令" data-url="http://tomhjx.github.io/2016/03/20/GIT命令/">
-      </div>
-    
-  </div>
-
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -397,335 +441,302 @@ http://www.codeceo.com/article/git-command-gu">
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="疯狂的茶几" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">疯狂的茶几</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description">懒人一个</p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">24</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">疯狂的茶几</p>
+              <p class="site-description motion-element" itemprop="description">懒人一个</p>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
+          <nav class="site-state motion-element">
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
 
-        </nav>
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
 
-        <div class="links-of-author motion-element">
+          </nav>
+
           
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
-        </div>
 
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B80_u5355_u7406_u89E3_u547D_u4EE4"><span class="nav-number">1.</span> <span class="nav-text">简单理解命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u901F_u67E5"><span class="nav-number">2.</span> <span class="nav-text">速查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u521B_u5EFA_u7248_u672C_u5E93"><span class="nav-number">2.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4FEE_u6539_u548C_u63D0_u4EA4"><span class="nav-number">2.2.</span> <span class="nav-text">修改和提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2"><span class="nav-number">2.3.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u64A4_u6D88"><span class="nav-number">2.4.</span> <span class="nav-text">撤消</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5206_u652F_u4E0E_u6807_u7B7E"><span class="nav-number">2.5.</span> <span class="nav-text">分支与标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5408_u5E76_u4E0E_u884D_u5408"><span class="nav-number">2.6.</span> <span class="nav-text">合并与衍合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FDC_u7A0B_u64CD_u4F5C"><span class="nav-number">2.7.</span> <span class="nav-text">远程操作</span></a></li></ol></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">疯狂的茶几</span>
+
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
   
 
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"tomhjx"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    };
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
 
   
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
   
 
 </body>

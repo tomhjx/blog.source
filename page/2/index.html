@@ -1,9 +1,22 @@
-<!doctype html>
-<html class="theme-next   use-motion ">
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -21,32 +34,47 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="疯狂的茶几, tomhjx" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
 
 
   <link rel="alternate" href="/atom.xml" title="疯狂的茶几" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
 
 
 
@@ -65,178 +93,157 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
 
-  <title> 疯狂的茶几 </title>
+
+
+  <link rel="canonical" href="http://tomhjx.github.io/page/2/"/>
+
+
+
+
+
+  <title>疯狂的茶几</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
+  
+  
+    
   
 
-
-
-
-
-
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">疯狂的茶几</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">疯狂的茶几</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  
-  <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'FswkeQpoefr-Zu6Swa1J','2.0.0');
-</script>
-
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-      
-      
-
-      
-    
-
     
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/03/12/定时器重启爱奇艺客户端/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -244,31 +251,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/03/12/定时器重启爱奇艺客户端/" itemprop="url">
-                  定时器重启爱奇艺客户端
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/12/定时器重启爱奇艺客户端/" itemprop="url">定时器重启爱奇艺客户端</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-03-12T01:34:42+08:00" content="2016-03-12">
-              2016-03-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T01:34:42+08:00">
+                2016-03-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/编程语言/" itemprop="url" rel="index">
                     <span itemprop="name">编程语言</span>
                   </a>
@@ -278,9 +296,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/编程语言/windows批处理/" itemprop="url" rel="index">
                     <span itemprop="name">windows批处理</span>
                   </a>
@@ -288,20 +305,19 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/12/定时器重启爱奇艺客户端/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/12/定时器重启爱奇艺客户端/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -310,17 +326,18 @@
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>想下载几个电视节目，找了很多地方，没有资源打包下载的，只有爱奇艺上可以下载。</p>
+          
+            <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>想下载几个电视节目，找了很多地方，没有资源打包下载的，只有爱奇艺上可以下载。</p>
 <p>但是有个问题，爱奇艺客户端上的下载功能不好用，断了不重试，每次断了之后，只能手动暂停再重开才能继续。</p>
 <p>于是需要写个批处理来代替人工，才能挂着不用管。</p>
 <h2 id="u7CFB_u7EDF"><a href="#u7CFB_u7EDF" class="headerlink" title="系统"></a>系统</h2><p>windows xp sp3</p>
@@ -352,13 +369,23 @@
 <h2 id="u4F7F_u7528"><a href="#u4F7F_u7528" class="headerlink" title="使用"></a>使用</h2><p>执行<code>QyClient.bat</code></p>
 <h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p><a href="https://github.com/tomhjx/tools/tree/master/qiyi-download" target="_blank" rel="external">https://github.com/tomhjx/tools/tree/master/qiyi-download</a></p>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -368,6 +395,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -375,13 +406,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/MySQL行级锁-表级锁-页级锁详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -389,31 +434,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/MySQL行级锁-表级锁-页级锁详解/" itemprop="url">
-                  MySQL行级锁,表级锁,页级锁详解
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/MySQL行级锁-表级锁-页级锁详解/" itemprop="url">MySQL行级锁,表级锁,页级锁详解</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T18:02:00+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T18:02:00+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -423,9 +479,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -433,20 +488,19 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/MySQL行级锁-表级锁-页级锁详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL行级锁-表级锁-页级锁详解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -455,17 +509,18 @@
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501"><a href="#u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501" class="headerlink" title="行级锁,表级锁,页级锁"></a>行级锁,表级锁,页级锁</h2><p>页级:引擎 BDB。<br>表级:引擎 MyISAM ， 理解为锁住整个表，可以同时读，写不行<br>行级:引擎 INNODB ， 单独的一行记录加锁</p>
+          
+            <h2 id="u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501"><a href="#u884C_u7EA7_u9501_2C_u8868_u7EA7_u9501_2C_u9875_u7EA7_u9501" class="headerlink" title="行级锁,表级锁,页级锁"></a>行级锁,表级锁,页级锁</h2><p>页级:引擎 BDB。<br>表级:引擎 MyISAM ， 理解为锁住整个表，可以同时读，写不行<br>行级:引擎 INNODB ， 单独的一行记录加锁</p>
 <p>表级，直接锁定整张表，在你锁定期间，其它进程无法对该表进行写操作。如果你是写锁，则其它进程则读也不允许<br>行级,，仅对指定的记录进行加锁，这样其它进程还是可以对同一个表中的其它记录进行操作。<br>页级，表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。 </p>
 <p>MySQL 5.1支持对MyISAM和MEMORY表进行表级锁定，对BDB表进行页级锁定，对InnoDB表进行行级锁定。<br>对WRITE，MySQL使用的表锁定方法原理如下：<br>如果在表上没有锁，在它上面放一个写锁。<br>否则，把锁定请求放在写锁定队列中。 </p>
 <p>对READ，MySQL使用的锁定方法原理如下：<br>如果在表上没有写锁定，把一个读锁定放在它上面<br>否则，把锁请求放在读锁定队列中。 </p>
@@ -533,13 +588,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <p>注1: FOR UPDATE仅适用于InnoDB，且必须在交易区块(BEGIN/COMMIT)中才能生效。<br>注2: 要测试锁定的状况，可以利用MySQL的Command Mode ，开二个视窗来做测试。</p>
 <p>在MySql 5.0中测试确实是这样的<br>另外：MyAsim 只支持表级锁，InnerDB支持行级锁<br>添加了(行级锁/表级锁)锁的数据不能被其它事务再锁定，也不被其它事务修改（修改、删除）<br>是表级锁时，不管是否查询到记录，都会锁定表<br>此外，如果A与B都对表id进行查询但查询不到记录，则A与B在查询上不会进行row锁，但A与B都会获取排它锁，此时A再插入一条记录的话则会因为B已经有锁而处于等待中，此时B再插入一条同样的数据则会抛出Deadlock found when trying to get lock; try restarting transaction然后释放锁，此时A就获得了锁而插入成功</p>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -549,6 +614,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -556,13 +625,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/MYSQL索引失效的各种情形总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -570,31 +653,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/MYSQL索引失效的各种情形总结/" itemprop="url">
-                  MYSQL索引失效的各种情形总结
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/MYSQL索引失效的各种情形总结/" itemprop="url">MYSQL索引失效的各种情形总结</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:58:30+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T17:58:30+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -604,9 +698,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -614,20 +707,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/MYSQL索引失效的各种情形总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MYSQL索引失效的各种情形总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -636,17 +728,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <ul>
+          
+            <ul>
 <li>没有查询条件，或者查询条件没有建立索引 </li>
 <li>在查询条件上没有使用引导列 </li>
 <li>查询的数量是大表的大部分，应该是30％以上。 </li>
@@ -669,13 +762,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <li>联合索引 is not null 只要在建立的索引列（不分先后）都会走, in null时 必须要和建立索引第一列一起使用,当建立索引第一位置条件是is null 时,其他建立索引的列可以是is null（但必须在所有列 都满足is null的时候）,或者=一个值； 当建立索引的第一位置是=一个值时,其他索引列可以是任何情况（包括is null =一个值）,以上两种情况索引都会走。其他情况不会走。</li>
 </ul>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -685,6 +788,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -692,13 +799,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/MySQL-server-has-gone-away报错原因分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -706,31 +827,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="url">
-                  MySQL server has gone away报错原因分析
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="url">MySQL server has gone away报错原因分析</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:44:52+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T17:44:52+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -740,9 +872,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -750,20 +881,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/MySQL-server-has-gone-away报错原因分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/MySQL-server-has-gone-away报错原因分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -772,17 +902,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h3 id="MySQL__u670D_u52A1_u5B95_u4E86"><a href="#MySQL__u670D_u52A1_u5B95_u4E86" class="headerlink" title="MySQL 服务宕了"></a>MySQL 服务宕了</h3><p>判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长</p>
+          
+            <h3 id="MySQL__u670D_u52A1_u5B95_u4E86"><a href="#MySQL__u670D_u52A1_u5B95_u4E86" class="headerlink" title="MySQL 服务宕了"></a>MySQL 服务宕了</h3><p>判断是否属于这个原因的方法很简单，执行以下命令，查看mysql的运行时长</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ mysql -uroot -p <span class="operator">-e</span> <span class="string">"show global status like 'uptime';"</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+-------+&#10;| Variable_name | Value |&#10;+---------------+-------+&#10;| Uptime        | 68928 |&#10;+---------------+-------+&#10;1 row in set (0.04 sec)</span><br></pre></td></tr></table></figure>
 <p>或者查看MySQL的报错日志，看看有没有重启的信息</p>
@@ -807,13 +938,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <p>修改参数：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; set global max_allowed_packet=1024*1024*16;</span><br><span class="line">mysql&gt; show global variables like 'max_allowed_packet';</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------+----------+&#10;| Variable_name      | Value    |&#10;+--------------------+----------+&#10;| max_allowed_packet | 16777216 |&#10;+--------------------+----------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -823,6 +964,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -830,13 +975,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/select语句执行顺序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -844,31 +1003,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/select语句执行顺序/" itemprop="url">
-                  select语句执行顺序
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/select语句执行顺序/" itemprop="url">select语句执行顺序</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:39:04+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T17:39:04+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -878,9 +1048,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -888,20 +1057,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/select语句执行顺序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select语句执行顺序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -910,17 +1078,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h3 id="SELECT_u8BED_u53E5_u5B9A_u4E49"><a href="#SELECT_u8BED_u53E5_u5B9A_u4E49" class="headerlink" title="SELECT语句定义"></a>SELECT语句定义</h3><p>一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：</p>
+          
+            <h3 id="SELECT_u8BED_u53E5_u5B9A_u4E49"><a href="#SELECT_u8BED_u53E5_u5B9A_u4E49" class="headerlink" title="SELECT语句定义"></a>SELECT语句定义</h3><p>一个完成的SELECT语句包含可选的几个子句。SELECT语句的定义如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#60;SELECT clause&#62; [&#60;FROM clause&#62;] [&#60;WHERE clause&#62;] [&#60;GROUP BY clause&#62;] [&#60;HAVING clause&#62;] [&#60;ORDER BY clause&#62;] [&#60;LIMIT clause&#62;]</span><br></pre></td></tr></table></figure>
 <p>SELECT子句是必选的，其它子句如WHERE子句、GROUP BY子句等是可选的。</p>
 <p>一个SELECT语句中，子句的顺序是固定的。例如GROUP BY子句不会位于WHERE子句的前面。</p>
@@ -928,13 +1097,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;&#24320;&#22987;-&#62;FROM&#23376;&#21477;-&#62;WHERE&#23376;&#21477;-&#62;GROUP BY&#23376;&#21477;-&#62;HAVING&#23376;&#21477;-&#62;ORDER BY&#23376;&#21477;-&#62;SELECT&#23376;&#21477;-&#62;LIMIT&#23376;&#21477;-&#62;&#26368;&#32456;&#32467;&#26524;</span><br></pre></td></tr></table></figure>
 <p>每个子句执行后都会产生一个中间结果，供接下来的子句使用，如果不存在某个子句，就跳过</p>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -944,6 +1123,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -951,13 +1134,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/mySQL查询优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -965,31 +1162,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/mySQL查询优化/" itemprop="url">
-                  mySQL查询优化
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/mySQL查询优化/" itemprop="url">mySQL查询优化</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:35:28+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T17:35:28+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -999,9 +1207,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -1009,20 +1216,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/mySQL查询优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/mySQL查询优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -1031,17 +1237,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>糟糕的SQL查询语句可对整个应用程序的运行产生严重的影响，其不仅消耗掉更多的数据库时间，且它将对其他应用组件产生影响。</p>
+          
+            <p>糟糕的SQL查询语句可对整个应用程序的运行产生严重的影响，其不仅消耗掉更多的数据库时间，且它将对其他应用组件产生影响。</p>
 <p>　　如同其它学科，优化查询性能很大程度上决定于开发者的直觉。幸运的是，像MySQL这样的数据库自带有一些协助工具。本文简要讨论诸多工具之三种：使用索引，使用EXPLAIN分析查询以及调整MySQL的内部配置。</p>
 <p>　　一、使用索引<br>　<br>　　MySQL允许对数据库表进行索引，以此能迅速查找记录，而无需一开始就扫描整个表，由此显著地加快查询速度。每个表最多可以做到16个索引，此外MySQL还支持多列索引及全文检索。</p>
 <p>　　给表添加一个索引非常简单，只需调用一个CREATE INDEX命令并为索引指定它的域即可。列表A给出了一个例子：</p>
@@ -1204,13 +1411,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <p>如果数据并不完全是那种在系统非正常关闭事件中插入的单个记录，那么减少索引刷新的另一策略是使用 MyISAM 表的 DELAYED_KEY_WRITE 表创建选项（如果将 MySQL 用于某些数据录入工作时可能会出现这种情况）。此选项使索引高速缓存只偶尔刷新，而不是在每次插入后都要刷新。</p>
 <p>如果希望在服务器范围内利用延迟索引刷新，只要利用 –delayed-key-write 选项启动 mysqld 即可。在此情形下，索引块写操作延迟到必须刷新块以便为其他索引值腾出空间为止，或延迟到执行了一个 flush-tables 命令后，或延迟到该索引表关闭。</p>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1220,6 +1437,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1227,13 +1448,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/悲观锁和乐观锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -1241,31 +1476,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/悲观锁和乐观锁/" itemprop="url">
-                  悲观锁和乐观锁
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/悲观锁和乐观锁/" itemprop="url">悲观锁和乐观锁</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T17:33:09+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T17:33:09+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -1275,9 +1521,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -1285,20 +1530,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/悲观锁和乐观锁/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/悲观锁和乐观锁/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -1307,17 +1551,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <p>1        事务隔离</p>
+          
+            <p>1        事务隔离</p>
 <p>事务隔离是数据库提供的功能。</p>
 <p>SQL Server通过SET TRANSACTION ISOLATION LEVEL语句设置事务隔离级别：</p>
 <p>SET TRANSACTION ISOLATION LEVEL</p>
@@ -1413,13 +1658,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <p>Your transaction (process ID #52) was deadlocked on {lock | communication buffer | thRead} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.</p>
 <p>除了Read UnCommitted和Snapshot，其它类型的事务都可能产生死锁。</p>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1429,6 +1684,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1436,13 +1695,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/select考察/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -1450,31 +1723,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/select考察/" itemprop="url">
-                  select考察
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/select考察/" itemprop="url">select考察</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T16:32:23+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T16:32:23+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -1484,9 +1768,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -1494,20 +1777,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/select考察/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/select考察/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -1516,17 +1798,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`n_click`</span> (<span class="string">`n_click`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`publishtime`</span> (<span class="string">`publishtime`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`createtime`</span> (<span class="string">`createtime`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> profiling=<span class="number">1</span>;</span> #开启运行记录日志</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">profiles</span>;</span>#查询运行记录</span><br><span class="line">#<span class="operator"><span class="keyword">reset</span> <span class="keyword">query</span> <span class="keyword">cache</span>;</span>#清空查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">flush</span> <span class="keyword">tables</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> <span class="keyword">session</span> query_cache_type = <span class="number">0</span>;</span>临时禁用查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%query_cache%'</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'%Qcache%'</span>;</span></span><br></pre></td></tr></table></figure>
+          
+            <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`n_click`</span> (<span class="string">`n_click`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`publishtime`</span> (<span class="string">`publishtime`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">3</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`createtime`</span> (<span class="string">`createtime`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'utf8_general_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM;</span></span><br><span class="line"></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> profiling=<span class="number">1</span>;</span> #开启运行记录日志</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">profiles</span>;</span>#查询运行记录</span><br><span class="line">#<span class="operator"><span class="keyword">reset</span> <span class="keyword">query</span> <span class="keyword">cache</span>;</span>#清空查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">flush</span> <span class="keyword">tables</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">set</span> <span class="keyword">session</span> query_cache_type = <span class="number">0</span>;</span>临时禁用查询缓存</span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%query_cache%'</span>;</span></span><br><span class="line">#<span class="operator"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'%Qcache%'</span>;</span></span><br></pre></td></tr></table></figure>
 <h3 id="u8054_u8868_u67E5_u8BE2"><a href="#u8054_u8868_u67E5_u8BE2" class="headerlink" title="联表查询"></a>联表查询</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">inner</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows    | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 5000000 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |       1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+---------+-------------+&#10;&#10;5000000 rows in set (31.00355250 sec)</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
@@ -1601,13 +1884,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra                                 |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;|  1 | SIMPLE      | case_article | range | mid           | mid  | 4       | NULL |    1 | Using where; Using index for group-by |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;&#10;1 row in set (0.40 sec)</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">mid</span> <span class="keyword">from</span> case_article <span class="keyword">where</span> <span class="keyword">mid</span> &lt; <span class="number">290000</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">mid</span>) <span class="keyword">as</span> a;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;| id | select_type | table        | type  | possible_keys | key  | key_len | ref  | rows | Extra                                 |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;|  1 | PRIMARY     | NULL         | NULL  | NULL          | NULL | NULL    | NULL | NULL | Select tables optimized away          |&#10;|  2 | DERIVED     | case_article | range | mid           | mid  | 4       | NULL |    2 | Using where; Using index for group-by |&#10;+----+-------------+--------------+-------+---------------+------+---------+------+------+---------------------------------------+&#10;&#10;&#10;1 row in set (0.46 sec)</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1617,6 +1910,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1624,13 +1921,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/explain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -1638,31 +1949,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/explain/" itemprop="url">
-                  explain
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/explain/" itemprop="url">explain</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T16:26:06+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T16:26:06+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -1672,9 +1994,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
@@ -1682,20 +2003,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/explain/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/explain/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -1704,17 +2024,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`content`</span> <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">100001</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">10001</span>;</span></span><br></pre></td></tr></table></figure>
+          
+            <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_article`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`mid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`n_click`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`content`</span> <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`publishtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> <span class="string">`mid`</span> (<span class="string">`mid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">100001</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`case1_member`</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`createtime`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">`status`</span> TINYINT(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">COLLATE</span>=<span class="string">'latin1_swedish_ci'</span></span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line">AUTO_INCREMENT=<span class="number">10001</span>;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> <span class="keyword">select</span> a.<span class="keyword">id</span>,b.<span class="keyword">name</span> <span class="keyword">from</span> case1_article <span class="keyword">as</span> a <span class="keyword">left</span> <span class="keyword">join</span>  case1_member <span class="keyword">as</span> b <span class="keyword">on</span> a.<span class="keyword">mid</span> = b.<span class="keyword">id</span> <span class="keyword">where</span> a.<span class="string">`status`</span>=<span class="number">1</span> <span class="keyword">and</span> b.<span class="string">`status`</span>=<span class="number">1</span>;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;| id | select_type | table | type   | possible_keys | key     | key_len | ref        | rows   | Extra       |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+&#10;|  1 | SIMPLE      | a     | ALL    | mid           | NULL    | NULL    | NULL       | 100752 | Using where |&#10;|  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 4       | test.a.mid |      1 | Using where |&#10;+----+-------------+-------+--------+---------------+---------+---------+------------+--------+-------------+</span><br></pre></td></tr></table></figure>
 <hr>
@@ -1753,13 +2074,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <hr>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">explain</span> (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">2</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">12</span>) <span class="keyword">union</span> all (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">id</span>),<span class="keyword">mid</span> <span class="keyword">from</span> case1_article <span class="keyword">where</span> <span class="keyword">mid</span> =<span class="number">13</span>);</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;| id | select_type  | table         | type | possible_keys | key  | key_len | ref   | rows | Extra       |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+&#10;|  1 | PRIMARY      | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  2 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |   10 | Using index |&#10;|  3 | UNION        | case1_article | ref  | mid           | mid  | 4       | const |    7 | Using index |&#10;| NULL | UNION RESULT | &#60;union1,2,3&#62;  | ALL  | NULL          | NULL | NULL    | NULL  | NULL |             |&#10;+----+--------------+---------------+------+---------------+------+---------+-------+------+-------------+</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1769,6 +2100,10 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1776,13 +2111,27 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tomhjx.github.io/2016/01/03/apc测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="疯狂的茶几">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="疯狂的茶几">
+    </span>
 
     
       <header class="post-header">
@@ -1790,31 +2139,42 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/01/03/apc测试/" itemprop="url">
-                  apc测试
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/01/03/apc测试/" itemprop="url">apc测试</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T16:04:11+08:00" content="2016-01-03">
-              2016-01-03
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T16:04:11+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/编程语言/" itemprop="url" rel="index">
                     <span itemprop="name">编程语言</span>
                   </a>
@@ -1824,9 +2184,8 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/编程语言/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
@@ -1834,20 +2193,19 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/03/apc测试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/03/apc测试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -1856,17 +2214,18 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote>
+          
+            <blockquote>
 <p>thinkphp 3.2.1 demo</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
@@ -1876,13 +2235,23 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/<span class="number">3.2</span>.<span class="number">1</span>/</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#10;This is ApacheBench, Version 2.3 &#60;$Revision: 655654 $&#62;&#10;Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/&#10;Licensed to The Apache Software Foundation, http://www.apache.org/&#10;&#10;Benchmarking dev.demo.com (be patient)&#10;Completed 500 requests&#10;Completed 1000 requests&#10;Completed 1500 requests&#10;Completed 2000 requests&#10;Completed 2500 requests&#10;Completed 3000 requests&#10;Completed 3500 requests&#10;Completed 4000 requests&#10;Completed 4500 requests&#10;Completed 5000 requests&#10;Finished 5000 requests&#10;&#10;&#10;Server Software:        Apache/2.2.22&#10;Server Hostname:        dev.demo.com&#10;Server Port:            80&#10;&#10;Document Path:          /iframe.thinkphp/3.2.1/&#10;Document Length:        445 bytes&#10;&#10;Concurrency Level:      100&#10;Time taken for tests:   34.969 seconds&#10;Complete requests:      5000&#10;Failed requests:        0&#10;Write errors:           0&#10;Total transferred:      4000000 bytes&#10;HTML transferred:       2225000 bytes&#10;Requests per second:    142.98 [#/sec] (mean)&#10;Time per request:       699.382 [ms] (mean)&#10;Time per request:       6.994 [ms] (mean, across all concurrent requests)&#10;Transfer rate:          111.71 [Kbytes/sec] received&#10;&#10;Connection Times (ms)&#10;              min  mean[+/-sd] median   max&#10;Connect:        0    1   2.0      1      18&#10;Processing:    61  695 353.2    658    4606&#10;Waiting:       14  658 347.7    615    4606&#10;Total:         61  696 353.0    658    4607&#10;&#10;Percentage of the requests served within a certain time (ms)&#10;  50%    658&#10;  66%    743&#10;  75%    800&#10;  80%    836&#10;  90%    946&#10;  95%   1072&#10;  98%   1340&#10;  99%   2618&#10; 100%   4607 (longest request)</span><br></pre></td></tr></table></figure>
 
-            
-          </span>
+          
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1892,11 +2261,14 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
     
-
   </section>
 
   
@@ -1906,17 +2278,15 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1927,63 +2297,81 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="疯狂的茶几" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">疯狂的茶几</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description">懒人一个</p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">24</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">疯狂的茶几</p>
+              <p class="site-description motion-element" itemprop="description">懒人一个</p>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
+          <nav class="site-state motion-element">
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
 
-        </nav>
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
 
-        <div class="links-of-author motion-element">
+          </nav>
+
           
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
-        </div>
 
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
       </section>
+
+      
 
       
 
@@ -1991,84 +2379,191 @@ InnoDB锁与MyISAM锁的最大不同在于：一是支持事务（TRANCSACTION�
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">疯狂的茶几</span>
+
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
 
   
   
 
   
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"tomhjx"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
 
   
   
 
   
+
+  
+
   
 
 </body>
