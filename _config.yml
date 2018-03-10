@@ -33,6 +33,15 @@ algolia:
   apiKey: '8ae83e007f83e881bb1071fe58673c1b'
   indexName: 'tomhjx_hexo_blog'
   chunkSize: 5000
+  fields:
+    - content:strip:truncate,0,50000
+    - excerpt:strip
+    - gallery
+    - permalink
+    - photos
+    - slug
+    - tags
+    - title
 
 # Writing
 new_post_name: :title.md # File name of new posts
