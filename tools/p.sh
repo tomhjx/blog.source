@@ -1,6 +1,7 @@
 #!/bin/bash
 #发布到网站
-cd /var/www/hexo/public
+path=$(pwd)/public
+cd ${path}
 hexo g
 #----git
 git add -A

@@ -27,6 +27,13 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
 
+#search
+algolia:
+  applicationID: 'YFFH0CCP57'
+  apiKey: '8ae83e007f83e881bb1071fe58673c1b'
+  indexName: 'tomhjx_hexo_blog'
+  chunkSize: 5000
+
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
