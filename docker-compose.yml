@@ -6,3 +6,8 @@ services:
       restart: always
       ports:
         - "4000:4000"
+      volumes:
+        - ./_config.yml:/var/blog/_config.yml
+        - ./scaffolds:/var/blog/scaffolds
+        - ./source:/var/blog/source
+        - ./themes:/var/blog/themes
