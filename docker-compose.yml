@@ -1,6 +1,6 @@
 version: '3'
 services:
-  blog.work.net:
+  blog:
       build: ./
       container_name: my_blog
       restart: always
