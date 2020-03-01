@@ -228,7 +228,6 @@ chat:
   icon: comment # Icon name in Font Awesome, set false to disable icon.
   text: Chat # Button text, change it as you wish.
 
-
 # ---------------------------------------------------------------
 # Post Settings
 # See: https://theme-next.org/docs/theme-settings/posts

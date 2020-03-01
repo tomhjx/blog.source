@@ -1,13 +1,16 @@
-version: '3'
+version: '3.5'
 services:
   blog:
-      build: ./
-      container_name: my_blog
+      image: tomhjx/hexo:4.2.0.13-centos7
+      command: ["hexo", "server", "--debug"]
       restart: always
       ports:
         - "4000:4000"
       volumes:
-        - ./_config.yml:/var/blog/_config.yml
-        - ./scaffolds:/var/blog/scaffolds
-        - ./source:/var/blog/source
-        - ./themes:/var/blog/themes
+        - ./uploads:/var/www/blog/themes/next/source/uploads
+        - ./themes/next/_config.yml:/var/www/blog/themes/next/_config.yml
+        - ./_config.yml:/var/www/blog/_config.yml
+        - ./scaffolds:/var/www/blog/scaffolds
+        - ./source:/var/www/blog/source
+        - /Users/tom/.ssh/id_rsa:/root/.ssh/id_rsa
+        - /Users/tom/.gitconfig:/root/.gitconfig
