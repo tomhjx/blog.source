@@ -1,0 +1,11 @@
+<script>
+    var myHeaders = new Headers(); // Currently empty
+    var l = [
+        'referer'
+    ]
+    for (k in l) {
+        document.writeln(l + ':' + myHeaders.get(k));
+    }
+
+    document.writeln('document.referrer :' + document.referrer);
+</script>
