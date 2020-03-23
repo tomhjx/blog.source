@@ -1,0 +1,10 @@
+<script>
+    var end = "2020-04-01 00:00:00";  // 结束时间点
+    var endms = new Date(end).getTime();
+    var nowms = new Date().getTime(); 
+    // var nowms = new Date("2020-03-31 23:59:59").getTime(); 测试代码，假设当天是"2020-03-31 23:59:59"
+    var nowdiff = Math.ceil((endms-nowms) / (1000 * 60 * 60 * 24));
+    var lessnumOfday = 3; //每天少3个名额
+    document.writeln("活动还有"+nowdiff+"天结束，还有"+(lessnumOfday*nowdiff)+"个名额");
+
+</script>
