@@ -2,16 +2,14 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 操作系统
-  - Linux
+  - 笔记本电脑
+  - Mac
 tags:
-  - 操作系统
-  - Linux
+  - 笔记本电脑
+  - Mac
   - Q&A
 ---
 ## Question
-
-
 
 ## Answer
 
