@@ -39,9 +39,13 @@ comments: false
     * Firebase没有非洲节点，链路时延过长且无法优化，通过socket io自建socket服务实现心跳、聊天、轨迹跟踪功能
     * 调研[CRM]SAAS(https://www.fxiaoke.com/)
     * 对接[Firebase](https://firebase.google.com/)，实现司机心跳保活、出行轨迹跟踪，app推送
+    * [基于PostgreSQL‎实现电子围栏](https://yq.aliyun.com/articles/700357)
+    * 谷歌地图对非洲地区支持较弱，并且没有摩托路线，需要基于[openstreetmap](https://www.openstreetmap.org/#map=3/26.35/96.50)自建地图
+    * 参与海外出行项目（路线计算，轨迹跟踪，司机抢单，乘客下单，运力调度）
     * 探索[TAPD](https://www.tapd.cn/)
     * 消息队列选型（阿里云rocketmq，kafka，rabbitmq）
     * 海外ota，酒店搜索技术选型，lnmp+elasticsearch+redis+mongodb
+    * 参与海外ota项目（酒店采集，酒店信息清洗，酒店搜索，订房）
     * 从技术岗转型管理岗
 
 * 2018
@@ -56,4 +60,5 @@ comments: false
     * symfony+[capifony](https://everzet.github.io/capifony/)部署生产环境
     * 使用[symfony](https://symfony.com/)PHP框架
     * 使用docker部署本地环境
-    * 二次元社区，维护[socket io](https://socket.io/)搭建的nodejs聊天系统
+    * 维护[socket io](https://socket.io/)搭建的nodejs聊天系统
+    * 接盘二次元社区
