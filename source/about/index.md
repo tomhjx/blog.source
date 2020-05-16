@@ -20,22 +20,29 @@ comments: false
     * 通过[石墨文档](https://shimo.im/sheets/PrDWgkwcGRYJdpTx/AGQY4)落地项目管理（进度跟踪，项目会议，成本统计）
     * [nginx rsyslog](https://github.com/xgoteam/docker/tree/master/openresty/1.13.6.2-rsyslog-centos7)结合[阿里云日志服务SLS](https://help.aliyun.com/document_detail/48932.html?spm=5176.10695662.1996646101.searchclickresult.49652c5a08LNAS)统一nginx日志管理
     * [基于golang与shell实现简单的网络探针](https://github.com/tomhjx/network-probe)
+    * 为降成本，放弃ucloud罗马网络，改为自建vpn，打通阿里云（德国法兰克福）与ucloud（非洲拉各斯）内网
+    * 降低成本，放弃阿里云rocketmq，自建rabbitmq集群
+    * 分片离线计算，在低成本的背景下，为sitemap内容生成提速
 
 * 2019
     * 调研cloudflare Quick协议支持情况，与谷歌浏览器支持的版本不一致
     * 测试环境上k8s
     * k8s的fpm服务上[容器探针](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#%E5%AE%B9%E5%99%A8%E6%8E%A2%E9%92%88)
-    * 制定项目交付方案，组织整体研发团队落地实施
-    * 制定技术方案规范
+    * 精简与统一团队git flow流程
+    * 统一项目交付方案，组织整个研发团队落地实施
+    * 整合技术方案规范
     * jenkins+gitlab部署ci/cd
+    * 通过ucloud[罗马网络](https://www.ucloud.cn/site/product/rome.html)，打通阿里云（德国法兰克福）与ucloud（非洲拉各斯）内网
+    * 阿里云对象存储（德国法兰克福）[镜像回源]（https://help.aliyun.com/document_detail/31865.html?spm=a2c4g.11186623.2.22.50c87222oVtN3W#concept-n34-q1z-5db）+ ucloud对象存储（非洲拉各斯）实现图片上传边缘化，提高上传网络质量
     * 接入[cloudflare](ttps://www.cloudflare.com)，使用cdn、https
-    * 通过[路由分析工具](https://www.ipip.net/)做[非洲网络测试](https://shimo.im/sheets/xH1PswEmO9UxEmfI/esmoi)，发现了ucloud厂商更适合部署非洲业务
+    * 调研边缘机房，通过[路由分析工具](https://www.ipip.net/)做[非洲网络测试](https://shimo.im/sheets/xH1PswEmO9UxEmfI/esmoi)，ucloud有优势
     * Firebase没有非洲节点，链路时延过长且无法优化，通过socket io自建socket服务实现心跳、聊天、轨迹跟踪功能
+    * 调研[CRM]SAAS(https://www.fxiaoke.com/)
     * 对接[Firebase](https://firebase.google.com/)，实现司机心跳保活、出行轨迹跟踪，app推送
     * 探索[TAPD](https://www.tapd.cn/)
-    * 消息队列选型（rocketmq，kafka，rabbitmq）
-    * 海外ota，酒店数据采集技术选型，python+mongodb
-    * 海外ota，酒店搜索技术选型，lnmp+elasticsearch+redis
+    * 消息队列选型（阿里云rocketmq，kafka，rabbitmq）
+    * 海外ota，酒店搜索技术选型，lnmp+elasticsearch+redis+mongodb
+    * 从技术岗转型管理岗
 
 * 2018
     * 开发发版工具
@@ -45,6 +52,7 @@ comments: false
     * 通过docker自建[gitlab](https://about.gitlab.com/)
     * 对接[腾讯短视频](https://cloud.tencent.com/document/product/584)
     * [自研框架，供团队使用](https://github.com/tomhjx/sphp)
+    * 浅尝[laravel](https://laravel.com/)PHP框架
     * symfony+[capifony](https://everzet.github.io/capifony/)部署生产环境
     * 使用[symfony](https://symfony.com/)PHP框架
     * 使用docker部署本地环境
