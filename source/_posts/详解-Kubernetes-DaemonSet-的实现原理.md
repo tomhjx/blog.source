@@ -331,3 +331,16 @@ fluentd-elasticsearch-wvffx   1/1   Terminating   0     14s
 DaemonSet 其实就是 Kubernetes 中的守护进程，它会在每一个节点上创建能够提供服务的副本，很多云服务商都会使用 DaemonSet 在所有的节点上内置一些用于提供日志收集、统计分析和安全策略的服务。
 
 在研究 DaemonSet 的调度策略的过程中，我们其实能够通过一些历史的 issue 和 PR 了解到 DaemonSet 调度策略改动的原因，也能让我们对于 Kubernetes 的演进过程和设计决策有一个比较清楚的认识。
+
+## Referenece
+
+*   [DaemonSet · Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+*   [Perform a Rolling Update on a DaemonSet](https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/)
+*   [Perform a Rollback on a DaemonSet](https://kubernetes.io/docs/tasks/manage-daemon/rollback-daemon-set/)
+*   [Schedule DaemonSet Pods by default scheduler, not DaemonSet controller](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/scheduling/schedule-DS-pod-by-scheduler.md)
+*   [DaemonsetController can’t feel it when node has more resources, e.g. other Pod exits](https://github.com/kubernetes/kubernetes/issues/46935)
+*   [DaemonsetController can’t feel it when node recovered from outofdisk state](https://github.com/kubernetes/kubernetes/issues/45628)
+*   [DaemonSet pods should be scheduled by default scheduler, not DaemonSet controller](https://github.com/kubernetes/kubernetes/issues/42002)
+*   [NodeController should add NoSchedule taints and we should get rid of getNodeConditionPredicate()](https://github.com/kubernetes/kubernetes/issues/42001)
+*   [DaemonSet should respect Pod Affinity and Pod AntiAffinity](https://github.com/kubernetes/kubernetes/issues/29276)
+*   [Make DaemonSet respect critical pods annotation when scheduling](https://github.com/kubernetes/kubernetes/pull/42028)
