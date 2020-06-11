@@ -2,9 +2,8 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 虚拟化
-  - kubernetes
+  - 存储
 tags:
-  - kubernetes
+  - 存储
   - 云原生
 ---
