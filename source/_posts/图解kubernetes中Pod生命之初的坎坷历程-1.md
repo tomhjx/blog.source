@@ -1,6 +1,7 @@
 ---
 title: 图解kubernetes中Pod生命之初的坎坷历程
 categories:
+  - 运维
   - 虚拟化
   - kubernetes
 tags:

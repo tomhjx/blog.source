@@ -1,6 +1,7 @@
 ---
 title: 使用 ffmpeg 实现 MP4 与 GIF 的互转
 categories:
+  - 开发
   - 多媒体
   - ffmpeg
 tags:

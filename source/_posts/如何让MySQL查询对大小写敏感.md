@@ -1,6 +1,7 @@
 ---
 title: 如何让MySQL查询对大小写敏感?
 categories:
+  - 开发
   - 数据库
   - MySQL
 tags:
