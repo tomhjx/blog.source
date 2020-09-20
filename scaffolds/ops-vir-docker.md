@@ -2,9 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 编程语言
-  - PHP
+  - 运维
+  - 虚拟化
+  - docker
 tags:
-  - PHP
-  - 实录
+  - docker
 ---

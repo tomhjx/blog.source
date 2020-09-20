@@ -2,8 +2,6 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 日志工具
-  - syslog-ng
+  - 其他
 tags:
-  - syslog-ng
 ---

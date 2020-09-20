@@ -2,8 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 编程语言
-  - PHP
+  - 开发
+  - web服务器
+  - nignx
 tags:
-  - PHP
+  - nignx
 ---

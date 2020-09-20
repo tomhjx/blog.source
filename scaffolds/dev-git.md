@@ -2,8 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - web服务器
-  - nignx
+  - 开发
+  - 版本控制
+  - GIT
 tags:
-  - nignx
+  - GIT
 ---

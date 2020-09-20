@@ -2,8 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 版本管理
-  - GIT
+  - 运维
+  - 日志
+  - syslog-ng
 tags:
-  - GIT
+  - syslog-ng
 ---

@@ -2,9 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 数据库
-  - MySQL
+  - 开发
+  - 多媒体
+  - ffmpeg
 tags:
-  - MySQL
-  - 实录
+  - ffmpeg
 ---

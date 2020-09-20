@@ -2,8 +2,10 @@
 title: {{ title }}
 date: {{ date }}
 categories:
-  - 系统
-  - Linux
+  - 开发
+  - 编程语言
+  - PHP
 tags:
-  - Linux
+  - PHP
+  - 实录
 ---
