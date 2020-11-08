@@ -117,10 +117,10 @@ AMQP协议是一个二进制协议，具有一些现代特性：多通道（mult
 
 * [AMQP 0.9.1 完整的中文翻译](http://www.blogjava.net/qbna350816/archive/2016/08/12/431554.html)
 
-* [AMQP 0.9.1 规范](https://link.zhihu.com/?target=https%3A//www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+* [AMQP 0.9.1 规范](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
 
-* [RabbitMQ 对于 AMQP 0.9.1 的勘误](https://link.zhihu.com/?target=https%3A//www.rabbitmq.com/amqp-0-9-1-errata.html)
+* [RabbitMQ 对于 AMQP 0.9.1 的勘误](https://www.rabbitmq.com/amqp-0-9-1-errata.html)
 
-* [RabbitMQ 对与 AMQP 0.9.1 的扩展](https://link.zhihu.com/?target=https%3A//www.rabbitmq.com/extensions.html)
+* [RabbitMQ 对与 AMQP 0.9.1 的扩展](https://www.rabbitmq.com/extensions.html)
 
-* [AMQP 1.0 最终版](https://link.zhihu.com/?target=http%3A//www.amqp.org/specification/1.0/amqp-org-download)
+* [AMQP 1.0 最终版](https://www.amqp.org/specification/1.0/amqp-org-download)
