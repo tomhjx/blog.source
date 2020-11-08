@@ -43,6 +43,7 @@ jobs:
           -v ${{ github.workspace }}/scaffolds:/var/www/blog/scaffolds \
           -v ${{ github.workspace }}/source:/var/www/blog/source \
           -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
+          -v ${HOME}/.ssh/known_hosts:/root/.ssh/known_hosts \
           -v ${HOME}/.gitconfig:/root/.gitconfig \
           tomhjx/hexo:4.2.0.13-centos7 /bin/bash -c "hexo generate -d"
 
