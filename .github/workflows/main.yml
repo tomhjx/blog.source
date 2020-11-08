@@ -36,15 +36,14 @@ jobs:
           git config --global user.email 'tom_hejiaxi@163.com'
       - name: Deploy
         run: |
-          cd ~
           docker run \
           -v ${{ github.workspace }}/uploads:/var/www/blog/themes/next/source/uploads \
           -v ${{ github.workspace }}/themes/next/_config.yml:/var/www/blog/themes/next/_config.yml \
           -v ${{ github.workspace }}/_config.yml:/var/www/blog/_config.yml \
           -v ${{ github.workspace }}/scaffolds:/var/www/blog/scaffolds \
           -v ${{ github.workspace }}/source:/var/www/blog/source \
-          -v ./.ssh/id_rsa:/root/.ssh/id_rsa \
-          -v ./.gitconfig:/root/.gitconfig \
+          -v ${$HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
+          -v ${$HOME}/.gitconfig:/root/.gitconfig \
           tomhjx/hexo:4.2.0.13-centos7 /bin/bash -c "hexo generate -d"
 
 
