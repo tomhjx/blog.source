@@ -36,7 +36,7 @@ jobs:
           git config --global user.email 'tom_hejiaxi@163.com'
       - name: Deploy
         run: |
-          cd ${{ github.workspace }} \
+          cd ${{ github.workspace }}
           docker run \
           -v ./uploads:/var/www/blog/themes/next/source/uploads \
           -v ./themes/next/_config.yml:/var/www/blog/themes/next/_config.yml \
