@@ -690,7 +690,7 @@ google_analytics:
 baidu_analytics: # <app_id>
 
 # Growingio Analytics
-growingio_analytics: # <project_id>
+growingio_analytics: bfa004dda34659b8
 
 # CNZZ count
 cnzz_siteid:
