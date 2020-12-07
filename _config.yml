@@ -28,20 +28,26 @@ i18n_dir: :lang
 skip_render:
 
 #search
-algolia:
-  applicationID: 'YFFH0CCP57'
-  apiKey: '8ae83e007f83e881bb1071fe58673c1b'
-  indexName: 'tomhjx_hexo_blog'
-  chunkSize: 5000
-  fields:
-    - content:strip:truncate,0,50000
-    - excerpt:strip
-    - gallery
-    - permalink
-    - photos
-    - slug
-    - tags
-    - title
+# algolia:
+#   applicationID: 'YFFH0CCP57'
+#   apiKey: '8ae83e007f83e881bb1071fe58673c1b'
+#   indexName: 'tomhjx_hexo_blog'
+#   chunkSize: 5000
+#   fields:
+#     - content:strip:truncate,0,50000
+#     - excerpt:strip
+#     - gallery
+#     - permalink
+#     - photos
+#     - slug
+#     - tags
+#     - title
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -90,7 +96,7 @@ stylus:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:tomhjx/tomhjx.github.io.git
+  repo: git@github.com:tomhjx/home.blog.git
   branch: master
 
 #Feed Atom

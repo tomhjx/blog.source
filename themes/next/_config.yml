@@ -760,13 +760,6 @@ local_search:
   # Preload the search data when the page loads.
   preload: false
 
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
-
-
 # Swiftype Search API Key
 swiftype_key:
 
