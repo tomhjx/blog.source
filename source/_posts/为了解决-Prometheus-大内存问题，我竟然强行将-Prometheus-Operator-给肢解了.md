@@ -6,6 +6,9 @@ categories:
 tags:
   - 监控
   - 转载
+  - Kubernetes
+  - 虚拟化
+  - 云原生
 date: 2020-09-20 10:05:38
 ---
 
