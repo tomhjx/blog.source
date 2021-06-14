@@ -1,10 +1,10 @@
 ---
-title: select考察
+title: MySQL Select实测
 categories:
   - 数据库
   - MySQL
 tags:
-  - 实录
+  - 原创
   - MySQL
   - select
 date: 2016-01-03 16:32:23

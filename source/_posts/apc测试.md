@@ -4,7 +4,7 @@ categories:
   - 编程语言
   - PHP
 tags:
-  - 实录
+  - 原创
   - PHP
   - APC
 date: 2016-01-03 16:04:11
@@ -14,7 +14,7 @@ date: 2016-01-03 16:04:11
 > thinkphp 3.2.1 demo
 
 
-```sh
+```bash
 
 $ ab -n5000 -c100 http://dev.demo.com/iframe.thinkphp/3.2.1/
 

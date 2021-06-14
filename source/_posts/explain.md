@@ -4,7 +4,7 @@ categories:
   - 数据库
   - MySQL
 tags:
-  - 实录
+  - 原创
   - MySQL
   - explain
 date: 2016-01-03 16:26:06

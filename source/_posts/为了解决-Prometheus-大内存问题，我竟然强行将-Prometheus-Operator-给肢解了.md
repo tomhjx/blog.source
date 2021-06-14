@@ -175,51 +175,73 @@ $ kubectl label ns kube-system monitoring-role=system
 
 给其他的 namespace 打上标签 monitoring\-role=others。例如：
 
-$ kubectl label ns monitoring monitoring\-role=others
-$ kubectl label ns default monitoring\-role=others
+
+```bash
+$ kubectl label ns monitoring monitoring-role=others
+$ kubectl label ns default monitoring-role=others
+```
 
 **拆分 PrometheusRule**
 
 告警规则需要根据监控目标拆分成两个 PrometheusRule。具体做法是将 kube\-system namespace 相关的规则整合到一个 PrometheusRule 中，并修改名称和标签：
 
-# prometheus\-rules\-system.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
+```yaml
+
+# prometheus-rules-system.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
-  labels:
-    prometheus: system
-    role: alert\-rules
-  name: prometheus\-system\-rules
-  namespace: monitoring
+  labels:
+    prometheus: system
+    role: alert-rules
+  name: prometheus-system-rules
+  namespace: monitoring
 spec:
-  groups:
+  groups:
 ...
 ...
+
+```
 
 剩下的放到另外一个 PrometheusRule 中，并修改名称和标签：
 
-# prometheus\-rules\-others.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
+
+```yaml
+# prometheus-rules-others.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
-  labels:
-    prometheus: others
-    role: alert\-rules
-  name: prometheus\-others\-rules
-  namespace: monitoring
+  labels:
+    prometheus: others
+    role: alert-rules
+  name: prometheus-others-rules
+  namespace: monitoring
 spec:
-  groups:
+  groups:
 ...
 ...
+
+```
 
 然后删除默认的 PrometheusRule：
 
-$ kubectl \-n monitoring delete prometheusrule prometheus\-k8s\-rules
+```bash
+
+$ kubectl -n monitoring delete prometheusrule prometheus-k8s-rules
+
+
+```
+
 
 新增两个 PrometheusRule：
 
-$ kubectl apply \-f prometheus\-rules\-system.yaml
-$ kubectl apply \-f prometheus\-rules\-others.yaml
+
+```bash
+
+$ kubectl apply -f prometheus-rules-system.yaml
+$ kubectl apply -f prometheus-rules-others.yaml
+
+```
 
 如果你实在不知道如何拆分规则，或者不想拆分，想做一个伸手党，可以看这里：
 
@@ -231,101 +253,106 @@ $ kubectl apply \-f prometheus\-rules\-others.yaml
 
 下一步是拆分 Prometheus 实例，根据上面的方案需要拆分成两个实例，一个用来监控 kube\-system namespace，另一个用来监控其他 namespace：
 
-# prometheus\-prometheus\-system.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
+```yaml
+
+# prometheus-prometheus-system.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
 metadata:
-  labels:
-    prometheus: system
-  name: system
-  namespace: monitoring
+  labels:
+    prometheus: system 
+  name: system
+  namespace: monitoring
 spec:
-  remoteWrite:
-    \- url: http://victoriametrics.kube\-system.svc.cluster.local:8428/api/v1/write
-      queueConfig:
-        maxSamplesPerSend: 10000
-  retention: 2h
-  alerting:
-    alertmanagers:
-    \- name: alertmanager\-main
-      namespace: monitoring
-      port: web
-  image: quay.io/prometheus/prometheus:v2.17.2
-  nodeSelector:
-    beta.kubernetes.io/os: linux
-  podMonitorNamespaceSelector:
-    matchLabels:
-      monitoring\-role: system
-  podMonitorSelector: {}
-  replicas: 1
-  resources:
-    requests:
-      memory: 400Mi
-    limits:
-      memory: 2Gi
-  ruleSelector:
-    matchLabels:
-      prometheus: system
-      role: alert\-rules
-  securityContext:
-    fsGroup: 2000
-    runAsNonRoot: true
-    runAsUser: 1000
-  serviceAccountName: prometheus\-k8s
-  serviceMonitorNamespaceSelector:
-    matchLabels:
-      monitoring\-role: system
-  serviceMonitorSelector: {}
-  version: v2.17.2
-\-\-\-
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
+  remoteWrite:
+    - url: http://victoriametrics.kube-system.svc.cluster.local:8428/api/v1/write
+      queueConfig:
+        maxSamplesPerSend: 10000
+  retention: 2h 
+  alerting:
+    alertmanagers:
+    - name: alertmanager-main
+      namespace: monitoring
+      port: web
+  image: quay.io/prometheus/prometheus:v2.17.2
+  nodeSelector:
+    beta.kubernetes.io/os: linux
+  podMonitorNamespaceSelector:
+    matchLabels:
+      monitoring-role: system 
+  podMonitorSelector: {}
+  replicas: 1 
+  resources:
+    requests:
+      memory: 400Mi
+    limits:
+      memory: 2Gi
+  ruleSelector:
+    matchLabels:
+      prometheus: system 
+      role: alert-rules
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: 
+    matchLabels:
+      monitoring-role: system 
+  serviceMonitorSelector: {}
+  version: v2.17.2
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
 metadata:
-  labels:
-    prometheus: others
-  name: others
-  namespace: monitoring
+  labels:
+    prometheus: others
+  name: others
+  namespace: monitoring
 spec:
-  remoteWrite:
-    \- url: http://victoriametrics.kube\-system.svc.cluster.local:8428/api/v1/write
-      queueConfig:
-        maxSamplesPerSend: 10000
-  retention: 2h
-  alerting:
-    alertmanagers:
-    \- name: alertmanager\-main
-      namespace: monitoring
-      port: web
-  image: quay.io/prometheus/prometheus:v2.17.2
-  nodeSelector:
-    beta.kubernetes.io/os: linux
-  podMonitorNamespaceSelector:
-    matchLabels:
-      monitoring\-role: others
-  podMonitorSelector: {}
-  replicas: 1
-  resources:
-    requests:
-      memory: 400Mi
-    limits:
-      memory: 2Gi
-  ruleSelector:
-    matchLabels:
-      prometheus: others
-      role: alert\-rules
-  securityContext:
-    fsGroup: 2000
-    runAsNonRoot: true
-    runAsUser: 1000
-  serviceAccountName: prometheus\-k8s
-  serviceMonitorNamespaceSelector:
-    matchLabels:
-      monitoring\-role: others
-  serviceMonitorSelector: {}
-  additionalScrapeConfigs:
-    name: additional\-scrape\-configs
-    key: prometheus\-additional.yaml
-  version: v2.17.2
+  remoteWrite:
+    - url: http://victoriametrics.kube-system.svc.cluster.local:8428/api/v1/write
+      queueConfig:
+        maxSamplesPerSend: 10000
+  retention: 2h
+  alerting:
+    alertmanagers:
+    - name: alertmanager-main
+      namespace: monitoring
+      port: web
+  image: quay.io/prometheus/prometheus:v2.17.2
+  nodeSelector:
+    beta.kubernetes.io/os: linux
+  podMonitorNamespaceSelector: 
+    matchLabels:
+      monitoring-role: others 
+  podMonitorSelector: {}
+  replicas: 1
+  resources:
+    requests:
+      memory: 400Mi
+    limits:
+      memory: 2Gi
+  ruleSelector:
+    matchLabels:
+      prometheus: others 
+      role: alert-rules
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      monitoring-role: others 
+  serviceMonitorSelector: {}
+  additionalScrapeConfigs:
+    name: additional-scrape-configs
+    key: prometheus-additional.yaml
+  version: v2.17.2
+
+```
+
 
 需要注意的配置：
 
@@ -341,75 +368,112 @@ spec:
 
 删除默认的 Prometheus 实例：
 
-$ kubectl \-n monitoring delete prometheus k8s
+
+```bash
+
+$ kubectl -n monitoring delete prometheus k8s
+
+
+```
 
 创建新的 Prometheus 实例：
 
-$ kubectl apply \-f prometheus\-prometheus.yaml
+```bash
+
+$ kubectl apply -f prometheus-prometheus.yaml
+
+
+```
 
 查看运行状况：
 
-$ kubectl \-n monitoring get prometheus
-NAME     VERSION   REPLICAS   AGE
-system   v2.17.2   1          29h
-others   v2.17.2   1          29h
+```bash
 
-$ kubectl \-n monitoring get sts
-NAME                READY   AGE
-prometheus\-system   1/1     29h
-prometheus\-others   1/1     29h
-alertmanager\-main   1/1     25d
+$ kubectl -n monitoring get prometheus
+NAME     VERSION   REPLICAS   AGE
+system   v2.17.2   1          29h
+others   v2.17.2   1          29h
+
+$ kubectl -n monitoring get sts
+NAME                READY   AGE
+prometheus-system   1/1     29h
+prometheus-others   1/1     29h
+alertmanager-main   1/1     25d
+
+
+```
+
 
 查看每个 Prometheus 实例的内存占用：
 
-$ kubectl \-n monitoring top pod \-l app=prometheus
-NAME                  CPU(cores)   MEMORY(bytes)
-prometheus\-others\-0   12m          110Mi
-prometheus\-system\-0   121m         1182Mi
+```bash
+
+$ kubectl -n monitoring top pod -l app=prometheus
+NAME                  CPU(cores)   MEMORY(bytes)
+prometheus-others-0   12m          110Mi
+prometheus-system-0   121m         1182Mi
+
+```
 
 最后还要修改 Prometheus 的 Service，yaml 如下：
 
-apiVersion: v1
-kind: Service
+
+```yaml
+apiVersion: v1
+kind: Service
 metadata:
-  labels:
-    prometheus: system
-  name: prometheus\-system
-  namespace: monitoring
+  labels:
+    prometheus: system 
+  name: prometheus-system
+  namespace: monitoring
 spec:
-  ports:
-  \- name: web
-    port: 9090
-    targetPort: web
-  selector:
-    app: prometheus
-    prometheus: system
-  sessionAffinity: ClientIP
-\-\-\-
-apiVersion: v1
-kind: Service
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  selector:
+    app: prometheus
+    prometheus: system
+  sessionAffinity: ClientIP
+---
+apiVersion: v1
+kind: Service
 metadata:
-  labels:
-    prometheus: others
-  name: prometheus\-others
-  namespace: monitoring
+  labels:
+    prometheus: others
+  name: prometheus-others
+  namespace: monitoring
 spec:
-  ports:
-  \- name: web
-    port: 9090
-    targetPort: web
-  selector:
-    app: prometheus
-    prometheus: others
-  sessionAffinity: ClientIP
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  selector:
+    app: prometheus
+    prometheus: others
+  sessionAffinity: ClientIP
+
+```
+
 
 删除默认的 Service：
 
-$ kubectl \-n monitoring delete svc prometheus\-k8s
+
+```bash
+
+$ kubectl -n monitoring delete svc prometheus-k8s
+
+
+```
 
 创建新的 Service：
 
-$ kubectl apply \-f prometheus\-service.yaml
+
+```bash
+
+$ kubectl apply -f prometheus-service.yaml
+
+```
 
 **修改 Grafana 数据源**
 
