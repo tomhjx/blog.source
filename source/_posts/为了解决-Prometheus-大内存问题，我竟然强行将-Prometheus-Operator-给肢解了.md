@@ -60,94 +60,98 @@ Prometheus Operator 通过 CRD 资源名 Prometheus 来控制 Prometheus 实例�
 
 首先部署一个单实例的 VictoriaMetrics，完整的 yaml 如下：
 
-kind: PersistentVolumeClaim
-apiVersion: v1
+```yaml
+
+kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: victoriametrics
-  namespace: kube\-system
+  name: victoriametrics
+  namespace: kube-system
 spec:
-  accessModes:
-    \- ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-\-\-\-
-apiVersion: apps/v1
-kind: StatefulSet
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
-  labels:
-    app: victoriametrics
-  name: victoriametrics
-  namespace: kube\-system
+  labels:
+    app: victoriametrics
+  name: victoriametrics
+  namespace: kube-system
 spec:
-  serviceName: pvictoriametrics
-  selector:
-    matchLabels:
-      app: victoriametrics
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: victoriametrics
-    spec:
-      nodeSelector:
-        blog: "true"
-      containers:
-      \- args:
-        \- \-\-storageDataPath=/storage
-        \- \-\-httpListenAddr=:8428
-        \- \-\-retentionPeriod=1
-        image: victoriametrics/victoria\-metrics
-        imagePullPolicy: IfNotPresent
-        name: victoriametrics
-        ports:
-        \- containerPort: 8428
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8428
-          initialDelaySeconds: 30
-          timeoutSeconds: 30
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8428
-          initialDelaySeconds: 120
-          timeoutSeconds: 30
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 2000Mi
-          requests:
-            cpu: 2000m
-            memory: 2000Mi
-        volumeMounts:
-        \- mountPath: /storage
-          name: storage\-volume
-      restartPolicy: Always
-      priorityClassName: system\-cluster\-critical
-      volumes:
-      \- name: storage\-volume
-        persistentVolumeClaim:
-          claimName: victoriametrics
-\-\-\-
-apiVersion: v1
-kind: Service
+  serviceName: pvictoriametrics
+  selector:
+    matchLabels:
+      app: victoriametrics
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: victoriametrics
+    spec:
+      nodeSelector:
+        blog: "true"
+      containers:    
+      - args:
+        - --storageDataPath=/storage
+        - --httpListenAddr=:8428
+        - --retentionPeriod=1
+        image: victoriametrics/victoria-metrics
+        imagePullPolicy: IfNotPresent
+        name: victoriametrics
+        ports:
+        - containerPort: 8428
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8428
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8428
+          initialDelaySeconds: 120
+          timeoutSeconds: 30
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 2000Mi
+          requests:
+            cpu: 2000m
+            memory: 2000Mi
+        volumeMounts:
+        - mountPath: /storage
+          name: storage-volume
+      restartPolicy: Always
+      priorityClassName: system-cluster-critical
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: victoriametrics
+---
+apiVersion: v1
+kind: Service
 metadata:
-  labels:
-    app: victoriametrics
-  name: victoriametrics
-  namespace: kube\-system
+  labels:
+    app: victoriametrics
+  name: victoriametrics
+  namespace: kube-system
 spec:
-  ports:
-  \- name: http
-    port: 8428
-    protocol: TCP
-    targetPort: 8428
-  selector:
-    app: victoriametrics
-  type: ClusterIP
+  ports:
+  - name: http
+    port: 8428
+    protocol: TCP
+    targetPort: 8428
+  selector:
+    app: victoriametrics
+  type: ClusterIP
+
+```
 
 有几个启动参数需要注意：
 
@@ -161,7 +165,13 @@ spec:
 
 为了限定抓取 target 的 namespace，我们需要给 namespace 打上标签，使每个 Prometheus 实例只抓取特定 namespace 的指标。根据上文的方案，需要给 kube\-system 打上标签 monitoring\-role=system：
 
-$ kubectl label ns kube\-system monitoring\-role=system
+
+```bash
+
+$ kubectl label ns kube-system monitoring-role=system
+
+```
+
 
 给其他的 namespace 打上标签 monitoring\-role=others。例如：
 
