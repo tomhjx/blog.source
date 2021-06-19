@@ -8,7 +8,7 @@ services:
         - "4000:4000"
       volumes:
         - ./uploads:/var/www/blog/themes/next/source/uploads
-        - ./themes/next/_config.yml:/var/www/blog/themes/next/_config.yml
+        - ./_config.next.yml:/var/www/blog/_config.next.yml
         - ./_config.yml:/var/www/blog/_config.yml
         - ./scaffolds:/var/www/blog/scaffolds
         - ./source:/var/www/blog/source

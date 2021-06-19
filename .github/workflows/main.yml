@@ -38,9 +38,8 @@ jobs:
         run: |
           docker run \
           -v ${{ github.workspace }}/uploads:/var/www/blog/themes/next/source/uploads \
-          -v ${{ github.workspace }}/themes/next/_config.yml:/var/www/blog/themes/next/_config.yml \
-          -v ${{ github.workspace }}/themes/next/layout/_partials/head/head.swig:/var/www/blog/themes/next/layout/_partials/head/head.swig \
           -v ${{ github.workspace }}/_config.yml:/var/www/blog/_config.yml \
+          -v ${{ github.workspace }}/_config.next.yml:/var/www/blog/_config.next.yml \
           -v ${{ github.workspace }}/scaffolds:/var/www/blog/scaffolds \
           -v ${{ github.workspace }}/source:/var/www/blog/source \
           -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \

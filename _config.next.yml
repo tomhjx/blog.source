@@ -19,7 +19,7 @@ minify: false
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
 custom_file_path:
-  #head: source/_data/head.njk
+  head: source/_data/head.njk
   #header: source/_data/header.njk
   #sidebar: source/_data/sidebar.njk
   #postMeta: source/_data/post-meta.njk
@@ -37,9 +37,10 @@ custom_file_path:
 
 # Schemes
 scheme: Mist
+# scheme: Pisces
 
 # Dark Mode
-darkmode: false
+darkmode: true
 
 
 # ---------------------------------------------------------------
@@ -98,9 +99,8 @@ menu_settings:
 
 sidebar:
   # Sidebar Position.
-  position: left
-  #position: right
-
+  # position: left
+  
   # Manual define the sidebar width. If commented, will be default for:
   # Muse | Mist: 320
   # Pisces | Gemini: 240
@@ -115,8 +115,6 @@ sidebar:
 
   # Sidebar padding in pixels.
   padding: 18
-  # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
-  offset: 12
 
 # Sidebar Avatar
 avatar:
@@ -166,13 +164,13 @@ links:
 toc:
   enable: true
   # Automatically add list number to toc.
-  number: true
-  # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
-  # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
-  expand_all: false
-  # Maximum heading depth of generated toc.
-  max_depth: 6
+  # number: true
+  # # If true, all words will placed on next lines if header width longer then sidebar width.
+  # wrap: false
+  # # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
+  # expand_all: false
+  # # Maximum heading depth of generated toc.
+  # max_depth: 6
 
 
 # ---------------------------------------------------------------
@@ -190,11 +188,11 @@ footer:
   # Icon between year and copyright info.
   icon:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
-    name: fa fa-heart
+    name: fa fa-user
     # If you want to animate the icon, set it to true.
     animated: false
     # Change the color of icon, using Hex Code.
-    color: "#ff0000"
+    color: "#808080"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
   copyright:
@@ -238,8 +236,8 @@ post_meta:
 # Post wordcount display settings
 # Dependencies: https://github.com/next-theme/hexo-word-counter
 symbols_count_time:
-  symbols: false
-  separated_meta: true
+  separated_meta: false
+  item_text_post: false
   item_text_total: false
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
@@ -508,7 +506,7 @@ math:
 
 # Easily enable fast Ajax navigation on your website.
 # For more information: https://github.com/next-theme/pjax
-pjax: false
+pjax: true
 
 # FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.
 # For more information: https://fancyapps.com/fancybox/
@@ -735,7 +733,6 @@ local_search:
   # Preload the search data when the page loads.
   preload: false
 
-
 # ---------------------------------------------------------------
 # Chat Services
 # See: https://theme-next.js.org/docs/third-party-services/chat-services
@@ -818,16 +815,7 @@ mermaid:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  enable: true
-  async: false
-  transition:
-    # All available transition variants: https://theme-next.js.org/animate/
-    post_block: fadeIn
-    post_header: fadeInDown
-    post_body: fadeInDown
-    coll_header: fadeInLeft
-    # Only for Pisces | Gemini.
-    sidebar: fadeInUp
+  enable: false
 
 # Progress bar in the top during page loading.
 # For more information: https://github.com/rstacruz/nprogress
