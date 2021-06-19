@@ -28,6 +28,7 @@ docker-compose exec blog hexo new memoir-post 定时器重启爱奇艺客户端
 ```bash
 
 docker-compose exec blog hexo generate -d
+docker-compose run blog hexo  generate -d
 
 ```
 
