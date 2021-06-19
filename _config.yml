@@ -92,13 +92,6 @@ theme: next
 stylus: 
   compress: true
 
-# Post wordcount display settings
-# Dependencies: https://github.com/willin/hexo-wordcount
-post_wordcount:
-  item_text: true
-  wordcount: true
-  min2read: true
-  
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
