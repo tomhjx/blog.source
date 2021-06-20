@@ -21,14 +21,20 @@ docker-compose exec blog hexo new [layout] <title>
 
 e.g
 
+```bash
+
 docker-compose exec blog hexo new memoir-post 定时器重启爱奇艺客户端
+docker-compose run --rm blog hexo new memoir-post 定时器重启爱奇艺客户端
+
+
+```
 
 ### 发布至git blog
 
 ```bash
 
 docker-compose exec blog hexo generate -d
-docker-compose run blog hexo  generate -d
+docker-compose run --rm blog hexo  generate -d
 
 ```
 
