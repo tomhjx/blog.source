@@ -9,7 +9,7 @@ tags:
   - 历史
   - PHP发展史
   - 技术发展史
-date: 1999-06-19 01:00:00
+date: 1999-06-19 15:00:00
 ---
 
 # 有什么变化
@@ -20,8 +20,11 @@ Andi Gutmans 和 Zeev Suraski 重写了PHP词法解析器，称为“Zend Engine
 
 ## Added
 
-引入Zend Engine
+* Zend Engine
 
+在PHP运行过程中引入了“Zend虚拟机”后，PHP架构发生了变化
+
+![](http://segmentfault.com/img/bVcGi8)
 
 
 # 为了解决什么问题
@@ -33,6 +36,4 @@ Andi Gutmans 和 Zeev Suraski 重写了PHP词法解析器，称为“Zend Engine
 
 * 模块化设计实现解耦
 
-* 词法解析器的核心优化：先预编译，再执行（用空间换时间，通过缓存中间结果来提速）
-
-![](http://segmentfault.com/img/bVcGiX)
+* 词法解析器的核心优化：执行机制划分为编译和执行，先进行预编译(Compile)，然后再执行(Execute)
