@@ -39,6 +39,28 @@ date: 1999-08-09 15:00:00
 * Remove --with-shared-apache (Sascha)
 
 
+
+
+## 修改了什么
+
+* Win32 builds now include the ODBC module built-in (Zeev)
+* Updated hyperwave module, made it thread safe
+* Updated pdflib module, version 0.6 of pdflib no longer supported
+* Updated fdf module
+* Built-in phpinfo() links are now turned off by default. They can be turned on using the allow_builtin_links INI directive (Zeev)
+* Changed phpinfo() to list modules that have no info function (Zeev)
+* Modified array_walk() function so that the userland callback is passed a key and possible user data in addition to the value (Andrei)
+* Children now inherit their parent's constructor, if they do not supply a constructor of their own.
+* Apache php_flag values only recognized 'On' (case sensitive) - changed to case insensitive (Zeev)
+* Merged in gdttf stuff from PHP 3.0 (Sascha)
+* Merged in PHP 3.0 version of str_replace (Sascha)
+* Merged in HP-UX/ANSI compatibility switch from PHP 3.0 (Sascha)
+
+* Improved register_shutdown_function() - you may now supply arguments that will be passed to the shutdown function (Zeev)
+* Improved call_user_func() and call_user_method() - they now support passing arguments by reference (Zeev)
+* Improved ISAPI module to supprt large server variables (Zeev)
+
+
 ## 修复了什么BUG
 
 * Fixed a problem when sending HTTP/1.x header lines using header() (Zeev)
@@ -68,29 +90,6 @@ date: 1999-08-09 15:00:00
 * Fixed implicit connect on the MySQL, mSQL, PostgreSQL and Sybase modules (Zeev)
 
 
-
-## 修改了什么
-
-* Win32 builds now include the ODBC module built-in (Zeev)
-* Updated hyperwave module, made it thread safe
-* Updated pdflib module, version 0.6 of pdflib no longer supported
-* Updated fdf module
-* Built-in phpinfo() links are now turned off by default. They can be turned on using the allow_builtin_links INI directive (Zeev)
-* Changed phpinfo() to list modules that have no info function (Zeev)
-* Modified array_walk() function so that the userland callback is passed a key and possible user data in addition to the value (Andrei)
-* Children now inherit their parent's constructor, if they do not supply a constructor of their own.
-* Apache php_flag values only recognized 'On' (case sensitive) - changed to case insensitive (Zeev)
-* Merged in gdttf stuff from PHP 3.0 (Sascha)
-* Merged in PHP 3.0 version of str_replace (Sascha)
-* Merged in HP-UX/ANSI compatibility switch from PHP 3.0 (Sascha)
-
-
-## 优化了什么
-
-* Improved register_shutdown_function() - you may now supply arguments that will be passed to the shutdown function (Zeev)
-* Improved call_user_func() and call_user_method() - they now support passing arguments by reference (Zeev)
-* Improved ISAPI module to supprt large server variables (Zeev)
-
 # 为了解决什么问题
 
 * BUG
@@ -103,9 +102,14 @@ date: 1999-08-09 15:00:00
 * 轻量化，减少更多的自启动，提供按需使用的空间
 
 * 开放更多的可扩展性
-  * 数据库
+  * 数据库驱动
+  * 提供编写钩子的空间
 
 * 优化查错体系
   * 补充并前置环境、依赖的查错
   * 规范化，完善错误日志等级
   * 补充错误信息提取手段
+
+* 关注关键问题
+  * 内存泄露
+  * 线程安全
