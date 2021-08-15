@@ -16,6 +16,8 @@ date: 2003-06-29 15:00:00
 
 它的核心是 Zend 引擎 2 代，引入了新的对象模型和大量新功能。
 
+http://people.apache.org/~jim/ApacheCons/ApacheCon2002/pdf/suraski-php-02.pdf
+
 ## 新增了什么
 
 *   New php.ini options:
