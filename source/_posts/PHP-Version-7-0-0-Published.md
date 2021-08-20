@@ -10,8 +10,55 @@ tags:
   - PHP发展史
   - 技术发展史
   - LiteSpeed
+  - GCC PGO
 date: 2015-12-03 15:00:00
 ---
+
+# 目标
+
+* 提升性能30%+
+  * 降低内存占用, 提高缓存友好性, 降低执行的指令数
+    * [优化ZVAL](https://www.laruence.com/2018/04/08/3170.html)
+      * ZVAL这个结构体的大小是(在64位系统)24个字节，在zval.value联合体中, zend_object_value是最大的长板, 它导致整个value需要16个字节
+        * 优化结构，在64位环境下,现在只需要16个字节
+
+      * PHP中大量的结构体都是基于Hashtable实现的, 增删改查Hashtable的操作占据了大量的CPU时间, 而字符串要查找首先要求它的Hash值
+        * 把一个字符串的Hash值计算好以后, 就存下来, 避免再次计算
+
+      * PHP的zval大部分都是按值传递, 写时拷贝的值, 但是有俩个例外, 就是对象和资源, 他们永远都是按引用传递, 这样就造成一个问题, 对象和资源在除了zval中的引用计数以外, 还需要一个全局的引用计数, 这样才能保证内存可以回收. 所以在PHP5的时代, 以对象为例, 它有俩套引用计数, 一个是zval中的, 另外一个是obj自身的计数。在获取object时，经过漫长的多次内存读取, 才能获取到真正的objec对象本身，效率低
+        * 对于在zval的value字段中能保存下的值, 就不再对他们进行引用计数了, 而是在拷贝的时候直接赋值, 这样就省掉了大量的引用计数相关的操作
+        * 标志位，方便判断是否需要进行引用计数
+        * PHP7中在取一个对象的类的时候，就会非常方便了, 直接zvalu.value.obj->ce即可，一些类所自定的handler也就可以很便捷的访问到了
+
+      * 因为引用计数是作用在zval的, 那么就会导致如果要拷贝一个字符串类型的zval, 我们别无他法只能复制这个字符串
+        * 用value来保存一个指针, 这个指针指向这个具体的值, 引用计数也随之作用于这个值上, 而不在是作用于zval上了.
+
+      * PHP5的时代, 采用的是写时分离，同一个变量，只要曾经被引用过，再被赋值，就会触发变量复制（分离），拖慢性能
+        * [zval不存储引用计数，不存在写时复制](https://www.laruence.com/2018/04/08/3179.html)
+
+      * zval在PHP5的时代，也常作为临时变量来高频使用，并在使用过程中也会在堆内存分配给它
+        * zval预先分配，移除了MAKE_STD_ZVAL/ALLOC_ZVAL宏, 不再支持存堆内存上申请zval. 函数内部使用的zval要么来自外面输入, 要么使用在栈上分配的临时zval
+
+    * [优化HashTable](https://www.laruence.com/2020/02/25/3182.html)
+
+      * Hashtable在PHP中，应用最多的是保存各种zval, 而PHP5的HashTable设计的太通用
+        * 可以设计为专门为了存储zval而优化, 从而能减少内存占用。
+        * 通过基于位操作来设计存储方案，节省内存
+      * 缓存局部性问题， 因为PHP5的Hashtable的Bucket，包括zval都是独立分配的，并且采用了List来串Hashtable中的所有元素，会导致在遍历或者顺序访问一个数组的时候，缓存不友好。
+        * 数据独立保存到一个连续数组，遍历时就可以顺序访问一块连续的内存,zval直接保存到数组元素中，在绝大部分情况下（不需要外部指针的内容，比如long，bool之类的）就可以不需要任何额外的zval指针解引用了，缓存局部性友好
+
+    * [优化OBJECT](https://www.laruence.com/2020/03/23/5605.html)
+      * 在PHP5中，只有resource和object是引用传递，也就是说在赋值，传递的时候都是传递的本身，也正因为如此，Object和Resource除了使用了Zval的引用计数以外，还采用了一套独立自身的计数系统
+        * zval中直接保存了zend_object对象的指针，统一并简化引用计数方案
+
+    * 编译优化
+      * [GCC PGO](https://www.laruence.com/2015/06/19/3063.html)，尝试分析PGO都做了些什么优化, 然后把一些通用的优化手工Apply到PHP7中
+      * 可通过产品场景训练GCC
+
+# 结果
+
+* 提升性能100%+
+
 
 # 有什么变化
 
@@ -649,3 +696,7 @@ https://www.php.net/manual/zh/install.unix.litespeed.php
 *   Fixed bug [#70322](http://bugs.php.net/70322) (ZipArchive::close() doesn't indicate errors).
 *   Fixed bug [#70350](http://bugs.php.net/70350) (ZipArchive::extractTo allows for directory traversal when creating directories). (CVE-2014-9767)
 *   Fixed bug [#67161](http://bugs.php.net/67161) (ZipArchive::getStream() returns NULL for certain file).
+
+
+# 关键问题及解决思路
+
