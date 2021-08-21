@@ -15,9 +15,9 @@ tags:
 date: 2015-12-03 15:00:00
 ---
 
-# 目标
+# 目标及关键路径
 
-* 提升性能30%+
+* [提升性能，预期提升30%+，实际提升了100%+](https://www.laruence.com/2015/12/04/3083.html)
   * 降低内存占用, 提高缓存友好性, 降低执行的指令数
     * [优化ZVAL](https://www.laruence.com/2018/04/08/3170.html)
       * ZVAL这个结构体的大小是(在64位系统)24个字节，在zval.value联合体中, zend_object_value是最大的长板, 它导致整个value需要16个字节
@@ -60,10 +60,7 @@ date: 2015-12-03 15:00:00
       * 默认的内存是以4KB分页的，而虚拟地址和内存地址是需要转换的， 而这个转换是要查表的，CPU为了加速这个查表过程都会内建TLB（Translation Lookaside Buffer）， 显而易见如果虚拟页越小，表里的条目数也就越多，而TLB大小是有限的，条目数越多TLB的Cache Miss也就会越高
         * 如果我们能启用大内存页就能间接降低这个TLB Cache Miss，[新的Linux Kernel启用Hugepage可以达到这个目的](https://www.laruence.com/2015/10/02/3069.html)
 
-# 结果
-
-* 提升性能100%+
-  * [让PHP7达到最高性能的几个Tips](https://www.laruence.com/2015/12/04/3086.html)
+    * [让PHP7达到最高性能的几个Tips](https://www.laruence.com/2015/12/04/3086.html)
 
 
 # 从 PHP 5.6.x 移植到 PHP 7.0.x
@@ -208,7 +205,7 @@ date: 2015-12-03 15:00:00
 
 * [declare(ticks)](https://www.php.net/manual/zh/control-structures.declare.php#control-structures.declare.ticks) 指示符不再泄漏到不同的编译单元中。
 
-## 弃用
+## 废弃
 
 * PHP4 风格的构造函数（方法名和类名一样）将被弃用，并在将来移除。 如果在类中仅使用了 PHP4 风格的构造函数，PHP7 会产生 E_DEPRECATED 警告。 如果还定义了 __construct() 方法则不受影响。
 
@@ -287,6 +284,8 @@ date: 2015-12-03 15:00:00
 * 允许在克隆表达式上访问对象成员，例如： (clone $foo)->bar()。
 
 # 变化
+
+[原文在这里可以找到](https://www.php.net/ChangeLog-7.php#PHP_7_0)
 
 ## Core
 
