@@ -6,11 +6,12 @@ categories:
   - PHP
 tags:
   - PHP
-  - 历史
+  - PHP7
   - PHP发展史
   - 技术发展史
   - LiteSpeed
-  - GCC PGO
+  - PGO
+  - HugePage
 date: 2015-12-03 15:00:00
 ---
 
@@ -55,12 +56,237 @@ date: 2015-12-03 15:00:00
       * [GCC PGO](https://www.laruence.com/2015/06/19/3063.html)，尝试分析PGO都做了些什么优化, 然后把一些通用的优化手工Apply到PHP7中
       * 可通过产品场景训练GCC
 
+    * 缓存优化
+      * 默认的内存是以4KB分页的，而虚拟地址和内存地址是需要转换的， 而这个转换是要查表的，CPU为了加速这个查表过程都会内建TLB（Translation Lookaside Buffer）， 显而易见如果虚拟页越小，表里的条目数也就越多，而TLB大小是有限的，条目数越多TLB的Cache Miss也就会越高
+        * 如果我们能启用大内存页就能间接降低这个TLB Cache Miss，[新的Linux Kernel启用Hugepage可以达到这个目的](https://www.laruence.com/2015/10/02/3069.html)
+
 # 结果
 
 * 提升性能100%+
+  * [让PHP7达到最高性能的几个Tips](https://www.laruence.com/2015/12/04/3086.html)
 
 
-# 有什么变化
+# 从 PHP 5.6.x 移植到 PHP 7.0.x
+
+[更多细节可以阅读这里](https://www.php.net/manual/zh/migration70.php)
+
+## 不向后兼容的变更
+
+* set_exception_handler() 不再保证收到的一定是 Exception 对象
+
+* 当内部构造器失败的时候，总是抛出异常
+
+* 解析错误会抛出 ParseError 异常。 对于 eval() 函数，需要将其包含到一个 catch 代码块中来处理解析错误。
+
+* 原有的 E_STRICT 警告都被迁移到其他级别。 E_STRICT 常量会被保留，所以调用 error_reporting(E_ALL|E_STRICT) 不会引发错误。
+
+* 对变量、属性和方法的间接调用现在将严格遵循从左到右的顺序来解析，而不是之前的混杂着几个特殊案例的情况。
+
+
+* 关于list()处理方式的变更
+
+  * list() 现在会按照变量定义的顺序来给他们进行赋值，而非反过来的顺序。 通常来说，这只会影响list() 与数组的[]操作符一起使用的案例
+
+  * list() 结构现在不再能是空的。
+
+  * list() 不再能解开字符串（string）变量。 你可以使用str_split()来代替它。
+
+
+* 在 PHP 5中，在以引用方式传递函数参数时，使用冗余的括号对可以隐匿严格标准 的警告。现在，这个警告总会触发。
+
+* foreach发生了细微的变化，控制结构， 主要围绕阵列的内部数组指针和迭代处理的修改。
+
+  * 在PHP7之前，当数组通过 foreach 迭代时，数组指针会移动。现在开始，不再如此
+
+  * 当默认使用通过值遍历数组时，foreach 实际操作的是数组的迭代副本，而非数组本身。这就意味着，foreach 中的操作不会修改原数组的值。
+
+  * 当使用引用遍历数组时，现在 foreach 在迭代中能更好的跟踪变化。
+
+  * 迭代一个非Traversable对象将会与迭代一个引用数组的行为相同。 这将导致在对象添加或删除属性时，foreach通过引用遍历时，有更好的迭代特性也能被应用
+
+
+* Changes to integer handling
+
+  * 在之前，一个八进制字符如果含有无效数字，该无效数字将被静默删节(0128 将被解析为 012). 现在这样的八进制字符将产生解析错误。
+
+  * 以负数形式进行的位移运算将会抛出一个 ArithmeticError
+
+  * 超出 integer 位宽的位移操作（无论哪个方向）将始终得到 0 作为结果。在从前，这一操作是结构依赖的。
+
+  * 之前的版本中，当 0 被做为除数时，无论是除数 (/) 或取模 (%) 操作，都会抛出一个 E_WARNING 错误并返回 false。现在，除法运算符 (/) 会返回一个由 IEEE 754 指定的浮点数：+INF, -INF 或 NAN。取模操作符 (%) 则会抛出一个 DivisionByZeroError 异常，并且不再产生 E_WARNING 错误。
+
+* string处理上的调整
+  * 十六进制字符串不再被认为是数字
+
+  * 由于新的 [Unicode codepoint escape syntax](https://www.php.net/manual/zh/migration70.new-features.php#migration70.new-features.unicode-codepoint-escape-syntax)语法， 紧连着无效序列并包含`\u{` 的字串可能引起致命错误。 为了避免这一报错，应该避免反斜杠开头。
+
+
+* 被移除的函数（Removed functions）
+
+  * 这两个函数从PHP 4.1.0 开始被废弃，应该使用 [call\_user\_func()](https://www.php.net/manual/zh/function.call-user-func.php) 和 [call\_user\_func\_array()](https://www.php.net/manual/zh/function.call-user-func-array.php)。 你也可以考虑使用 [变量函数](https://www.php.net/manual/zh/functions.variable-functions.php) 或者 [`...`](https://www.php.net/manual/zh/functions.arguments.php#functions.variable-arg-list) 操作符。
+
+  * 所有 `ereg` 系列函数被删掉了。 [PCRE](https://www.php.net/manual/zh/book.pcre.php) 作为推荐的替代品。
+
+  * 已废弃的 **mcrypt\_generic\_end()** 函数已被移除，请使用[mcrypt\_generic\_deinit()](https://www.php.net/manual/zh/function.mcrypt-generic-deinit.php)代替。
+
+  * 已废弃的 **mcrypt\_ecb()**, **mcrypt\_cbc()**, **mcrypt\_cfb()** 和 **mcrypt\_ofb()** 函数已被移除，请配合恰当的**`MCRYPT_MODE_*`** 常量来使用 [mcrypt\_decrypt()](https://www.php.net/manual/zh/function.mcrypt-decrypt.php)进行代替。
+
+  * 所有 [ext/mysql](https://www.php.net/manual/zh/book.mysql.php) 函数已被删掉了。 如何选择不同的 MySQL API，详情请见 [选择 MySQL API](https://www.php.net/manual/zh/mysqlinfo.api.choosing.php)。
+
+  * 所有 [ext/mssql](https://www.php.net/manual/zh/migration70.incompatible.php) 函数已被移除。
+
+  * 已废弃的 **datefmt\_set\_timezone\_id()** 和 **IntlDateFormatter::setTimeZoneID()** 函数已被移除，请使用 [datefmt\_set\_timezone()](https://www.php.net/manual/zh/intldateformatter.settimezone.php) 与 [IntlDateFormatter::setTimeZone()](https://www.php.net/manual/zh/intldateformatter.settimezone.php)代替。
+
+  * 移除了 **set\_magic\_quotes\_runtime()** 和它的别名 **magic\_quotes\_runtime()**。 它们在 PHP 5.3.0 中已经被废弃， 并由于 PHP 5.4.0 移除魔术引号（Magic Quotes）而没有用处。
+
+  * 已废弃的 **set\_socket\_blocking()** 函数已被移除，请使用[stream\_set\_blocking()](https://www.php.net/manual/zh/function.stream-set-blocking.php)代替。
+
+  * [dl()](https://www.php.net/manual/zh/function.dl.php)在 PHP-FPM 不再可用，在 CLI 和 embed SAPIs 中仍可用。
+
+  * 以下GD Type1函数被删除, 推荐使用 TrueType 字体和相关的函数作为替代。
+
+    *   **imagepsbbox()**
+    *   **imagepsencodefont()**
+    *   **imagepsextendfont()**
+    *   **imagepsfreefont()**
+    *   **imagepsloadfont()**
+    *   **imagepsslantfont()**
+    *   **imagepstext()**
+
+
+* 被移除掉的 INI 配置指令
+  * always_populate_raw_post_data
+  * asp_tags
+  * `xsl.security_prefs` 指令被移除 在预处理的时候，取而代之的方法 [XsltProcessor::setSecurityPrefs()](https://www.php.net/manual/zh/xsltprocessor.setsecurityprefs.php) 应该被调用到
+
+* new 操作符创建的对象不能以引用方式赋值给变量
+
+* 不能以下列名字来命名类、接口以及 trait：
+
+  *   bool
+  *   int
+  *   float
+  *   string
+  *   **`null`**
+  *   **`true`**
+  *   **`false`**
+
+* 不建议以下列名字来命名类、接口以及 trait，在以后的迭代中，会作为保留关键字： 
+
+  *   resource
+  *   object
+  *   [mixed](https://www.php.net/manual/zh/language.types.declarations.php#language.types.declarations.mixed)
+  *   numeric
+
+* 使用类似 ASP 的标签，以及 script 标签来区分 PHP 代码的方式被移除。
+
+* 在不匹配的上下文中以静态方式调用非静态方法， [在 PHP 5.6 中已经废弃](https://www.php.net/manual/zh/migration56.deprecated.php#migration56.deprecated.incompatible-context)， 但是在 PHP 7.0 中， 会导致被调用方法中未定义 `$this` 变量，以及此行为已经废弃的警告。
+
+* 在使用 [yield](https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield) 关键字的时候，不再需要括号， 并且它变更为右联接操作符，其运算符优先级介于 `print` 和 `=>` 之间。 可以通过使用括号来消除歧义。
+
+* 函数定义不可以包含多个同名参数
+
+* Switch 语句不可以包含多个 default 块
+
+* 当在函数代码中使用 [func\_get\_arg()](https://www.php.net/manual/zh/function.func-get-arg.php) 或 [func\_get\_args()](https://www.php.net/manual/zh/function.func-get-args.php) 函数来检视参数值， 或者使用 [debug\_backtrace()](https://www.php.net/manual/zh/function.debug-backtrace.php) 函数查看回溯跟踪， 以及在异常回溯中所报告的参数值是指参数当前的值（有可能是已经被函数内的代码改变过的值）， 而不再是参数被传入函数时候的原始值了。
+
+* 不再提供 $HTTP\_RAW\_POST\_DATA 变量。 请使用 [`php://input`](https://www.php.net/manual/zh/wrappers.php.php#wrappers.php.input) 作为替代。
+
+* 在 INI 文件中，不再支持以 `#` 开始的注释行， 请使用 `;`（分号）来表示注释。
+
+* JSON 扩展已经被 JSOND 扩展取代。 对于数值的处理，有以下两点需要注意的： 第一，数值不能以点号（.）结束 （例如，数值 34. 必须写作 34.0 或 34）。 第二，如果使用科学计数法表示数值，e 前面必须不是点号（.） （例如，3.e3 必须写作 3.0e3 或 3e3）。 另外，空字符串不再被视作有效的 JSON 字符串。
+
+* 在数值溢出的时候，内部函数将会失败，将浮点数转换为整数的时候，如果浮点数值太大，导致无法以整数表达的情况下， 在之前的版本中，内部函数会直接将整数截断，并不会引发错误。 在 PHP 7.0 中，如果发生这种情况，会引发 E_WARNING 错误，并且返回 null。
+
+* 在自定义会话处理器中，如果函数的返回值不是 false，也不是 -1， 会引发致命错误。现在，如果这些函数的返回值不是布尔值，也不是 -1 或者 0，函数调用结果将被视为失败，并且引发 E_WARNING 错误。
+
+* 由于内部排序算法进行了提升， 可能会导致对比时被视为相等的多个元素之间的顺序不稳定。
+
+* 在循环或者 switch 语句之外使用 break 和 continue 被视为编译型错误（之前视为运行时错误），会引发 E_COMPILE_ERROR 错误。
+
+* Mhash 扩展已经被完全整合进 [Hash](https://www.php.net/manual/zh/book.hash.php) 扩展了。 因此，不要再使用 [extension\_loaded()](https://www.php.net/manual/zh/function.extension-loaded.php) 函数来检测是否支持 MHash 扩展了， 建议使用 [function\_exists()](https://www.php.net/manual/zh/function.function-exists.php) 函数来进行检测。 另外，函数 [get\_loaded\_extensions()](https://www.php.net/manual/zh/function.get-loaded-extensions.php) 以及相关的特性中，也不再报告 和 MHash 扩展相关的信息了。
+
+* [declare(ticks)](https://www.php.net/manual/zh/control-structures.declare.php#control-structures.declare.ticks) 指示符不再泄漏到不同的编译单元中。
+
+## 弃用
+
+* PHP4 风格的构造函数（方法名和类名一样）将被弃用，并在将来移除。 如果在类中仅使用了 PHP4 风格的构造函数，PHP7 会产生 E_DEPRECATED 警告。 如果还定义了 __construct() 方法则不受影响。
+
+* 废弃了 [静态（Static）](https://www.php.net/manual/zh/language.oop5.static.php) 调用未声明成 **static** 的方法，未来可能会彻底移除该功能。
+
+* 废弃了 [password\_hash()](https://www.php.net/manual/zh/function.password-hash.php) 函数中的盐值选项，阻止开发者生成自己的盐值（通常更不安全）。 开发者不传该值时，该函数自己会生成密码学安全的盐值。因此再无必要传入自己自定义的盐值。
+
+* 废弃了 `capture_session_meta` 内的 SSL 上下文选项。 现在可以通过 [stream\_get\_meta\_data()](https://www.php.net/manual/zh/function.stream-get-meta-data.php) 获取 SSL 元数据（metadata）。
+
+* LDAP相关的以下函数已被废弃：
+  * ldap_sort()
+
+* 移除的扩展
+  *   ereg
+  *   mssql
+  *   mysql
+  *   sybase\_ct
+
+* 移除的 SAPI
+  *   aolserver
+  *   apache
+  *   apache\_hooks
+  *   apache2filter
+  *   caudium
+  *   continuity
+  *   isapi
+  *   milter
+  *   nsapi
+  *   phttpd
+  *   pi3web
+  *   roxen
+  *   thttpd
+  *   tux
+  *   webjames
+
+## 新特性
+
+* 标量类型声明
+
+* 返回值类型声明
+
+* 由于日常使用中存在大量同时使用三元表达式和 isset()的情况， 我们添加了null合并运算符 (??) 这个语法糖。如果变量存在且值不为null， 它就会返回自身的值，否则返回它的第二个操作数。
+
+* 太空船操作符用于比较两个表达式。当$a小于、等于或大于$b时它分别返回-1、0或1。 比较的原则是沿用 PHP 的[常规比较规则](https://www.php.net/manual/zh/types.comparisons.php)进行的。
+
+* 通过 define() 定义常量数组
+
+* 现在支持通过new class 来实例化一个匿名类，这可以用来替代一些“用后即焚”的完整类定义。
+
+* 这接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的。
+
+* [Closure::call()](https://www.php.net/manual/zh/closure.call.php) 现在有着更好的性能，简短干练的暂时绑定一个方法到对象上闭包并调用它。
+
+* 为unserialize()提供过滤，这个特性旨在提供更安全的方式解包不可靠的数据。它通过白名单的方式来防止潜在的代码注入。
+
+* 新增加的 [IntlChar](https://www.php.net/manual/zh/class.intlchar.php) 类旨在暴露出更多的 ICU 功能。这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。
+
+* [预期](https://www.php.net/manual/zh/function.assert.php#function.assert.expectations)是向后兼用并增强之前的 [assert()](https://www.php.net/manual/zh/function.assert.php) 的方法。 它使得在生产环境中启用断言为零成本，并且提供当断言失败时抛出特定异常的能力。
+
+* 从同一 [`namespace`](https://www.php.net/manual/zh/language.namespaces.definition.php) 导入的类、函数和常量现在可以通过单个 [`use`](https://www.php.net/manual/zh/language.namespaces.importing.php) 语句 一次性导入了。
+
+* 生成器可以返回表达式，此特性基于 PHP 5.5 版本中引入的生成器特性构建的。 它允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+
+* 现在，只需在最外层生成其中使用 [`yield from`](https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield.from)， 就可以把一个生成器自动委派给其他的生成器， **Traversable** 对象或者 array。
+
+* 新加的函数 [intdiv()](https://www.php.net/manual/zh/function.intdiv.php) 用来进行 整数的除法运算。
+
+* [session\_start()](https://www.php.net/manual/zh/function.session-start.php) 可以接受一个 array 作为参数， 用来覆盖 php.ini 文件中设置的 [会话配置选项](https://www.php.net/manual/zh/session.configuration.php)。
+
+* 在 PHP 7 之前，当使用 [preg\_replace\_callback()](https://www.php.net/manual/zh/function.preg-replace-callback.php) 函数的时候， 由于针对每个正则表达式都要执行回调函数，可能导致过多的分支代码。 而使用新加的 [preg\_replace\_callback\_array()](https://www.php.net/manual/zh/function.preg-replace-callback-array.php) 函数， 可以使得代码更加简洁。
+
+* 新加入两个跨平台的函数： [random\_bytes()](https://www.php.net/manual/zh/function.random-bytes.php) 和 [random\_int()](https://www.php.net/manual/zh/function.random-int.php) 用来产生高安全级别的随机字符串和随机整数。
+
+* 可以使用 list() 函数来展开实现了 ArrayAccess 接口的对象
+
+* 允许在克隆表达式上访问对象成员，例如： (clone $foo)->bar()。
+
+# 变化
 
 ## Core
 
