@@ -96,8 +96,7 @@ date: 2016-12-01 15:06:06
 
 * Return statements without argument in functions which declare a return type now trigger E_COMPILE_ERROR (unless the return type is declared as void), even if the return statement would never be reached.
 
-
-## 废弃
+------------
 
 * mcrypt 扩展已经过时了大约10年，并且用起来很复杂。因此它被废弃并且被 OpenSSL 所取代。 从PHP 7.2起它将被从核心代码中移除并且移到PECL中。
 

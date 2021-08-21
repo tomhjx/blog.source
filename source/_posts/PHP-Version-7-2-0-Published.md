@@ -70,9 +70,7 @@ date: 2017-11-30 15:00:00
 * The `zone` element of the array returned by [date\_parse()](https://www.php.net/manual/zh/function.date-parse.php) and [date\_parse\_from\_format()](https://www.php.net/manual/zh/function.date-parse-from-format.php) represents seconds instead of minutes now, and its sign is inverted. For instance `-120` is now `7200`.
 
 * As of PHP 7.2.34, the names of incoming cookies are no longer url-decoded for security reasons.
-
-
-## 废弃
+---------
 
 * 不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。 在以前，该行为会产生 **`E_NOTICE`**，但现在会产生 **`E_WARNING`**。在下一个 PHP 主版本中，将抛出 [Error](https://www.php.net/manual/zh/class.error.php) 异常。
 

@@ -72,8 +72,7 @@ date: 2018-12-06 15:00:00
 
 * As of PHP 7.3.23, the names of incoming cookies are no longer url-decoded for security reasons.
 
-
-## 废弃
+--------
 
 * 大小写不敏感的常量声明现已被废弃。将 **`true`** 作为第三个参数传递给 [define()](https://www.php.net/manual/zh/function.define.php) 将会导致一个废弃警告。大小写不敏感的使用（在读取时使用一个与声明时不同的大小写方式）也已被废弃。
 

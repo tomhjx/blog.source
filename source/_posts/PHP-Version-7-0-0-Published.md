@@ -205,7 +205,7 @@ date: 2015-12-03 15:00:00
 
 * [declare(ticks)](https://www.php.net/manual/zh/control-structures.declare.php#control-structures.declare.ticks) 指示符不再泄漏到不同的编译单元中。
 
-## 废弃
+-------------
 
 * PHP4 风格的构造函数（方法名和类名一样）将被弃用，并在将来移除。 如果在类中仅使用了 PHP4 风格的构造函数，PHP7 会产生 E_DEPRECATED 警告。 如果还定义了 __construct() 方法则不受影响。
 
