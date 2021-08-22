@@ -10,11 +10,13 @@ tags:
   - 历史
   - PHP发展史
   - 技术发展史
-  - Cryptographic Message Syntax - CMS
-  - Pseudo Terminals - PTY
+  - Cryptographic Message Syntax|CMS
+  - Pseudo Terminals|PTY
   - Socket Pairs
   - PHP Zip
   - PHP Tokenizer
+  - Just-In-Time|JIT
+  - Streaming SIMD Extensions 2|SSE2
 date: 2020-11-26 15:00:00
 ---
 
@@ -368,6 +370,10 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 
 * `CURLOPT_POSTFIELDS` no longer accepts objects as arrays. To interpret an object as an array, perform an explicit `(array)` cast. The same applies to other options accepting arrays as well.
 
+*   现在 CURL 扩展要求 libcurl 版本至少为 7.29.0。
+
+*   移除了 [curl\_version()](https://www.php.net/manual/zh/function.curl-version.php) 废弃的参数 `version`。
+
 
 ### Date and Time
 
@@ -401,6 +407,8 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 *   [enchant\_broker\_free()](https://www.php.net/manual/zh/function.enchant-broker-free.php) and [enchant\_broker\_free\_dict()](https://www.php.net/manual/zh/function.enchant-broker-free-dict.php) are deprecated; unset the object instead.
 
 *   The `ENCHANT_MYSPELL` and `ENCHANT_ISPELL` constants are deprecated.
+
+* 现在环境允许时，enchant 会默认使用 libenchant-2。 仍然支持 libenchant 1，但已经废弃，并将在未来移除。
 
 
 ### Exif
@@ -536,6 +544,8 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 
 
 ### PostgreSQL (PGSQL) / PDO PGSQL
+
+* PGSQL 与 PDO PGSQL 扩展需要 libpq 的版本号至少为 9.1。
 
 *   The deprecated [pg\_connect()](https://www.php.net/manual/zh/function.pg-connect.php) syntax using multiple parameters instead of a connection string is no longer supported.
 
@@ -782,7 +792,18 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 
 ### LibXML
 
-[libxml\_disable\_entity\_loader()](https://www.php.net/manual/zh/function.libxml-disable-entity-loader.php) has been deprecated. As libxml 2.9.0 is now required, external entity loading is guaranteed to be disabled by default, and this function is no longer needed to protect against XXE attacks, unless the (still vulnerable). `LIBXML_NOENT` is used. In that case, it is recommended to refactor the code using [libxml\_set\_external\_entity\_loader()](https://www.php.net/manual/zh/function.libxml-set-external-entity-loader.php) to suppress loading of external entities.
+* [libxml\_disable\_entity\_loader()](https://www.php.net/manual/zh/function.libxml-disable-entity-loader.php) has been deprecated. As libxml 2.9.0 is now required, external entity loading is guaranteed to be disabled by default, and this function is no longer needed to protect against XXE attacks, unless the (still vulnerable). `LIBXML_NOENT` is used. In that case, it is recommended to refactor the code using [libxml\_set\_external\_entity\_loader()](https://www.php.net/manual/zh/function.libxml-set-external-entity-loader.php) to suppress loading of external entities.
+
+### EBCDIC
+
+不再支持 EBCDIC targets，虽然它不太可能还在当初的地方继续运行。
+
+
+### SAPI
+
+* Apache 2 Handler
+  * [PHP 模块从 php7_module 重命名为 php_module。](https://php.watch/versions/8.0/mod_php-rename)
+
 
 
 ## 新特性
@@ -887,6 +908,11 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 
 *   [get\_resource\_id()](https://www.php.net/manual/zh/function.get-resource-id.php) has been added, which returns the same value as `(int) $resource`. It provides the same functionality under a clearer API.
 
+*   [array\_slice()](https://www.php.net/manual/zh/function.array-slice.php) 用于没有空隙的数组时， 将不会扫描整个数组去查找开始的位移（offset）。 在 offset 较大、长度较小时，会显著减少函数的运行时间。
+
+*   当本地化 `LC_CTYPE` 为 `"C"` 时（也是默认值）， [strtolower()](https://www.php.net/manual/zh/function.strtolower.php) 会使用 SIMD 的实现。
+  * [是怎样使用SSE2 (Streaming SIMD Extensions 2) 的实现来提升strtolower性能的呢？](https://www.laruence.com/2020/06/16/5916.html)
+
 
 ### Date and Time
 
@@ -926,7 +952,9 @@ The `IntlDateFormatter::RELATIVE_FULL`, `IntlDateFormatter::RELATIVE_LONG`, `Int
 
 ### OPcache
 
-If the opcache.record\_warnings ini setting is enabled, OPcache will record compile-time warnings and replay them on the next include, even if it is served from cache.
+*  opcache 扩展新增了即时编译(JIT) 支持。
+
+*  If the opcache.record\_warnings ini setting is enabled, OPcache will record compile-time warnings and replay them on the next include, even if it is served from cache.
 
 ### OpenSSL
 
@@ -950,6 +978,13 @@ Added [Cryptographic Message Syntax (CMS)](https://www.vocal.com/secure-communic
     *   [ReflectionParameter::getDefaultValue()](https://www.php.net/manual/zh/reflectionparameter.getdefaultvalue.php)
     *   [ReflectionParameter::isDefaultValueConstant()](https://www.php.net/manual/zh/reflectionparameter.isdefaultvalueconstant.php)
     *   [ReflectionParameter::getDefaultValueConstantName()](https://www.php.net/manual/zh/reflectionparameter.getdefaultvalueconstantname.php)
+
+* 可通过新参数 `filter` 来过滤 [ReflectionClass::getConstants()](https://www.php.net/manual/zh/reflectionclass.getconstants.php) 和 [ReflectionClass::getReflectionConstants()](https://www.php.net/manual/zh/reflectionclass.getreflectionconstants.php) 的返回结果。 新增三个常量，搭配使用：
+
+  *   `ReflectionClassConstant::IS_PUBLIC`
+  *   `ReflectionClassConstant::IS_PROTECTED`
+  *   `ReflectionClassConstant::IS_PRIVATE`
+
 
 ### SQLite3
 
@@ -1035,9 +1070,36 @@ Added [Cryptographic Message Syntax (CMS)](https://www.vocal.com/secure-communic
 
 *   Optional compression / encryption features are now listed in phpinfo.
 
+*   [ZipArchive::addGlob()](https://www.php.net/manual/zh/ziparchive.addglob.php) 和 [ZipArchive::addPattern()](https://www.php.net/manual/zh/ziparchive.addpattern.php) 方法中 `options` 数组参数可接受更多的值：
+
+    *   `flags`
+    *   `comp_method`
+    *   `comp_flags`
+    *   `env_method`
+    *   `enc_password`
+
+*   [ZipArchive::addEmptyDir()](https://www.php.net/manual/zh/ziparchive.addemptydir.php)、[ZipArchive::addFile()](https://www.php.net/manual/zh/ziparchive.addfile.php)、 [ZipArchive::addFromString()](https://www.php.net/manual/zh/ziparchive.addfromstring.php) 方法新增 `flags` 参数。 可用于名称编码 (`ZipArchive::FL_ENC_*`) 与条目（entry）替换 (`ZipArchive::FL_OVERWRITE`)。
+
+*   [ZipArchive::extractTo()](https://www.php.net/manual/zh/ziparchive.extractto.php) 现在会储存文件的修改时间。
+
+### JSON
+
+现在无法禁用 JSON 扩展，将是任意 PHP 版本的内置功能，类似 date 扩展。
+
+### GD
+
+*   [imagepolygon()](https://www.php.net/manual/zh/function.imagepolygon.php)、 [imageopenpolygon()](https://www.php.net/manual/zh/function.imageopenpolygon.php)、[imagefilledpolygon()](https://www.php.net/manual/zh/function.imagefilledpolygon.php) 的参数 `num_points` 现在为可选参数。 这些函数可用三或四个参数去调用。 省略参数时，会按 `count($points)/2` 计算。
+
+*   新增函数 [imagegetinterpolation()](https://www.php.net/manual/zh/function.imagegetinterpolation.php)，可获取当前的插值（interpolation）。
+
+### SimpleXML
+
+现在 [SimpleXMLElement](https://www.php.net/manual/zh/class.simplexmlelement.php) 实现（implements）了 [RecursiveIterator](https://www.php.net/manual/zh/class.recursiveiterator.php) 并吸收了 [SimpleXMLIterator](https://www.php.net/manual/zh/class.simplexmliterator.php) 的功能。 [SimpleXMLIterator](https://www.php.net/manual/zh/class.simplexmliterator.php) 是 [SimpleXMLElement](https://www.php.net/manual/zh/class.simplexmlelement.php) 的一个空扩展。
 
 
+### INI 文件处理的变更
 
+*   com.dotnet\_version 是一个新的 INI 指令，用于选择 [dotnet](https://www.php.net/manual/zh/class.dotnet.php) 对象的 .NET framework 版本。
 
-
+*   zend.exception\_string\_param\_max\_len 是一个新的 INI 指令，用于设置字符串化的调用栈（stack strace）的最大字符串长度。
 
