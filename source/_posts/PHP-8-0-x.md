@@ -911,6 +911,7 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 *   [array\_slice()](https://www.php.net/manual/zh/function.array-slice.php) 用于没有空隙的数组时， 将不会扫描整个数组去查找开始的位移（offset）。 在 offset 较大、长度较小时，会显著减少函数的运行时间。
 
 *   当本地化 `LC_CTYPE` 为 `"C"` 时（也是默认值）， [strtolower()](https://www.php.net/manual/zh/function.strtolower.php) 会使用 SIMD 的实现。
+  * {% post_link 'PHP 8.0.0' %}
   * [是怎样使用SSE2 (Streaming SIMD Extensions 2) 的实现来提升strtolower性能的呢？](https://www.laruence.com/2020/06/16/5916.html)
 
 
@@ -953,6 +954,7 @@ The `IntlDateFormatter::RELATIVE_FULL`, `IntlDateFormatter::RELATIVE_LONG`, `Int
 ### OPcache
 
 *  opcache 扩展新增了即时编译(JIT) 支持。
+  * [PHP8的Opcache JIT要怎样用，有什么要注意，性能提升效果咋样？](https://www.laruence.com/2020/06/27/5963.html)
 
 *  If the opcache.record\_warnings ini setting is enabled, OPcache will record compile-time warnings and replay them on the next include, even if it is served from cache.
 
