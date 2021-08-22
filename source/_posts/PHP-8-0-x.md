@@ -477,10 +477,12 @@ date: 2020-11-26 15:00:00
 
   *   The HTTP stream wrapper as used by functions like [file\_get\_contents()](https://www.php.net/manual/zh/function.file-get-contents.php) now advertises HTTP/1.1 rather than HTTP/1.0 by default. This does not change the behavior of the client, but may cause servers to respond differently. To retain the old behavior, set the `'protocol_version'` stream context option, e.g.
 
-      `<?php
+      ```php
+      <?php
       $ctx = stream_context_create(['http' => ['protocol_version' => '1.0']]);
       echo file_get_contents('http://example.org', false, $ctx);
-      ?>`
+      ?>
+      ```
 
   *   Calling [crypt()](https://www.php.net/manual/zh/function.crypt.php) without an explicit salt is no longer supported. If you would like to produce a strong hash with an auto-generated salt, use [password\_hash()](https://www.php.net/manual/zh/function.password-hash.php) instead.
 
@@ -503,6 +505,28 @@ date: 2020-11-26 15:00:00
   *   `T_COMMENT` tokens will no longer include a trailing newline. The newline will instead be part of a following `T_WHITESPACE` token. It should be noted that `T_COMMENT` is not always followed by whitespace, it may also be followed by `T_CLOSE_TAG` or end-of-file.
 
   *   Namespaced names are now represented using the `T_NAME_QUALIFIED` (`Foo\Bar`), `T_NAME_FULLY_QUALIFIED` (`\Foo\Bar`) and `T_NAME_RELATIVE` (`namespace\Foo\Bar`) tokens. `T_NS_SEPARATOR` is only used for standalone namespace separators, and only syntactially valid in conjunction with group use declarations.
+
+* XMLReader
+
+  * [XMLReader::open()](https://www.php.net/manual/zh/xmlreader.open.php) and [XMLReader::xml()](https://www.php.net/manual/zh/xmlreader.xml.php) are now static methods. They can still be called as instance methods, but inheriting classes need to declare them as static if they override these methods.
+
+* XML-RPC
+
+  * The XML-RPC extension has been moved to PECL and is no longer part of the PHP distribution.
+
+* Zip
+
+  * `ZipArchive::OPSYS_Z_CPM`** has been removed (this name was a typo). Use `ZipArchive::OPSYS_CPM` instead.
+
+* Zlib
+
+  *   [gzgetss()](https://www.php.net/manual/zh/function.gzgetss.php) has been removed.
+
+  *   [zlib.output\_compression](https://www.php.net/manual/zh/zlib.configuration.php#ini.zlib.output-compression) is no longer automatically disabled for `Content-Type: image/*`.
+
+* Windows PHP Test Packs
+
+  * The test runner has been renamed from run-test.php to run-tests.php, to match its name in php-src.
 
 
 ## 新特性
