@@ -27,185 +27,315 @@ date: 2020-11-26 15:00:00
 
 ## 不向后兼容的变更
 
-* 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
+### PHP Core
 
-*   `match` 现在是一个保留字。
+  * 字符串与数字的比较
 
-*   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
+    * 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
 
-*   与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
+      | Comparison | Before | After |
+      | --- | --- | --- |
+      | `0 == "0"` | **`true`** | **`true`** |
+      | `0 == "0.0"` | **`true`** | **`true`** |
+      | `0 == "foo"` | **`true`** | **`false`** |
+      | `0 == ""` | **`true`** | **`false`** |
+      | `42 == " 42"` | **`true`** | **`true`** |
+      | `42 == "42foo"` | **`true`** | **`false`** |
 
-*   不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
+  *   `match` 现在是一个保留字。
 
-*   `(real)` 和 `(unset)` 转换已被移除。
+  *   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
-*   The [track\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors) ini directive has been removed. This means that php\_errormsg is no longer available. The [error\_get\_last()](https://www.php.net/manual/zh/function.error-get-last.php) function may be used instead.
+  *   与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
 
-*   The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
+  *   不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
 
-*   The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
+  *   `(real)` 和 `(unset)` 转换已被移除。
 
-*   The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
+  *   The [track\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors) ini directive has been removed. This means that php\_errormsg is no longer available. The [error\_get\_last()](https://www.php.net/manual/zh/function.error-get-last.php) function may be used instead.
 
-*   [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
+  *   The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
 
-*   [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
+  *   The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
 
-*   The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
+  *   The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
 
-*   The ability to unbind this from proper closures that contain uses of this has also been removed.
+  *   [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
 
-*   The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
+  *   [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
 
-*   The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
+  *   The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
 
-*   Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
+  *   The ability to unbind this from proper closures that contain uses of this has also been removed.
 
-*   The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
+  *   The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
 
-*   [display\_startup\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.display-startup-errors) is now enabled by default.
+  *   The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
 
-*   Using parent inside a class that has no parent will now result in a fatal compile-time error.
+  *   Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
 
-*   The `@` operator will no longer silence fatal errors (`E_ERROR`, `E_CORE_ERROR`, `E_COMPILE_ERROR`, `E_USER_ERROR`, `E_RECOVERABLE_ERROR`, `E_PARSE`). Error handlers that expect error\_reporting to be `0` when `@` is used, should be adjusted to use a mask check instead
+  *   The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
 
-*   `#[` is no longer interpreted as the start of a comment, as this syntax is now used for attributes.
+  *   [display\_startup\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.display-startup-errors) is now enabled by default.
 
-*   Inheritance errors due to incompatible method signatures (LSP violations) will now always generate a fatal error. Previously a warning was generated in some cases.
+  *   Using parent inside a class that has no parent will now result in a fatal compile-time error.
 
-*   The precedence of the concatenation operator has changed relative to bitshifts and addition as well as subtraction.
+  *   The `@` operator will no longer silence fatal errors (`E_ERROR`, `E_CORE_ERROR`, `E_COMPILE_ERROR`, `E_USER_ERROR`, `E_RECOVERABLE_ERROR`, `E_PARSE`). Error handlers that expect error\_reporting to be `0` when `@` is used, should be adjusted to use a mask check instead:
 
-*   Arguments with a default value that resolves to `null` at runtime will no longer implicitly mark the argument type as nullable. Either an explicit nullable type, or an explicit `null` default value has to be used instead.
+      ```php
+      <?php
+      // Replace
+      function my_error_handler($err_no, $err_msg, $filename, $linenum) {
+          if (error_reporting() == 0) {
+              return false; // Silenced
+          }
+          // ...
+      }
 
+      // With
+      function my_error_handler($err_no, $err_msg, $filename, $linenum) {
+          if (!(error_reporting() & $err_no)) {
+              return false; // Silenced
+          }
+          // ...
+      }
+      ?>
+      ```
 
-*   A number of warnings have been converted into [Error](https://www.php.net/manual/zh/class.error.php) exceptions:
+      Additionally, care should be taken that error messages are not displayed in production environments, which can result in information leaks. Please ensure that `display_errors=Off` is used in conjunction with error logging.
 
-    *   Attempting to write to a property of a non-object. Previously this implicitly created an stdClass object for null, false and empty strings.
-    *   Attempting to append an element to an array for which the PHP\_INT\_MAX key is already used.
-    *   Attempting to use an invalid type (array or object) as an array key or string offset.
-    *   Attempting to write to an array index of a scalar value.
-    *   Attempting to unpack a non-array/Traversable.
-    *   Attempting to access unqualified constants which are undefined. Previously, unqualified constant accesses resulted in a warning and were interpreted as strings.
+  *   `#[` is no longer interpreted as the start of a comment, as this syntax is now used for attributes.
 
-*  A number of notices have been converted into warnings:
+  *   Inheritance errors due to incompatible method signatures (LSP violations) will now always generate a fatal error. Previously a warning was generated in some cases.
 
-    *   Attempting to read an undefined variable.
-    *   Attempting to read an undefined property.
-    *   Attempting to read an undefined array key.
-    *   Attempting to read a property of a non-object.
-    *   Attempting to access an array index of a non-array.
-    *   Attempting to convert an array to string.
-    *   Attempting to use a resource as an array key.
-    *   Attempting to use null, a boolean, or a float as a string offset.
-    *   Attempting to read an out-of-bounds string offset.
-    *   Attempting to assign an empty string to a string offset.
+  *   The precedence of the concatenation operator has changed relative to bitshifts and addition as well as subtraction.
 
-*   Attempting to assign multiple bytes to a string offset will now emit a warning.
+      ```php
+      <?php
+      echo "Sum: " . $a + $b;
+      // was previously interpreted as:
+      echo ("Sum: " . $a) + $b;
+      // is now interpreted as:
+      echo "Sum:" . ($a + $b);
+      ?>
+      ```
 
-*   Unexpected characters in source files (such as NUL bytes outside of strings) will now result in a [ParseError](https://www.php.net/manual/zh/class.parseerror.php) exception instead of a compile warning.
+  *   Arguments with a default value that resolves to `null` at runtime will no longer implicitly mark the argument type as nullable. Either an explicit nullable type, or an explicit `null` default value has to be used instead.
 
-*   Uncaught exceptions now go through "clean shutdown", which means that destructors will be called after an uncaught exception.
+      ```php
+      <?php
+      // Replace
+      function test(int $arg = CONST_RESOLVING_TO_NULL) {}
+      // With
+      function test(?int $arg = CONST_RESOLVING_TO_NULL) {}
+      // Or
+      function test(int $arg = null) {}
+      ?>
+      ```
+
+  *   A number of warnings have been converted into [Error](https://www.php.net/manual/zh/class.error.php) exceptions:
+
+      *   Attempting to write to a property of a non-object. Previously this implicitly created an stdClass object for null, false and empty strings.
+      *   Attempting to append an element to an array for which the PHP\_INT\_MAX key is already used.
+      *   Attempting to use an invalid type (array or object) as an array key or string offset.
+      *   Attempting to write to an array index of a scalar value.
+      *   Attempting to unpack a non-array/Traversable.
+      *   Attempting to access unqualified constants which are undefined. Previously, unqualified constant accesses resulted in a warning and were interpreted as strings.
+
+      A number of notices have been converted into warnings:
+
+      *   Attempting to read an undefined variable.
+      *   Attempting to read an undefined property.
+      *   Attempting to read an undefined array key.
+      *   Attempting to read a property of a non-object.
+      *   Attempting to access an array index of a non-array.
+      *   Attempting to convert an array to string.
+      *   Attempting to use a resource as an array key.
+      *   Attempting to use null, a boolean, or a float as a string offset.
+      *   Attempting to read an out-of-bounds string offset.
+      *   Attempting to assign an empty string to a string offset.
 
-*   The compile time fatal error "Only variables can be passed by reference" has been delayed until runtime, and converted into an "Argument cannot be passed by reference" [Error](https://www.php.net/manual/zh/class.error.php) exception.
+  *   Attempting to assign multiple bytes to a string offset will now emit a warning.
 
-*   Some "Only variables should be passed by reference" notices have been converted to "Argument cannot be passed by reference" exception.
+  *   Unexpected characters in source files (such as NUL bytes outside of strings) will now result in a [ParseError](https://www.php.net/manual/zh/class.parseerror.php) exception instead of a compile warning.
 
-*   The generated name for anonymous classes has changed. It will now include the name of the first parent or interface
+  *   Uncaught exceptions now go through "clean shutdown", which means that destructors will be called after an uncaught exception.
 
-* Non-absolute trait method references in trait alias adaptations are now required to be unambiguous
+  *   The compile time fatal error "Only variables can be passed by reference" has been delayed until runtime, and converted into an "Argument cannot be passed by reference" [Error](https://www.php.net/manual/zh/class.error.php) exception.
 
-* The signature of abstract methods defined in traits is now checked against the implementing class method
+  *   Some "Only variables should be passed by reference" notices have been converted to "Argument cannot be passed by reference" exception.
 
-*   Disabled functions are now treated exactly like non-existent functions. Calling a disabled function will report it as unknown, and redefining a disabled function is now possible.
+  *   The generated name for anonymous classes has changed. It will now include the name of the first parent or interface:
 
-*   `data://` stream wrappers are no longer writable, which matches the documented behavior.
+      ```php
+      <?php
+      new class extends ParentClass {};
+      // -> ParentClass@anonymous
+      new class implements FirstInterface, SecondInterface {};
+      // -> FirstInterface@anonymous
+      new class {};
+      // -> class@anonymous
+      ?>
+      ```
 
-*   The arithmetic and bitwise operators `+`, `-`, `*`, `/`, `**`, `%`, `<<`, `>>`, `&`, `|`, `^`, `~`, `++`, `--` will now consistently throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php) when one of the operands is an array, [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php) or non-overloaded object. The only exception to this is the array `+` array merge operation, which remains supported.
+      The name shown above is still followed by a NUL byte and a unique suffix.
 
-*   Float to string casting will now always behave locale-independently.
+  *   Non-absolute trait method references in trait alias adaptations are now required to be unambiguous:
 
-* Support for deprecated curly braces for offset access has been removed.
+      ```php
+      <?php
+      class X {
+          use T1, T2 {
+              func as otherFunc;
+          }
+          function func() {}
+      }
+      ?>
+      ```
 
-*   Applying the final modifier on a private method will now produce a warning unless that method is the constructor.
+      If both `T1::func()` and `T2::func()` exist, this code was previously silently accepted, and func was assumed to refer to `T1::func`. Now it will generate a fatal error instead, and either `T1::func` or `T2::func` needs to be written explicitly.
 
-*   If an object constructor [exit()](https://www.php.net/manual/zh/function.exit.php)s, the object destructor will no longer be called. This matches the behavior when the constructor throws.
+  *   The signature of abstract methods defined in traits is now checked against the implementing class method:
 
-*   Namespaced names can no longer contain whitespace: While `Foo\Bar` will be recognized as a namespaced name, `Foo \ Bar` will not. Conversely, reserved keywords are now permitted as namespace segments, which may also change the interpretation of code: `new\x` is now the same as `constant('new\x')`, not `new \x()`.
+      ```php
+      
+      <?php
+      trait MyTrait {
+          abstract private function neededByTrait(): string;
+      }
 
-*   Nested ternaries now require explicit parentheses.
+      class MyClass {
+          use MyTrait;
 
-*   [debug\_backtrace()](https://www.php.net/manual/zh/function.debug-backtrace.php) and [Exception::getTrace()](https://www.php.net/manual/zh/exception.gettrace.php) will no longer provide references to arguments. It will not be possible to change function arguments through the backtrace.
+          // Error, because of return type mismatch.
+          private function neededByTrait(): int { return 42; }
+      }
+      ?>
+      ```
 
-*   Numeric string handling has been altered to be more intuitive and less error-prone. Trailing whitespace is now allowed in numeric strings for consistency with how leading whitespace is treated. This mostly affects:
+  *   Disabled functions are now treated exactly like non-existent functions. Calling a disabled function will report it as unknown, and redefining a disabled function is now possible.
 
-    *   The [is\_numeric()](https://www.php.net/manual/zh/function.is-numeric.php) function
-    *   String-to-string comparisons
-    *   Type declarations
-    *   Increment and decrement operations
-    *   Arithmetic operations
-    *   Bitwise operations
+  *   `data://` stream wrappers are no longer writable, which matches the documented behavior.
 
-*   Magic Methods will now have their arguments and return types checked if they have them declared. The signatures should match the following list:
+  *   The arithmetic and bitwise operators `+`, `-`, `*`, `/`, `**`, `%`, `<<`, `>>`, `&`, `|`, `^`, `~`, `++`, `--` will now consistently throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php) when one of the operands is an array, [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php) or non-overloaded object. The only exception to this is the array `+` array merge operation, which remains supported.
 
-    *   `__call(string $name, array $arguments): mixed`
-    *   `__callStatic(string $name, array $arguments): mixed`
-    *   `__clone(): void`
-    *   `__debugInfo(): ?array`
-    *   `__get(string $name): mixed`
-    *   `__invoke(mixed $arguments): mixed`
-    *   `__isset(string $name): bool`
-    *   `__serialize(): array`
-    *   `__set(string $name, mixed $value): void`
-    *   `__set_state(array $properties): object`
-    *   `__sleep(): array`
-    *   `__unserialize(array $data): void`
-    *   `__unset(string $name): void`
-    *   `__wakeup(): void`
+  *   Float to string casting will now always behave locale-independently.
 
-*   [call\_user\_func\_array()](https://www.php.net/manual/zh/function.call-user-func-array.php) array keys will now be interpreted as parameter names, instead of being silently ignored.
+      ```php
+      <?php
+      setlocale(LC_ALL, "de_DE");
+      $f = 3.14;
+      echo $f, "\n";
+      // Previously: 3,14
+      // Now:        3.14
+      ?>
+      ```
 
-*   Declaring a function called `assert()` inside a namespace is no longer allowed, and issues `E_COMPILE_ERROR`. The [assert()](https://www.php.net/manual/zh/function.assert.php) function is subject to special handling by the engine, which may lead to inconsistent behavior when defining a namespaced function with the same name.
+      See [printf()](https://www.php.net/manual/zh/function.printf.php), [number\_format()](https://www.php.net/manual/zh/function.number-format.php) and **NumberFormatter()** for ways to customize number formatting.
 
-* Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s have been migrated to objects. Return value checks using [is\_resource()](https://www.php.net/manual/zh/function.is-resource.php) should be replaced with checks for `false`.
+  *   Support for deprecated curly braces for offset access has been removed.
 
-  *   [curl\_init()](https://www.php.net/manual/zh/function.curl-init.php) will now return a [CurlHandle](https://www.php.net/manual/zh/class.curlhandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_close()](https://www.php.net/manual/zh/function.curl-close.php) function no longer has an effect, instead the [CurlHandle](https://www.php.net/manual/zh/class.curlhandle.php) instance is automatically destroyed if it is no longer referenced.
+      ```php
+      <?php
+      // Instead of:
+      $array{0};
+      $array{"key"};
+      // Write:
+      $array[0];
+      $array["key"];
+      ?>
+      ```
 
-  *   [curl\_multi\_init()](https://www.php.net/manual/zh/function.curl-multi-init.php) will now return a [CurlMultiHandle](https://www.php.net/manual/zh/class.curlmultihandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_multi\_close()](https://www.php.net/manual/zh/function.curl-multi-close.php) function no longer has an effect, instead the [CurlMultiHandle](https://www.php.net/manual/zh/class.curlmultihandle.php) instance is automatically destroyed if it is no longer referenced.
+  *   Applying the final modifier on a private method will now produce a warning unless that method is the constructor.
 
-  *   [curl\_share\_init()](https://www.php.net/manual/zh/function.curl-share-init.php) will now return a [CurlShareHandle](https://www.php.net/manual/zh/class.curlsharehandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_share\_close()](https://www.php.net/manual/zh/function.curl-share-close.php) function no longer has an effect, instead the [CurlShareHandle](https://www.php.net/manual/zh/class.curlsharehandle.php) instance is automatically destroyed if it is no longer referenced.
+  *   If an object constructor [exit()](https://www.php.net/manual/zh/function.exit.php)s, the object destructor will no longer be called. This matches the behavior when the constructor throws.
 
-  *   [enchant\_broker\_init()](https://www.php.net/manual/zh/function.enchant-broker-init.php) will now return an [EnchantBroker](https://www.php.net/manual/zh/class.enchantbroker.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+  *   Namespaced names can no longer contain whitespace: While `Foo\Bar` will be recognized as a namespaced name, `Foo \ Bar` will not. Conversely, reserved keywords are now permitted as namespace segments, which may also change the interpretation of code: `new\x` is now the same as `constant('new\x')`, not `new \x()`.
 
-  *   [enchant\_broker\_request\_dict()](https://www.php.net/manual/zh/function.enchant-broker-request-dict.php) and [enchant\_broker\_request\_pwl\_dict()](https://www.php.net/manual/zh/function.enchant-broker-request-pwl-dict.php) will now return an [EnchantDictionary](https://www.php.net/manual/zh/class.enchantdictionary.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+  *   Nested ternaries now require explicit parentheses.
 
-  *   The GD extension now uses [GdImage](https://www.php.net/manual/zh/class.gdimage.php) objects as the underlying data structure for images, rather than [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s. The [imagedestroy()](https://www.php.net/manual/zh/function.imagedestroy.php) function no longer has an effect; instead the [GdImage](https://www.php.net/manual/zh/class.gdimage.php) instance is automatically destroyed if it is no longer referenced.
+  *   [debug\_backtrace()](https://www.php.net/manual/zh/function.debug-backtrace.php) and [Exception::getTrace()](https://www.php.net/manual/zh/exception.gettrace.php) will no longer provide references to arguments. It will not be possible to change function arguments through the backtrace.
 
-  *   [openssl\_x509\_read()](https://www.php.net/manual/zh/function.openssl-x509-read.php) and [openssl\_csr\_sign()](https://www.php.net/manual/zh/function.openssl-csr-sign.php) will now return an [OpenSSLCertificate](https://www.php.net/manual/zh/class.opensslcertificate.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [openssl\_x509\_free()](https://www.php.net/manual/zh/function.openssl-x509-free.php) function is deprecated and no longer has an effect, instead the [OpenSSLCertificate](https://www.php.net/manual/zh/class.opensslcertificate.php) instance is automatically destroyed if it is no longer referenced.
+  *   Numeric string handling has been altered to be more intuitive and less error-prone. Trailing whitespace is now allowed in numeric strings for consistency with how leading whitespace is treated. This mostly affects:
 
-  *   [openssl\_csr\_new()](https://www.php.net/manual/zh/function.openssl-csr-new.php) will now return an [OpenSSLCertificateSigningRequest](https://www.php.net/manual/zh/class.opensslcertificatesigningrequest.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+      *   The [is\_numeric()](https://www.php.net/manual/zh/function.is-numeric.php) function
+      *   String-to-string comparisons
+      *   Type declarations
+      *   Increment and decrement operations
 
-  *   [openssl\_pkey\_new()](https://www.php.net/manual/zh/function.openssl-pkey-new.php) will now return an [OpenSSLAsymmetricKey](https://www.php.net/manual/zh/class.opensslasymmetrickey.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [openssl\_pkey\_free()](https://www.php.net/manual/zh/function.openssl-pkey-free.php) function is deprecated and no longer has an effect, instead the [OpenSSLAsymmetricKey](https://www.php.net/manual/zh/class.opensslasymmetrickey.php) instance is automatically destroyed if it is no longer referenced.
+      The concept of a "leading-numeric string" has been mostly dropped; the cases where this remains exist in order to ease migration. Strings which emitted an `E_NOTICE` "A non well-formed numeric value encountered" will now emit an `E_WARNING` "A non-numeric value encountered" and all strings which emitted an `E_WARNING` "A non-numeric value encountered" will now throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php). This mostly affects:
 
-  *   [shmop\_open()](https://www.php.net/manual/zh/function.shmop-open.php) will now return a [Shmop](https://www.php.net/manual/zh/class.shmop.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [shmop\_close()](https://www.php.net/manual/zh/function.shmop-close.php) function no longer has an effect, and is deprecated; instead the [Shmop](https://www.php.net/manual/zh/class.shmop.php) instance is automatically destroyed if it is no longer referenced.
+      *   Arithmetic operations
+      *   Bitwise operations
 
-  *   [socket\_create()](https://www.php.net/manual/zh/function.socket-create.php), [socket\_create\_listen()](https://www.php.net/manual/zh/function.socket-create-listen.php), [socket\_accept()](https://www.php.net/manual/zh/function.socket-accept.php), [socket\_import\_stream()](https://www.php.net/manual/zh/function.socket-import-stream.php), [socket\_addrinfo\_connect()](https://www.php.net/manual/zh/function.socket-addrinfo-connect.php), [socket\_addrinfo\_bind()](https://www.php.net/manual/zh/function.socket-addrinfo-bind.php), and [socket\_wsaprotocol\_info\_import()](https://www.php.net/manual/zh/function.socket-wsaprotocol-info-import.php) will now return a [Socket](https://www.php.net/manual/zh/class.socket.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). [socket\_addrinfo\_lookup()](https://www.php.net/manual/zh/function.socket-addrinfo-lookup.php) will now return an array of [AddressInfo](https://www.php.net/manual/zh/class.addressinfo.php) objects rather than [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s.
+      This `E_WARNING` to [TypeError](https://www.php.net/manual/zh/class.typeerror.php) change also affects the `E_WARNING` "Illegal string offset 'string'" for illegal string offsets. The behavior of explicit casts to int/float from strings has not been changed.
 
-  *   [msg\_get\_queue()](https://www.php.net/manual/zh/function.msg-get-queue.php) will now return an SysvMessageQueue object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+  *   Magic Methods will now have their arguments and return types checked if they have them declared. The signatures should match the following list:
 
-  *   [sem\_get()](https://www.php.net/manual/zh/function.sem-get.php) will now return an SysvSemaphore object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+      *   `__call(string $name, array $arguments): mixed`
+      *   `__callStatic(string $name, array $arguments): mixed`
+      *   `__clone(): void`
+      *   `__debugInfo(): ?array`
+      *   `__get(string $name): mixed`
+      *   `__invoke(mixed $arguments): mixed`
+      *   `__isset(string $name): bool`
+      *   `__serialize(): array`
+      *   `__set(string $name, mixed $value): void`
+      *   `__set_state(array $properties): object`
+      *   `__sleep(): array`
+      *   `__unserialize(array $data): void`
+      *   `__unset(string $name): void`
+      *   `__wakeup(): void`
 
-  *   [shm\_attach()](https://www.php.net/manual/zh/function.shm-attach.php) will now return an SysvSharedMemory object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+  *   [call\_user\_func\_array()](https://www.php.net/manual/zh/function.call-user-func-array.php) array keys will now be interpreted as parameter names, instead of being silently ignored.
 
-  *   [xml\_parser\_create()](https://www.php.net/manual/zh/function.xml-parser-create.php) and [xml\_parser\_create\_ns()](https://www.php.net/manual/zh/function.xml-parser-create-ns.php) will now return an [XMLParser](https://www.php.net/manual/zh/class.xmlparser.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [xml\_parser\_free()](https://www.php.net/manual/zh/function.xml-parser-free.php) function no longer has an effect, instead the XmlParser instance is automatically destroyed if it is no longer referenced.
+  *   Declaring a function called `assert()` inside a namespace is no longer allowed, and issues `E_COMPILE_ERROR`. The [assert()](https://www.php.net/manual/zh/function.assert.php) function is subject to special handling by the engine, which may lead to inconsistent behavior when defining a namespaced function with the same name.
 
-  *   The [XMLWriter](https://www.php.net/manual/zh/book.xmlwriter.php) functions now accept and return, respectively, [XMLWriter](https://www.php.net/manual/zh/class.xmlwriter.php) objects instead of [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s.
 
-  *   [inflate\_init()](https://www.php.net/manual/zh/function.inflate-init.php) will now return an [InflateContext](https://www.php.net/manual/zh/class.inflatecontext.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+*  Resource to Object Migration 
 
-  *   [deflate\_init()](https://www.php.net/manual/zh/function.deflate-init.php) will now return a [DeflateContext](https://www.php.net/manual/zh/class.deflatecontext.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+  * Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s have been migrated to objects. Return value checks using [is\_resource()](https://www.php.net/manual/zh/function.is-resource.php) should be replaced with checks for `false`.
 
+    *   [curl\_init()](https://www.php.net/manual/zh/function.curl-init.php) will now return a [CurlHandle](https://www.php.net/manual/zh/class.curlhandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_close()](https://www.php.net/manual/zh/function.curl-close.php) function no longer has an effect, instead the [CurlHandle](https://www.php.net/manual/zh/class.curlhandle.php) instance is automatically destroyed if it is no longer referenced.
 
-* The ability to import case-insensitive constants from type libraries has been removed. The second argument to [com\_load\_typelib()](https://www.php.net/manual/zh/function.com-load-typelib.php) may no longer be false; [com.autoregister\_casesensitive](https://www.php.net/manual/zh/com.configuration.php#ini.com.autoregister-casesensitive) may no longer be disabled; case-insensitive markers in [com.typelib\_file](https://www.php.net/manual/zh/com.configuration.php#ini.com.typelib-file) are ignored.
+    *   [curl\_multi\_init()](https://www.php.net/manual/zh/function.curl-multi-init.php) will now return a [CurlMultiHandle](https://www.php.net/manual/zh/class.curlmultihandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_multi\_close()](https://www.php.net/manual/zh/function.curl-multi-close.php) function no longer has an effect, instead the [CurlMultiHandle](https://www.php.net/manual/zh/class.curlmultihandle.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [curl\_share\_init()](https://www.php.net/manual/zh/function.curl-share-init.php) will now return a [CurlShareHandle](https://www.php.net/manual/zh/class.curlsharehandle.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [curl\_share\_close()](https://www.php.net/manual/zh/function.curl-share-close.php) function no longer has an effect, instead the [CurlShareHandle](https://www.php.net/manual/zh/class.curlsharehandle.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [enchant\_broker\_init()](https://www.php.net/manual/zh/function.enchant-broker-init.php) will now return an [EnchantBroker](https://www.php.net/manual/zh/class.enchantbroker.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [enchant\_broker\_request\_dict()](https://www.php.net/manual/zh/function.enchant-broker-request-dict.php) and [enchant\_broker\_request\_pwl\_dict()](https://www.php.net/manual/zh/function.enchant-broker-request-pwl-dict.php) will now return an [EnchantDictionary](https://www.php.net/manual/zh/class.enchantdictionary.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   The GD extension now uses [GdImage](https://www.php.net/manual/zh/class.gdimage.php) objects as the underlying data structure for images, rather than [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s. The [imagedestroy()](https://www.php.net/manual/zh/function.imagedestroy.php) function no longer has an effect; instead the [GdImage](https://www.php.net/manual/zh/class.gdimage.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [openssl\_x509\_read()](https://www.php.net/manual/zh/function.openssl-x509-read.php) and [openssl\_csr\_sign()](https://www.php.net/manual/zh/function.openssl-csr-sign.php) will now return an [OpenSSLCertificate](https://www.php.net/manual/zh/class.opensslcertificate.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [openssl\_x509\_free()](https://www.php.net/manual/zh/function.openssl-x509-free.php) function is deprecated and no longer has an effect, instead the [OpenSSLCertificate](https://www.php.net/manual/zh/class.opensslcertificate.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [openssl\_csr\_new()](https://www.php.net/manual/zh/function.openssl-csr-new.php) will now return an [OpenSSLCertificateSigningRequest](https://www.php.net/manual/zh/class.opensslcertificatesigningrequest.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [openssl\_pkey\_new()](https://www.php.net/manual/zh/function.openssl-pkey-new.php) will now return an [OpenSSLAsymmetricKey](https://www.php.net/manual/zh/class.opensslasymmetrickey.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [openssl\_pkey\_free()](https://www.php.net/manual/zh/function.openssl-pkey-free.php) function is deprecated and no longer has an effect, instead the [OpenSSLAsymmetricKey](https://www.php.net/manual/zh/class.opensslasymmetrickey.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [shmop\_open()](https://www.php.net/manual/zh/function.shmop-open.php) will now return a [Shmop](https://www.php.net/manual/zh/class.shmop.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [shmop\_close()](https://www.php.net/manual/zh/function.shmop-close.php) function no longer has an effect, and is deprecated; instead the [Shmop](https://www.php.net/manual/zh/class.shmop.php) instance is automatically destroyed if it is no longer referenced.
+
+    *   [socket\_create()](https://www.php.net/manual/zh/function.socket-create.php), [socket\_create\_listen()](https://www.php.net/manual/zh/function.socket-create-listen.php), [socket\_accept()](https://www.php.net/manual/zh/function.socket-accept.php), [socket\_import\_stream()](https://www.php.net/manual/zh/function.socket-import-stream.php), [socket\_addrinfo\_connect()](https://www.php.net/manual/zh/function.socket-addrinfo-connect.php), [socket\_addrinfo\_bind()](https://www.php.net/manual/zh/function.socket-addrinfo-bind.php), and [socket\_wsaprotocol\_info\_import()](https://www.php.net/manual/zh/function.socket-wsaprotocol-info-import.php) will now return a [Socket](https://www.php.net/manual/zh/class.socket.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). [socket\_addrinfo\_lookup()](https://www.php.net/manual/zh/function.socket-addrinfo-lookup.php) will now return an array of [AddressInfo](https://www.php.net/manual/zh/class.addressinfo.php) objects rather than [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s.
+
+    *   [msg\_get\_queue()](https://www.php.net/manual/zh/function.msg-get-queue.php) will now return an SysvMessageQueue object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [sem\_get()](https://www.php.net/manual/zh/function.sem-get.php) will now return an SysvSemaphore object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [shm\_attach()](https://www.php.net/manual/zh/function.shm-attach.php) will now return an SysvSharedMemory object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [xml\_parser\_create()](https://www.php.net/manual/zh/function.xml-parser-create.php) and [xml\_parser\_create\_ns()](https://www.php.net/manual/zh/function.xml-parser-create-ns.php) will now return an [XMLParser](https://www.php.net/manual/zh/class.xmlparser.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php). The [xml\_parser\_free()](https://www.php.net/manual/zh/function.xml-parser-free.php) function no longer has an effect, instead the XmlParser instance is automatically destroyed if it is no longer referenced.
+
+    *   The [XMLWriter](https://www.php.net/manual/zh/book.xmlwriter.php) functions now accept and return, respectively, [XMLWriter](https://www.php.net/manual/zh/class.xmlwriter.php) objects instead of [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php)s.
+
+    *   [inflate\_init()](https://www.php.net/manual/zh/function.inflate-init.php) will now return an [InflateContext](https://www.php.net/manual/zh/class.inflatecontext.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+    *   [deflate\_init()](https://www.php.net/manual/zh/function.deflate-init.php) will now return a [DeflateContext](https://www.php.net/manual/zh/class.deflatecontext.php) object rather than a [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php).
+
+
+* COM and .Net (Windows)
+
+  * The ability to import case-insensitive constants from type libraries has been removed. The second argument to [com\_load\_typelib()](https://www.php.net/manual/zh/function.com-load-typelib.php) may no longer be false; [com.autoregister\_casesensitive](https://www.php.net/manual/zh/com.configuration.php#ini.com.autoregister-casesensitive) may no longer be disabled; case-insensitive markers in [com.typelib\_file](https://www.php.net/manual/zh/com.configuration.php#ini.com.typelib-file) are ignored.
 
 
 * `CURLOPT_POSTFIELDS` no longer accepts objects as arrays. To interpret an object as an array, perform an explicit `(array)` cast. The same applies to other options accepting arrays as well.
@@ -516,7 +646,7 @@ date: 2020-11-26 15:00:00
 
 * Zip
 
-  * `ZipArchive::OPSYS_Z_CPM`** has been removed (this name was a typo). Use `ZipArchive::OPSYS_CPM` instead.
+  * `ZipArchive::OPSYS_Z_CPM` has been removed (this name was a typo). Use `ZipArchive::OPSYS_CPM` instead.
 
 * Zlib
 
