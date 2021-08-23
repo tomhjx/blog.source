@@ -121,28 +121,3 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
-  plugins:
-    - plugin:
-        name: markdown-it-toc-and-anchor
-        enable: true
-        options:
-          tocClassName: 'toc'
-          anchorClassName: 'anchor'
-    - plugin:
-        name: markdown-it-multimd-table
-        enable: true
-        options:
-          multiline: true
-          rowspan: true
-          headerless: true
-    - plugin:
-        name: ./markdown-it-furigana
-        enable: true
-        options:
-          fallbackParens: "()"
-    - plugin:
-        name: ./markdown-it-spoiler
-        enable: true
-    - plugin:
-        name: markdown-it-footnote
-        enable: true
