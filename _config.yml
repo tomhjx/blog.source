@@ -89,39 +89,6 @@ feed:
   type: atom
   path: atom.xml
   limit: 0
-
-# opitions for renderer
-markdown:
-  render:
-    html: false
-    xhtmlOut: true
-    breaks: true
-    linkify: true
-    typographer: 
-    quotes: '“”‘’'
-  plugins:
-    - plugin:
-        name: markdown-it-toc-and-anchor
-        enable: true
-        options:
-          tocClassName: 'toc'
-          anchorClassName: 'anchor'
-    - plugin:
-        name: markdown-it-multimd-table
-        enable: true
-        options:
-          multiline: true
-          rowspan: true
-          headerless: true
-    - plugin:
-        name: ./markdown-it-furigana
-        enable: true
-        options:
-          fallbackParens: "()"
-    - plugin:
-        name: ./markdown-it-spoiler
-        enable: true
-
 # options for minify
 minify:
   html:
@@ -142,3 +109,36 @@ minify:
     compress:
     exclude:
       - '**/*.min.js'
+
+
+# opitions for renderer
+markdown:
+  render:
+    html: false
+    xhtmlOut: true
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - plugin:
+        name: markdown-it-toc-and-anchor
+        enable: true
+        options:
+          tocClassName: 'toc'
+          anchorClassName: 'anchor'
+    - plugin:
+        name: markdown-it-multimd-table
+        enable: true
+        options:
+          multiline: true
+          rowspan: true
+          headerless: true
+    - plugin:
+      name: markdown-it-furigana
+      enable: true
+      options:
+        fallbackParens: "()"
+    - plugin:
+        name: markdown-it-spoiler
+        enable: true
