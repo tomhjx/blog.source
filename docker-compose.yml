@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   blog:
-      image: tomhjx/hexo:5.4.0-next-8.7.0-centos-7-beta.1
+      image: tomhjx/hexo:5.4.0-next-8.7.0-centos-7-beta.2
       command: ["hexo", "server", "--debug"]
       restart: always
       ports:
