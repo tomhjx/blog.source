@@ -91,7 +91,7 @@ feed:
   limit: 0
 
 markdown:
-  preset: 'default'
+  preset: 'commonmark'
   render:
     html: true
     xhtmlOut: false
