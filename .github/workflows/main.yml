@@ -45,6 +45,6 @@ jobs:
           -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
           -v ${HOME}/.ssh/known_hosts:/root/.ssh/known_hosts \
           -v ${HOME}/.gitconfig:/root/.gitconfig \
-          tomhjx/hexo:tomhjx/hexo:5.4.0-next-8.7.0-centos-7-beta.2 /bin/bash -c "hexo generate -d"
+          tomhjx/hexo:5.4.0-next-8.7.0-centos-7-beta.2 /bin/bash -c "hexo generate -d"
 
 
