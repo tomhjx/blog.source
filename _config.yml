@@ -102,6 +102,17 @@ markdown:
   enable_rules:
   disable_rules:
   plugins:
+    - markdown-it-abbr
+    - markdown-it-abbr
+    - markdown-it-cjk-breaks
+    - markdown-it-container
+    - markdown-it-deflist
+    - markdown-it-emoji
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-mark
+    - markdown-it-sub
+    - markdown-it-sup
   anchors:
     level: 2
     collisionSuffix: ''
