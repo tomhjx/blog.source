@@ -90,6 +90,7 @@ feed:
   path: atom.xml
   limit: 0
 # options for minify
+# https://www.npmjs.com/package/hexo-renderer-multi-markdown-it
 minify:
   html:
     enable: true
@@ -135,10 +136,13 @@ markdown:
           rowspan: true
           headerless: true
     - plugin:
-      name: markdown-it-furigana
-      enable: true
-      options:
-        fallbackParens: "()"
+        name: ./markdown-it-furigana
+        enable: true
+        options:
+          fallbackParens: "()"
     - plugin:
-        name: markdown-it-spoiler
+        name: ./markdown-it-spoiler
+        enable: true
+    - plugin:
+        name: markdown-it-footnote
         enable: true
