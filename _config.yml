@@ -113,11 +113,11 @@ minify:
 
 
 # opitions for renderer
-markdown:
-  render:
-    html: false
-    xhtmlOut: true
-    breaks: true
-    linkify: true
-    typographer: true
-    quotes: '“”‘’'
+# markdown:
+#   render:
+#     html: false
+#     xhtmlOut: true
+#     breaks: true
+#     linkify: true
+#     typographer: true
+#     quotes: '“”‘’'
