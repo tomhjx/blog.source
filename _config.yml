@@ -45,13 +45,10 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: false
+  enable: true
   line_number: false
   auto_detect: false
   tab_replace:
-prismjs:
-  enable: false
-
 
 # Category & Tag
 default_category: 未分类
@@ -92,58 +89,25 @@ feed:
   type: atom
   path: atom.xml
   limit: 0
-# options for minify
-# https://www.npmjs.com/package/hexo-renderer-multi-markdown-it
-minify:
-  html:
-    enable: true
-    exclude:
-      - '**/json.ejs'
-      - '**/atom.ejs'
-      - '**/rss.ejs'
-  css:
-    enable: true
-    exclude:
-      - '**/*.min.css'
-  js:
-    enable: true
-    mangle:
-      toplevel: true
-    output:
-    compress:
-    exclude:
-      - '**/*.min.js'
 
-# opitions for renderer
 markdown:
+  preset: 'default'
   render:
     html: false
-    xhtmlOut: true
+    xhtmlOut: false
     breaks: true
     linkify: true
-    typographer: 
+    typographer: true
     quotes: '“”‘’'
+  enable_rules:
+  disable_rules:
   plugins:
-    - plugin:
-        name: markdown-it-toc-and-anchor
-        enable: true
-        options:
-          tocClassName: 'toc'
-          anchorClassName: 'anchor'
-    - plugin:
-        name: markdown-it-multimd-table
-        enable: true
-        options:
-          multiline: true
-          rowspan: true
-          headerless: true
-    - plugin:
-        name: ./markdown-it-furigana
-        enable: true
-        options:
-          fallbackParens: "()"
-    - plugin:
-        name: ./markdown-it-spoiler
-        enable: true
-        options:
-          title: "你知道得太多了"
+  anchors:
+    level: 2
+    collisionSuffix: ''
+    permalink: false
+    permalinkClass: 'header-anchor'
+    permalinkSide: 'left'
+    permalinkSymbol: '¶'
+    case: 0
+    separator: ''
