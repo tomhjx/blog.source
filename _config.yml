@@ -93,7 +93,7 @@ feed:
 markdown:
   preset: 'default'
   render:
-    html: false
+    html: true
     xhtmlOut: false
     breaks: true
     linkify: true
