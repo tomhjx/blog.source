@@ -50,6 +50,50 @@ date: 2020-11-26 15:00:00
     | `42 == "42foo"` | **`true`** | **`false`** |
 
 
+    Comparison
+
+    Before
+
+    After
+
+    `0 == "0"`
+
+    **`true`**
+
+    **`true`**
+
+    `0 == "0.0"`
+
+    **`true`**
+
+    **`true`**
+
+    `0 == "foo"`
+
+    **`true`**
+
+    **`false`**
+
+    `0 == ""`
+
+    **`true`**
+
+    **`false`**
+
+    `42 == " 42"`
+
+    **`true`**
+
+    **`true`**
+
+    `42 == "42foo"`
+
+    **`true`**
+
+    **`false`**
+
+
+
 *   `match` 现在是一个保留字。
 
 *   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
