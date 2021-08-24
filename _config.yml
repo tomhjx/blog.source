@@ -111,6 +111,7 @@ markdown:
     - markdown-it-mark
     - markdown-it-sub
     - markdown-it-sup
+    - markdown-it-multimd-table
   # anchors:
   #   level: 2
   #   collisionSuffix: ''
