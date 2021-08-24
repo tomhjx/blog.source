@@ -38,7 +38,8 @@ date: 2020-11-26 15:00:00
 
 * 字符串与数字的比较
 
-  * 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
+  * [^PHP 8.0.0^](https://wiki.php.net/rfc/saner-numeric-strings) 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
+
 
     | Comparison | Before | After |
     | --- | --- | --- |
@@ -910,8 +911,7 @@ Several [资源(resource)](https://www.php.net/manual/zh/language.types.resource
 
 *   [array\_slice()](https://www.php.net/manual/zh/function.array-slice.php) 用于没有空隙的数组时， 将不会扫描整个数组去查找开始的位移（offset）。 在 offset 较大、长度较小时，会显著减少函数的运行时间。
 
-*   ^{% post_link 'PHP-8-0-0' %}^当本地化 `LC_CTYPE` 为 `"C"` 时（也是默认值）， [strtolower()](https://www.php.net/manual/zh/function.strtolower.php) 会使用 SIMD 的实现。
-    * >  {% post_link 'PHP-8-0-0' %}
+*   ^[{% post_link 'PHP-8-0-0' %}]^ 当本地化 `LC_CTYPE` 为 `"C"` 时（也是默认值）， [strtolower()](https://www.php.net/manual/zh/function.strtolower.php) 会使用 SIMD 的实现。
     * >  [是怎样使用SSE2 (Streaming SIMD Extensions 2) 的实现来提升strtolower性能的呢？](https://www.laruence.com/2020/06/16/5916.html)
 
 
