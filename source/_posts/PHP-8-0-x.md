@@ -38,7 +38,7 @@ date: 2020-11-26 15:00:00
 
 * 字符串与数字的比较
 
-  * ^[PHP 8.0.0](https://wiki.php.net/rfc/saner-numeric-strings) 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
+  * [^PHP 8.0.0](https://wiki.php.net/rfc/saner-numeric-strings) 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。
 
 
     | Comparison | Before | After |
