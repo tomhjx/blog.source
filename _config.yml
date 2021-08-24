@@ -99,8 +99,6 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
-  enable_rules:
-  disable_rules:
   plugins:
     - markdown-it-abbr
     - markdown-it-abbr
@@ -113,7 +111,6 @@ markdown:
     - markdown-it-mark
     - markdown-it-sub
     - markdown-it-sup
-    - markdown-it-table-of-contents
   # anchors:
   #   level: 2
   #   collisionSuffix: ''
