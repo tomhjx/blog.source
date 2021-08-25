@@ -52,7 +52,7 @@ date: 2020-11-26 15:00:00
 
 *   [^v8.0.0.alpha2^](https://wiki.php.net/rfc/match_expression_v2) `match` 现在是一个保留字。
 
-*   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
+*   [^v8.0.0^](https://github.com/php/php-src/pull/5925) 断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
 *   与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
 
