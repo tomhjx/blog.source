@@ -91,7 +91,8 @@ feed:
   limit: 0
 
 markdown:
-  preset: 'commonmark'
+  # preset: 'commonmark'
+  preset: 'default'
   render:
     html: false
     xhtmlOut: false
@@ -99,11 +100,11 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
-  enable_rules:
-    - 'table'
-    - 'link'
-    - 'image'
-    - 'autolink'
+  # enable_rules:
+  #   - 'table'
+  #   - 'link'
+  #   - 'image'
+  #   - 'autolink'
   plugins:
     - markdown-it-abbr
     - markdown-it-cjk-breaks
