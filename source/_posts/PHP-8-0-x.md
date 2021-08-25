@@ -57,7 +57,7 @@ https://www.php.net/releases/8.0/zh.php
 
 *   [^8.0.0^](https://github.com/php/php-src/commit/1a7c0d52dc31623bd88a87e03849ab915275c49d) 与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
 
-*   不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
+*   [^8.0.0^](https://github.com/php/php-src/commit/6c73b50cf6cf71be26700ce168d5e69350637d71) 不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
 
 *   [^v8.0.0^](https://www.php.net/manual/zh/language.types.type-juggling.php) `(real)` 和 `(unset)` 转换已被移除。
 
@@ -73,13 +73,13 @@ https://www.php.net/releases/8.0/zh.php
 
 *  [^8.0.0^](https://github.com/php/php-src/commit/6db97f5e3ea3ac9774a06981226a0fe1bca02b38) [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
 
-*   The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
+*    [^8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
 
-*   The ability to unbind this from proper closures that contain uses of this has also been removed.
+*   [^8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from proper closures that contain uses of this has also been removed.
 
-*   The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
+*   [^8.0.0^](https://github.com/php/php-src/commit/c46b2ed677aecfc2f07993eefad0326f31c5cc44) The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
 
-*   The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
+*   [^8.0.0^](https://github.com/php/php-src/commit/14bdb0cfc7b62205c75f6d5c783e343259796776) The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
 
 *   Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
 
