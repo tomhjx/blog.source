@@ -55,7 +55,7 @@ https://www.php.net/releases/8.0/zh.php
 
 *   [^v8.0.0^](https://github.com/php/php-src/pull/5925) 断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
-*   与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
+*   [^8.0.0^](https://github.com/php/php-src/commit/1a7c0d52dc31623bd88a87e03849ab915275c49d) 与类名相同的方法名将不再被当做构造方法。应该使用[\_\_construct()](https://www.php.net/manual/zh/language.oop5.decon.php#object.construct) 来取代它。
 
 *   不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
 
@@ -65,13 +65,13 @@ https://www.php.net/releases/8.0/zh.php
 
 *   [^8.0.0^](https://github.com/php/php-src/commit/3d39479f4d7c86c66aa92fc5d0d97fb660109ee9) The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
 
-*   The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
+*   [^8.0.0^](https://github.com/php/php-src/commit/0dfd918ee7a3520836b875b8c24f0a5f98fbee15) The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
 
-*   The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
+*   [^8.0.0^](https://github.com/php/php-src/commit/2f1f34952e9a0dfb3adcbec82ba69f4ac82b3a3d) The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
 
-*   [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
+*  [^8.0.0^](https://github.com/php/php-src/commit/ee16d99504f0014c3d292809da927fb622293f41) [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
 
-*   [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
+*  [^8.0.0^](https://github.com/php/php-src/commit/6db97f5e3ea3ac9774a06981226a0fe1bca02b38) [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
 
 *   The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
 
