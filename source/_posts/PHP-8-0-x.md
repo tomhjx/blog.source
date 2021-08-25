@@ -48,7 +48,14 @@ date: 2020-11-26 15:00:00
     | `42 == " 42"` | **`true`** | **`true`** |
     | `42 == "42foo"` | **`true`** | **`false`** |
 
-*   ^v8.0.0alpha2^ `match` 现在是一个保留字。https://wiki.php.net/rfc/match_expression_v2
+    | Option | Description |
+    | ------ | ----------- |
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+
+
+*   ^v8.0.0.alpha2^ `match` 现在是一个保留字。https://wiki.php.net/rfc/match_expression_v2
 
 *   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
