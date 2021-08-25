@@ -26,6 +26,7 @@ date: 2020-11-26 15:00:00
   * 基于缓存前置思想，使用CPU机器码缓存，绕过Zend VM及其过程开销来尽可能提升性能
     * JIT
 
+https://www.php.net/releases/8.0/zh.php
 
 # 从 PHP 7.4.x 移植到 PHP 8.0.x
 
@@ -58,11 +59,11 @@ date: 2020-11-26 15:00:00
 
 *   不再允许通过静态调用的方式去调用非静态方法。因此[is\_callable()](https://www.php.net/manual/zh/function.is-callable.php)在检查一个类名与非静态方法 时将返回失败（应当检查一个类的实例）。
 
-*   `(real)` 和 `(unset)` 转换已被移除。
+*   [^v8.0.0^](https://www.php.net/manual/zh/language.types.type-juggling.php) `(real)` 和 `(unset)` 转换已被移除。
 
-*   The [track\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors) ini directive has been removed. This means that php\_errormsg is no longer available. The [error\_get\_last()](https://www.php.net/manual/zh/function.error-get-last.php) function may be used instead.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/920b4b249f71e6cbfd795f81c6a08126a33c659e) The [track\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors) ini directive has been removed. This means that php\_errormsg is no longer available. The [error\_get\_last()](https://www.php.net/manual/zh/function.error-get-last.php) function may be used instead.
 
-*   The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
+*   [^8.0.0^](https://github.com/php/php-src/commit/3d39479f4d7c86c66aa92fc5d0d97fb660109ee9) The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
 
 *   The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
 
