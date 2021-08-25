@@ -39,7 +39,7 @@ date: 2020-11-26 15:00:00
 * 字符串与数字的比较
 
   *  [^v8.0.0^](https://wiki.php.net/rfc/saner-numeric-strings) 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。 
-  
+
     | Comparison | Before | After |
     | --- | --- | --- |
     | `0 == "0"` | **`true`** | **`true`** |
@@ -49,14 +49,8 @@ date: 2020-11-26 15:00:00
     | `42 == " 42"` | **`true`** | **`true`** |
     | `42 == "42foo"` | **`true`** | **`false`** |
 
-    | Option | Description |
-    | ------ | ----------- |
-    | data   | path to data files to supply the data that will be passed into templates. |
-    | engine | engine to be used for processing templates. Handlebars is the default. |
-    | ext    | extension to be used for dest files. |
 
-
-*   ^v8.0.0.alpha2^ `match` 现在是一个保留字。https://wiki.php.net/rfc/match_expression_v2
+*   [^v8.0.0.alpha2^](https://wiki.php.net/rfc/match_expression_v2) `match` 现在是一个保留字。
 
 *   断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
