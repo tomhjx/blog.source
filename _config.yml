@@ -99,6 +99,7 @@ markdown:
   preset: 'default'
   render:
     html: false
+    langPrefix: 'language-'
     xhtmlOut: false
     breaks: true
     linkify: true
