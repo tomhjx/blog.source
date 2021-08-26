@@ -51,6 +51,9 @@ highlight:
   auto_detect: false
   tab_replace:
 
+prismjs:
+  enable: true 
+
 # Category & Tag
 default_category: 未分类
 category_map:
