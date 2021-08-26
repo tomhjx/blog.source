@@ -45,14 +45,11 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  # enable: true
   enable: false
-  line_number: false
-  auto_detect: false
-  tab_replace:
-
-prismjs:
-  enable: true 
+  # enable: true
+  # line_number: false
+  # auto_detect: false
+  # tab_replace:
 
 # Category & Tag
 default_category: 未分类
