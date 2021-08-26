@@ -51,7 +51,8 @@ https://www.php.net/releases/8.0/zh.php
     | `42 == "42foo"` | **`true`** | **`false`** |
 
 
-*   [^v8.0.0.alpha2^](https://wiki.php.net/rfc/match_expression_v2) `match` 现在是一个保留字。
+*   [^v8.0.0^](https://github.com/php/php-src/commit/9fa1d1330138ac424f990ff03e62721120aaaec3) `match` 现在是一个保留字。
+    > [PHP RFC: Match expression v2](https://wiki.php.net/rfc/match_expression_v2)
 
 *   [^v8.0.0^](https://github.com/php/php-src/pull/5925) 断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
 
@@ -63,25 +64,27 @@ https://www.php.net/releases/8.0/zh.php
 
 *   [^v8.0.0^](https://github.com/php/php-src/commit/920b4b249f71e6cbfd795f81c6a08126a33c659e) The [track\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors) ini directive has been removed. This means that php\_errormsg is no longer available. The [error\_get\_last()](https://www.php.net/manual/zh/function.error-get-last.php) function may be used instead.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/3d39479f4d7c86c66aa92fc5d0d97fb660109ee9) The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/3d39479f4d7c86c66aa92fc5d0d97fb660109ee9) The ability to define case-insensitive constants has been removed. The third argument to [define()](https://www.php.net/manual/zh/function.define.php) may no longer be `true`.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/0dfd918ee7a3520836b875b8c24f0a5f98fbee15) The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/0dfd918ee7a3520836b875b8c24f0a5f98fbee15) The ability to specify an autoloader using an [\_\_autoload()](https://www.php.net/manual/zh/function.autoload.php) function has been removed. [spl\_autoload\_register()](https://www.php.net/manual/zh/function.spl-autoload-register.php) should be used instead.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/2f1f34952e9a0dfb3adcbec82ba69f4ac82b3a3d) The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
+*   [^v8.0.0^](https://github.com/php/php-src/commit/2f1f34952e9a0dfb3adcbec82ba69f4ac82b3a3d) The `errcontext` argument will no longer be passed to custom error handlers set with [set\_error\_handler()](https://www.php.net/manual/zh/function.set-error-handler.php).
 
-*  [^8.0.0^](https://github.com/php/php-src/commit/ee16d99504f0014c3d292809da927fb622293f41) [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/ee16d99504f0014c3d292809da927fb622293f41) [create\_function()](https://www.php.net/manual/zh/function.create-function.php) has been removed. Anonymous functions may be used instead.
 
-*  [^8.0.0^](https://github.com/php/php-src/commit/6db97f5e3ea3ac9774a06981226a0fe1bca02b38) [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/6db97f5e3ea3ac9774a06981226a0fe1bca02b38) [each()](https://www.php.net/manual/zh/function.each.php) has been removed. [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) or [ArrayIterator](https://www.php.net/manual/zh/class.arrayiterator.php) should be used instead.
 
-*    [^8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
+*    [^v8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from closures that were created from a method, using [Closure::fromCallable()](https://www.php.net/manual/zh/closure.fromcallable.php) or [ReflectionMethod::getClosure()](https://www.php.net/manual/zh/reflectionmethod.getclosure.php), has been removed.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from proper closures that contain uses of this has also been removed.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/87fefd165a29091c3cb462431529107189c12d55) The ability to unbind this from proper closures that contain uses of this has also been removed.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/c46b2ed677aecfc2f07993eefad0326f31c5cc44) The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/c46b2ed677aecfc2f07993eefad0326f31c5cc44) The ability to use [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) with objects has been removed. [isset()](https://www.php.net/manual/zh/function.isset.php) or [property\_exists()](https://www.php.net/manual/zh/function.property-exists.php) may be used instead.
 
-*   [^8.0.0^](https://github.com/php/php-src/commit/14bdb0cfc7b62205c75f6d5c783e343259796776) The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
+*   [^v8.0.0^](https://github.com/php/php-src/commit/14bdb0cfc7b62205c75f6d5c783e343259796776) The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
 
-*   Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/6732028273b109cb342387ab5580c367f629d0ac) Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
+  > [PHP RFC: Arrays starting with a negative index](https://wiki.php.net/rfc/negative_array_index)
+  > [PHP 8.0: Implicit negative array key increments do not skip negative numbers](https://php.watch/versions/8.0/negative-array-keys)
 
 *   The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
 
