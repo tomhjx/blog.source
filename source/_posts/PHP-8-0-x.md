@@ -51,7 +51,7 @@ https://www.php.net/releases/8.0/zh.php
       | `42 == "42foo"` | **`true`** | **`false`** |
 
 
-*   [^v8.0.0^](https://github.com/php/php-src/commit/9fa1d1330138ac424f990ff03e62721120aaaec3) `match` 现在是一个保留字。
+*   [^v8.0.0^](https://github.com/php/php-src/pull/5371) `match` 现在是一个保留字。
     > [PHP RFC: Match expression v2](https://wiki.php.net/rfc/match_expression_v2)
 
 *   [^v8.0.0^](https://github.com/php/php-src/pull/5925) 断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置 `assert.exception=0` 。
