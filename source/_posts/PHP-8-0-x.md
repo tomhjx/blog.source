@@ -30,7 +30,8 @@ https://www.php.net/releases/8.0/zh.php
 
 # 从 PHP 7.4.x 移植到 PHP 8.0.x
 
-[这里可以找到原文](https://www.php.net/manual/zh/migration80.php)
+> [PHP 8.0: What's New and Changed](https://php.watch/versions/8.0)
+> [PHP Manual](https://www.php.net/manual/zh/migration80.php)
 
 
 ## 不向后兼容的变更
@@ -86,13 +87,13 @@ https://www.php.net/releases/8.0/zh.php
     > [PHP RFC: Arrays starting with a negative index](https://wiki.php.net/rfc/negative_array_index)
     > [PHP 8.0: Implicit negative array key increments do not skip negative numbers](https://php.watch/versions/8.0/negative-array-keys)
 
-*   The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/ea5854ca8c1193aacaee6fe059b2bfba636769e0) The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
 
-*   [display\_startup\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.display-startup-errors) is now enabled by default.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/790ed7d540aa04d22b1fc72a1f17e57ed6ef94e7) [display\_startup\_errors](https://www.php.net/manual/zh/errorfunc.configuration.php#ini.display-startup-errors) is now enabled by default.
 
-*   Using parent inside a class that has no parent will now result in a fatal compile-time error.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/5c24f8042d46f3dfbe8eb122a64792758fff5271) Using parent inside a class that has no parent will now result in a fatal compile-time error.
 
-*   The `@` operator will no longer silence fatal errors (`E_ERROR`, `E_CORE_ERROR`, `E_COMPILE_ERROR`, `E_USER_ERROR`, `E_RECOVERABLE_ERROR`, `E_PARSE`). Error handlers that expect error\_reporting to be `0` when `@` is used, should be adjusted to use a mask check instead:
+*   [^v8.0.0^](https://github.com/php/php-src/pull/3685) The `@` operator will no longer silence fatal errors (`E_ERROR`, `E_CORE_ERROR`, `E_COMPILE_ERROR`, `E_USER_ERROR`, `E_RECOVERABLE_ERROR`, `E_PARSE`). Error handlers that expect error\_reporting to be `0` when `@` is used, should be adjusted to use a mask check instead:
 
     ```php
     <?php
@@ -115,6 +116,7 @@ https://www.php.net/releases/8.0/zh.php
     ```
 
     Additionally, care should be taken that error messages are not displayed in production environments, which can result in information leaks. Please ensure that `display_errors=Off` is used in conjunction with error logging.
+    > [PHP 8.0: @ Error Suppression operator does not silent fatal errors](https://php.watch/versions/8.0/fatal-error-suppression)
 
 *   `#[` is no longer interpreted as the start of a comment, as this syntax is now used for attributes.
 
