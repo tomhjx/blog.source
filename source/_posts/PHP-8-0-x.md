@@ -41,14 +41,14 @@ https://www.php.net/releases/8.0/zh.php
 
   *  [^v8.0.0^](https://wiki.php.net/rfc/saner-numeric-strings) 数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。 数字与数字形式的字符串之间的比较仍然像之前那样进行。 请注意，这意味着 0 == "not-a-number" 现在将被认为是 false 。 
 
-    | Comparison | Before | After |
-    | --- | --- | --- |
-    | `0 == "0"` | **`true`** | **`true`** |
-    | `0 == "0.0"` | **`true`** | **`true`** |
-    | `0 == "foo"` | **`true`** | **`false`** |
-    | `0 == ""` | **`true`** | **`false`** |
-    | `42 == " 42"` | **`true`** | **`true`** |
-    | `42 == "42foo"` | **`true`** | **`false`** |
+      | Comparison | Before | After |
+      | --- | --- | --- |
+      | `0 == "0"` | **`true`** | **`true`** |
+      | `0 == "0.0"` | **`true`** | **`true`** |
+      | `0 == "foo"` | **`true`** | **`false`** |
+      | `0 == ""` | **`true`** | **`false`** |
+      | `42 == " 42"` | **`true`** | **`true`** |
+      | `42 == "42foo"` | **`true`** | **`false`** |
 
 
 *   [^v8.0.0^](https://github.com/php/php-src/commit/9fa1d1330138ac424f990ff03e62721120aaaec3) `match` 现在是一个保留字。
@@ -83,8 +83,8 @@ https://www.php.net/releases/8.0/zh.php
 *   [^v8.0.0^](https://github.com/php/php-src/commit/14bdb0cfc7b62205c75f6d5c783e343259796776) The behavior of [array\_key\_exists()](https://www.php.net/manual/zh/function.array-key-exists.php) regarding the type of the `key` parameter has been made consistent with [isset()](https://www.php.net/manual/zh/function.isset.php) and normal array access. All key types now use the usual coercions and array/object keys throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php).
 
 *  [^v8.0.0^](https://github.com/php/php-src/commit/6732028273b109cb342387ab5580c367f629d0ac) Any array that has a number n as its first numeric key will use n+1 for its next implicit key, even if n is negative.
-  > [PHP RFC: Arrays starting with a negative index](https://wiki.php.net/rfc/negative_array_index)
-  > [PHP 8.0: Implicit negative array key increments do not skip negative numbers](https://php.watch/versions/8.0/negative-array-keys)
+    > [PHP RFC: Arrays starting with a negative index](https://wiki.php.net/rfc/negative_array_index)
+    > [PHP 8.0: Implicit negative array key increments do not skip negative numbers](https://php.watch/versions/8.0/negative-array-keys)
 
 *   The default error\_reporting level is now `E_ALL`. Previously it excluded `E_NOTICE` and `E_DEPRECATED`.
 
