@@ -50,6 +50,9 @@ highlight:
   # line_number: false
   # auto_detect: false
   # tab_replace:
+prismjs:
+  enable: false
+
 
 # Category & Tag
 default_category: 未分类
