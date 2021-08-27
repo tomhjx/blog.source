@@ -10,23 +10,27 @@ tags:
   - 历史
   - PHP发展史
   - 技术发展史
-  - Cryptographic Message Syntax|CMS
-  - Pseudo Terminals|PTY
+  - Cryptographic Message Syntax
+  - Pseudo Terminals
   - Socket Pairs
   - PHP Zip
   - PHP Tokenizer
-  - Just-In-Time|JIT
-  - Streaming SIMD Extensions 2|SSE2
+  - Just-In-Time
+  - JIT
+  - Streaming SIMD Extensions 2
+  - SSE2
+  - LSP
 date: 2020-11-26 15:00:00
 ---
 
 # 目标及关键路径
 
+> https://www.php.net/releases/8.0/zh.php
+
 * 提升性能
   * 基于缓存前置思想，使用CPU机器码缓存，绕过Zend VM及其过程开销来尽可能提升性能
     * JIT
 
-https://www.php.net/releases/8.0/zh.php
 
 # 从 PHP 7.4.x 移植到 PHP 8.0.x
 
@@ -118,11 +122,17 @@ https://www.php.net/releases/8.0/zh.php
     Additionally, care should be taken that error messages are not displayed in production environments, which can result in information leaks. Please ensure that `display_errors=Off` is used in conjunction with error logging.
     > [PHP 8.0: @ Error Suppression operator does not silent fatal errors](https://php.watch/versions/8.0/fatal-error-suppression)
 
-*   `#[` is no longer interpreted as the start of a comment, as this syntax is now used for attributes.
+*   [^v8.0.0^](https://github.com/php/php-src/pull/5394) `#[` is no longer interpreted as the start of a comment, as this syntax is now used for attributes.
+    > [PHP RFC: Attributes v2](https://wiki.php.net/rfc/attributes_v2)
+    > [Discussion: Attributes v2](https://externals.io/message/108907)
+    > [PHP 8.0: Attributes](https://php.watch/versions/8.0/attributes)
 
-*   Inheritance errors due to incompatible method signatures (LSP violations) will now always generate a fatal error. Previously a warning was generated in some cases.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/fd2db1192997f5778139ea8e9d25189c7c08af2c) Inheritance errors due to incompatible method signatures ([LSP](https://microsoft.github.io/language-server-protocol/) violations) will now always generate a fatal error. Previously a warning was generated in some cases.
+    > [PHP RFC: Always generate fatal error for incompatible method signatures](https://wiki.php.net/rfc/lsp_errors)
+    > [Github Pull Request: Always generate fatal error for LSP failures #4000](https://github.com/php/php-src/pull/4000)
+    > [PHP 8.0: Fatal errors on incompatible method signatures](https://php.watch/versions/8.0/lsp-errors)
 
-*   The precedence of the concatenation operator has changed relative to bitshifts and addition as well as subtraction.
+*   [^v7.4.0^](https://github.com/php/php-src/commit/3b23694aac62ad9c2dfdb60cafb304f9fc0b7c04) The precedence of the concatenation operator has changed relative to bitshifts and addition as well as subtraction.
 
     ```php
     <?php
@@ -133,8 +143,10 @@ https://www.php.net/releases/8.0/zh.php
     echo "Sum:" . ($a + $b);
     ?>
     ```
+    > [PHP RFC: Change the precedence of the concatenation operator](https://wiki.php.net/rfc/concatenation_precedence)
+    > [PHP 8.0: +/- operators take higher precedence when used with concat (.) operator](https://php.watch/versions/8.0/contact-add-sub-precedence)
 
-*   Arguments with a default value that resolves to `null` at runtime will no longer implicitly mark the argument type as nullable. Either an explicit nullable type, or an explicit `null` default value has to be used instead.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/cdd4e591a46ad171aa5c0776671788cd710a9d4b) Arguments with a default value that resolves to `null` at runtime will no longer implicitly mark the argument type as nullable. Either an explicit nullable type, or an explicit `null` default value has to be used instead.
 
     ```php
     <?php
@@ -146,6 +158,7 @@ https://www.php.net/releases/8.0/zh.php
     function test(int $arg = null) {}
     ?>
     ```
+    > [Github Pull Request: Don't make argument nullable based on AST null initializer #4720](https://github.com/php/php-src/pull/4720)
 
 *   A number of warnings have been converted into [Error](https://www.php.net/manual/zh/class.error.php) exceptions:
 
