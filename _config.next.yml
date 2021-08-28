@@ -38,8 +38,8 @@ custom_file_path:
 # Schemes
 # scheme: Mist
 # scheme: Pisces
-scheme: Muse
-# scheme: Gemini
+# scheme: Muse
+scheme: Gemini
 
 # Dark Mode
 darkmode: false
