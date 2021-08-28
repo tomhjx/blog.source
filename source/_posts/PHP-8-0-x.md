@@ -272,7 +272,7 @@ date: 2020-11-26 15:00:00
     > [PHP RFC: Locale-independent float to string cast](https://wiki.php.net/rfc/locale_independent_float_to_string)
     > [Github Pull Request: Make float to string conversions locale-independent #5224](https://github.com/php/php-src/pull/5224)
 
-*   [^v7.4.0^](https://github.com/php/php-src/commit/bc3ee2eeea1a3ca3ff33263861758d6ed54f3b16) Support for deprecated curly braces for offset access has been removed.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/bc3ee2eeea1a3ca3ff33263861758d6ed54f3b16) Support for deprecated curly braces for offset access has been removed.
 
     ```php
     <?php
