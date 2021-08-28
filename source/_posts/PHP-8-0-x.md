@@ -226,7 +226,7 @@ date: 2020-11-26 15:00:00
     If both `T1::func()` and `T2::func()` exist, this code was previously silently accepted, and func was assumed to refer to `T1::func`. Now it will generate a fatal error instead, and either `T1::func` or `T2::func` needs to be written explicitly.
     > [Github Pull Request: Require non-absolute trait method refs to be unambiguous #5232](https://github.com/php/php-src/pull/5232)
 
-*   The signature of abstract methods defined in traits is now checked against the implementing class method:
+*   [^v8.0.0^](https://github.com/php/php-src/commit/f74e30c07c2a94921fbfb7b8936324707505bd75) The signature of abstract methods defined in traits is now checked against the implementing class method:
 
     ```php
     
@@ -243,14 +243,19 @@ date: 2020-11-26 15:00:00
     }
     ?>
     ```
+    > [PHP RFC: Validation for abstract trait methods](https://wiki.php.net/rfc/abstract_trait_method_validation)
+    > [Github Pull Request: Check abstract method signatures coming from traits #5068](https://github.com/php/php-src/pull/5068)
 
-*   Disabled functions are now treated exactly like non-existent functions. Calling a disabled function will report it as unknown, and redefining a disabled function is now possible.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/53eee290b6f5ca531aef19885a392c939013ce36) Disabled functions are now treated exactly like non-existent functions. Calling a disabled function will report it as unknown, and redefining a disabled function is now possible.
+    > [Github Pull Request: Completely remove disabled functions from function table #5473](https://github.com/php/php-src/pull/5473)
 
-*   `data://` stream wrappers are no longer writable, which matches the documented behavior.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/69888c3ff1f2301ead8e37b23ff8481d475e29d2) `data://` stream wrappers are no longer writable, which matches the documented behavior.
 
-*   The arithmetic and bitwise operators `+`, `-`, `*`, `/`, `**`, `%`, `<<`, `>>`, `&`, `|`, `^`, `~`, `++`, `--` will now consistently throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php) when one of the operands is an array, [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php) or non-overloaded object. The only exception to this is the array `+` array merge operation, which remains supported.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/5bc1e224dbd660cea99c222baf8bd3c215d25073) The arithmetic and bitwise operators `+`, `-`, `*`, `/`, `**`, `%`, `<<`, `>>`, `&`, `|`, `^`, `~`, `++`, `--` will now consistently throw a [TypeError](https://www.php.net/manual/zh/class.typeerror.php) when one of the operands is an array, [资源(resource)](https://www.php.net/manual/zh/language.types.resource.php) or non-overloaded object. The only exception to this is the array `+` array merge operation, which remains supported.
+    > [PHP RFC: Stricter type checks for arithmetic/bitwise operators](https://wiki.php.net/rfc/arithmetic_operator_type_checks)
+    > [Github Pull Request: Make numeric operations on resources, arrays and objects type errors #5331](https://github.com/php/php-src/pull/5331)
 
-*   Float to string casting will now always behave locale-independently.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/4a816584a4d483722485e5163396ea1bb2a6aee7) Float to string casting will now always behave locale-independently.
 
     ```php
     <?php
@@ -264,7 +269,10 @@ date: 2020-11-26 15:00:00
 
     See [printf()](https://www.php.net/manual/zh/function.printf.php), [number\_format()](https://www.php.net/manual/zh/function.number-format.php) and **NumberFormatter()** for ways to customize number formatting.
 
-*   Support for deprecated curly braces for offset access has been removed.
+    > [PHP RFC: Locale-independent float to string cast](https://wiki.php.net/rfc/locale_independent_float_to_string)
+    > [Github Pull Request: Make float to string conversions locale-independent #5224](https://github.com/php/php-src/pull/5224)
+
+*   [^v7.4.0^](https://github.com/php/php-src/commit/bc3ee2eeea1a3ca3ff33263861758d6ed54f3b16) Support for deprecated curly braces for offset access has been removed.
 
     ```php
     <?php
@@ -276,6 +284,9 @@ date: 2020-11-26 15:00:00
     $array["key"];
     ?>
     ```
+
+    > [PHP RFC: Deprecate curly brace syntax for accessing array elements and string offsets](https://wiki.php.net/rfc/deprecate_curly_braces_array_access)
+    > [Github Pull Request: Deprecate curly brace syntax for array/string offset access #4416](https://github.com/php/php-src/pull/4416)
 
 *   Applying the final modifier on a private method will now produce a warning unless that method is the constructor.
 
