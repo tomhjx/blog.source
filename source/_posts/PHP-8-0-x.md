@@ -160,7 +160,8 @@ date: 2020-11-26 15:00:00
     ```
     > [Github Pull Request: Don't make argument nullable based on AST null initializer #4720](https://github.com/php/php-src/pull/4720)
 
-*   A number of warnings have been converted into [Error](https://www.php.net/manual/zh/class.error.php) exceptions:
+*   [^v8.0.0^](https://github.com/php/php-src/commit/e8b0163e0b6632c77cb8a3e863671c87793dbfc4) A number of warnings have been converted into [Error](https://www.php.net/manual/zh/class.error.php) exceptions:
+    > [PHP RFC: Reclassifying engine warnings](https://wiki.php.net/rfc/engine_warnings)
 
     *   Attempting to write to a property of a non-object. Previously this implicitly created an stdClass object for null, false and empty strings.
     *   Attempting to append an element to an array for which the PHP\_INT\_MAX key is already used.
@@ -182,17 +183,18 @@ date: 2020-11-26 15:00:00
     *   Attempting to read an out-of-bounds string offset.
     *   Attempting to assign an empty string to a string offset.
 
-*   Attempting to assign multiple bytes to a string offset will now emit a warning.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/66659d6cf6ae2547c0e582a6e3aa0d1ee0e3835f) Attempting to assign multiple bytes to a string offset will now emit a warning.
 
-*   Unexpected characters in source files (such as NUL bytes outside of strings) will now result in a [ParseError](https://www.php.net/manual/zh/class.parseerror.php) exception instead of a compile warning.
+*   [^v8.0.0^](https://github.com/php/php-src/commit/d44cf9b539c5dfbd3ff0295bac25165e79214e09) Unexpected characters in source files (such as NUL bytes outside of strings) will now result in a [ParseError](https://www.php.net/manual/zh/class.parseerror.php) exception instead of a compile warning.
+    > [Github Pull Request: Replace "unexpected character" warning with ParseError #4767](https://github.com/php/php-src/pull/4767)
 
-*   Uncaught exceptions now go through "clean shutdown", which means that destructors will be called after an uncaught exception.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/db233501ff9d56765ef4a870b777a643c2136711)  Uncaught exceptions now go through "clean shutdown", which means that destructors will be called after an uncaught exception.
 
-*   The compile time fatal error "Only variables can be passed by reference" has been delayed until runtime, and converted into an "Argument cannot be passed by reference" [Error](https://www.php.net/manual/zh/class.error.php) exception.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/64b40f69dca440e86e608847a39b795aedf75861) The compile time fatal error "Only variables can be passed by reference" has been delayed until runtime, and converted into an "Argument cannot be passed by reference" [Error](https://www.php.net/manual/zh/class.error.php) exception.
 
-*   Some "Only variables should be passed by reference" notices have been converted to "Argument cannot be passed by reference" exception.
+*  [^v8.0.0^](https://github.com/php/php-src/commit/64b40f69dca440e86e608847a39b795aedf75861) Some "Only variables should be passed by reference" notices have been converted to "Argument cannot be passed by reference" exception.
 
-*   The generated name for anonymous classes has changed. It will now include the name of the first parent or interface:
+*  [^v8.0.0^](https://github.com/php/php-src/commit/72bd55902d1908857f47555ad69458861e1acd94) The generated name for anonymous classes has changed. It will now include the name of the first parent or interface:
 
     ```php
     <?php
@@ -206,8 +208,9 @@ date: 2020-11-26 15:00:00
     ```
 
     The name shown above is still followed by a NUL byte and a unique suffix.
+    > [Github Pull Request: Improve generated names for anonymous classes #5153](https://github.com/php/php-src/pull/5153)
 
-*   Non-absolute trait method references in trait alias adaptations are now required to be unambiguous:
+*   [^v8.0.0^](https://github.com/php/php-src/commit/fff5771cccaca49565c90349320f3c06cbe19328) Non-absolute trait method references in trait alias adaptations are now required to be unambiguous:
 
     ```php
     <?php
@@ -221,6 +224,7 @@ date: 2020-11-26 15:00:00
     ```
 
     If both `T1::func()` and `T2::func()` exist, this code was previously silently accepted, and func was assumed to refer to `T1::func`. Now it will generate a fatal error instead, and either `T1::func` or `T2::func` needs to be written explicitly.
+    > [Github Pull Request: Require non-absolute trait method refs to be unambiguous #5232](https://github.com/php/php-src/pull/5232)
 
 *   The signature of abstract methods defined in traits is now checked against the implementing class method:
 
